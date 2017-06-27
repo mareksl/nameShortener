@@ -1,8 +1,5 @@
 @import 'reset';
 @import 'typography';
-* {
-	box-sizing: border-box;
-}
 
 .main {
 	width: 50%;
@@ -11,6 +8,7 @@
 	border-radius: 6px;
 	padding: 8px 0;
 }
+
 .formGroup {
 	padding: 8px;
 	margin: 4px 0;
@@ -24,8 +22,7 @@
 	padding: 8px;
 }
 
-.nameInput:focus {
-}
+.nameInput:focus {}
 
 .nameLen {
 	display: block;
@@ -46,8 +43,7 @@
 	padding: 8px;
 }
 
-.nameOutput:focus {
-}
+.nameOutput:focus {}
 
 .shortenName {
 	cursor: pointer;
@@ -58,24 +54,35 @@
 	color: $tr-white;
 	flex: 1 1 50%;
 	box-shadow: 0 1px 1px $tr-darkgray;
-	&:hover, &:focus {
+
+	&:focus,
+	&:hover {
 		outline: none;
 		background-color: $tr-darkorange;
 	}
+
 	&:active {
 		outline: none;
 		background-color: $tr-darkorange;
 		box-shadow: inset 0 1px 1px $tr-darkgray;
 	}
 }
+
 .settingsOpt {
 	cursor: pointer;
 	display: block;
 }
+
 input[type="checkbox"] {
 	cursor: pointer;
 }
+
 .objInput {
 	width: 100%;
 	height: 200px;
+}
+
+.warning {
+	color: $tr-darkorange;
+	font-weight: bold;
 }

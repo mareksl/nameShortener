@@ -1,8 +1,12 @@
 var nameChecker = (function() {
   'use strict';
-  //CHECK LENGTH
+  // CHECK LENGTH
   var lengthCheck = function(target) {
     return target.value.length;
+  };
+  // MAXIMUM lENGTH
+  var maxLength = function(target, max) {
+    return lengthCheck(target) > max;
   };
   // REPLACE LETTER
   var replaceLetter = function(string, options) {
@@ -38,7 +42,8 @@ var nameChecker = (function() {
   return {
     lengthCheck: lengthCheck,
     replaceUmlauts: replaceUmlauts,
-    removeParens: removeParens
+    removeParens: removeParens,
+    maxLength: maxLength
   };
 }());
 //-----------------------------------------------------------
@@ -48,8 +53,17 @@ var nameChecker = (function() {
   var $ = function(el) {
     return document.querySelector(el);
   };
-  var displayLength = function(input, output) {
+  var displayLength = function(input, output, max) {
     output.innerHTML = nameChecker.lengthCheck(input);
+    if (nameChecker.maxLength(input, max)) {
+      if (!output.classList.contains('warning')) {
+        output.classList.add('warning');
+      }
+    } else {
+      if (output.classList.contains('warning')) {
+        output.classList.remove('warning');
+      }
+    }
   };
   // EVENT LISTENERS
   var inputName = $('#inputName'),
@@ -57,19 +71,19 @@ var nameChecker = (function() {
     outputShortName = $('#outputShortName'),
     outputInHouseName = $('#outputInHouseName'),
     lenName = $('#lenName'),
-		inputObj = $('#inputObj'),
-		lenObj = $('#lenObj');
+    inputObj = $('#inputObj'),
+    lenObj = $('#lenObj');
   inputName.addEventListener('input', function(e) {
-    displayLength(inputName, lenName);
+    displayLength(inputName, lenName, 50);
   });
   outputName.addEventListener('input', function(e) {
-    displayLength(outputName, lenOutputName);
+    displayLength(outputName, lenOutputName, 50);
   });
   outputShortName.addEventListener('input', function(e) {
-    displayLength(outputShortName, lenOutputShortName);
+    displayLength(outputShortName, lenOutputShortName, 30);
   });
   outputInHouseName.addEventListener('input', function(e) {
-    displayLength(outputInHouseName, lenOutputInHouseName);
+    displayLength(outputInHouseName, lenOutputInHouseName, 40);
   });
   $('#buttonShorten').addEventListener('click', function(e) {
     var value = inputName.value;
@@ -84,16 +98,16 @@ var nameChecker = (function() {
     outputName.value = value;
     outputShortName.value = value;
     outputInHouseName.value = value;
-    displayLength(outputName, lenOutputName);
-    displayLength(outputShortName, lenOutputShortName);
-    displayLength(outputInHouseName, lenOutputInHouseName);
+    displayLength(outputName, lenOutputName, 50);
+    displayLength(outputShortName, lenOutputShortName, 30);
+    displayLength(outputInHouseName, lenOutputInHouseName, 40);
   });
-	inputObj.addEventListener('input', function(e) {
-		displayLength(inputObj, lenObj);
-	});
-	$('#buttonObjUmlauts').addEventListener('click', function(e){
-		inputObj.value = nameChecker.replaceUmlauts(inputObj.value);
-		displayLength(inputObj, lenObj);
-		inputObj.select();
-	});
+  inputObj.addEventListener('input', function(e) {
+    displayLength(inputObj, lenObj, 2000);
+  });
+  $('#buttonObjUmlauts').addEventListener('click', function(e) {
+    inputObj.value = nameChecker.replaceUmlauts(inputObj.value);
+    displayLength(inputObj, lenObj, 2000);
+    inputObj.select();
+  });
 }());
