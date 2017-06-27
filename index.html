@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Fund Name Shortener</title>
+	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/typography.css">
+
+</head>
+
+<body>
+	<h1>Fund Name Shortener</h1>
+
+	<div class="main">
+		<div class="nameGroup">
+			<label>Fund Name
+			<input class="nameInput" type="text" id="inputName">
+			</label>
+			<div class="settings">
+				Options
+				<label class="settingsOpt"><input type="checkbox" name="shortenNames" checked>Shorten Names</label>
+				<label class="settingsOpt"><input type="checkbox" name="removeParens">Remove Parens</label>
+				<label class="settingsOpt"><input type="checkbox" name="removeSpecial">Replace Umlauts and ß</label>
+			</div>
+			<div class="nameGroupOutput">
+				<span class="nameLen" id="lenName">0</span>
+				<button class="shortenName" type="button" id="buttonShorten">Shorten</button>
+			</div>
+			<label>Name
+			<input class="nameOutput" type="text" id="outputName"></label>
+			<div class="nameGroupOutput">
+				<span class="nameLen" id="lenOutputName">0</span>
+			</div>
+			<label>Short Name
+			<input class="nameOutput" type="text" id="outputShortName"></label>
+			<div class="nameGroupOutput">
+				<span class="nameLen" id="lenOutputShortName">0</span>
+			</div>
+			<label>In-House Name
+			<input class="nameOutput" type="text" id="outputInHouseName"></label>
+			<div class="nameGroupOutput">
+				<span class="nameLen" id="lenOutputInHouseName">0</span>
+			</div>
+		</div>
+
+
+	</div>
+	<div class="main">
+		<label>Objective
+		<textarea class="objInput" id="inputObj"></textarea>
+		</label>
+		<div class="nameGroupOutput">
+			<span class="nameLen" id="lenObj">0</span>
+			<button class="shortenName" type="button" id="buttonObjUmlauts">Replace Umlauts</button>
+		</div>
+	</div>
+	<script src="js/script.js" charset="utf-8"></script>
+</body>
+
+</html>

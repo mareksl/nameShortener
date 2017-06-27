@@ -1,0 +1,117 @@
+@font-face {
+	font-family: 'Knowledge';
+	src: url('fonts/knowledge2017-20170221/Knowledge2017-Regular.ttf');
+	font-weight: normal;
+}
+@font-face {
+	font-family: 'Knowledge';
+	src: url('fonts/knowledge2017-20170221/Knowledge2017-Bold.ttf');
+	font-weight: bold;
+}
+$primary-color-dark: #231f20;
+$primary-color: #853109;
+$primary-color-light: #fff;
+$primary-color-text: #231f20;
+$accent-color: #ed1c24;
+$accent-color-dark: #733236;
+$accent-color-light: #ffcb04;
+$accent-color-mid: #f67414;
+// @import url( 'https://fonts.googleapis.com/css?family=Poiret+One|Lato:300,400&subset=latin-ext');
+// $serif: 'Poiret One', serif;
+$sans: 'Knowledge', sans-serif;
+$monospace: 'Courier new', Courier, 'Andale Mono', monospace; // $display: 'Montserrat';
+$hover-shadow: 0 .2rem .2rem $accent-color-light;
+$hover-shadow-dark: 0 .15rem .1rem rgba($primary-color-dark, .5);
+
+html {
+	font-size: 16px;
+}
+
+body {
+	color: $primary-color-text;
+	font-family: $sans;
+	font-weight: 400;
+	font-size: 100%;
+	line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: $sans;
+}
+
+h1 {
+	width: 100%;
+	text-align: center;
+	font-size: 2em;
+	font-weight: bold;
+}
+
+h2 {
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
+h3 {
+	font-size: 1.25em;
+	font-weight: bold;
+}
+
+h4 {
+	font-size: 1.25em;
+}
+
+h5 {
+	font-size: 1.125em;
+}
+
+h6 {
+	font-size: 1.0625em;
+}
+
+p {
+	padding-bottom: 2em;
+	font-size: 1.1em;
+	max-width: 32rem;
+	margin: auto;
+	text-align: center;
+}
+
+small {
+	font-size: .8em;
+}
+
+a {
+	transition: .4s;
+	text-decoration: none;
+	color: $accent-color-dark;
+
+	&:focus,
+	&:hover {
+		text-decoration: underline;
+		color: $primary-color;
+	}
+
+	&:active {
+		color: $accent-color-dark;
+		text-shadow: none;
+	}
+}
+
+i {
+	font-style: italic;
+}
+
+em {
+	font-style: italic;
+}
+
+strong {
+	font-weight: bold;
+	font-variant: small-caps;
+}
+/* TYPOGRAPHY END */
