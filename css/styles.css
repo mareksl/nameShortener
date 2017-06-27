@@ -136,7 +136,7 @@ html {
   font-size: 16px; }
 
 body {
-  color: #231f20;
+  color: #4D4D4D;
   font-family: "Knowledge", sans-serif;
   font-weight: 400;
   font-size: 100%;
@@ -151,6 +151,7 @@ h6 {
   font-family: "Knowledge", sans-serif; }
 
 h1 {
+  padding: 16px;
   width: 100%;
   text-align: center;
   font-size: 2em;
@@ -186,12 +187,12 @@ small {
 a {
   transition: .4s;
   text-decoration: none;
-  color: #733236; }
+  color: #FF8000; }
   a:focus, a:hover {
     text-decoration: underline;
     color: #853109; }
   a:active {
-    color: #733236;
+    color: #FF8000;
     text-shadow: none; }
 
 i {
@@ -232,6 +233,7 @@ strong {
   padding: 8px 0; }
 
 .nameGroupOutput {
+  margin: 8px 0;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap; }
@@ -242,7 +244,20 @@ strong {
   padding: 8px; }
 
 .shortenName {
-  flex: 1 1 50%; }
+  font-weight: bold;
+  background-color: #FF8000;
+  border: 0;
+  border-radius: 5px;
+  color: #fff;
+  flex: 1 1 50%;
+  box-shadow: 0 2px 4px #afafaf; }
+  .shortenName:hover, .shortenName:focus {
+    outline: none;
+    background-color: #ff5900; }
+  .shortenName:active {
+    outline: none;
+    background-color: #ff5900;
+    box-shadow: inset 0 2px 4px #afafaf; }
 
 .settingsOpt {
   display: block; }

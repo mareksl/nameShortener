@@ -8,27 +8,25 @@
 	src: url('fonts/knowledge2017-20170221/Knowledge2017-Bold.ttf');
 	font-weight: bold;
 }
-$primary-color-dark: #231f20;
 $primary-color: #853109;
-$primary-color-light: #fff;
-$primary-color-text: #231f20;
-$accent-color: #ed1c24;
-$accent-color-dark: #733236;
-$accent-color-light: #ffcb04;
-$accent-color-mid: #f67414;
+$tr-white: #fff;
+$tr-darkgray: #4D4D4D;
+$tr-lightgray: #afafaf;
+$tr-orange: #FF8000;
+$tr-darkorange: #ff5900;
 // @import url( 'https://fonts.googleapis.com/css?family=Poiret+One|Lato:300,400&subset=latin-ext');
 // $serif: 'Poiret One', serif;
 $sans: 'Knowledge', sans-serif;
-$monospace: 'Courier new', Courier, 'Andale Mono', monospace; // $display: 'Montserrat';
-$hover-shadow: 0 .2rem .2rem $accent-color-light;
-$hover-shadow-dark: 0 .15rem .1rem rgba($primary-color-dark, .5);
+$monospace: 'Courier new', Courier, 'Andale Mono', monospace;
+$hover-shadow: 0 .2rem .2rem $tr-orange;
+$hover-shadow-dark: 0 .15rem .1rem rgba($tr-darkgray, .5);
 
 html {
 	font-size: 16px;
 }
 
 body {
-	color: $primary-color-text;
+	color: $tr-darkgray;
 	font-family: $sans;
 	font-weight: 400;
 	font-size: 100%;
@@ -45,6 +43,7 @@ h6 {
 }
 
 h1 {
+	padding: 16px;
 	width: 100%;
 	text-align: center;
 	font-size: 2em;
@@ -88,7 +87,7 @@ small {
 a {
 	transition: .4s;
 	text-decoration: none;
-	color: $accent-color-dark;
+	color: $tr-orange;
 
 	&:focus,
 	&:hover {
@@ -97,7 +96,7 @@ a {
 	}
 
 	&:active {
-		color: $accent-color-dark;
+		color: $tr-orange;
 		text-shadow: none;
 	}
 }
