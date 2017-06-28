@@ -38,12 +38,19 @@ var nameChecker = (function() {
       '[()]': ''
     });
   };
+	//REMOVE LINE BREAKS
+	var removeBreaks = function(string) {
+		return replaceLetter(string, {
+			'\n': ' '
+		});
+	};
   //RETURN OBJECT
   return {
     lengthCheck: lengthCheck,
     replaceUmlauts: replaceUmlauts,
     removeParens: removeParens,
-    maxLength: maxLength
+    maxLength: maxLength,
+		removeBreaks: removeBreaks
   };
 }());
 //-----------------------------------------------------------
@@ -107,6 +114,11 @@ var nameChecker = (function() {
   });
   $('#buttonObjUmlauts').addEventListener('click', function(e) {
     inputObj.value = nameChecker.replaceUmlauts(inputObj.value);
+    displayLength(inputObj, lenObj, 2000);
+    inputObj.select();
+  });
+	$('#buttonObjBreaks').addEventListener('click', function(e) {
+    inputObj.value = nameChecker.removeBreaks(inputObj.value);
     displayLength(inputObj, lenObj, 2000);
     inputObj.select();
   });
