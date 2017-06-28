@@ -213,19 +213,27 @@ strong {
   width: 50%;
   max-width: 600px;
   margin: auto;
-  border-radius: 6px;
   padding: 8px 0; }
 
 .formGroup {
   padding: 8px;
   margin: 4px 0;
-  background-color: #fff;
-  border-radius: 5px; }
+  background-color: #fff; }
 
-.nameInput {
+.nameInput,
+.nameOutput {
+  height: 33px;
+  border-radius: 4px;
+  border: 1px solid #afafaf;
   display: block;
   width: 100%;
   padding: 8px; }
+
+.nameInput:focus,
+.nameOutput:focus,
+.objInput:focus {
+  outline: none;
+  border: 2px solid #FF8000; }
 
 .nameLen {
   display: block;
@@ -238,17 +246,12 @@ strong {
   flex-direction: row;
   flex-wrap: wrap; }
 
-.nameOutput {
-  display: block;
-  width: 100%;
-  padding: 8px; }
-
 .shortenName {
   cursor: pointer;
   font-weight: bold;
   background-color: #FF8000;
   border: 0;
-  border-radius: 5px;
+  border-radius: 4px;
   color: #fff;
   flex: 1 1 50%;
   box-shadow: 0 1px 1px #4D4D4D; }
@@ -268,8 +271,11 @@ input[type="checkbox"] {
   cursor: pointer; }
 
 .objInput {
+  border-radius: 4px;
   width: 100%;
-  height: 200px; }
+  height: 200px;
+  border: 1px solid #afafaf;
+  padding: 8px; }
 
 .warning {
   color: #ff5900;
