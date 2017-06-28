@@ -1,5 +1,9 @@
 @import 'reset';
 @import 'typography';
+h1 {
+	background-color: $tr-darkgray;
+	color: $tr-lightorange;
+}
 
 .main {
 	width: 50%;
@@ -11,7 +15,6 @@
 .formGroup {
 	padding: 8px;
 	margin: 4px 0;
-	background-color: #fff;
 }
 
 .nameInput,
@@ -50,17 +53,22 @@
 .shortenName {
 	cursor: pointer;
 	font-weight: bold;
-	background-color: $tr-orange;
-	border: 0;
+	background-color: $tr-white;
+	// background-color: $tr-orange;
+	// border: 0;
+	border: 2px solid $tr-orange;
 	border-radius: 4px;
-	color: $tr-white;
+	color: $tr-orange;
+	// color: #fff;
 	flex: 0 1 50%;
-	box-shadow: 0 1px 1px $tr-darkgray;
+	// box-shadow: 0 1px 1px $tr-darkgray;
 
 	&:focus,
 	&:hover {
 		outline: none;
-		background-color: $tr-darkorange;
+		color: $tr-white;
+		background-color: $tr-orange;
+		// background-color: $tr-darkorange;
 	}
 
 	&:active {
