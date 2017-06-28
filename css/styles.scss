@@ -79,6 +79,10 @@ input[type="checkbox"] {
 	cursor: pointer;
 }
 
+input[type="checkbox"]:checked + span{
+		border-bottom: 2px solid $tr-orange;
+}
+
 .objInput {
 	resize: vertical;
 	border-radius: 4px;
