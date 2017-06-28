@@ -14,6 +14,7 @@ $tr-darkgray: #4D4D4D;
 $tr-lightgray: #afafaf;
 $tr-orange: #FF8000;
 $tr-darkorange: #ff5900;
+$tr-lightorange: #ffa100;
 $sans: 'Knowledge', sans-serif;
 $monospace: 'Courier new', Courier, 'Andale Mono', monospace;
 $hover-shadow: 0 .2rem .2rem $tr-orange;
@@ -29,6 +30,16 @@ body {
 	font-weight: 400;
 	font-size: 100%;
 	line-height: 1.5;
+}
+
+::selection {
+	background: $tr-orange;
+	color: $tr-white;
+}
+
+::-moz-selection {
+	background: $tr-orange;
+	color: $tr-white;
 }
 
 h1,
