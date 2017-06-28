@@ -217,6 +217,10 @@ strong {
   font-variant: small-caps; }
 
 /* TYPOGRAPHY END */
+h1 {
+  background-color: #4D4D4D;
+  color: #ffa100; }
+
 .main {
   width: 50%;
   max-width: 600px;
@@ -225,8 +229,7 @@ strong {
 
 .formGroup {
   padding: 8px;
-  margin: 4px 0;
-  background-color: #fff; }
+  margin: 4px 0; }
 
 .nameInput,
 .nameOutput {
@@ -260,15 +263,15 @@ strong {
 .shortenName {
   cursor: pointer;
   font-weight: bold;
-  background-color: #FF8000;
-  border: 0;
+  background-color: #fff;
+  border: 2px solid #FF8000;
   border-radius: 4px;
-  color: #fff;
-  flex: 0 1 50%;
-  box-shadow: 0 1px 1px #4D4D4D; }
+  color: #FF8000;
+  flex: 0 1 50%; }
   .shortenName:focus, .shortenName:hover {
     outline: none;
-    background-color: #ff5900; }
+    color: #fff;
+    background-color: #FF8000; }
   .shortenName:active {
     outline: none;
     background-color: #ff5900;
