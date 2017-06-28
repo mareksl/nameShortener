@@ -22,7 +22,6 @@
 	display: block;
 	width: 100%;
 	padding: 8px;
-
 }
 
 .nameInput:focus,
@@ -78,6 +77,10 @@
 
 input[type="checkbox"] {
 	cursor: pointer;
+}
+
+input[type="checkbox"]:checked + span{
+		border-bottom: 2px solid $tr-orange;
 }
 
 .objInput {
