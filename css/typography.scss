@@ -12,9 +12,12 @@ $primary-color: #853109;
 $tr-white: #fff;
 $tr-darkgray: #4D4D4D;
 $tr-lightgray: #afafaf;
+$tr-mutedgray: #D0D0D0;
+$own-mutedgray: #ededed;
 $tr-orange: #FF8000;
 $tr-darkorange: #ff5900;
 $tr-lightorange: #ffa100;
+$own-mutedorange: #ffeccc; //tint of $tr-lightorange
 $sans: 'Knowledge', sans-serif;
 $monospace: 'Courier new', Courier, 'Andale Mono', monospace;
 $hover-shadow: 0 .2rem .2rem $tr-orange;
@@ -82,7 +85,6 @@ h6 {
 }
 
 p {
-	padding-bottom: 2em;
 	font-size: 1.1em;
 	max-width: 32rem;
 	margin: auto;
@@ -101,7 +103,7 @@ a {
 	&:focus,
 	&:hover {
 		text-decoration: underline;
-		color: $primary-color;
+		color: $tr-darkgray;
 	}
 
 	&:active {

@@ -1,13 +1,14 @@
 @import 'reset';
 @import 'typography';
+
 h1 {
 	background-color: $tr-darkgray;
 	color: $tr-lightorange;
 }
 
 .main {
-	width: 50%;
-	max-width: 600px;
+	width: 66.6666%;
+	max-width: 680px;
 	margin: auto;
 	padding: 8px 0;
 }
@@ -50,7 +51,11 @@ h1 {
 	justify-content: flex-end;
 }
 
+.linkButton,
 .shortenName {
+	padding: 0 .5em;
+	min-height: 28px;
+	width: 100%;
 	cursor: pointer;
 	font-weight: bold;
 	background-color: $tr-white;
@@ -62,7 +67,6 @@ h1 {
 	// color: #fff;
 	flex: 0 1 50%;
 	// box-shadow: 0 1px 1px $tr-darkgray;
-
 	&:focus,
 	&:hover {
 		outline: none;
@@ -78,6 +82,19 @@ h1 {
 	}
 }
 
+.linkButton {
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	&:active,
+	&:focus,
+	&:hover {
+		text-decoration: none;
+	}
+}
+
 .settingsOpt {
 	cursor: pointer;
 	display: block;
@@ -87,8 +104,8 @@ input[type="checkbox"] {
 	cursor: pointer;
 }
 
-input[type="checkbox"]:checked + span{
-		border-bottom: 2px solid $tr-orange;
+input[type="checkbox"]:checked + span {
+	border-bottom: 2px solid $tr-orange;
 }
 
 .objInput {
@@ -101,8 +118,42 @@ input[type="checkbox"]:checked + span{
 	font-family: $sans;
 	font-size: 1em;
 }
-
 .warning {
 	color: $tr-darkorange;
 	font-weight: bold;
+}
+
+.tableRules {
+	width: 100%;
+	margin: 16px 0;
+
+	thead {
+		font-weight: bold;
+		background-color: $tr-darkgray;
+		color: $tr-white;
+	}
+
+	td,
+	th,
+	tr {
+		padding: .4em;
+	}
+
+	td {
+		border: 1px $own-mutedgray solid;
+	}
+
+	tbody tr {
+		&:hover {
+			background-color: $own-mutedgray;
+		}
+	}
+}
+
+.rules {
+	display: none;
+
+	&.show {
+		display: block;
+	}
 }

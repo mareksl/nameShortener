@@ -32,25 +32,36 @@ var nameChecker = (function() {
       '\u00df': 'ss',
     });
   };
+  //REPLACE SLASHES
+  var replaceSlashes = function(string) {
+    return replaceLetter(string, {
+      '/': '%2F'
+    });
+  };
+  //GENERATE TRANSLATE LINK
+  var translateLink = function(string) {
+    return 'https://translate.google.com/#auto/en/' + replaceSlashes(encodeURI(removeBreaks(string)));
+  };
   //REMOVE PARENS
   var removeParens = function(string) {
     return replaceLetter(string, {
       '[()]': ''
     });
   };
-	//REMOVE LINE BREAKS
-	var removeBreaks = function(string) {
-		return replaceLetter(string, {
-			'\n': ' '
-		});
-	};
+  //REMOVE LINE BREAKS
+  var removeBreaks = function(string) {
+    return replaceLetter(string, {
+      '\n': ' '
+    });
+  };
   //RETURN OBJECT
   return {
     lengthCheck: lengthCheck,
     replaceUmlauts: replaceUmlauts,
     removeParens: removeParens,
     maxLength: maxLength,
-		removeBreaks: removeBreaks
+    removeBreaks: removeBreaks,
+    translateLink: translateLink
   };
 }());
 //-----------------------------------------------------------
@@ -79,7 +90,9 @@ var nameChecker = (function() {
     outputInHouseName = $('#outputInHouseName'),
     lenName = $('#lenName'),
     inputObj = $('#inputObj'),
-    lenObj = $('#lenObj');
+    lenObj = $('#lenObj'),
+    showRules = $('#showRules'),
+    divRules = $('.rules');
   inputName.addEventListener('input', function(e) {
     displayLength(inputName, lenName, 50);
   });
@@ -111,15 +124,23 @@ var nameChecker = (function() {
   });
   inputObj.addEventListener('input', function(e) {
     displayLength(inputObj, lenObj, 2000);
+    $('#linkTranslate').href = nameChecker.translateLink(inputObj.value);
   });
   $('#buttonObjUmlauts').addEventListener('click', function(e) {
     inputObj.value = nameChecker.replaceUmlauts(inputObj.value);
     displayLength(inputObj, lenObj, 2000);
     inputObj.select();
   });
-	$('#buttonObjBreaks').addEventListener('click', function(e) {
+  $('#buttonObjBreaks').addEventListener('click', function(e) {
     inputObj.value = nameChecker.removeBreaks(inputObj.value);
     displayLength(inputObj, lenObj, 2000);
     inputObj.select();
   });
+  showRules.addEventListener('click', function(e) {
+    if (!divRules.classList.contains('show')) {
+      divRules.classList.add('show');
+    } else {
+      divRules.classList.remove('show');
+    }
+  })
 }());
