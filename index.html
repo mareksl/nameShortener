@@ -23,8 +23,61 @@
 			</div>
 		</div>
 		<div class="formGroup">
-			Options
-			<label class="settingsOpt"><input type="checkbox" name="shortenNames" checked><span>Shorten Names</span></label>
+			<div class="nameGroupOutput"><button class="shortenName" id="showRules">Rules</button></div>
+			<div class="rules">
+			<table class="tableRules" id="tableRules">
+				<thead>
+					<tr>
+						<th>Word</th>
+						<th>Replacement</th>
+						<th>Remove</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<td><input type="text" name="" value="" class="nameInput"></td>
+						<td><input type="text" name="" value="" class="nameInput"></td>
+						<td><button class="shortenName">Add</button></td>
+					</tr>
+				</tfoot>
+				<tbody>
+					<tr>
+						<td>a</td>
+						<td>b</td>
+						<td><button class="shortenName">Remove</button></td>
+					</tr>
+					<tr>
+						<td>a</td>
+						<td>b</td>
+						<td><button class="shortenName">Remove</button></td>
+					</tr>
+					<tr>
+						<td>a</td>
+						<td>b</td>
+						<td><button class="shortenName">Remove</button></td>
+					</tr>
+					<tr>
+						<td>a</td>
+						<td>b</td>
+						<td><button class="shortenName">Remove</button></td>
+					</tr>
+					<tr>
+						<td>a</td>
+						<td>b</td>
+						<td><button class="shortenName">Remove</button></td>
+					</tr>
+					<tr>
+						<td>a</td>
+						<td>b</td>
+						<td><button class="shortenName">Remove</button></td>
+					</tr>
+				</tbody>
+			</table>
+			<!-- <div class="nameGroupOutput"><button class="shortenName">Load</button></div>
+			<div class="nameGroupOutput"><button class="shortenName">Save</button></div> -->
+			<!-- <div class="nameGroupOutput"><button class="shortenName">Close</button></div> -->
+			</div>
+			<label class="settingsOpt"><input type="checkbox" name="shortenNames" disabled><span>Shorten Names</span></label>
 			<label class="settingsOpt"><input type="checkbox" name="removeParens"><span>Remove Parens</span></label>
 			<label class="settingsOpt"><input type="checkbox" name="removeSpecial"><span>Replace Umlauts and ß</span></label>
 		</div>
@@ -63,6 +116,9 @@
 			</div>
 			<div class="nameGroupOutput">
 				<button class="shortenName" type="button" id="buttonObjBreaks">Remove Line Breaks</button>
+			</div>
+			<div class="nameGroupOutput">
+				<a class="linkButton" id="linkTranslate" href="http://translate.google.com/" target="_blank">Google Translate</a>
 			</div>
 		</div>
 	</div>
