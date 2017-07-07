@@ -54,6 +54,16 @@ var nameChecker = (function() {
       '\n': ' '
     });
   };
+  // ADD CLASSES
+  var addShareClasses = function(name, sClasses) {
+    var output = [];
+    for (var i = 0; i < sClasses.length; i++) {
+			if (sClasses[i] !== '') {
+      output.push(name + ' ' + sClasses[i]);
+		}
+    }
+    return output;
+  };
   //RETURN OBJECT
   return {
     lengthCheck: lengthCheck,
@@ -61,7 +71,8 @@ var nameChecker = (function() {
     removeParens: removeParens,
     maxLength: maxLength,
     removeBreaks: removeBreaks,
-    translateLink: translateLink
+    translateLink: translateLink,
+    addShareClasses: addShareClasses
   };
 }());
 //-----------------------------------------------------------
@@ -83,6 +94,15 @@ var nameChecker = (function() {
       }
     }
   };
+
+  function addShareClasses(name, sClassesIn, output) {
+    var sClasses = sClassesIn.value.split('\n');
+    output.innerHTML = '';
+    var classesOutput = nameChecker.addShareClasses(name, sClasses);
+    for (var i = 0; i < classesOutput.length; i++) {
+      output.innerHTML += '<li tabindex="0" contenteditable="true">' + classesOutput[i] + '</li>';
+    }
+  }
   // EVENT LISTENERS
   var inputName = $('#inputName'),
     outputName = $('#outputName'),
@@ -92,18 +112,24 @@ var nameChecker = (function() {
     inputObj = $('#inputObj'),
     lenObj = $('#lenObj'),
     showRules = $('#showRules'),
-    divRules = $('.rules');
+    divRules = $('.rules'),
+    shareClassesOutput = $('#shareClassesOutput'),
+    shareClassesShortOutput = $('#shareClassesShortOutput'),
+    shareClassesInHouseOutput = $('#shareClassesInHouseOutput');
   inputName.addEventListener('input', function(e) {
     displayLength(inputName, lenName, 50);
   });
   outputName.addEventListener('input', function(e) {
     displayLength(outputName, lenOutputName, 50);
+    addShareClasses(outputName.value, $('#shareClasses'), shareClassesOutput);
   });
   outputShortName.addEventListener('input', function(e) {
     displayLength(outputShortName, lenOutputShortName, 30);
+    addShareClasses(outputShortName.value, $('#shareClasses'), shareClassesOutputShort);
   });
   outputInHouseName.addEventListener('input', function(e) {
     displayLength(outputInHouseName, lenOutputInHouseName, 40);
+    addShareClasses(outputInHouseName.value, $('#shareClasses'), shareClassesOutputInHouse);
   });
   $('#buttonShorten').addEventListener('click', function(e) {
     var value = inputName.value;
@@ -121,6 +147,9 @@ var nameChecker = (function() {
     displayLength(outputName, lenOutputName, 50);
     displayLength(outputShortName, lenOutputShortName, 30);
     displayLength(outputInHouseName, lenOutputInHouseName, 40);
+    addShareClasses(outputName.value, $('#shareClasses'), shareClassesOutput);
+    addShareClasses(outputShortName.value, $('#shareClasses'), shareClassesOutputShort);
+    addShareClasses(outputInHouseName.value, $('#shareClasses'), shareClassesOutputInHouse);
   });
   inputObj.addEventListener('input', function(e) {
     displayLength(inputObj, lenObj, 2000);
@@ -142,5 +171,14 @@ var nameChecker = (function() {
     } else {
       divRules.classList.remove('show');
     }
-  })
+  });
+  var comfyText = (function() {
+      $('#shareClasses').addEventListener('input', autoExpand);
+
+    function autoExpand(e, el) {
+      var el = el || e.target;
+      el.style.height = 'inherit';
+      el.style.height = (el.scrollHeight + 4) + 'px';
+    }
+  })();
 }());
