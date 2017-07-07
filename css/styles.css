@@ -217,8 +217,8 @@ strong {
 
 /* TYPOGRAPHY END */
 h1 {
-  background-color: #4D4D4D;
-  color: #ffa100; }
+  color: #ffa100;
+  background-color: #4D4D4D; }
 
 .main {
   width: 66.6666%;
@@ -227,55 +227,69 @@ h1 {
   padding: 8px 0; }
 
 .formGroup {
-  padding: 8px;
-  margin: 4px 0; }
-
-.nameInput,
-.nameOutput {
-  height: 33px;
-  border-radius: 4px;
-  border: 1px solid #afafaf;
-  display: block;
-  width: 100%;
+  margin: 4px 0;
   padding: 8px; }
+
+input[type='text'] {
+  display: block;
+  height: 33px;
+  padding: 8px;
+  border: 1px solid #afafaf;
+  border-radius: 4px; }
+
+.nameInput {
+  width: 100%; }
+
+.nameOutput {
+  flex: 1 0 auto; }
 
 .nameInput:focus,
 .nameOutput:focus,
-.objInput:focus {
-  outline: none;
-  border: 2px solid #FF8000; }
+textarea:focus {
+  border: 2px solid #FF8000;
+  outline: none; }
 
 .nameLen {
+  line-height: 1;
   display: block;
-  flex: 1 1 50%;
-  text-align: center;
-  padding: 8px 0; }
+  width: 50px;
+  height: 33px;
+  padding: 8px 0;
+  text-align: center; }
+
+.nameLenFund {
+  line-height: 1;
+  display: block;
+  flex: 0 1 50%;
+  height: 33px;
+  padding: 8px 0;
+  text-align: center; }
 
 .nameGroupOutput {
-  margin: 4px 0;
-  height: 40px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-end; }
+  justify-content: flex-end;
+  min-height: 33px;
+  margin: 4px 0; }
 
 .linkButton,
 .shortenName {
-  padding: 0 .5em;
-  min-height: 28px;
-  width: 100%;
-  cursor: pointer;
   font-weight: bold;
-  background-color: #fff;
+  flex: 0 1 50%;
+  width: 100%;
+  min-height: 28px;
+  padding: 0 .5em;
+  cursor: pointer;
+  color: #FF8000;
   border: 2px solid #FF8000;
   border-radius: 4px;
-  color: #FF8000;
-  flex: 0 1 50%; }
+  background-color: #fff; }
   .linkButton:focus, .linkButton:hover,
   .shortenName:focus,
   .shortenName:hover {
-    outline: none;
     color: #fff;
+    outline: none;
     background-color: #FF8000; }
   .linkButton:active,
   .shortenName:active {
@@ -284,50 +298,56 @@ h1 {
     box-shadow: inset 0 1px 1px #4D4D4D; }
 
 .linkButton {
-  text-align: center;
   display: flex;
   align-items: center;
-  justify-content: center; }
+  justify-content: center;
+  text-align: center; }
   .linkButton:active, .linkButton:focus, .linkButton:hover {
     text-decoration: none; }
 
 .settingsOpt {
-  cursor: pointer;
-  display: block; }
-
-input[type="checkbox"] {
+  display: block;
   cursor: pointer; }
 
-input[type="checkbox"]:checked + span {
+input[type='checkbox'] {
+  cursor: pointer; }
+
+input[type='checkbox']:checked + span {
   border-bottom: 2px solid #FF8000; }
 
-.objInput {
-  resize: vertical;
-  border-radius: 4px;
-  width: 100%;
-  height: 200px;
-  border: 1px solid #afafaf;
-  padding: 8px;
+textarea {
   font-family: "Knowledge", sans-serif;
-  font-size: 1em; }
+  font-size: 1em;
+  width: 100%;
+  padding: 8px;
+  resize: vertical;
+  border: 1px solid #afafaf;
+  border-radius: 4px; }
+
+.objInput {
+  min-height: 200px; }
 
 .warning {
-  color: #ff5900;
-  font-weight: bold; }
+  font-weight: bold;
+  color: #ff5900; }
 
 .tableRules {
   width: 100%;
-  margin: 16px 0; }
+  margin: 16px 0;
+  table-layout: fixed; }
   .tableRules thead {
     font-weight: bold;
-    background-color: #4D4D4D;
-    color: #fff; }
+    color: #fff;
+    background-color: #4D4D4D; }
   .tableRules td,
   .tableRules th,
   .tableRules tr {
     padding: .4em; }
   .tableRules td {
     border: 1px #ededed solid; }
+    .tableRules td:focus {
+      border: 2px solid #FF8000;
+      outline: none; }
   .tableRules tbody tr:hover {
     background-color: #ededed; }
 
@@ -335,5 +355,25 @@ input[type="checkbox"]:checked + span {
   display: none; }
   .rules.show {
     display: block; }
+
+.removeRule {
+  width: 100px; }
+
+.shareClassesInput {
+  resize: none; }
+
+.shareClasses {
+  margin-bottom: 1em; }
+  .shareClasses li {
+    border-bottom: 1px dotted #ffa100; }
+    .shareClasses li:focus {
+      border-bottom-style: solid;
+      border-color: #FF8000;
+      outline: none; }
+
+.nameType {
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid #FF8000; }
 
 /*# sourceMappingURL=styles.css.map */
