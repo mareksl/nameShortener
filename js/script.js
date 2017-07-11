@@ -100,8 +100,11 @@ var nameChecker = (function() {
     output.innerHTML = '';
     var classesOutput = nameChecker.addShareClasses(name, sClasses);
     for (var i = 0; i < classesOutput.length; i++) {
-      output.innerHTML += '<li tabindex="0" contenteditable="true">' + classesOutput[i] + '</li>';
-    }
+			var lenId = output.id+'_'+i;
+      output.innerHTML += '<li tabindex="0" contenteditable="true">' + classesOutput[i] + '</li><span id="'+lenId+'">0</span>';
+		}
+
+
   }
   // EVENT LISTENERS
   var inputName = $('#inputName'),
