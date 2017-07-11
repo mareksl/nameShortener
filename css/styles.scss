@@ -23,16 +23,14 @@ input[type='text'] {
 	height: 33px;
 	// width: 100%;
 	padding: 8px;
-	border: 1px solid $tr-lightgray;
-	border-radius: 4px;
-}
-
-.nameInput {
-	width: 100%;
 }
 
 .nameOutput {
 	flex: 1 0 auto;
+	border: 1px solid $tr-lightgray;
+	border-radius: 4px;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
 }
 
 .nameInput:focus,
@@ -49,21 +47,26 @@ textarea:focus {
 	height: 33px;
 	padding: 8px 0;
 	text-align: center;
+	border: 1px solid $tr-lightgray;
+	border-left: 0;
+	border-top-right-radius: 4px;
+	border-bottom-right-radius: 4px;
 }
-
-.nameLenFund {
+.objLen {
 	line-height: 1;
 	display: block;
-	flex: 0 1 50%;
+	width: 50px;
 	height: 33px;
 	padding: 8px 0;
 	text-align: center;
+	flex: 1 0 auto;
 }
+
 
 .nameGroupOutput {
 	display: flex;
 	flex-direction: row;
-	flex-wrap: wrap;
+	flex-wrap: nowrap;
 	justify-content: flex-end;
 	min-height: 33px;
 	margin: 4px 0;
@@ -198,6 +201,8 @@ textarea {
 	margin-bottom: 1em;
 
 	li {
+		display: inline-block;
+		width: calc(100% - 50px);
 		border-bottom: 1px dotted $tr-lightorange;
 
 		&:focus {
@@ -205,6 +210,13 @@ textarea {
 			border-color: $tr-orange;
 			outline: none;
 		}
+	}
+	span {
+		width: 50px;
+		border-left: 1px dotted $tr-lightorange;
+		border-bottom: 1px dotted $tr-lightorange;
+		display: inline-block;
+		text-align: center;
 	}
 }
 

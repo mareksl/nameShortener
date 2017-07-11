@@ -169,11 +169,11 @@ h1 {
   font-weight: bold; }
 
 h2 {
-  font-size: 1.5em;
+  font-size: 1.2em;
   font-weight: bold; }
 
 h3 {
-  font-size: 1.25em;
+  font-size: 1em;
   font-weight: bold; }
 
 h4 {
@@ -233,15 +233,14 @@ h1 {
 input[type='text'] {
   display: block;
   height: 33px;
-  padding: 8px;
-  border: 1px solid #afafaf;
-  border-radius: 4px; }
-
-.nameInput {
-  width: 100%; }
+  padding: 8px; }
 
 .nameOutput {
-  flex: 1 0 auto; }
+  flex: 1 0 auto;
+  border: 1px solid #afafaf;
+  border-radius: 4px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0; }
 
 .nameInput:focus,
 .nameOutput:focus,
@@ -255,20 +254,25 @@ textarea:focus {
   width: 50px;
   height: 33px;
   padding: 8px 0;
-  text-align: center; }
+  text-align: center;
+  border: 1px solid #afafaf;
+  border-left: 0;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px; }
 
-.nameLenFund {
+.objLen {
   line-height: 1;
   display: block;
-  flex: 0 1 50%;
+  width: 50px;
   height: 33px;
   padding: 8px 0;
-  text-align: center; }
+  text-align: center;
+  flex: 1 0 auto; }
 
 .nameGroupOutput {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: flex-end;
   min-height: 33px;
   margin: 4px 0; }
@@ -365,11 +369,19 @@ textarea {
 .shareClasses {
   margin-bottom: 1em; }
   .shareClasses li {
+    display: inline-block;
+    width: calc(100% - 50px);
     border-bottom: 1px dotted #ffa100; }
     .shareClasses li:focus {
       border-bottom-style: solid;
       border-color: #FF8000;
       outline: none; }
+  .shareClasses span {
+    width: 50px;
+    border-left: 1px dotted #ffa100;
+    border-bottom: 1px dotted #ffa100;
+    display: inline-block;
+    text-align: center; }
 
 .nameType {
   display: block;

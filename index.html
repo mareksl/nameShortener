@@ -12,13 +12,15 @@
 
 	<div class="main">
 		<div class="formGroup">
-			<label>Fund Name
-			<input class="nameInput" type="text" id="inputName">
+			<label><h2>Fund Name</h2>
+			<div class="nameGroupOutput">
+			<input class="nameOutput" type="text" id="inputName">
+			<span class="nameLen" id="lenName">0</span>
+			</div>
 			</label>
 		</div>
 		<div class="formGroup">
 			<div class="nameGroupOutput">
-				<span class="nameLenFund" id="lenName">0</span>
 				<button class="shortenName" type="button" id="buttonShorten">Shorten</button>
 			</div>
 		</div>
@@ -36,9 +38,7 @@
 					<tfoot>
 						<tr>
 							<td contenteditable="true"></td>
-							<!-- <td><input type="text" name="" value="" class="nameInput"></td> -->
 							<td contenteditable="true"></td>
-							<!-- <td><input type="text" name="" value="" class="nameInput"></td> -->
 							<td><button class="shortenName">Add</button></td>
 						</tr>
 					</tfoot>
@@ -61,42 +61,32 @@
 	</div>
 	<div class="main">
 		<div class="formGroup">
-			<label>Share Classes (each on new line)
+			<label><h2>Share Classes (each on new line)</h2>
 		<textarea class="shareClassesInput" id="shareClasses"></textarea></label>
 		</div>
-		<div class="formGroup">
-			<label>Name
-				<div class="nameGroupOutput">
-			<input class="nameOutput" type="text" id="outputName"></label>
-			<span class="nameLen" id="lenOutputName">0</span>
-		</div>
-	</div>
 	<div class="formGroup">
-		<label>Short Name
-			<div class="nameGroupOutput">
-			<input class="nameOutput" type="text" id="outputShortName"></label>
-			<span class="nameLen" id="lenOutputShortName">0</span>
-		</div>
-	</div>
-	<div class="formGroup">
-		<label>In-House Name
-			<div class="nameGroupOutput">
-			<input class="nameOutput" type="text" id="outputInHouseName"></label>
-			<span class="nameLen" id="lenOutputInHouseName">0</span>
-		</div>
-	</div>
-	<div class="formGroup">
-		Generated Share Classes
+		<h2>Generated Share Classes</h2>
 		<div class="nameList">
-			<span class="nameType">Name</span>
+			<span class="nameType"><h3>Name</h3></span>
+			<div class="nameGroupOutput">
+		<input class="nameOutput" type="text" id="outputName">
+		<span class="nameLen" id="lenOutputName">0</span>
+	</div>
 
 			<ul id="shareClassesOutput" class="shareClasses">
 			</ul>
-			<span class="nameType">Short Name</span>
-
+			<span class="nameType"><h3>Short Name</h3></span>
+			<div class="nameGroupOutput">
+			<input class="nameOutput" type="text" id="outputShortName">
+		<span class="nameLen" id="lenOutputShortName">0</span>
+	</div>
 			<ul id="shareClassesOutputShort" class="shareClasses">
 			</ul>
-			<span class="nameType">In-House Name</span>
+			<span class="nameType"><h3>In-House Name</h3></span>
+				<div class="nameGroupOutput">
+				<input class="nameOutput" type="text" id="outputInHouseName">
+			<span class="nameLen" id="lenOutputInHouseName">0</span>
+		</div>
 			<ul id="shareClassesOutputInHouse" class="shareClasses">
 			</ul>
 		</div>
@@ -104,13 +94,13 @@
 	</div>
 	<div class="main">
 		<div class="formGroup">
-			<label>Objective
+			<label><h2>Objective</h2>
 		<textarea class="objInput" id="inputObj"></textarea>
 		</label>
 		</div>
 		<div class="formGroup">
 			<div class="nameGroupOutput">
-				<span class="nameLen" id="lenObj">0</span>
+				<span class="objLen" id="lenObj">0</span>
 				<button class="shortenName" type="button" id="buttonObjUmlauts">Replace Umlauts</button>
 			</div>
 			<div class="nameGroupOutput">
