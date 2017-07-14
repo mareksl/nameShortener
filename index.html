@@ -68,7 +68,7 @@
 		<div class="formGroup">
 			<h2>Generated Share Classes</h2>
 			<div class="nameList">
-				<label><h3>Name</h3>
+				<label><h3>Name</h3><small> (max. 50 chars)</small>
 					<div class="nameGroupOutput">
 						<input class="nameOutput" type="text" id="outputName">
 						<span class="nameLen" id="lenOutputName">0</span>
@@ -77,7 +77,7 @@
 
 				<ul id="shareClassesOutput" class="shareClasses">
 				</ul>
-				<label><h3>Short Name</h3>
+				<label><h3>Short Name</h3><small> (max. 30 chars)</small>
 					<div class="nameGroupOutput">
 						<input class="nameOutput" type="text" id="outputShortName">
 						<span class="nameLen" id="lenOutputShortName">0</span>
@@ -85,7 +85,7 @@
 				</label>
 				<ul id="shareClassesOutputShort" class="shareClasses">
 				</ul>
-				<label><h3>In-House Name</h3>
+				<label><h3>In-House Name</h3><small> (max. 40 chars)</small>
 					<div class="nameGroupOutput">
 						<input class="nameOutput" type="text" id="outputInHouseName">
 						<span class="nameLen" id="lenOutputInHouseName">0</span>
@@ -105,13 +105,13 @@
 		<div class="formGroup">
 			<div class="nameGroupOutput">
 				<span class="objLen" id="lenObj">0</span>
-				<button class="shortenName" type="button" id="buttonObjUmlauts">Replace Umlauts</button>
+				<a class="linkButton" id="linkTranslate" href="http://translate.google.com/" target="_blank">Google Translate</a>
 			</div>
 			<div class="nameGroupOutput">
 				<button class="shortenName" type="button" id="buttonObjBreaks">Remove Line Breaks</button>
 			</div>
 			<div class="nameGroupOutput">
-				<a class="linkButton" id="linkTranslate" href="http://translate.google.com/" target="_blank">Google Translate</a>
+				<button class="shortenName" type="button" id="buttonObjUmlauts">Replace Umlauts</button>
 			</div>
 		</div>
 	</div>

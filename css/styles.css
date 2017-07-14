@@ -173,6 +173,7 @@ h2 {
   font-weight: bold; }
 
 h3 {
+  display: inline;
   font-size: 1em;
   font-weight: bold; }
 
@@ -192,7 +193,8 @@ p {
   text-align: center; }
 
 small {
-  font-size: .8em; }
+  font-size: .8em;
+  color: #afafaf; }
 
 a {
   transition: .4s;
