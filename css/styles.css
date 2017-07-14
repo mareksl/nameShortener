@@ -169,6 +169,7 @@ h1 {
   font-weight: bold; }
 
 h2 {
+  display: inline;
   font-size: 1.2em;
   font-weight: bold; }
 
