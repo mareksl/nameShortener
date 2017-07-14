@@ -69,6 +69,7 @@ h2 {
 }
 
 h3 {
+	display: inline;
 	font-size: 1em;
 	font-weight: bold;
 }
@@ -94,6 +95,7 @@ p {
 
 small {
 	font-size: .8em;
+	color: $tr-lightgray;
 }
 
 a {
