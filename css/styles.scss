@@ -205,7 +205,7 @@ textarea {
 		width: calc(100% - 50px);
 		border-bottom: 1px dotted $tr-lightorange;
 
-		&:first-child {
+		&:first-of-type {
 			border-top: 1px dotted $tr-lightorange;
 		}
 
@@ -223,8 +223,10 @@ textarea {
 		display: inline-block;
 		text-align: center;
 		cursor: pointer;
-
-		&:first-child {
+&:hover {
+	border-left-style: solid;
+}
+		&:first-of-type {
 			border-top: 1px dotted $tr-lightorange;
 		}
 	}
