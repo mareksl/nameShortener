@@ -57,32 +57,46 @@ var nameChecker = (function() {
   // ADD CLASSES
   var addShareClasses = function(name, sClasses) {
     var output = [];
-    for (var i = 0; i < sClasses.length; i++) {
-      if (sClasses[i] !== '') {
-        output.push(name + ' ' + sClasses[i]);
+      for (var i = 0; i < sClasses.length; i++) {
+        if (sClasses[i] !== '') {
+          output.push(name + ' ' + sClasses[i]);
+        }
       }
-    }
     return output;
   };
-  var shortenName = function(name, rules) {
-    return replaceLetter(name, rules);
+  var shortenName = function(name, shareClasses, rules, lengths) {
+    var nameWithShareclasses = addShareClasses(name, shareClasses);
+    var output = [];
+    var longest = name;
+    if (nameWithShareclasses.length > 0) {
+      longest = nameWithShareclasses.reduce(function(a, b) {
+        return a.length > b.length ? a : b;
+      });
+    }
+    var maxShareClassLen = longest.length - name.length;
+    var shortenToLen = lengths.map(function(e) {
+      return e - maxShareClassLen;
+    });
+    var shortenedNames = [];
+    for (var i = 0; i < shortenToLen.length; i++) {
+      let short = name.substr(0, shortenToLen[i]);
+      shortenedNames.push(short);
+    }
+    output = shortenedNames;
+    return output;
   };
   var shortenProcess = function(name, options, rules, shareClasses) {
-    // remove parentheses, replace umlauts
-    name = options.removeParens ? removeParens(name) : name;
-    name = options.replaceUmlauts ? replaceUmlauts(name) : name;
-    // add the share classes
-    var nameWithShareclasses = addShareClasses(name, shareClasses);
-    // shorten name
-    name = options.shortenName ? shortenName(name, rules) : name;
     var shortenedName = name;
+    // remove parentheses
+    shortenedName = options.removeParens ? removeParens(shortenedName) : shortenedName;
+    // replace umlauts
+    shortenedName = options.replaceUmlauts ? replaceUmlauts(shortenedName) : shortenedName;
+    // shorten name
+    shortenedName = options.shortenName ? shortenName(shortenedName, shareClasses, rules, [50, 30, 40]) : [shortenedName, shortenedName, shortenedName];
     return {
-      shortenedName: shortenedName,
-      // shortenedNameShort: shortenedNameShort,
-      // shortenedNameInHouse: shortenedNameInHouse,
-      // shortenedNameWithShareClasses: shortenedNameWithShareClasses,
-      // shortenedNameShortWithShareClasses: shortenedNameShortWithShareClasses,
-      // shortenedNameInHouseWithShareClasses: shortenedNameInHouseWithShareClasses
+      shortenedName: shortenedName[0],
+      shortenedNameShort: shortenedName[1],
+      shortenedNameInHouse: shortenedName[2],
     };
   };
   //RETURN OBJECT
@@ -117,24 +131,42 @@ var nameChecker = (function() {
     }
   };
 
+  function selectElementContents(el) {
+    var range = document.createRange();
+    range.selectNodeContents(el);
+    var sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+  }
+
   function addShareClasses(name, sClassesIn, output, max) {
-    var sClasses = sClassesIn.value.split('\n');
+    var sClasses = sClassesIn.value.length > 0 ? sClassesIn.value.split('\n') : [];
     while (output.firstChild) {
       output.removeChild(output.firstChild);
     }
-    var classesOutput = nameChecker.addShareClasses(name, sClasses);
-    for (var i = 0; i < classesOutput.length; i++) {
-      var lenId = output.id + '_' + i;
-      var newShareClass = document.createElement('li');
+    let classesOutput = nameChecker.addShareClasses(name, sClasses);
+    for (let i = 0; i < classesOutput.length; i++) {
+      let lenId = output.id + '_' + i;
+      let newShareClass = document.createElement('li');
       newShareClass.setAttribute('tabIndex', '0');
       newShareClass.setAttribute('contentEditable', 'true');
-      var newShareClassText = document.createTextNode(classesOutput[i]);
+      let newShareClassText = document.createTextNode(classesOutput[i]);
       newShareClass.appendChild(newShareClassText);
-      var newShareClassLen = document.createElement('span');
+      let newShareClassLen = document.createElement('span');
       newShareClassLen.setAttribute('id', lenId);
       displayLength(newShareClassText, newShareClassLen, max);
       output.appendChild(newShareClass);
       output.appendChild(newShareClassLen);
+      newShareClassLen.addEventListener('click', function() {
+        selectElementContents(newShareClass);
+        try {
+          let success = document.execCommand('copy');
+          let msg = success ? 'successful' : 'unsuccessful';
+          console.log('Copying text command was ' + msg);
+        } catch (e) {
+          console.log('Unable to copy!');
+        }
+      })
     }
   }
   // EVENT LISTENERS
@@ -150,6 +182,9 @@ var nameChecker = (function() {
     shareClassesOutput = $('#shareClassesOutput'),
     shareClassesShortOutput = $('#shareClassesShortOutput'),
     shareClassesInHouseOutput = $('#shareClassesInHouseOutput');
+  var rules = {
+    'öko': 'testä',
+  };
   inputName.addEventListener('input', function(e) {
     displayLength(inputName.value, lenName, 50);
   });
@@ -170,10 +205,13 @@ var nameChecker = (function() {
     var options = {};
     options.replaceUmlauts = $('input[name="removeSpecial"]').checked;
     options.removeParens = $('input[name="removeParens"]').checked;
-    value = nameChecker.shortenProcess(value, options, undefined, $('#shareClasses')).shortenedName;
-    outputName.value = value;
-    outputShortName.value = value;
-    outputInHouseName.value = value;
+    options.shortenName = $('input[name="shortenNames"]').checked;
+    var sClassesIn = $('#shareClasses');
+    var sClasses = sClassesIn.value.length > 0 ? sClassesIn.value.split('\n') : [];
+    var shortened = nameChecker.shortenProcess(value, options, rules, sClasses);
+    outputName.value = shortened.shortenedName;
+    outputShortName.value = shortened.shortenedNameShort;
+    outputInHouseName.value = shortened.shortenedNameInHouse;
     displayLength(outputName.value, lenOutputName, 50);
     displayLength(outputShortName.value, lenOutputShortName, 30);
     displayLength(outputInHouseName.value, lenOutputInHouseName, 40);

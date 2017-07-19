@@ -1,6 +1,5 @@
 @import 'reset';
 @import 'typography';
-
 h1 {
 	color: $tr-lightorange;
 	background-color: $tr-darkgray;
@@ -217,5 +216,20 @@ textarea {
 		border-bottom: 1px dotted $tr-lightorange;
 		display: inline-block;
 		text-align: center;
+		cursor: pointer;
+		&:hover {
+			box-shadow: inset 0 0 16px $tr-lightorange;
+		}
 	}
+}
+pre {
+	font-family: $sans;
+	font-size: 1em;
+	width: 100%;
+	height: 200px;
+	padding: 8px;
+	resize: vertical;
+	overflow: auto;
+	border: 1px solid $tr-lightgray;
+	border-radius: 4px;
 }
