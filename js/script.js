@@ -57,42 +57,50 @@ var nameChecker = (function() {
   // ADD CLASSES
   var addShareClasses = function(name, sClasses) {
     var output = [];
-      for (var i = 0; i < sClasses.length; i++) {
-        if (sClasses[i] !== '') {
-          output.push(name + ' ' + sClasses[i]);
-        }
+    for (var i = 0; i < sClasses.length; i++) {
+      if (sClasses[i] !== '') {
+        output.push(name + ' ' + sClasses[i]);
       }
+    }
     return output;
   };
   var shortenName = function(name, shareClasses, rules, lengths) {
+    var shortenedNames = [];
+    // add share classes for length calculation
     var nameWithShareclasses = addShareClasses(name, shareClasses);
-    var output = [];
+    // find out longest possible name (with sc if any)
     var longest = name;
     if (nameWithShareclasses.length > 0) {
       longest = nameWithShareclasses.reduce(function(a, b) {
         return a.length > b.length ? a : b;
       });
     }
+    // max length of share class to add
     var maxShareClassLen = longest.length - name.length;
+    // lengths to shorten name to
     var shortenToLen = lengths.map(function(e) {
       return e - maxShareClassLen;
     });
-    var shortenedNames = [];
+    // shortening algorithm
+    var algorithm = function(input, len) {
+      return input.substr(0, len);
+    }
+    // shortening algorithm END
+    // output
     for (var i = 0; i < shortenToLen.length; i++) {
-      let short = name.substr(0, shortenToLen[i]);
+      var short = algorithm(name, shortenToLen[i]);
       shortenedNames.push(short);
     }
-    output = shortenedNames;
-    return output;
+    return shortenedNames;
   };
-  var shortenProcess = function(name, options, rules, shareClasses) {
+  var shortenProcess = function(name, options, rules, shareClasses, lengths) {
     var shortenedName = name;
     // remove parentheses
     shortenedName = options.removeParens ? removeParens(shortenedName) : shortenedName;
     // replace umlauts
     shortenedName = options.replaceUmlauts ? replaceUmlauts(shortenedName) : shortenedName;
     // shorten name
-    shortenedName = options.shortenName ? shortenName(shortenedName, shareClasses, rules, [50, 30, 40]) : [shortenedName, shortenedName, shortenedName];
+    shortenedName = options.shortenName ? shortenName(shortenedName, shareClasses, rules, lengths) : [shortenedName, shortenedName, shortenedName];
     return {
       shortenedName: shortenedName[0],
       shortenedNameShort: shortenedName[1],
@@ -112,7 +120,7 @@ var nameChecker = (function() {
   };
 }());
 //-----------------------------------------------------------
-(function init() {
+(function init(lengths) {
   'use strict';
   // SELECTOR
   var $ = function(el) {
@@ -170,35 +178,39 @@ var nameChecker = (function() {
     }
   }
   // EVENT LISTENERS
-  var inputName = $('#inputName'),
-    outputName = $('#outputName'),
-    outputShortName = $('#outputShortName'),
-    outputInHouseName = $('#outputInHouseName'),
-    lenName = $('#lenName'),
-    inputObj = $('#inputObj'),
-    lenObj = $('#lenObj'),
-    showRules = $('#showRules'),
-    divRules = $('.rules'),
-    shareClassesOutput = $('#shareClassesOutput'),
-    shareClassesShortOutput = $('#shareClassesShortOutput'),
-    shareClassesInHouseOutput = $('#shareClassesInHouseOutput');
+  var inputName = $('#inputName'), // INITIAL NAME INPUT
+    outputName = $('#outputName'), // PROCESSED NAME OUTPUT
+    outputShortName = $('#outputShortName'), // PROCESSED SHORT NAME OUTPUT
+    outputInHouseName = $('#outputInHouseName'), // PROCESSED IN HOUSE NAME OUTPUT
+    lenName = $('#lenName'), // NAME LENGTH
+    inputObj = $('#inputObj'), // OBJECTIVE INPUT
+    lenObj = $('#lenObj'), // OBJECTIVE LENGTH
+    showRules = $('#showRules'), // RULES BUTTON
+    divRules = $('.rules'), // RULES LIST
+    shareClassesOutput = $('#shareClassesOutput'), // NAME WITH SC OUTPUT
+    shareClassesShortOutput = $('#shareClassesShortOutput'), // SHORT NAME WITH SC OUTPUT
+    shareClassesInHouseOutput = $('#shareClassesInHouseOutput'), // IN HOUSE NAME WITH SC OUTPUT
+    shareClassesInput = $('#shareClasses'); // SHARE CLASSES INPUT
   var rules = {
     'öko': 'testä',
   };
+  var displayAndAdd = function(output, lenout, lennum, shareClassesOutput) {
+    var value = output.value;
+    var length = lengths[lennum];
+    displayLength(value, lenout, length);
+    addShareClasses(value, shareClassesInput, shareClassesOutput, length);
+  }
   inputName.addEventListener('input', function(e) {
-    displayLength(inputName.value, lenName, 50);
+    displayLength(inputName.value, lenName, lengths[0]);
   });
   outputName.addEventListener('input', function(e) {
-    displayLength(outputName.value, lenOutputName, 50);
-    addShareClasses(outputName.value, $('#shareClasses'), shareClassesOutput, 50);
+    displayAndAdd(outputName, lenOutputName, 0, shareClassesOutput);
   });
   outputShortName.addEventListener('input', function(e) {
-    displayLength(outputShortName.value, lenOutputShortName, 30);
-    addShareClasses(outputShortName.value, $('#shareClasses'), shareClassesOutputShort, 30);
+    displayAndAdd(outputShortName, lenOutputShortName, 1, shareClassesOutputShort);
   });
   outputInHouseName.addEventListener('input', function(e) {
-    displayLength(outputInHouseName.value, lenOutputInHouseName, 40);
-    addShareClasses(outputInHouseName.value, $('#shareClasses'), shareClassesOutputInHouse, 40);
+    displayAndAdd(outputInHouseName, lenOutputInHouseName, 2, shareClassesOutputInHouse);
   });
   $('#buttonShorten').addEventListener('click', function(e) {
     var value = inputName.value;
@@ -206,19 +218,16 @@ var nameChecker = (function() {
     options.replaceUmlauts = $('input[name="removeSpecial"]').checked;
     options.removeParens = $('input[name="removeParens"]').checked;
     options.shortenName = $('input[name="shortenNames"]').checked;
-    var sClassesIn = $('#shareClasses');
-    var sClasses = sClassesIn.value.length > 0 ? sClassesIn.value.split('\n') : [];
-    var shortened = nameChecker.shortenProcess(value, options, rules, sClasses);
+    var sClasses = shareClassesInput.value.length > 0 ? shareClassesInput.value.split('\n') : [];
+    var shortened = nameChecker.shortenProcess(value, options, rules, sClasses, lengths);
     outputName.value = shortened.shortenedName;
     outputShortName.value = shortened.shortenedNameShort;
     outputInHouseName.value = shortened.shortenedNameInHouse;
-    displayLength(outputName.value, lenOutputName, 50);
-    displayLength(outputShortName.value, lenOutputShortName, 30);
-    displayLength(outputInHouseName.value, lenOutputInHouseName, 40);
-    addShareClasses(outputName.value, $('#shareClasses'), shareClassesOutput, 50);
-    addShareClasses(outputShortName.value, $('#shareClasses'), shareClassesOutputShort, 30);
-    addShareClasses(outputInHouseName.value, $('#shareClasses'), shareClassesOutputInHouse, 40);
+    displayAndAdd(outputName, lenOutputName, 0, shareClassesOutput);
+    displayAndAdd(outputShortName, lenOutputShortName, 1, shareClassesOutputShort);
+    displayAndAdd(outputInHouseName, lenOutputInHouseName, 2, shareClassesOutputInHouse);
   });
+  //OBJECTIVE
   inputObj.addEventListener('input', function(e) {
     displayLength(inputObj.value, lenObj, 2000);
     $('#linkTranslate').href = nameChecker.translateLink(inputObj.value);
@@ -241,7 +250,7 @@ var nameChecker = (function() {
     }
   });
   var comfyText = (function() {
-    $('#shareClasses').addEventListener('input', autoExpand);
+    shareClassesInput.addEventListener('input', autoExpand);
 
     function autoExpand(e, el) {
       var el = el || e.target;
@@ -249,4 +258,4 @@ var nameChecker = (function() {
       el.style.height = (el.scrollHeight + 4) + 'px';
     }
   })();
-}());
+}([50, 30, 40]));
