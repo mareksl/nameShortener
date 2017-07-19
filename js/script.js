@@ -162,6 +162,7 @@ var nameChecker = (function() {
       newShareClass.appendChild(newShareClassText);
       let newShareClassLen = document.createElement('span');
       newShareClassLen.setAttribute('id', lenId);
+      newShareClassLen.setAttribute('data-tooltip', "Copy");
       displayLength(newShareClassText, newShareClassLen, max);
       output.appendChild(newShareClass);
       output.appendChild(newShareClassLen);

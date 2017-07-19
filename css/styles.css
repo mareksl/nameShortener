@@ -375,6 +375,8 @@ textarea {
     display: inline-block;
     width: calc(100% - 50px);
     border-bottom: 1px dotted #ffa100; }
+    .shareClasses li:first-child {
+      border-top: 1px dotted #ffa100; }
     .shareClasses li:focus {
       border-bottom-style: solid;
       border-color: #FF8000;
@@ -386,8 +388,6 @@ textarea {
     display: inline-block;
     text-align: center;
     cursor: pointer; }
-    .shareClasses span:hover {
-      box-shadow: inset 0 0 16px #ffa100; }
 
 pre {
   font-family: "Knowledge", sans-serif;
@@ -399,5 +399,53 @@ pre {
   overflow: auto;
   border: 1px solid #afafaf;
   border-radius: 4px; }
+
+/* Add this attribute to the element that needs a tooltip */
+[data-tooltip] {
+  position: relative;
+  z-index: 2;
+  cursor: pointer; }
+
+/* Hide the tooltip content by default */
+[data-tooltip]:after,
+[data-tooltip]:before {
+  transition: all .2s;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none; }
+
+/* Position tooltip above the element */
+[data-tooltip]:before {
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  right: 100%;
+  margin-right: .5em;
+  padding: 0 .5em 0 1.5em;
+  content: attr(data-tooltip);
+  text-align: center;
+  background: rgba(255, 255, 255, 0.8); }
+
+/* Triangle hack to make tooltip look like a speech bubble */
+[data-tooltip]:after {
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 50px);
+  margin-top: -5px;
+  margin-right: 8px;
+  border: solid #ffa100;
+  border-width: 0 2px 2px 0;
+  padding: 4px;
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+  content: ' ';
+  font-size: 0;
+  line-height: 0; }
+
+/* Show tooltip content on hover */
+[data-tooltip]:hover:after,
+[data-tooltip]:hover:before {
+  visibility: visible;
+  opacity: 1; }
 
 /*# sourceMappingURL=styles.css.map */
