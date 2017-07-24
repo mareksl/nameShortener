@@ -70,7 +70,7 @@ var nameChecker = (function() {
     });
     var rules = {};
     for (var i = 0; i < rulesTemp.length; i++) {
-      rules[rulesTemp[i]] = rulesUns[rulesTemp[i]]
+      rules[rulesTemp[i].toUpperCase()] = rulesUns[rulesTemp[i]]
     }
     var shortenedNames = [];
     // add share classes for length calculation
@@ -89,6 +89,13 @@ var nameChecker = (function() {
       return e - maxShareClassLen;
     });
     var x = 0;
+    var debug = document.querySelector('#debug');
+
+    function countOps(i) {
+      setTimeout(function() {
+        debug.innerHTML = i;
+      }, 0);
+    }
     // shortening algorithm
     var algorithm = function(value, options, maxlen) {
       var len = value.length;
@@ -96,15 +103,17 @@ var nameChecker = (function() {
         return value;
       } else {
         var newvalue = value;
+        var ivalue = value.toUpperCase();
         for (var prop in options) {
           if (options.hasOwnProperty(prop) && prop.length > options[prop].length) {
-						var regex = new RegExp(prop, 'i')
-            var pos = value.lastIndexOf(prop);
+            var regex = new RegExp(prop, 'i')
+            var pos = ivalue.lastIndexOf(prop);
             if (pos > -1) {
               var oldstring = newvalue.substring(0, pos);
               var newstring = newvalue.substring(pos);
               newstring = newstring.replace(regex, options[prop]);
               newvalue = oldstring + newstring;
+              countOps(x++);
               newvalue = algorithm(newvalue, options, maxlen);
             };
           }
@@ -236,25 +245,60 @@ var nameChecker = (function() {
     // Parse JSON string into object
     rules = JSON.parse(response);
   });
-  // var rules = {
-  //   'Pioneer': 'Pio',
-  //   'Eastern': 'Ea',
-  //   'Funds': 'Fd',
-  //   'Stock': 'Stk',
-  //   'long': 'ln',
-  //   'bong': 'bn',
-  //   'brain': 'brainananakjshfdkjdszh;',
-  //   'Europe': 'Eur',
-  //   'Austria': 'Aut',
-  //   'a1': 'b',
-  //   'a2': 'b',
-  //   'a3': 'b',
-  //   'a4': 'b',
-  //   'a5': 'b',
-  //   'a6': 'b',
-  //   'a7': 'b',
-  //   'a8': 'b',
-  // };
+	Object.prototype.hasOwnPropertyCI = function(prop) {
+   return Object.keys(this)
+          .filter(function (v) {
+             return v.toLowerCase() === prop.toLowerCase();
+           }).length > 0;
+};
+  var addTableRow = function(tableBody, key, value) {
+    let tableRow = document.createElement('tr');
+    let tableCellKey = document.createElement('td');
+    let tableCellValue = document.createElement('td');
+    let tableCellRemove = document.createElement('td');
+    let tableButtonRemove = document.createElement('button');
+    tableButtonRemove.innerHTML = 'Remove';
+    tableButtonRemove.classList += 'shortenName';
+    tableCellKey.innerHTML = key;
+    // tableCellKey.setAttribute('contentEditable', true);
+    tableCellValue.innerHTML = value;
+    // tableCellValue.setAttribute('contentEditable', true);
+    tableCellRemove.appendChild(tableButtonRemove);
+    tableRow.appendChild(tableCellKey);
+    tableRow.appendChild(tableCellValue);
+    tableRow.appendChild(tableCellRemove);
+    tableBody.appendChild(tableRow);
+    tableButtonRemove.addEventListener('click', function(e) {
+      delete rules[key];
+      console.log(rules);
+      tableBody.removeChild(tableRow);
+    })
+  }
+  var tableRules = $('#tableRules');
+  var tableFromJSON = function(data, table) {
+    var tableBody = table.querySelector('tbody');
+    tableBody.innerHTML = '';
+    for (let prop in data) {
+      if (data.hasOwnProperty(prop)) {
+        addTableRow(tableBody, prop, data[prop]);
+      }
+    }
+    var btnAddRule = $('#btnAddRule');
+    btnAddRule.addEventListener('click', function(e) {
+			var key = $('#addRuleKey').innerHTML, value = $('#addRuleValue').innerHTML;
+      if (key !== '' && value !== '') {
+        if (rules.hasOwnPropertyCI(key)) {
+          alert('Rule already exists!');
+        } else {
+					rules[key] = value;
+          addTableRow(tableBody, key, value);
+        }
+      } else {
+        alert('Please check rule input!');
+      }
+    })
+  }
+  tableFromJSON(rules, tableRules);
   var displayAndAdd = function(output, lenout, lennum, shareClassesOutput) {
     var value = output.value;
     var length = lengths[lennum];
