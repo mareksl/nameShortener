@@ -64,7 +64,14 @@ var nameChecker = (function() {
     }
     return output;
   };
-  var shortenName = function(name, shareClasses, rules, lengths) {
+  var shortenName = function(name, shareClasses, rulesUns, lengths) {
+    var rulesTemp = Object.keys(rulesUns).sort(function(a, b) {
+      return name.lastIndexOf(a) - name.lastIndexOf(b);
+    });
+    var rules = {};
+    for (var i = 0; i < rulesTemp.length; i++) {
+      rules[rulesTemp[i]] = rulesUns[rulesTemp[i]]
+    }
     var shortenedNames = [];
     // add share classes for length calculation
     var nameWithShareclasses = addShareClasses(name, shareClasses);
@@ -81,25 +88,27 @@ var nameChecker = (function() {
     var shortenToLen = lengths.map(function(e) {
       return e - maxShareClassLen;
     });
+    var x = 0;
     // shortening algorithm
     var algorithm = function(value, options, maxlen) {
       var len = value.length;
       if (len <= maxlen) {
         return value;
       } else {
+        var newvalue = value;
         for (var prop in options) {
           if (options.hasOwnProperty(prop) && prop.length > options[prop].length) {
-            var regex = RegExp(prop, 'g');
             var pos = value.lastIndexOf(prop);
             if (pos > -1) {
-              var oldstring = value.substring(0, pos);
-              var newstring = value.substring(pos);
-              newstring = newstring.replace(regex, options[prop]);
-              value = algorithm(oldstring + newstring, options, maxlen);
-            }
+              var oldstring = newvalue.substring(0, pos);
+              var newstring = newvalue.substring(pos);
+              newstring = newstring.replace(prop, options[prop]);
+              newvalue = oldstring + newstring;
+              newvalue = algorithm(newvalue, options, maxlen);
+            };
           }
         }
-        return value;
+        return newvalue;
       }
     };
     // shortening algorithm END
@@ -210,9 +219,23 @@ var nameChecker = (function() {
     shareClassesInHouseOutput = $('#shareClassesInHouseOutput'), // IN HOUSE NAME WITH SC OUTPUT
     shareClassesInput = $('#shareClasses'); // SHARE CLASSES INPUT
   var rules = {
+    'Pioneer': 'Pio',
+    'Eastern': 'Ea',
+    'Funds': 'Fd',
+    'Stock': 'Stk',
     'long': 'ln',
     'bong': 'bn',
-    'brain': 'brainananakjshfdkjdszh;'
+    'brain': 'brainananakjshfdkjdszh;',
+    'Europe': 'Eur',
+    'Austria': 'Aut',
+    'a1': 'b',
+    'a2': 'b',
+    'a3': 'b',
+    'a4': 'b',
+    'a5': 'b',
+    'a6': 'b',
+    'a7': 'b',
+    'a8': 'b',
   };
   var displayAndAdd = function(output, lenout, lennum, shareClassesOutput) {
     var value = output.value;
