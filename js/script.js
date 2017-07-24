@@ -236,6 +236,7 @@ var nameChecker = (function() {
       if (xobj.readyState == 4 && xobj.status == "200") {
         // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
         callback(xobj.responseText);
+        tableFromJSON(rules, tableRules);
       }
     };
     xobj.send(null);
@@ -297,7 +298,6 @@ var nameChecker = (function() {
       }
     })
   }
-  tableFromJSON(rules, tableRules);
   var displayAndAdd = function(output, lenout, lennum, shareClassesOutput) {
     var value = output.value;
     var length = lengths[lennum];
