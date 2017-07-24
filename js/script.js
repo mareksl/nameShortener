@@ -103,7 +103,7 @@ var nameChecker = (function() {
             if (pos > -1) {
               var oldstring = newvalue.substring(0, pos);
               var newstring = newvalue.substring(pos);
-              newstring = newstring.replace(prop, options[prop]);
+              newstring = newstring.replace(regex, options[prop]);
               newvalue = oldstring + newstring;
               newvalue = algorithm(newvalue, options, maxlen);
             };
