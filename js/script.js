@@ -218,25 +218,42 @@ var nameChecker = (function() {
     shareClassesShortOutput = $('#shareClassesShortOutput'), // SHORT NAME WITH SC OUTPUT
     shareClassesInHouseOutput = $('#shareClassesInHouseOutput'), // IN HOUSE NAME WITH SC OUTPUT
     shareClassesInput = $('#shareClasses'); // SHARE CLASSES INPUT
-  var rules = {
-    'Pioneer': 'Pio',
-    'Eastern': 'Ea',
-    'Funds': 'Fd',
-    'Stock': 'Stk',
-    'long': 'ln',
-    'bong': 'bn',
-    'brain': 'brainananakjshfdkjdszh;',
-    'Europe': 'Eur',
-    'Austria': 'Aut',
-    'a1': 'b',
-    'a2': 'b',
-    'a3': 'b',
-    'a4': 'b',
-    'a5': 'b',
-    'a6': 'b',
-    'a7': 'b',
-    'a8': 'b',
+  function loadJSON(callback) {
+    var xobj = new XMLHttpRequest();
+    xobj.overrideMimeType("application/json");
+    xobj.open('GET', 'js/rules.json', true); // Replace 'my_data' with the path to your file
+    xobj.onreadystatechange = function() {
+      if (xobj.readyState == 4 && xobj.status == "200") {
+        // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+        callback(xobj.responseText);
+      }
+    };
+    xobj.send(null);
   };
+	var rules;
+  loadJSON(function(response) {
+    // Parse JSON string into object
+    rules = JSON.parse(response);
+  });
+  // var rules = {
+  //   'Pioneer': 'Pio',
+  //   'Eastern': 'Ea',
+  //   'Funds': 'Fd',
+  //   'Stock': 'Stk',
+  //   'long': 'ln',
+  //   'bong': 'bn',
+  //   'brain': 'brainananakjshfdkjdszh;',
+  //   'Europe': 'Eur',
+  //   'Austria': 'Aut',
+  //   'a1': 'b',
+  //   'a2': 'b',
+  //   'a3': 'b',
+  //   'a4': 'b',
+  //   'a5': 'b',
+  //   'a6': 'b',
+  //   'a7': 'b',
+  //   'a8': 'b',
+  // };
   var displayAndAdd = function(output, lenout, lennum, shareClassesOutput) {
     var value = output.value;
     var length = lengths[lennum];
