@@ -240,17 +240,15 @@ var nameChecker = (function() {
     };
     xobj.send(null);
   };
-  var rules;
-  loadJSON(function(response) {
+  var rules = loadJSON(function(response) {
     // Parse JSON string into object
-    rules = JSON.parse(response);
+    return JSON.parse(response);
   });
-	Object.prototype.hasOwnPropertyCI = function(prop) {
-   return Object.keys(this)
-          .filter(function (v) {
-             return v.toLowerCase() === prop.toLowerCase();
-           }).length > 0;
-};
+  Object.prototype.hasOwnPropertyCI = function(prop) {
+    return Object.keys(this).filter(function(v) {
+      return v.toLowerCase() === prop.toLowerCase();
+    }).length > 0;
+  };
   var addTableRow = function(tableBody, key, value) {
     let tableRow = document.createElement('tr');
     let tableCellKey = document.createElement('td');
@@ -285,12 +283,13 @@ var nameChecker = (function() {
     }
     var btnAddRule = $('#btnAddRule');
     btnAddRule.addEventListener('click', function(e) {
-			var key = $('#addRuleKey').innerHTML, value = $('#addRuleValue').innerHTML;
+      var key = $('#addRuleKey').innerHTML,
+        value = $('#addRuleValue').innerHTML;
       if (key !== '' && value !== '') {
         if (rules.hasOwnPropertyCI(key)) {
           alert('Rule already exists!');
         } else {
-					rules[key] = value;
+          rules[key] = value;
           addTableRow(tableBody, key, value);
         }
       } else {
