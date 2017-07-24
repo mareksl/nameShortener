@@ -228,6 +228,8 @@ var nameChecker = (function() {
     shareClassesShortOutput = $('#shareClassesShortOutput'), // SHORT NAME WITH SC OUTPUT
     shareClassesInHouseOutput = $('#shareClassesInHouseOutput'), // IN HOUSE NAME WITH SC OUTPUT
     shareClassesInput = $('#shareClasses'); // SHARE CLASSES INPUT
+  var rules;
+
   function loadJSON(callback) {
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
@@ -236,14 +238,14 @@ var nameChecker = (function() {
       if (xobj.readyState == 4 && xobj.status == "200") {
         // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
         callback(xobj.responseText);
-        tableFromJSON(rules, tableRules);
       }
     };
     xobj.send(null);
   };
-  var rules = loadJSON(function(response) {
+  loadJSON(function(response) {
     // Parse JSON string into object
-    return JSON.parse(response);
+    rules = JSON.parse(response);
+    tableFromJSON(rules, tableRules);
   });
   Object.prototype.hasOwnPropertyCI = function(prop) {
     return Object.keys(this).filter(function(v) {
