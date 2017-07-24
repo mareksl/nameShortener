@@ -98,6 +98,7 @@ var nameChecker = (function() {
         var newvalue = value;
         for (var prop in options) {
           if (options.hasOwnProperty(prop) && prop.length > options[prop].length) {
+						var regex = new Regex(prop, 'gi')
             var pos = value.lastIndexOf(prop);
             if (pos > -1) {
               var oldstring = newvalue.substring(0, pos);
@@ -230,7 +231,7 @@ var nameChecker = (function() {
     };
     xobj.send(null);
   };
-	var rules;
+  var rules;
   loadJSON(function(response) {
     // Parse JSON string into object
     rules = JSON.parse(response);
