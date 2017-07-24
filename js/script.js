@@ -82,13 +82,30 @@ var nameChecker = (function() {
       return e - maxShareClassLen;
     });
     // shortening algorithm
-    var algorithm = function(input, len) {
-      return input.substr(0, len);
-    }
+    var algorithm = function(value, options, maxlen) {
+      var len = value.length;
+      if (len <= maxlen) {
+        return value;
+      } else {
+        for (var prop in options) {
+          if (options.hasOwnProperty(prop) && prop.length > options[prop].length) {
+            var regex = RegExp(prop, 'g');
+            var pos = value.lastIndexOf(prop);
+            if (pos > -1) {
+              var oldstring = value.substring(0, pos);
+              var newstring = value.substring(pos);
+              newstring = newstring.replace(regex, options[prop]);
+              value = algorithm(oldstring + newstring, options, maxlen);
+            }
+          }
+        }
+        return value;
+      }
+    };
     // shortening algorithm END
     // output
     for (var i = 0; i < shortenToLen.length; i++) {
-      var short = algorithm(name, shortenToLen[i]);
+      var short = algorithm(name, rules, shortenToLen[i]);
       shortenedNames.push(short);
     }
     return shortenedNames;
@@ -193,7 +210,9 @@ var nameChecker = (function() {
     shareClassesInHouseOutput = $('#shareClassesInHouseOutput'), // IN HOUSE NAME WITH SC OUTPUT
     shareClassesInput = $('#shareClasses'); // SHARE CLASSES INPUT
   var rules = {
-    'öko': 'testä',
+    'long': 'ln',
+    'bong': 'bn',
+    'brain': 'brainananakjshfdkjdszh;'
   };
   var displayAndAdd = function(output, lenout, lennum, shareClassesOutput) {
     var value = output.value;
