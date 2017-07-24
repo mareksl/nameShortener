@@ -26,7 +26,7 @@
 			</div>
 		</div>
 		<div class="formGroup">
-			<div class="nameGroupOutput"><button class="shortenName" id="showRules">Rules</button></div>
+			<div class="nameGroupOutput"><button class="shortenName" id="showRules">Rules <small>(in development)</small></button></div>
 			<div class="rules">
 				<table class="tableRules" id="tableRules">
 					<thead>
@@ -38,9 +38,9 @@
 					</thead>
 					<tfoot>
 						<tr>
-							<td contenteditable="true"></td>
-							<td contenteditable="true"></td>
-							<td><button class="shortenName">Add</button></td>
+							<td id="addRuleKey" contenteditable="true"></td>
+							<td id="addRuleValue" contenteditable="true"></td>
+							<td><button id="btnAddRule" class="shortenName">Add</button></td>
 						</tr>
 					</tfoot>
 					<tbody>
@@ -62,7 +62,7 @@
 	</div>
 	<div class="main">
 		<div class="formGroup">
-			<label><h2>Share Classes</h2><small> (each on new line)</small>
+			<label><h2>Share Classes</h2><small> (each on new line) </small><span id="debug"></span>
 		<textarea class="shareClassesInput" id="shareClasses"></textarea></label>
 		</div>
 		<div class="formGroup">
