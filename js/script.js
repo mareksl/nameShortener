@@ -392,6 +392,9 @@ var nameChecker = (function() {
       divRules.classList.remove('show');
     }
   });
+	btnCloseRules.addEventListener('click', function(e) {
+			divRules.classList.remove('show');
+	});
   var comfyText = (function() {
     shareClassesInput.addEventListener('input', autoExpand);
 
