@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 var nameChecker = (function() {
   'use strict';
   // CHECK LENGTH
@@ -70,7 +71,7 @@ var nameChecker = (function() {
     });
     var rules = {};
     for (var i = 0; i < rulesTemp.length; i++) {
-      rules[rulesTemp[i].toUpperCase()] = rulesUns[rulesTemp[i]]
+      rules[rulesTemp[i].toUpperCase()] = rulesUns[rulesTemp[i]];
     }
     var shortenedNames = [];
     // add share classes for length calculation
@@ -106,7 +107,7 @@ var nameChecker = (function() {
         var ivalue = value.toUpperCase();
         for (var prop in options) {
           if (options.hasOwnProperty(prop) && prop.length > options[prop].length) {
-            var regex = new RegExp(prop, 'i')
+            var regex = new RegExp(prop, 'i');
             var pos = ivalue.lastIndexOf(prop);
             if (pos > -1) {
               var oldstring = newvalue.substring(0, pos);
@@ -115,7 +116,7 @@ var nameChecker = (function() {
               newvalue = oldstring + newstring;
               countOps(x++);
               newvalue = algorithm(newvalue, options, maxlen);
-            };
+            }
           }
         }
         return newvalue;
@@ -123,7 +124,7 @@ var nameChecker = (function() {
     };
     // shortening algorithm END
     // output
-    for (var i = 0; i < shortenToLen.length; i++) {
+    for (let i = 0; i < shortenToLen.length; i++) {
       var short = algorithm(name, rules, shortenToLen[i]);
       shortenedNames.push(short);
     }
@@ -211,7 +212,7 @@ var nameChecker = (function() {
         } catch (e) {
           console.log('Unable to copy!');
         }
-      })
+      });
     }
   }
   // EVENT LISTENERS
@@ -227,30 +228,23 @@ var nameChecker = (function() {
     shareClassesOutput = $('#shareClassesOutput'), // NAME WITH SC OUTPUT
     shareClassesShortOutput = $('#shareClassesShortOutput'), // SHORT NAME WITH SC OUTPUT
     shareClassesInHouseOutput = $('#shareClassesInHouseOutput'), // IN HOUSE NAME WITH SC OUTPUT
-    shareClassesInput = $('#shareClasses'); // SHARE CLASSES INPUT
+    shareClassesInput = $('#shareClasses'),
+    btnSaveRules = $('#btnSaveRules'),
+    btnResetRules = $('#btnResetRules'),
+    btnCloseRules = $('#btnCloseRules'),
+    rulesSaved = $('#rulesSaved'); // SHARE CLASSES INPUT
   var rules;
-
-  function loadJSON(callback) {
-    var xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
-    xobj.open('GET', 'js/rules.json', true); // Replace 'my_data' with the path to your file
-    xobj.onreadystatechange = function() {
-      if (xobj.readyState == 4 && xobj.status == "200") {
-        // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
-        callback(xobj.responseText);
-      }
-    };
-    xobj.send(null);
-  };
-  loadJSON(function(response) {
-    // Parse JSON string into object
-    rules = JSON.parse(response);
-    tableFromJSON(rules, tableRules);
-  });
-  Object.prototype.hasOwnPropertyCI = function(prop) {
-    return Object.keys(this).filter(function(v) {
-      return v.toLowerCase() === prop.toLowerCase();
-    }).length > 0;
+  var tableRules = $('#tableRules');
+  var tableBody = tableRules.querySelector('tbody');
+	var modifyRules = function(status) {
+    if (status === 'saved') {
+      rulesSaved.innerHTML = '';
+      localStorage.localRules = JSON.stringify(rules);
+      localStorage.localRulesSaved = true;
+    } else if (status === 'changed') {
+      rulesSaved.innerHTML = '*';
+      localStorage.localRulesSaved = false;
+    }
   };
   var addTableRow = function(tableBody, key, value) {
     let tableRow = document.createElement('tr');
@@ -271,11 +265,10 @@ var nameChecker = (function() {
     tableBody.appendChild(tableRow);
     tableButtonRemove.addEventListener('click', function(e) {
       delete rules[key];
-      console.log(rules);
+			modifyRules('changed');
       tableBody.removeChild(tableRow);
-    })
-  }
-  var tableRules = $('#tableRules');
+    });
+  };
   var tableFromJSON = function(data, table) {
     var tableBody = table.querySelector('tbody');
     tableBody.innerHTML = '';
@@ -284,28 +277,72 @@ var nameChecker = (function() {
         addTableRow(tableBody, prop, data[prop]);
       }
     }
-    var btnAddRule = $('#btnAddRule');
-    btnAddRule.addEventListener('click', function(e) {
-      var key = $('#addRuleKey').innerHTML,
-        value = $('#addRuleValue').innerHTML;
-      if (key !== '' && value !== '') {
-        if (rules.hasOwnPropertyCI(key)) {
-          alert('Rule already exists!');
-        } else {
-          rules[key] = value;
-          addTableRow(tableBody, key, value);
+  };
+
+  function loadJSON(callback) {
+    if (typeof localStorage.localRules !== 'undefined') {
+			console.log('Loading LOCAL rules!');
+      callback(localStorage.localRules);
+    } else {
+			console.log('Loading DEFAULT rules!');
+      var xobj = new XMLHttpRequest();
+      xobj.overrideMimeType("application/json");
+      xobj.open('GET', 'js/rules.json', true); // Replace 'my_data' with the path to your file
+      xobj.onreadystatechange = function() {
+        if (xobj.readyState == 4 && xobj.status == "200") {
+          // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+          callback(xobj.responseText);
         }
-      } else {
-        alert('Please check rule input!');
-      }
-    })
+      };
+      xobj.send(null);
+    }
   }
+  loadJSON(function(response) {
+    // Parse JSON string into object
+    rules = JSON.parse(response);
+    tableFromJSON(rules, tableRules);
+  });
+  Object.prototype.hasOwnPropertyCI = function(prop) {
+    return Object.keys(this).filter(function(v) {
+      return v.toLowerCase() === prop.toLowerCase();
+    }).length > 0;
+  };
+  var btnAddRule = $('#btnAddRule');
+  btnAddRule.addEventListener('click', function(e) {
+    var key = $('#addRuleKey').innerHTML,
+      value = $('#addRuleValue').innerHTML;
+    if (key !== '' && value !== '') {
+      if (rules.hasOwnPropertyCI(key)) {
+        alert('Rule already exists!');
+      } else {
+        rules[key] = value;
+				modifyRules('changed');
+        addTableRow(tableBody, key, value);
+      }
+    } else {
+      alert('Please check rule input!');
+    }
+  });
+
+  btnSaveRules.addEventListener('click', function(e) {
+    modifyRules('saved');
+  });
+	btnResetRules.addEventListener('click', function(e) {
+		console.log('Rules reset to DEFAULT!');
+		localStorage.removeItem('localRules');
+		localStorage.removeItem('localRulesSaved');
+		loadJSON(function(response) {
+	    // Parse JSON string into object
+	    rules = JSON.parse(response);
+	    tableFromJSON(rules, tableRules);
+	  });
+	});
   var displayAndAdd = function(output, lenout, lennum, shareClassesOutput) {
     var value = output.value;
     var length = lengths[lennum];
     displayLength(value, lenout, length);
     addShareClasses(value, shareClassesInput, shareClassesOutput, length);
-  }
+  };
   inputName.addEventListener('input', function(e) {
     displayLength(inputName.value, lenName, lengths[0]);
   });
@@ -359,7 +396,7 @@ var nameChecker = (function() {
     shareClassesInput.addEventListener('input', autoExpand);
 
     function autoExpand(e, el) {
-      var el = el || e.target;
+      el = el || e.target;
       el.style.height = 'inherit';
       el.style.height = (el.scrollHeight + 4) + 'px';
     }
