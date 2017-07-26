@@ -223,6 +223,7 @@ var nameChecker = (function() {
     btnSaveRules = $('#btnSaveRules'),
     btnResetRules = $('#btnResetRules'),
     btnCloseRules = $('#btnCloseRules'),
+    btnRemoveRules = $('#btnRemoveRules'),
     rulesSaved = $('#rulesSaved'),
     tableRules = $('#tableRules'),
     tableBody = tableRules.querySelector('tbody'),
@@ -317,6 +318,13 @@ var nameChecker = (function() {
       alert('Please check rule input!');
     }
   });
+	btnRemoveRules.addEventListener('click', function(e){
+		rules = {};
+		while (tableBody.firstChild) {
+		    tableBody.removeChild(tableBody.firstChild);
+		};
+		modifyRules('changed');
+	});
   btnSaveRules.addEventListener('click', function(e) {
     modifyRules('saved');
   });
