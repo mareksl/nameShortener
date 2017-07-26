@@ -335,7 +335,7 @@ var nameChecker = (function() {
     rules = {};
     while (tableBody.firstChild) {
       tableBody.removeChild(tableBody.firstChild);
-    };
+    }
     modifyRules('changed');
   });
   btnSaveRules.addEventListener('click', function(e) {
