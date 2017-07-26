@@ -89,14 +89,6 @@ var nameChecker = (function() {
     var shortenToLen = lengths.map(function(e) {
       return e - maxShareClassLen;
     });
-    var x = 0;
-    var debug = document.querySelector('#debug');
-
-    function countOps(i) {
-      setTimeout(function() {
-        debug.innerHTML = i;
-      }, 0);
-    }
     // shortening algorithm
     var shorten = function(value, options, maxlen) {
       var len = value.length;
@@ -114,7 +106,6 @@ var nameChecker = (function() {
               var newstring = newvalue.substring(pos);
               newstring = newstring.replace(regex, options[prop]);
               newvalue = oldstring + newstring;
-              countOps(x++);
               newvalue = shorten(newvalue, options, maxlen);
             }
           }
@@ -232,11 +223,13 @@ var nameChecker = (function() {
     btnSaveRules = $('#btnSaveRules'),
     btnResetRules = $('#btnResetRules'),
     btnCloseRules = $('#btnCloseRules'),
-    rulesSaved = $('#rulesSaved'); // SHARE CLASSES INPUT
+    rulesSaved = $('#rulesSaved'),
+    tableRules = $('#tableRules'),
+    tableBody = tableRules.querySelector('tbody'),
+		btnAddRule = $('#btnAddRule'),
+		buttonShorten = $('#buttonShorten'); // SHARE CLASSES INPUT
   var rules;
-  var tableRules = $('#tableRules');
-  var tableBody = tableRules.querySelector('tbody');
-	var modifyRules = function(status) {
+  var modifyRules = function(status) {
     if (status === 'saved') {
       rulesSaved.innerHTML = '';
       localStorage.localRules = JSON.stringify(rules);
@@ -265,7 +258,7 @@ var nameChecker = (function() {
     tableBody.appendChild(tableRow);
     tableButtonRemove.addEventListener('click', function(e) {
       delete rules[key];
-			modifyRules('changed');
+      modifyRules('changed');
       tableBody.removeChild(tableRow);
     });
   };
@@ -281,10 +274,10 @@ var nameChecker = (function() {
 
   function loadJSON(callback) {
     if (typeof localStorage.localRules !== 'undefined') {
-			console.log('Loading LOCAL rules!');
+      console.log('Loading LOCAL rules!');
       callback(localStorage.localRules);
     } else {
-			console.log('Loading DEFAULT rules!');
+      console.log('Loading DEFAULT rules!');
       var xobj = new XMLHttpRequest();
       xobj.overrideMimeType("application/json");
       xobj.open('GET', 'js/rules.json', true); // Replace 'my_data' with the path to your file
@@ -307,7 +300,6 @@ var nameChecker = (function() {
       return v.toLowerCase() === prop.toLowerCase();
     }).length > 0;
   };
-  var btnAddRule = $('#btnAddRule');
   btnAddRule.addEventListener('click', function(e) {
     var key = $('#addRuleKey').innerHTML,
       value = $('#addRuleValue').innerHTML;
@@ -316,27 +308,28 @@ var nameChecker = (function() {
         alert('Rule already exists!');
       } else {
         rules[key] = value;
-				modifyRules('changed');
+        modifyRules('changed');
         addTableRow(tableBody, key, value);
+        $('#addRuleKey').innerHTML = '';
+        $('#addRuleValue').innerHTML = '';
       }
     } else {
       alert('Please check rule input!');
     }
   });
-
   btnSaveRules.addEventListener('click', function(e) {
     modifyRules('saved');
   });
-	btnResetRules.addEventListener('click', function(e) {
-		console.log('Rules reset to DEFAULT!');
-		localStorage.removeItem('localRules');
-		localStorage.removeItem('localRulesSaved');
-		loadJSON(function(response) {
-	    // Parse JSON string into object
-	    rules = JSON.parse(response);
-	    tableFromJSON(rules, tableRules);
-	  });
-	});
+  btnResetRules.addEventListener('click', function(e) {
+    console.log('Rules reset to DEFAULT!');
+    localStorage.removeItem('localRules');
+    localStorage.removeItem('localRulesSaved');
+    loadJSON(function(response) {
+      // Parse JSON string into object
+      rules = JSON.parse(response);
+      tableFromJSON(rules, tableRules);
+    });
+  });
   var displayAndAdd = function(output, lenout, lennum, shareClassesOutput) {
     var value = output.value;
     var length = lengths[lennum];
@@ -355,7 +348,7 @@ var nameChecker = (function() {
   outputInHouseName.addEventListener('input', function(e) {
     displayAndAdd(outputInHouseName, lenOutputInHouseName, 2, shareClassesOutputInHouse);
   });
-  $('#buttonShorten').addEventListener('click', function(e) {
+  buttonShorten.addEventListener('click', function(e) {
     var value = inputName.value;
     var options = {};
     options.replaceUmlauts = $('input[name="removeSpecial"]').checked;
@@ -392,9 +385,9 @@ var nameChecker = (function() {
       divRules.classList.remove('show');
     }
   });
-	btnCloseRules.addEventListener('click', function(e) {
-			divRules.classList.remove('show');
-	});
+  btnCloseRules.addEventListener('click', function(e) {
+    divRules.classList.remove('show');
+  });
   var comfyText = (function() {
     shareClassesInput.addEventListener('input', autoExpand);
 
