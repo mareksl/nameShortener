@@ -354,7 +354,7 @@ var nameChecker = (function() {
     }
   });
   window.addEventListener('beforeunload', function(e) {
-    if (localStorage.localRulesSaved === false) {
+    if (localStorage.localRulesSaved === 'false') {
       var dialogText = 'You have unsaved rules!';
       e.returnValue = dialogText;
       return dialogText;
