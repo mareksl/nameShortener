@@ -229,8 +229,8 @@ var nameChecker = (function() {
     tableBody = tableRules.querySelector('tbody'),
     btnAddRule = $('#btnAddRule'),
     buttonShorten = $('#buttonShorten'),
-		addRuleKey = $('#addRuleKey'),
-		addRuleValue = $('#addRuleValue'); // SHARE CLASSES INPUT
+    addRuleKey = $('#addRuleKey'),
+    addRuleValue = $('#addRuleValue'); // SHARE CLASSES INPUT
   var rules;
   var modifyRules = function(status) {
     if (status === 'saved') {
@@ -326,11 +326,11 @@ var nameChecker = (function() {
       e.preventDefault();
     }
   });
-	addRuleValue.addEventListener('keydown', function(e) {
-		if (e.which === 13) {
-			e.preventDefault();
-		}
-	});
+  addRuleValue.addEventListener('keydown', function(e) {
+    if (e.which === 13) {
+      e.preventDefault();
+    }
+  });
   btnRemoveRules.addEventListener('click', function(e) {
     rules = {};
     while (tableBody.firstChild) {
@@ -353,6 +353,13 @@ var nameChecker = (function() {
       });
     }
   });
+  window.onbeforeunload = function(e) {
+    if (localStorage.localRulesSaved === false) {
+      var dialogText = 'You have unsaved rules! Do you want to leave the page?';
+      e.returnValue = dialogText;
+      return dialogText;
+    }
+  };
   var displayAndAdd = function(output, lenout, lennum, shareClassesOutput) {
     var value = output.value;
     var length = lengths[lennum];
