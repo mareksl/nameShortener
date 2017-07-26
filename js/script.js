@@ -330,7 +330,7 @@ var nameChecker = (function() {
     modifyRules('saved');
   });
   btnResetRules.addEventListener('click', function(e) {
-    if (prompt('Do you want to reset the rules to the default set? All your changes will be lost!')) {
+    if (confirm('Do you want to reset the rules to the default set? All your changes will be lost!')) {
       console.log('Rules reset to DEFAULT!');
       localStorage.removeItem('localRules');
       localStorage.removeItem('localRulesSaved');
