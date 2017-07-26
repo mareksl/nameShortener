@@ -92,6 +92,7 @@ textarea:focus {
 		border: 2px dashed $tr-orange;
 		outline: none;
 	}
+
 	&:hover {
 		color: $tr-white;
 		outline: none;
@@ -226,9 +227,11 @@ textarea {
 		display: inline-block;
 		text-align: center;
 		cursor: pointer;
-&:hover {
-	border-left-style: solid;
-}
+
+		&:hover {
+			border-left-style: solid;
+		}
+
 		&:first-of-type {
 			border-top: 1px dotted $tr-lightorange;
 		}
@@ -247,12 +250,14 @@ pre {
 	border-radius: 4px;
 }
 /* Add this attribute to the element that needs a tooltip */
+
 [data-tooltip] {
 	position: relative;
 	z-index: 2;
 	cursor: pointer;
 }
 /* Hide the tooltip content by default */
+
 [data-tooltip]:after,
 [data-tooltip]:before {
 	transition: all .2s;
@@ -261,6 +266,7 @@ pre {
 	pointer-events: none;
 }
 /* Position tooltip above the element */
+
 [data-tooltip]:before {
 	box-sizing: border-box;
 	position: absolute;
@@ -273,7 +279,6 @@ pre {
 	background: rgba($tr-white,.8);
 }
 /* Triangle hack to make tooltip look like a speech bubble */
-
 [data-tooltip]:after {
 	position: absolute;
 	top: 50%;
@@ -293,6 +298,7 @@ pre {
 	line-height: 0;
 }
 /* Show tooltip content on hover */
+
 [data-tooltip]:hover:after,
 [data-tooltip]:hover:before {
 	visibility: visible;
