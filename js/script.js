@@ -98,7 +98,7 @@ var nameChecker = (function() {
       }, 0);
     }
     // shortening algorithm
-    var algorithm = function(value, options, maxlen) {
+    var shorten = function(value, options, maxlen) {
       var len = value.length;
       if (len <= maxlen) {
         return value;
@@ -115,7 +115,7 @@ var nameChecker = (function() {
               newstring = newstring.replace(regex, options[prop]);
               newvalue = oldstring + newstring;
               countOps(x++);
-              newvalue = algorithm(newvalue, options, maxlen);
+              newvalue = shorten(newvalue, options, maxlen);
             }
           }
         }
@@ -125,7 +125,7 @@ var nameChecker = (function() {
     // shortening algorithm END
     // output
     for (let i = 0; i < shortenToLen.length; i++) {
-      var short = algorithm(name, rules, shortenToLen[i]);
+      var short = shorten(name, rules, shortenToLen[i]);
       shortenedNames.push(short);
     }
     return shortenedNames;
