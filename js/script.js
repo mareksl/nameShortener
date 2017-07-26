@@ -228,7 +228,9 @@ var nameChecker = (function() {
     tableRules = $('#tableRules'),
     tableBody = tableRules.querySelector('tbody'),
     btnAddRule = $('#btnAddRule'),
-    buttonShorten = $('#buttonShorten'); // SHARE CLASSES INPUT
+    buttonShorten = $('#buttonShorten'),
+		addRuleKey = $('#addRuleKey'),
+		addRuleValue = $('#addRuleValue'); // SHARE CLASSES INPUT
   var rules;
   var modifyRules = function(status) {
     if (status === 'saved') {
@@ -303,8 +305,8 @@ var nameChecker = (function() {
     }).length > 0;
   };
   btnAddRule.addEventListener('click', function(e) {
-    var key = $('#addRuleKey').innerHTML,
-      value = $('#addRuleValue').innerHTML;
+    var key = addRuleKey.innerHTML,
+      value = addRuleValue.innerHTML;
     if (key !== '' && value !== '') {
       if (rules.hasOwnPropertyCI(key)) {
         alert('Rule already exists!');
@@ -312,18 +314,28 @@ var nameChecker = (function() {
         rules[key] = value;
         modifyRules('changed');
         addTableRow(tableBody, key, value);
-        $('#addRuleKey').innerHTML = '';
-        $('#addRuleValue').innerHTML = '';
+        addRuleKey.innerHTML = '';
+        addRuleValue.innerHTML = '';
       }
     } else {
       alert('Please check rule input!');
     }
   });
+  addRuleKey.addEventListener('keydown', function(e) {
+    if (e.which === 13) {
+      e.preventDefault();
+    }
+  });
+	addRuleValue.addEventListener('keydown', function(e) {
+		if (e.which === 13) {
+			e.preventDefault();
+		}
+	});
   btnRemoveRules.addEventListener('click', function(e) {
     rules = {};
     while (tableBody.firstChild) {
       tableBody.removeChild(tableBody.firstChild);
-    };
+    }
     modifyRules('changed');
   });
   btnSaveRules.addEventListener('click', function(e) {
@@ -350,11 +362,11 @@ var nameChecker = (function() {
   inputName.addEventListener('input', function(e) {
     displayLength(inputName.value, lenName, lengths[0]);
   });
-	inputName.addEventListener('keydown', function(e) {
-		if (e.which === 13) {
-			buttonShorten.click();
-		}
-	});
+  inputName.addEventListener('keydown', function(e) {
+    if (e.which === 13) {
+      buttonShorten.click();
+    }
+  });
   outputName.addEventListener('input', function(e) {
     displayAndAdd(outputName, lenOutputName, 0, shareClassesOutput);
   });
