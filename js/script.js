@@ -350,6 +350,11 @@ var nameChecker = (function() {
   inputName.addEventListener('input', function(e) {
     displayLength(inputName.value, lenName, lengths[0]);
   });
+	inputName.addEventListener('keydown', function(e) {
+		if (e.which === 13) {
+			buttonShorten.click();
+		}
+	});
   outputName.addEventListener('input', function(e) {
     displayAndAdd(outputName, lenOutputName, 0, shareClassesOutput);
   });
