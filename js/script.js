@@ -277,6 +277,7 @@ var nameChecker = (function() {
     if (typeof localStorage.localRules !== 'undefined') {
       console.log('Loading LOCAL rules!');
       callback(localStorage.localRules);
+			localStorage.localRulesSaved = true;
     } else {
       console.log('Loading DEFAULT rules!');
       var xobj = new XMLHttpRequest();
