@@ -227,8 +227,8 @@ var nameChecker = (function() {
     rulesSaved = $('#rulesSaved'),
     tableRules = $('#tableRules'),
     tableBody = tableRules.querySelector('tbody'),
-		btnAddRule = $('#btnAddRule'),
-		buttonShorten = $('#buttonShorten'); // SHARE CLASSES INPUT
+    btnAddRule = $('#btnAddRule'),
+    buttonShorten = $('#buttonShorten'); // SHARE CLASSES INPUT
   var rules;
   var modifyRules = function(status) {
     if (status === 'saved') {
@@ -277,7 +277,7 @@ var nameChecker = (function() {
     if (typeof localStorage.localRules !== 'undefined') {
       console.log('Loading LOCAL rules!');
       callback(localStorage.localRules);
-			localStorage.localRulesSaved = true;
+      localStorage.localRulesSaved = true;
     } else {
       console.log('Loading DEFAULT rules!');
       var xobj = new XMLHttpRequest();
@@ -319,25 +319,27 @@ var nameChecker = (function() {
       alert('Please check rule input!');
     }
   });
-	btnRemoveRules.addEventListener('click', function(e){
-		rules = {};
-		while (tableBody.firstChild) {
-		    tableBody.removeChild(tableBody.firstChild);
-		};
-		modifyRules('changed');
-	});
+  btnRemoveRules.addEventListener('click', function(e) {
+    rules = {};
+    while (tableBody.firstChild) {
+      tableBody.removeChild(tableBody.firstChild);
+    };
+    modifyRules('changed');
+  });
   btnSaveRules.addEventListener('click', function(e) {
     modifyRules('saved');
   });
   btnResetRules.addEventListener('click', function(e) {
-    console.log('Rules reset to DEFAULT!');
-    localStorage.removeItem('localRules');
-    localStorage.removeItem('localRulesSaved');
-    loadJSON(function(response) {
-      // Parse JSON string into object
-      rules = JSON.parse(response);
-      tableFromJSON(rules, tableRules);
-    });
+    if (prompt('Do you want to reset the rules to the default set? All your changes will be lost!')) {
+      console.log('Rules reset to DEFAULT!');
+      localStorage.removeItem('localRules');
+      localStorage.removeItem('localRulesSaved');
+      loadJSON(function(response) {
+        // Parse JSON string into object
+        rules = JSON.parse(response);
+        tableFromJSON(rules, tableRules);
+      });
+    }
   });
   var displayAndAdd = function(output, lenout, lennum, shareClassesOutput) {
     var value = output.value;
