@@ -353,13 +353,13 @@ var nameChecker = (function() {
       });
     }
   });
-  window.onbeforeunload = function(e) {
+  window.addEventListener('beforeunload', function(e) {
     if (localStorage.localRulesSaved === false) {
-      var dialogText = 'You have unsaved rules! Do you want to leave the page?';
+      var dialogText = 'You have unsaved rules!';
       e.returnValue = dialogText;
       return dialogText;
     }
-  };
+  });
   var displayAndAdd = function(output, lenout, lennum, shareClassesOutput) {
     var value = output.value;
     var length = lengths[lennum];
