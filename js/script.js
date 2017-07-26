@@ -275,11 +275,11 @@ var nameChecker = (function() {
     }
   };
 
-  function loadJSON(callback) {
+  function loadRules(callback) {
+		localStorage.localRulesSaved = true;
     if (typeof localStorage.localRules !== 'undefined') {
       console.log('Loading LOCAL rules!');
       callback(localStorage.localRules);
-      localStorage.localRulesSaved = true;
     } else {
       console.log('Loading DEFAULT rules!');
       var xobj = new XMLHttpRequest();
@@ -294,7 +294,7 @@ var nameChecker = (function() {
       xobj.send(null);
     }
   }
-  loadJSON(function(response) {
+  loadRules(function(response) {
     // Parse JSON string into object
     rules = JSON.parse(response);
     tableFromJSON(rules, tableRules);
@@ -346,7 +346,7 @@ var nameChecker = (function() {
       console.log('Rules reset to DEFAULT!');
       localStorage.removeItem('localRules');
       localStorage.removeItem('localRulesSaved');
-      loadJSON(function(response) {
+      loadRules(function(response) {
         // Parse JSON string into object
         rules = JSON.parse(response);
         tableFromJSON(rules, tableRules);
