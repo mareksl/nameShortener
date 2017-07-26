@@ -88,7 +88,10 @@ textarea:focus {
 	border-radius: 4px;
 	background-color: $tr-white;
 	// box-shadow: 0 1px 1px $tr-darkgray;
-	&:focus,
+	&:focus {
+		border: 2px dashed $tr-orange;
+		outline: none;
+	}
 	&:hover {
 		color: $tr-white;
 		outline: none;
