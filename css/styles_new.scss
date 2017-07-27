@@ -2,8 +2,8 @@
 @import 'typography';
 
 .header {
-	padding: 1rem;
 	width: 100%;
+	padding: 1rem;
 	text-align: center;
 	background-color: $tr-darkgray;
 }
@@ -14,8 +14,8 @@
 
 .main {
 	display: flex;
-	flex-flow: column;
 	align-items: center;
+	flex-flow: column;
 }
 
 .section {
@@ -25,16 +25,35 @@
 	padding: 8px 0;
 }
 
+.section__header {
+	display: block;
+	width: 100%;
+}
+
+.section__rules {
+	display: none;
+}
+
+.section__rules--show {
+	display: block;
+}
+
 .table-rules {
 	width: 100%;
 	margin: 16px 0;
 	table-layout: fixed;
 }
 
+.table-rules__header {
+	font-weight: bold;
+	color: $tr-white;
+	background-color: $tr-darkgray;
+}
+
 .button {
+	font-weight: bold;
 	display: block;
 	width: 200px;
-	font-weight: bold;
 	height: 1.75rem;
 	padding: 0 .5rem;
 	cursor: pointer;
@@ -86,11 +105,11 @@
 
 .textarea {
 	font-size: 1rem;
+	display: block;
 	padding: .5rem;
 	resize: vertical;
 	border: 1px solid $tr-lightgray;
 	border-radius: 4px;
-	display: block;
 
 	&:focus {
 		border: 2px solid $tr-orange;
@@ -119,8 +138,7 @@
 }
 
 .input-checkbox {
-	position: absolute; // take it out of document flow
-	opacity: 0; // hide it
+	position: absolute; // take it out of document flow  opacity: 0; // hide it
 
 	&:focus + .input-checkbox__label,
 	&:hover + .input-checkbox__label {
@@ -133,23 +151,23 @@
 
 	&:checked + .input-checkbox__label {
 		&:before {
-			background: $tr-orange;
 			border: 1px solid $tr-darkorange;
+			background: $tr-orange;
 		}
 
 		&:after {
-			content: '';
-			width: 8px;
-			height: 4px;
 			position: absolute;
 			top: 4px;
 			left: 4px;
+			width: 8px;
+			height: 4px;
+			content: '';
+			transform: rotate(-45deg);
+			opacity: 1;
 			border: 2px solid $tr-white;
 			border-top: 0;
 			border-right: 0;
 			background: transparent;
-			opacity: 1;
-			transform: rotate(-45deg);
 		}
 	}
 }
@@ -159,13 +177,14 @@
 	cursor: pointer;
 
 	&:before {
-		content: '';
-		border: 1px solid $tr-lightgray;
-		margin-right: 10px;
 		display: inline-block;
-		vertical-align: text-top;
 		width: 1em;
 		height: 1em;
+		margin-right: 10px;
+		content: '';
+		vertical-align: text-top;
+		border: 1px solid $tr-lightgray;
 		border-radius: 4px;
+		background: $tr-white;
 	}
 }

@@ -215,7 +215,7 @@ var nameChecker = (function() {
     inputObj = $('#inputObj'), // OBJECTIVE INPUT
     lenObj = $('#lenObj'), // OBJECTIVE LENGTH
     showRules = $('#showRules'), // RULES BUTTON
-    divRules = $('.rules'), // RULES LIST
+    divRules = $('.section__rules'), // RULES LIST
     shareClassesOutput = $('#shareClassesOutput'), // NAME WITH SC OUTPUT
     shareClassesShortOutput = $('#shareClassesShortOutput'), // SHORT NAME WITH SC OUTPUT
     shareClassesInHouseOutput = $('#shareClassesInHouseOutput'), // IN HOUSE NAME WITH SC OUTPUT
@@ -414,14 +414,14 @@ var nameChecker = (function() {
     inputObj.select();
   });
   showRules.addEventListener('click', function(e) {
-    if (!divRules.classList.contains('show')) {
-      divRules.classList.add('show');
+    if (!divRules.classList.contains('section__rules--show')) {
+      divRules.classList.add('section__rules--show');
     } else {
-      divRules.classList.remove('show');
+      divRules.classList.remove('section__rules--show');
     }
   });
   btnCloseRules.addEventListener('click', function(e) {
-    divRules.classList.remove('show');
+    divRules.classList.remove('section__rules--show');
   });
   var comfyText = (function() {
     shareClassesInput.addEventListener('input', autoExpand);
