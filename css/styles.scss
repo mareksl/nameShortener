@@ -2,6 +2,9 @@
 @import 'typography';
 
 h1 {
+	padding: 16px;
+	width: 100%;
+	text-align: center;
 	color: $tr-lightorange;
 	background-color: $tr-darkgray;
 }

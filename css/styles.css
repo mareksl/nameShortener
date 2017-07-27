@@ -162,9 +162,6 @@ h6 {
   font-family: "Knowledge", sans-serif; }
 
 h1 {
-  padding: 16px;
-  width: 100%;
-  text-align: center;
   font-size: 2em;
   font-weight: bold; }
 
@@ -198,15 +195,7 @@ small {
   color: #afafaf; }
 
 a {
-  transition: .4s;
-  text-decoration: none;
-  color: #FF8000; }
-  a:focus, a:hover {
-    text-decoration: underline;
-    color: #4D4D4D; }
-  a:active {
-    color: #FF8000;
-    text-shadow: none; }
+  text-decoration: none; }
 
 i {
   font-style: italic; }
@@ -220,6 +209,9 @@ strong {
 
 /* TYPOGRAPHY END */
 h1 {
+  padding: 16px;
+  width: 100%;
+  text-align: center;
   color: #ffa100;
   background-color: #4D4D4D; }
 

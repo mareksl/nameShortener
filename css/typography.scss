@@ -56,9 +56,6 @@ h6 {
 }
 
 h1 {
-	padding: 16px;
-	width: 100%;
-	text-align: center;
 	font-size: 2em;
 	font-weight: bold;
 }
@@ -100,20 +97,7 @@ small {
 }
 
 a {
-	transition: .4s;
 	text-decoration: none;
-	color: $tr-orange;
-
-	&:focus,
-	&:hover {
-		text-decoration: underline;
-		color: $tr-darkgray;
-	}
-
-	&:active {
-		color: $tr-orange;
-		text-shadow: none;
-	}
 }
 
 i {
@@ -128,5 +112,4 @@ strong {
 	font-weight: bold;
 	font-variant: small-caps;
 }
-
 /* TYPOGRAPHY END */
