@@ -323,7 +323,7 @@ input[type='checkbox'] {
     cursor: pointer; }
   input[type='checkbox'] + label:before {
     content: '';
-    border: 1px dotted #afafaf;
+    border: 1px solid #afafaf;
     margin-right: 10px;
     display: inline-block;
     vertical-align: text-top;
@@ -332,10 +332,11 @@ input[type='checkbox'] {
     background: white;
     border-radius: 4px; }
   input[type='checkbox']:focus + label:before, input[type='checkbox']:hover + label:before {
-    border: 1px solid #ff5900;
+    border: 1px solid #FF8000;
     box-shadow: 0 0 0 1px #FF8000; }
   input[type='checkbox']:checked + label:before {
-    background: #FF8000; }
+    background: #FF8000;
+    border: 1px solid #ff5900; }
   input[type='checkbox']:checked + label:after {
     content: '';
     width: 8px;
