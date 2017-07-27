@@ -150,7 +150,6 @@ input[type='checkbox'] {
 	&:checked + label:before {
 		background: $tr-orange;
 		border: 1px solid $tr-darkorange;
-
 	}
 
 	&:checked + label:after {
@@ -218,9 +217,11 @@ textarea {
 		}
 	}
 
-	tbody tr {
-		&:hover {
-			background-color: $own-mutedgray;
+	tbody {
+		tr {
+			&:hover {
+				background-color: $own-mutedgray;
+			}
 		}
 	}
 }
