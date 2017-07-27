@@ -208,7 +208,7 @@ textarea {
 		padding: .4em;
 	}
 
-	td {
+	tbody td, tfoot td {
 		border: 1px $own-mutedgray solid;
 
 		&:focus {
