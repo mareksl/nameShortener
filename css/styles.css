@@ -332,6 +332,7 @@ input[type='checkbox'] {
     background: white;
     border-radius: 4px; }
   input[type='checkbox']:focus + label:before, input[type='checkbox']:hover + label:before {
+    transform: scale(1.1);
     border: 1px solid #FF8000;
     box-shadow: 0 0 0 1px #FF8000; }
   input[type='checkbox']:checked + label:before {

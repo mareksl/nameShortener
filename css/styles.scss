@@ -143,6 +143,7 @@ input[type='checkbox'] {
 
 	&:focus + label:before,
 	&:hover + label:before {
+		transform: scale(1.1);
 		border: 1px solid $tr-orange;
 		box-shadow: 0 0 0 1px $tr-orange;
 	}
