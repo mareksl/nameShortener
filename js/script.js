@@ -386,9 +386,9 @@ var nameChecker = (function() {
   buttonShorten.addEventListener('click', function(e) {
     var value = inputName.value;
     var options = {};
-    options.replaceUmlauts = $('input[name="removeSpecial"]').checked;
-    options.removeParens = $('input[name="removeParens"]').checked;
-    options.shortenName = $('input[name="shortenNames"]').checked;
+    options.replaceUmlauts = $('#removeSpecial').checked;
+    options.removeParens = $('#removeParens').checked;
+    options.shortenName = $('#shortenNames').checked;
     var sClasses = shareClassesInput.value.length > 0 ? shareClassesInput.value.split('\n') : [];
     var shortened = nameChecker.shortenProcess(value, options, rules, sClasses, lengths);
     outputName.value = shortened.shortenedName;

@@ -120,17 +120,55 @@ textarea:focus {
 	}
 }
 
-.settingsOpt {
-	display: block;
-	cursor: pointer;
-}
-
 input[type='checkbox'] {
-	cursor: pointer;
-}
+	position: absolute; // take it out of document flow
+	opacity: 0; // hide it
 
-input[type='checkbox']:checked + span {
-	border-bottom: 2px solid $tr-orange;
+	& + label {
+		position: relative;
+		cursor: pointer;
+	}
+
+	& + label:before {
+		content: '';
+		border: 1px dotted $tr-lightgray;
+		margin-right: 10px;
+		display: inline-block;
+		vertical-align: text-top;
+		width: 1em;
+		height: 1em;
+		background: white;
+		border-radius: 4px;
+	}
+
+	&:focus + label:before,
+	&:hover + label:before {
+		border: 1px solid $tr-darkorange;
+		box-shadow: 0 0 0 1px $tr-orange;
+	}
+
+	&:checked + label:before {
+		background: $tr-orange;
+	}
+
+	&:checked + label:after {
+		content: '';
+		width: 8px;
+		height: 4px;
+		position: absolute;
+		top: 4px;
+		left: 4px;
+		border: 2px solid $tr-white;
+		border-top: none;
+		border-right: none;
+		background: transparent;
+		opacity: 0;
+		transform: rotate(-45deg);
+	}
+
+	&:checked + label:after {
+		opacity: 1;
+	}
 }
 
 textarea {
@@ -250,14 +288,12 @@ pre {
 	border-radius: 4px;
 }
 /* Add this attribute to the element that needs a tooltip */
-
 [data-tooltip] {
 	position: relative;
 	z-index: 2;
 	cursor: pointer;
 }
 /* Hide the tooltip content by default */
-
 [data-tooltip]:after,
 [data-tooltip]:before {
 	transition: all .2s;
@@ -266,7 +302,6 @@ pre {
 	pointer-events: none;
 }
 /* Position tooltip above the element */
-
 [data-tooltip]:before {
 	box-sizing: border-box;
 	position: absolute;
@@ -279,6 +314,7 @@ pre {
 	background: rgba($tr-white,.8);
 }
 /* Triangle hack to make tooltip look like a speech bubble */
+
 [data-tooltip]:after {
 	position: absolute;
 	top: 50%;
@@ -298,7 +334,6 @@ pre {
 	line-height: 0;
 }
 /* Show tooltip content on hover */
-
 [data-tooltip]:hover:after,
 [data-tooltip]:hover:before {
 	visibility: visible;

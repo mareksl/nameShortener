@@ -315,15 +315,42 @@ textarea:focus {
   .linkButton:active, .linkButton:focus, .linkButton:hover {
     text-decoration: none; }
 
-.settingsOpt {
-  display: block;
-  cursor: pointer; }
-
 input[type='checkbox'] {
-  cursor: pointer; }
-
-input[type='checkbox']:checked + span {
-  border-bottom: 2px solid #FF8000; }
+  position: absolute;
+  opacity: 0; }
+  input[type='checkbox'] + label {
+    position: relative;
+    cursor: pointer; }
+  input[type='checkbox'] + label:before {
+    content: '';
+    border: 1px dotted #afafaf;
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: text-top;
+    width: 1em;
+    height: 1em;
+    background: white;
+    border-radius: 4px; }
+  input[type='checkbox']:focus + label:before, input[type='checkbox']:hover + label:before {
+    border: 1px solid #ff5900;
+    box-shadow: 0 0 0 1px #FF8000; }
+  input[type='checkbox']:checked + label:before {
+    background: #FF8000; }
+  input[type='checkbox']:checked + label:after {
+    content: '';
+    width: 8px;
+    height: 4px;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    border: 2px solid #fff;
+    border-top: none;
+    border-right: none;
+    background: transparent;
+    opacity: 0;
+    transform: rotate(-45deg); }
+  input[type='checkbox']:checked + label:after {
+    opacity: 1; }
 
 textarea {
   font-family: "Knowledge", sans-serif;
