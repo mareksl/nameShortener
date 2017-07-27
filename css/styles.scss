@@ -131,7 +131,7 @@ input[type='checkbox'] {
 
 	& + label:before {
 		content: '';
-		border: 1px dotted $tr-lightgray;
+		border: 1px solid $tr-lightgray;
 		margin-right: 10px;
 		display: inline-block;
 		vertical-align: text-top;
@@ -143,12 +143,14 @@ input[type='checkbox'] {
 
 	&:focus + label:before,
 	&:hover + label:before {
-		border: 1px solid $tr-darkorange;
+		border: 1px solid $tr-orange;
 		box-shadow: 0 0 0 1px $tr-orange;
 	}
 
 	&:checked + label:before {
 		background: $tr-orange;
+		border: 1px solid $tr-darkorange;
+
 	}
 
 	&:checked + label:after {
