@@ -15,20 +15,20 @@
 	</header>
 	<main class="main">
 		<section class="section">
-			<h2>Fund name</h2>
+			<h2 class="section__header">Fund name</h2>
 			<label>Fund Name
 <input class="input-text" type="text" id="inputName">
 <span class="container-count__length" id="lenName">0</span>
 </label>
 
 			<button class="button" type="button" id="buttonShorten">Shorten</button>
-			<div><button class="button" id="showRules">Rules</button></div>
+			<button class="button" id="showRules">Rules</button>
 		</section>
 
-		<section class="section">
-			<h2>Rules</h2>
+		<section class="section section__rules">
+			<h2 class="section__header">Rules</h2>
 			<table class="table-rules" id="tableRules">
-				<thead class="table-rules__thead">
+				<thead class="table-rules__header">
 					<tr>
 						<th>Word</th>
 						<th>Replacement</th>
@@ -53,7 +53,7 @@
 		</section>
 
 		<section class="section">
-			<h2>Options</h2>
+			<h2 class="section__header">Options</h2>
 			<ul>
 				<li><input class="input-checkbox" type="checkbox" id="shortenNames"><label class="input-checkbox__label" for="shortenNames">Shorten Names</label></li>
 				<li><input class="input-checkbox" type="checkbox" id="removeParens"><label class="input-checkbox__label" for="removeParens">Remove Parens</label></li>
@@ -61,13 +61,13 @@
 			</ul>
 		</section>
 		<section class="section">
-			<h2>Share Classes</h2>
+			<h2 class="section__header">Share Classes</h2>
 			<label>Share Classes<small> (each on new line)</small>
 <textarea class="textarea textarea--expandable" id="shareClasses"></textarea></label>
 		</section>
 		<section class="section">
 
-			<h2>Generated Share Classes</h2>
+			<h2 class="section__header">Generated Share Classes</h2>
 			<label>Name<small> (max. 50 chars)</small>
 <input class="input-text" type="text" id="outputName">
 <span class="container-count__length" id="lenOutputName">0</span>
@@ -91,7 +91,7 @@
 		</section>
 
 		<section class="section">
-			<h2>Objective</h2>
+			<h2 class="section__header">Objective</h2>
 			<label>Objective
 <textarea class="textarea" id="inputObj"></textarea>
 </label>
