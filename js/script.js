@@ -250,7 +250,7 @@ var nameChecker = (function() {
     let tableCellValue = document.createElement('td');
     let tableCellRemove = document.createElement('td');
     let tableButtonRemove = document.createElement('button');
-		tableRow.classList += 'table-rules__row';
+    tableRow.classList += 'table-rules__row';
     tableCellKey.classList += 'table-rules__item';
     tableCellValue.classList += 'table-rules__item';
     tableCellRemove.classList += 'table-rules__item';
@@ -438,4 +438,35 @@ var nameChecker = (function() {
       el.style.height = (el.scrollHeight + 4) + 'px';
     }
   })();
+  var createCsvArray = function() {
+    var array = [
+      ['Name', 'Short Name', 'In-House Name']
+    ];
+    var nameFields = shareClassesOutput.getElementsByTagName('li');
+    var nameFieldsShort = shareClassesOutputShort.getElementsByTagName('li');
+    var nameFieldsInHouse = shareClassesOutputInHouse.getElementsByTagName('li');
+    for (var i = 0; i < nameFields.length; i++) {
+      let names = [];
+      names[0] = (nameFields[i].innerHTML);
+      names[1] = (nameFieldsShort[i].innerHTML);
+      names[2] = (nameFieldsInHouse[i].innerHTML);
+      array.push(names);
+    }
+    var lineArray = [];
+    array.forEach(function(infoArray, index) {
+      var line = infoArray.join(",");
+      lineArray.push(index == 0 ? "data:text/csv;charset=utf-8," + line : line);
+    });
+    var csvContent = lineArray.join("\n");
+    var encodedUri = encodeURI(csvContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "names.csv");
+    document.body.appendChild(link); // Required for FF
+    link.click();
+    document.body.removeChild(link);
+  }
+  $('#btnExportNames').addEventListener('click', function() {
+    createCsvArray();
+  })
 }([50, 30, 40]));
