@@ -52,12 +52,15 @@
 	color: $tr-white;
 	background-color: $tr-darkgray;
 }
+
 .table-rules__item {
-	border: 1px solid $own-mutedgray;
 	padding: .4rem;
+	border: 1px solid $own-mutedgray;
 }
+
 .table-rules__item--editable {
 	line-height: 1rem;
+
 	&:focus {
 		border: 2px solid $tr-orange;
 		outline: none;
@@ -101,8 +104,8 @@
 
 .button--intable {
 	width: 5.5rem;
-	margin: 0;
 	height: 1.7rem;
+	margin: 0;
 }
 
 .button-link {
@@ -137,9 +140,11 @@
 .textarea--expandable {
 	resize: none;
 }
+
 .textarea--minheight {
 	min-height: 12rem;
 }
+
 .container-count {
 	display: flex;
 	width: 100%;
@@ -154,9 +159,9 @@
 	padding: .5rem;
 	border: 1px solid $tr-lightgray;
 	border-radius: 4px;
-	align-self: flex-start;
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;
+	align-self: flex-start;
 
 	&:focus {
 		border: 2px solid $tr-orange;
