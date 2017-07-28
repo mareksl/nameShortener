@@ -16,10 +16,10 @@
 	<main class="main">
 		<section class="section">
 			<h2 class="section__header">Fund name</h2>
-			<label>Fund Name
-<input class="input-text" type="text" id="inputName">
-<span class="container-count__length" id="lenName">0</span>
-</label>
+			<label class="input-label" for="inputName">Fund Name</label>
+			<div class="container-count"><input class="container-count__input-text" type="text" id="inputName">
+				<span class="container-count__length" id="lenName">0</span></div>
+
 
 			<button class="button" type="button" id="buttonShorten">Shorten</button>
 			<button class="button" id="showRules">Rules</button>
@@ -29,19 +29,19 @@
 			<h2 class="section__header">Rules</h2>
 			<table class="table-rules" id="tableRules">
 				<thead class="table-rules__header">
-					<tr>
-						<th>Word</th>
-						<th>Replacement</th>
-						<td></td>
+					<tr class="table-rules__row">
+						<th class="table-rules__item">Word</th>
+						<th class="table-rules__item">Replacement</th>
+						<td class="table-rules__item table-rules__item--removerule"></td>
 					</tr>
 				</thead>
 				<tbody>
 				</tbody>
 				<tfoot>
-					<tr>
-						<td id="addRuleKey" contenteditable="true"></td>
-						<td id="addRuleValue" contenteditable="true"></td>
-						<td><button class="button" id="btnAddRule">Add</button></td>
+					<tr class="table-rules__row">
+						<td class="table-rules__item table-rules__item--editable" id="addRuleKey" contenteditable="true"></td>
+						<td class="table-rules__item table-rules__item--editable" id="addRuleValue" contenteditable="true"></td>
+						<td class="table-rules__item"><button class="button button--intable" id="btnAddRule">Add</button></td>
 					</tr>
 				</tfoot>
 			</table>
@@ -54,7 +54,7 @@
 
 		<section class="section">
 			<h2 class="section__header">Options</h2>
-			<ul>
+			<ul class="options__list">
 				<li><input class="input-checkbox" type="checkbox" id="shortenNames"><label class="input-checkbox__label" for="shortenNames">Shorten Names</label></li>
 				<li><input class="input-checkbox" type="checkbox" id="removeParens"><label class="input-checkbox__label" for="removeParens">Remove Parens</label></li>
 				<li><input class="input-checkbox" type="checkbox" id="removeSpecial"><label class="input-checkbox__label" for="removeSpecial">Replace Umlauts and ß</label></li>
@@ -62,43 +62,46 @@
 		</section>
 		<section class="section">
 			<h2 class="section__header">Share Classes</h2>
-			<label>Share Classes<small> (each on new line)</small>
-<textarea class="textarea textarea--expandable" id="shareClasses"></textarea></label>
+			<label class="input-label" for="shareClasses">Share Classes<small> (each on new line)</small></label>
+			<textarea class="textarea textarea--expandable" id="shareClasses"></textarea>
 		</section>
 		<section class="section">
 
 			<h2 class="section__header">Generated Share Classes</h2>
-			<label>Name<small> (max. 50 chars)</small>
-<input class="input-text" type="text" id="outputName">
-<span class="container-count__length" id="lenOutputName">0</span>
-</label>
-			<ul id="shareClassesOutput">
+			<label class="input-label" for="outputName">Name<small> (max. 50 chars)</small></label>
+			<div class="container-count"><input class="container-count__input-text" type="text" id="outputName">
+				<span class="container-count__length" id="lenOutputName">0</span></div>
+
+			<ul class="shareclass-list" id="shareClassesOutput">
 			</ul>
 
-			<label>Short Name<small> (max. 30 chars)</small>
-<input class="input-text" type="text" id="outputShortName">
-<span class="container-count__length" id="lenOutputShortName">0</span>
-</label>
-			<ul id="shareClassesOutputShort">
+			<label class="input-label" for="outputShortName">Short Name<small> (max. 30 chars)</small></label>
+			<div class="container-count"><input class="container-count__input-text" type="text" id="outputShortName">
+				<span class="container-count__length" id="lenOutputShortName">0</span></div>
+
+			<ul class="shareclass-list" id="shareClassesOutputShort">
 			</ul>
 
-			<label>In-House Name<small> (max. 40 chars)</small>
-<input class="input-text" type="text" id="outputInHouseName">
-<span class="container-count__length" id="lenOutputInHouseName">0</span>
-</label>
-			<ul id="shareClassesOutputInHouse">
+			<label class="input-label" for="outputInHouseName">In-House Name<small> (max. 40 chars)</small></label>
+			<div class="container-count"><input class="container-count__input-text" type="text" id="outputInHouseName">
+				<span class="container-count__length" id="lenOutputInHouseName">0</span></div>
+
+			<ul class="shareclass-list" id="shareClassesOutputInHouse">
 			</ul>
 		</section>
 
 		<section class="section">
 			<h2 class="section__header">Objective</h2>
-			<label>Objective
-<textarea class="textarea" id="inputObj"></textarea>
-</label>
-			<span class="container-count__length" id="lenObj">0</span>
-			<a class="button button-link" id="linkTranslate" href="http://translate.google.com/" target="_blank">Google Translate</a>
-			<button class="button" type="button" id="buttonObjBreaks">Remove Line Breaks</button>
-			<button class="button" type="button" id="buttonObjUmlauts">Replace Umlauts</button>
+			<label class="input-label" for="inputObj">Objective</label>
+			<textarea class="textarea textarea--minheight" id="inputObj"></textarea>
+			<div class="objective">
+				<span class="objective__length" id="lenObj">0</span>
+				<div class="objective__buttons">
+					<a class="button button-link" id="linkTranslate" href="http://translate.google.com/" target="_blank">Google Translate</a>
+					<button class="button" type="button" id="buttonObjBreaks">Remove Line Breaks</button>
+					<button class="button" type="button" id="buttonObjUmlauts">Replace Umlauts</button>
+				</div>
+			</div>
 		</section>
 
 	</main>
