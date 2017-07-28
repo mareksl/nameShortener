@@ -9,7 +9,7 @@
 }
 
 .footer {
-	padding: 1rem 0 .5rem 0;
+	padding: .5rem;
 	text-align: center;
 }
 
@@ -71,7 +71,10 @@
 		outline: none;
 	}
 }
-
+.table-rules__item--noborder{
+	padding: .4rem;
+	border: 0;
+}
 .table-rules__item--removerule {
 	width: 100px;
 }
@@ -79,7 +82,7 @@
 .button {
 	font-weight: bold;
 	display: block;
-	width: 200px;
+	min-width: 200px;
 	height: 2rem;
 	margin: .2rem 0;
 	padding: 0 .5rem;
@@ -108,6 +111,7 @@
 }
 
 .button--intable {
+	min-width: 0;
 	width: 5.5rem;
 	height: 1.7rem;
 	margin: 0;
