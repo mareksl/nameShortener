@@ -157,12 +157,12 @@ var nameChecker = (function() {
   var displayLength = function(input, output, max) {
     output.innerHTML = nameChecker.lengthCheck(input);
     if (nameChecker.maxLength(input, max)) {
-      if (!output.classList.contains('container-count__length--warning')) {
-        output.classList.add('container-count__length--warning');
+      if (!output.classList.contains('length--warning')) {
+        output.classList.add('length--warning');
       }
     } else {
-      if (output.classList.contains('container-count__length--warning')) {
-        output.classList.remove('container-count__length--warning');
+      if (output.classList.contains('length--warning')) {
+        output.classList.remove('length--warning');
       }
     }
   };
@@ -186,11 +186,13 @@ var nameChecker = (function() {
       let newShareClass = document.createElement('li');
       newShareClass.setAttribute('tabIndex', '0');
       newShareClass.setAttribute('contentEditable', 'true');
+      newShareClass.classList += "shareclass-list__item";
       let newShareClassText = document.createTextNode(classesOutput[i]);
       newShareClass.appendChild(newShareClassText);
       let newShareClassLen = document.createElement('span');
       newShareClassLen.setAttribute('id', lenId);
       newShareClassLen.setAttribute('data-tooltip', "Copy");
+      newShareClassLen.classList += "shareclass-list__length";
       displayLength(newShareClassText, newShareClassLen, max);
       output.appendChild(newShareClass);
       output.appendChild(newShareClassLen);
@@ -248,8 +250,12 @@ var nameChecker = (function() {
     let tableCellValue = document.createElement('td');
     let tableCellRemove = document.createElement('td');
     let tableButtonRemove = document.createElement('button');
+		tableRow.classList += 'table-rules__row';
+    tableCellKey.classList += 'table-rules__item';
+    tableCellValue.classList += 'table-rules__item';
+    tableCellRemove.classList += 'table-rules__item';
     tableButtonRemove.innerHTML = 'Remove';
-    tableButtonRemove.classList += 'button';
+    tableButtonRemove.classList += 'button button--intable';
     tableCellKey.innerHTML = key;
     // tableCellKey.setAttribute('contentEditable', true);
     tableCellValue.innerHTML = value;
@@ -276,7 +282,7 @@ var nameChecker = (function() {
   };
 
   function loadRules(callback) {
-		localStorage.localRulesSaved = true;
+    localStorage.localRulesSaved = true;
     if (typeof localStorage.localRules !== 'undefined') {
       console.log('Loading LOCAL rules!');
       callback(localStorage.localRules);
