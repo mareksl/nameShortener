@@ -9,112 +9,104 @@
 </head>
 
 <body>
-	<h1>Fund Name Shortener <small>(beta)</small></h1>
 
-	<div class="main">
-		<div class="formGroup">
-			<label><h2>Fund Name</h2>
-			<div class="nameGroupOutput">
-			<input class="nameOutput" type="text" id="inputName">
-			<span class="nameLen" id="lenName">0</span>
-			</div>
-			</label>
-		</div>
-		<div class="formGroup">
-			<div class="nameGroupOutput">
-				<button class="shortenName" type="button" id="buttonShorten">Shorten</button>
-			</div>
-		</div>
-		<div class="formGroup">
-			<div class="nameGroupOutput"><button class="shortenName" id="showRules">Rules</button></div>
-			<div class="rules">
-				<table class="tableRules" id="tableRules">
-					<thead>
-						<tr>
-							<th>Word</th>
-							<th>Replacement</th>
-							<td class="removeRule"></td>
-						</tr>
-					</thead>
-					<tbody>
-					</tbody>
-					<tfoot>
-						<tr>
-							<td id="addRuleKey" contenteditable="true"></td>
-							<td id="addRuleValue" contenteditable="true"></td>
-							<td><button id="btnAddRule" class="shortenName">Add</button></td>
-						</tr>
-					</tfoot>
-				</table>
-			<div class="nameGroupOutput"><button id="btnSaveRules" class="shortenName">Save <span id="rulesSaved"></span></button></div>
-			<div class="nameGroupOutput"><button id="btnResetRules" class="shortenName">Reset to default</button></div>
-			<div class="nameGroupOutput"><button id="btnRemoveRules" class="shortenName">Remove all rules</button></div>
-			<div class="nameGroupOutput"><button id="btnCloseRules" class="shortenName">Close</button></div>
+	<header class="header">
+		<h1 class="header__title">Fund Name Shortener <small>(beta)</small></h1>
+	</header>
+	<main class="main">
+		<section class="section">
+			<h2 class="section__header">Fund name</h2>
+			<label class="input-label input-label--visuallyhidden" for="inputName">Fund Name</label>
+			<div class="container-count"><input class="container-count__input-text" type="text" id="inputName">
+				<span class="container-count__length" id="lenName">0</span></div>
 
-			</div>
-			<ul>
-			<li><input type="checkbox" id="shortenNames"><label for="shortenNames">Shorten Names</label></li>
-			<li><input type="checkbox" id="removeParens"><label for="removeParens">Remove Parens</label></li>
-			<li><input type="checkbox" id="removeSpecial"><label for="removeSpecial">Replace Umlauts and ß</label></li>
+
+			<button class="button" type="button" id="buttonShorten">Shorten</button>
+			<button class="button" id="showRules">Rules</button>
+		</section>
+
+		<section class="section section__rules">
+			<h2 class="section__header">Rules</h2>
+			<table class="table-rules" id="tableRules">
+				<thead class="table-rules__header">
+					<tr class="table-rules__row">
+						<th class="table-rules__item table-rules__item--noborder">Word</th>
+						<th class="table-rules__item table-rules__item--noborder">Replacement</th>
+						<td class="table-rules__item table-rules__item--removerule table-rules__item--noborder"></td>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+				<tfoot>
+					<tr class="table-rules__row">
+						<td class="table-rules__item table-rules__item--editable" id="addRuleKey" contenteditable="true"></td>
+						<td class="table-rules__item table-rules__item--editable" id="addRuleValue" contenteditable="true"></td>
+						<td class="table-rules__item"><button class="button button--intable" id="btnAddRule">Add</button></td>
+					</tr>
+				</tfoot>
+			</table>
+
+			<button class="button" id="btnSaveRules">Save <span id="rulesSaved"></span></button>
+			<button class="button" id="btnResetRules">Reset to default</button>
+			<button class="button" id="btnRemoveRules">Remove all rules</button>
+			<button class="button" id="btnCloseRules">Close</button>
+		</section>
+
+		<section class="section">
+			<h2 class="section__header">Options</h2>
+			<ul class="options__list">
+				<li><input class="input-checkbox" type="checkbox" id="shortenNames"><label class="input-checkbox__label" for="shortenNames">Shorten Names</label></li>
+				<li><input class="input-checkbox" type="checkbox" id="removeParens"><label class="input-checkbox__label" for="removeParens">Remove Parens</label></li>
+				<li><input class="input-checkbox" type="checkbox" id="removeSpecial"><label class="input-checkbox__label" for="removeSpecial">Replace Umlauts and ß</label></li>
 			</ul>
-		</div>
-	</div>
-	<div class="main">
-		<div class="formGroup">
-			<label><h2>Share Classes</h2><small> (each on new line) </small><span id="debug"></span>
-		<textarea class="shareClassesInput" id="shareClasses"></textarea></label>
-		</div>
-		<div class="formGroup">
-			<h2>Generated Share Classes</h2>
-			<div class="nameList">
-				<label><h3>Name</h3><small> (max. 50 chars)</small>
-					<div class="nameGroupOutput">
-						<input class="nameOutput" type="text" id="outputName">
-						<span class="nameLen" id="lenOutputName">0</span>
-					</div>
-				</label>
+		</section>
+		<section class="section">
+			<h2 class="section__header">Share Classes</h2>
+			<label class="input-label input-label--visuallyhidden" for="shareClasses">Share Classes<small> (each on new line)</small></label>
+			<textarea class="textarea textarea--expandable" id="shareClasses" placeholder="One Share Class per line."></textarea>
+		</section>
+		<section class="section">
 
-				<ul id="shareClassesOutput" class="shareClasses">
-				</ul>
-				<label><h3>Short Name</h3><small> (max. 30 chars)</small>
-					<div class="nameGroupOutput">
-						<input class="nameOutput" type="text" id="outputShortName">
-						<span class="nameLen" id="lenOutputShortName">0</span>
-					</div>
-				</label>
-				<ul id="shareClassesOutputShort" class="shareClasses">
-				</ul>
-				<label><h3>In-House Name</h3><small> (max. 40 chars)</small>
-					<div class="nameGroupOutput">
-						<input class="nameOutput" type="text" id="outputInHouseName">
-						<span class="nameLen" id="lenOutputInHouseName">0</span>
-					</div>
-				</label>
-				<ul id="shareClassesOutputInHouse" class="shareClasses">
-				</ul>
+			<h2 class="section__header">Generated Share Classes</h2>
+			<label class="input-label" for="outputName">Name<small> (max. 50 chars)</small></label>
+			<div class="container-count"><input class="container-count__input-text" type="text" id="outputName">
+				<span class="container-count__length" id="lenOutputName">0</span></div>
+
+			<ul class="shareclass-list" id="shareClassesOutput">
+			</ul>
+
+			<label class="input-label" for="outputShortName">Short Name<small> (max. 30 chars)</small></label>
+			<div class="container-count"><input class="container-count__input-text" type="text" id="outputShortName">
+				<span class="container-count__length" id="lenOutputShortName">0</span></div>
+
+			<ul class="shareclass-list" id="shareClassesOutputShort">
+			</ul>
+
+			<label class="input-label" for="outputInHouseName">In-House Name<small> (max. 40 chars)</small></label>
+			<div class="container-count"><input class="container-count__input-text" type="text" id="outputInHouseName">
+				<span class="container-count__length" id="lenOutputInHouseName">0</span></div>
+
+			<ul class="shareclass-list" id="shareClassesOutputInHouse">
+			</ul>
+		</section>
+
+		<section class="section">
+			<h2 class="section__header">Objective</h2>
+			<label class="input-label input-label--visuallyhidden" for="inputObj">Objective</label>
+			<textarea class="textarea textarea--minheight" id="inputObj"></textarea>
+			<div class="objective">
+				<span class="objective__length" id="lenObj">0</span>
+				<div class="objective__buttons">
+					<a class="button button-link" id="linkTranslate" href="http://translate.google.com/" target="_blank">Google Translate</a>
+					<button class="button" type="button" id="buttonObjBreaks">Remove Line Breaks</button>
+					<button class="button" type="button" id="buttonObjUmlauts">Replace Umlauts</button>
+				</div>
 			</div>
-		</div>
-	</div>
-	<div class="main">
-		<div class="formGroup">
-			<label><h2>Objective</h2>
-		<textarea class="objInput" id="inputObj"></textarea>
-		</label>
-		<!-- <pre contenteditable="true"></pre> -->
-		</div>
-		<div class="formGroup">
-			<div class="nameGroupOutput">
-				<span class="objLen" id="lenObj">0</span>
-				<a class="linkButton" id="linkTranslate" href="http://translate.google.com/" target="_blank">Google Translate</a>
-			</div>
-			<div class="nameGroupOutput">
-				<button class="shortenName" type="button" id="buttonObjBreaks">Remove Line Breaks</button>
-			</div>
-			<div class="nameGroupOutput">
-				<button class="shortenName" type="button" id="buttonObjUmlauts">Replace Umlauts</button>
-			</div>
-		</div>
-	</div>
+		</section>
+
+	</main>
+	<footer class="footer"><small>Marek Sładczyk 2017</small></footer>
+
 	<script src="js/script.js" charset="utf-8"></script>
 </body>
 

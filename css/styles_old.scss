@@ -1,0 +1,348 @@
+@import 'reset';
+@import 'typography';
+
+h1 {
+	padding: 16px;
+	width: 100%;
+	text-align: center;
+	color: $tr-lightorange;
+	background-color: $tr-darkgray;
+}
+
+.main {
+	width: 66.6666%;
+	max-width: 680px;
+	margin: auto;
+	padding: 8px 0;
+}
+
+.formGroup {
+	margin: 4px 0;
+	padding: 8px;
+}
+
+input[type='text'] {
+	display: block;
+	height: 33px;
+	// width: 100%;
+	padding: 8px;
+}
+
+.nameOutput {
+	flex: 1 0 auto;
+	border: 1px solid $tr-lightgray;
+	border-radius: 4px;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.nameInput:focus,
+.nameOutput:focus,
+textarea:focus {
+	border: 2px solid $tr-orange;
+	outline: none;
+}
+
+.nameLen {
+	line-height: 1;
+	display: block;
+	width: 50px;
+	height: 33px;
+	padding: 8px 0;
+	text-align: center;
+	border: 1px solid $tr-lightgray;
+	border-left: 0;
+	border-top-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+
+.objLen {
+	line-height: 1;
+	display: block;
+	width: 50px;
+	height: 33px;
+	padding: 8px 0;
+	text-align: center;
+	flex: 1 0 auto;
+}
+
+.nameGroupOutput {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-end;
+	min-height: 33px;
+	margin: 4px 0;
+}
+
+.linkButton,
+.shortenName {
+	font-weight: bold;
+	// color: #fff;
+	flex: 0 1 50%;
+	width: 100%;
+	min-height: 28px;
+	padding: 0 .5em;
+	cursor: pointer;
+	color: $tr-orange;
+	// background-color: $tr-orange;
+	// border: 0;
+	border: 2px solid $tr-orange;
+	border-radius: 4px;
+	background-color: $tr-white;
+	// box-shadow: 0 1px 1px $tr-darkgray;
+	&:focus {
+		border: 2px dashed $tr-orange;
+		outline: none;
+	}
+
+	&:hover {
+		color: $tr-white;
+		outline: none;
+		background-color: $tr-orange;
+		// background-color: $tr-darkorange;
+	}
+
+	&:active {
+		outline: none;
+		background-color: $tr-darkorange;
+		box-shadow: inset 0 1px 1px $tr-darkgray;
+	}
+}
+
+.linkButton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+
+	&:active,
+	&:focus,
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+input[type='checkbox'] {
+	position: absolute; // take it out of document flow
+	opacity: 0; // hide it
+
+	& + label {
+		position: relative;
+		cursor: pointer;
+	}
+
+	& + label:before {
+		content: '';
+		border: 1px solid $tr-lightgray;
+		margin-right: 10px;
+		display: inline-block;
+		vertical-align: text-top;
+		width: 1em;
+		height: 1em;
+		background: white;
+		border-radius: 4px;
+	}
+
+	&:focus + label:before,
+	&:hover + label:before {
+		transform: scale(1.1);
+		border: 1px solid $tr-orange;
+		box-shadow: 0 0 0 1px $tr-orange;
+	}
+
+	&:checked + label:before {
+		background: $tr-orange;
+		border: 1px solid $tr-darkorange;
+	}
+
+	&:checked + label:after {
+		content: '';
+		width: 8px;
+		height: 4px;
+		position: absolute;
+		top: 4px;
+		left: 4px;
+		border: 2px solid $tr-white;
+		border-top: none;
+		border-right: none;
+		background: transparent;
+		opacity: 0;
+		transform: rotate(-45deg);
+	}
+
+	&:checked + label:after {
+		opacity: 1;
+	}
+}
+
+textarea {
+	font-family: $sans;
+	font-size: 1em;
+	width: 100%;
+	padding: 8px;
+	resize: vertical;
+	border: 1px solid $tr-lightgray;
+	border-radius: 4px;
+}
+
+.objInput {
+	min-height: 200px;
+}
+
+.warning {
+	font-weight: bold;
+	color: $tr-darkorange;
+}
+
+.tableRules {
+	width: 100%;
+	margin: 16px 0;
+	table-layout: fixed;
+
+	thead {
+		font-weight: bold;
+		color: $tr-white;
+		background-color: $tr-darkgray;
+	}
+
+	td,
+	th,
+	tr {
+		padding: .4em;
+	}
+
+	tbody td, tfoot td {
+		border: 1px $own-mutedgray solid;
+
+		&:focus {
+			border: 2px solid $tr-orange;
+			outline: none;
+		}
+	}
+
+	tbody {
+		tr {
+			&:hover {
+				background-color: $own-mutedgray;
+			}
+		}
+	}
+}
+
+.rules {
+	display: none;
+
+	&.show {
+		display: block;
+	}
+}
+
+.removeRule {
+	width: 100px;
+}
+
+.shareClassesInput {
+	resize: none;
+}
+
+.shareClasses {
+	margin-bottom: 1em;
+
+	li {
+		display: inline-block;
+		width: calc(100% - 50px);
+		border-bottom: 1px dotted $tr-lightorange;
+
+		&:first-of-type {
+			border-top: 1px dotted $tr-lightorange;
+		}
+
+		&:focus {
+			border-bottom-style: solid;
+			border-color: $tr-orange;
+			outline: none;
+		}
+	}
+
+	span {
+		width: 50px;
+		border-left: 1px dotted $tr-lightorange;
+		border-bottom: 1px dotted $tr-lightorange;
+		display: inline-block;
+		text-align: center;
+		cursor: pointer;
+
+		&:hover {
+			border-left-style: solid;
+		}
+
+		&:first-of-type {
+			border-top: 1px dotted $tr-lightorange;
+		}
+	}
+}
+
+pre {
+	font-family: $sans;
+	font-size: 1em;
+	width: 100%;
+	height: 200px;
+	padding: 8px;
+	resize: vertical;
+	overflow: auto;
+	border: 1px solid $tr-lightgray;
+	border-radius: 4px;
+}
+/* Add this attribute to the element that needs a tooltip */
+[data-tooltip] {
+	position: relative;
+	z-index: 2;
+	cursor: pointer;
+}
+/* Hide the tooltip content by default */
+[data-tooltip]:after,
+[data-tooltip]:before {
+	transition: all .2s;
+	visibility: hidden;
+	opacity: 0;
+	pointer-events: none;
+}
+/* Position tooltip above the element */
+[data-tooltip]:before {
+	box-sizing: border-box;
+	position: absolute;
+	top: 0;
+	right: 100%;
+	margin-right: .5em;
+	padding: 0 .5em 0 1.5em;
+	content: attr(data-tooltip);
+	text-align: center;
+	background: rgba($tr-white,.8);
+}
+/* Triangle hack to make tooltip look like a speech bubble */
+
+[data-tooltip]:after {
+	position: absolute;
+	top: 50%;
+	right: calc(100% + 50px);
+	margin-top: -5px;
+	margin-right: 8px;
+	// width: 0;
+	border: solid $tr-lightorange;
+	// border-top: 5px solid transparent;
+	// border-bottom: 5px solid transparent;
+	border-width: 0 2px 2px 0;
+	padding: 4px;
+	transform: rotate(135deg);
+	-webkit-transform: rotate(135deg);
+	content: ' ';
+	font-size: 0;
+	line-height: 0;
+}
+/* Show tooltip content on hover */
+[data-tooltip]:hover:after,
+[data-tooltip]:hover:before {
+	visibility: visible;
+	opacity: 1;
+}
