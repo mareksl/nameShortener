@@ -157,12 +157,12 @@ var nameChecker = (function() {
   var displayLength = function(input, output, max) {
     output.innerHTML = nameChecker.lengthCheck(input);
     if (nameChecker.maxLength(input, max)) {
-      if (!output.classList.contains('warning')) {
-        output.classList.add('warning');
+      if (!output.classList.contains('length--warning')) {
+        output.classList.add('length--warning');
       }
     } else {
-      if (output.classList.contains('warning')) {
-        output.classList.remove('warning');
+      if (output.classList.contains('length--warning')) {
+        output.classList.remove('length--warning');
       }
     }
   };
@@ -186,11 +186,13 @@ var nameChecker = (function() {
       let newShareClass = document.createElement('li');
       newShareClass.setAttribute('tabIndex', '0');
       newShareClass.setAttribute('contentEditable', 'true');
+      newShareClass.classList += "shareclass-list__item";
       let newShareClassText = document.createTextNode(classesOutput[i]);
       newShareClass.appendChild(newShareClassText);
       let newShareClassLen = document.createElement('span');
       newShareClassLen.setAttribute('id', lenId);
       newShareClassLen.setAttribute('data-tooltip', "Copy");
+      newShareClassLen.classList += "shareclass-list__length";
       displayLength(newShareClassText, newShareClassLen, max);
       output.appendChild(newShareClass);
       output.appendChild(newShareClassLen);
@@ -215,7 +217,7 @@ var nameChecker = (function() {
     inputObj = $('#inputObj'), // OBJECTIVE INPUT
     lenObj = $('#lenObj'), // OBJECTIVE LENGTH
     showRules = $('#showRules'), // RULES BUTTON
-    divRules = $('.rules'), // RULES LIST
+    divRules = $('.section__rules'), // RULES LIST
     shareClassesOutput = $('#shareClassesOutput'), // NAME WITH SC OUTPUT
     shareClassesShortOutput = $('#shareClassesShortOutput'), // SHORT NAME WITH SC OUTPUT
     shareClassesInHouseOutput = $('#shareClassesInHouseOutput'), // IN HOUSE NAME WITH SC OUTPUT
@@ -248,8 +250,12 @@ var nameChecker = (function() {
     let tableCellValue = document.createElement('td');
     let tableCellRemove = document.createElement('td');
     let tableButtonRemove = document.createElement('button');
+		tableRow.classList += 'table-rules__row';
+    tableCellKey.classList += 'table-rules__item';
+    tableCellValue.classList += 'table-rules__item';
+    tableCellRemove.classList += 'table-rules__item';
     tableButtonRemove.innerHTML = 'Remove';
-    tableButtonRemove.classList += 'shortenName';
+    tableButtonRemove.classList += 'button button--intable';
     tableCellKey.innerHTML = key;
     // tableCellKey.setAttribute('contentEditable', true);
     tableCellValue.innerHTML = value;
@@ -276,7 +282,7 @@ var nameChecker = (function() {
   };
 
   function loadRules(callback) {
-		localStorage.localRulesSaved = true;
+    localStorage.localRulesSaved = true;
     if (typeof localStorage.localRules !== 'undefined') {
       console.log('Loading LOCAL rules!');
       callback(localStorage.localRules);
@@ -414,14 +420,14 @@ var nameChecker = (function() {
     inputObj.select();
   });
   showRules.addEventListener('click', function(e) {
-    if (!divRules.classList.contains('show')) {
-      divRules.classList.add('show');
+    if (!divRules.classList.contains('section__rules--show')) {
+      divRules.classList.add('section__rules--show');
     } else {
-      divRules.classList.remove('show');
+      divRules.classList.remove('section__rules--show');
     }
   });
   btnCloseRules.addEventListener('click', function(e) {
-    divRules.classList.remove('show');
+    divRules.classList.remove('section__rules--show');
   });
   var comfyText = (function() {
     shareClassesInput.addEventListener('input', autoExpand);
