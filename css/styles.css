@@ -530,7 +530,8 @@ strong {
   border: 2px dotted #ff5900;
   border-radius: 50%;
   align-items: center;
-  justify-content: center; }
+  justify-content: center;
+  transition: .2s; }
   .github-link:hover {
     transform: scale(1.4); }
 
