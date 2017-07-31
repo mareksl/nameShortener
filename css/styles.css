@@ -531,9 +531,10 @@ strong {
   border-radius: 50%;
   align-items: center;
   justify-content: center;
-  transition: .2s; }
+  transition: .2s ease-in-out; }
   .github-link:hover {
-    transform: scale(1.4); }
+    transform: scale(1.2);
+    box-shadow: 0 0 16px #FF8000; }
 
 .github-link__logo {
   width: 1.5rem;

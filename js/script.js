@@ -217,7 +217,7 @@ var nameChecker = (function() {
     inputObj = $('#inputObj'), // OBJECTIVE INPUT
     lenObj = $('#lenObj'), // OBJECTIVE LENGTH
     showRules = $('#showRules'), // RULES BUTTON
-    divRules = $('.section__rules'), // RULES LIST
+    divRules = $('#sectionRules'), // RULES LIST
     shareClassesOutput = $('#shareClassesOutput'), // NAME WITH SC OUTPUT
     shareClassesShortOutput = $('#shareClassesShortOutput'), // SHORT NAME WITH SC OUTPUT
     shareClassesInHouseOutput = $('#shareClassesInHouseOutput'), // IN HOUSE NAME WITH SC OUTPUT
@@ -233,6 +233,8 @@ var nameChecker = (function() {
     buttonShorten = $('#buttonShorten'),
     addRuleKey = $('#addRuleKey'),
     addRuleValue = $('#addRuleValue'); // SHARE CLASSES INPUT
+    // sectionReplace = $('#sectionReplace'),
+    // replaceChars = $('#replaceChars');
   var rules;
   var modifyRules = function(status) {
     if (status === 'saved') {
@@ -426,6 +428,13 @@ var nameChecker = (function() {
       divRules.classList.remove('section__rules--show');
     }
   });
+	// replaceChars.addEventListener('click', function(e) {
+	// 	if (!sectionReplace.classList.contains('section__rules--show')) {
+	// 		sectionReplace.classList.add('section__rules--show');
+	// 	} else {
+	// 		sectionReplace.classList.remove('section__rules--show');
+	// 	}
+	// });
   btnCloseRules.addEventListener('click', function(e) {
     divRules.classList.remove('section__rules--show');
   });
