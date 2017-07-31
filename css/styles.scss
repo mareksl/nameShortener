@@ -9,8 +9,12 @@
 }
 
 .footer {
-	padding: .5rem;
-	text-align: center;
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .header__title {
@@ -113,8 +117,8 @@
 }
 
 .button--intable {
-	min-width: 0;
 	width: 5.5rem;
+	min-width: 0;
 	height: 1.7rem;
 	margin: 0;
 }
@@ -392,5 +396,30 @@
 		&:after {
 			opacity: 1;
 		}
+	}
+}
+
+.github-link {
+	display: flex;
+	width: 2rem;
+	height: 2rem;
+	margin: 2rem;
+	border: 2px dotted $tr-darkorange;
+	border-radius: 50%;
+	align-items: center;
+	justify-content: center;
+
+	&:hover {
+		transform: scale(1.4);
+	}
+}
+
+.github-link__logo {
+	width: 1.5rem;
+	height: 1.5rem;
+}
+@media (max-width: 600px) {
+	.footer {
+		position: relative;
 	}
 }

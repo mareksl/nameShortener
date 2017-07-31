@@ -215,8 +215,12 @@ strong {
   background-color: #4D4D4D; }
 
 .footer {
-  padding: .5rem;
-  text-align: center; }
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
 
 .header__title {
   color: #ffa100; }
@@ -297,8 +301,8 @@ strong {
     box-shadow: inset 0 1px 1px #4D4D4D; }
 
 .button--intable {
-  min-width: 0;
   width: 5.5rem;
+  min-width: 0;
   height: 1.7rem;
   margin: 0; }
 
@@ -517,5 +521,25 @@ strong {
       transform: scaleX(1); }
     [data-tooltip]:hover:after {
       opacity: 1; }
+
+.github-link {
+  display: flex;
+  width: 2rem;
+  height: 2rem;
+  margin: 2rem;
+  border: 2px dotted #ff5900;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center; }
+  .github-link:hover {
+    transform: scale(1.4); }
+
+.github-link__logo {
+  width: 1.5rem;
+  height: 1.5rem; }
+
+@media (max-width: 600px) {
+  .footer {
+    position: relative; } }
 
 /*# sourceMappingURL=styles.css.map */
