@@ -71,10 +71,12 @@
 		outline: none;
 	}
 }
-.table-rules__item--noborder{
+
+.table-rules__item--noborder {
 	padding: .4rem;
 	border: 0;
 }
+
 .table-rules__item--removerule {
 	width: 100px;
 }
@@ -118,6 +120,7 @@
 }
 
 .button-link {
+	line-height: 1.7;
 	text-align: center;
 
 	&:active,

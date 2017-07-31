@@ -303,6 +303,7 @@ strong {
   margin: 0; }
 
 .button-link {
+  line-height: 1.7;
   text-align: center; }
   .button-link:active, .button-link:focus, .button-link:hover {
     text-decoration: none; }
