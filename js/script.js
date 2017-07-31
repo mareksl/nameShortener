@@ -465,8 +465,8 @@ var nameChecker = (function() {
     document.body.appendChild(link); // Required for FF
     link.click();
     document.body.removeChild(link);
-  }
+  };
   $('#btnExportNames').addEventListener('click', function() {
     createCsvArray();
-  })
+  });
 }([50, 30, 40]));
