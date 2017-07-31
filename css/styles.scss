@@ -381,7 +381,6 @@
 		content: ' ';
 		transform: rotate(135deg);
 		opacity: 0;
-		// transform: rotate(135deg);
 		border: solid $tr-lightorange;
 		border-width: 0 2px 2px 0;
 	}
@@ -408,6 +407,7 @@
 	border-radius: 50%;
 	align-items: center;
 	justify-content: center;
+	transition: .2s;
 
 	&:hover {
 		transform: scale(1.4);
