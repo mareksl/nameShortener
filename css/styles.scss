@@ -253,8 +253,15 @@
 	color: $tr-darkorange;
 }
 
-.options__list {
+.options-list {
+	display: flex;
 	align-self: flex-start;
+	flex-flow: row wrap;
+}
+
+.options-list__item {
+	flex: 0 0 50%;
+	padding-right: 1rem;
 }
 
 .input-checkbox {
@@ -296,6 +303,7 @@
 .input-checkbox__label {
 	position: relative;
 	cursor: pointer;
+	white-space: nowrap;
 
 	&:before {
 		display: inline-block;
@@ -403,11 +411,11 @@
 	width: 2rem;
 	height: 2rem;
 	margin: 2rem;
+	transition: .2s ease-in-out;
 	border: 2px dotted $tr-darkorange;
 	border-radius: 50%;
 	align-items: center;
 	justify-content: center;
-	transition: .2s ease-in-out;
 
 	&:hover {
 		transform: scale(1.2);
@@ -418,7 +426,6 @@
 .github-link__logo {
 	width: 1.5rem;
 	height: 1.5rem;
-
 }
 @media (max-width: 600px) {
 	.footer {
