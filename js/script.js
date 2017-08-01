@@ -139,7 +139,6 @@ var nameChecker = (function() {
   return {
     lengthCheck: lengthCheck,
     replaceUmlauts: replaceUmlauts,
-    removeParens: removeParens,
     maxLength: maxLength,
     removeBreaks: removeBreaks,
     translateLink: translateLink,
@@ -150,10 +149,38 @@ var nameChecker = (function() {
 //-----------------------------------------------------------
 (function init(lengths) {
   'use strict';
-  // SELECTOR
-  var $ = function(el) {
-    return document.querySelector(el);
-  };
+	// SELECTOR
+	var $ = function(el) {
+		return document.querySelector(el);
+	};
+
+  var inputName = $('#inputName'), // INITIAL NAME INPUT
+    outputName = $('#outputName'), // PROCESSED NAME OUTPUT
+    outputShortName = $('#outputShortName'), // PROCESSED SHORT NAME OUTPUT
+    outputInHouseName = $('#outputInHouseName'), // PROCESSED IN HOUSE NAME OUTPUT
+    lenName = $('#lenName'), // NAME LENGTH
+    inputObj = $('#inputObj'), // OBJECTIVE INPUT
+    lenObj = $('#lenObj'), // OBJECTIVE LENGTH
+    showRules = $('#showRules'), // RULES BUTTON
+    divRules = $('#sectionRules'), // RULES LIST
+    shareClassesOutput = $('#shareClassesOutput'), // NAME WITH SC OUTPUT
+    shareClassesShortOutput = $('#shareClassesShortOutput'), // SHORT NAME WITH SC OUTPUT
+    shareClassesInHouseOutput = $('#shareClassesInHouseOutput'), // IN HOUSE NAME WITH SC OUTPUT
+    shareClassesInput = $('#shareClasses'),
+    btnSaveRules = $('#btnSaveRules'),
+    btnResetRules = $('#btnResetRules'),
+    btnCloseRules = $('#btnCloseRules'),
+    btnRemoveRules = $('#btnRemoveRules'),
+    rulesSaved = $('#rulesSaved'),
+    tableRules = $('#tableRules'),
+    tableBody = tableRules.querySelector('tbody'),
+    btnAddRule = $('#btnAddRule'),
+    buttonShorten = $('#buttonShorten'),
+    addRuleKey = $('#addRuleKey'),
+    addRuleValue = $('#addRuleValue'); // SHARE CLASSES INPUT
+  // sectionReplace = $('#sectionReplace'),
+  // replaceChars = $('#replaceChars');
+  var rules;
   var displayLength = function(input, output, max) {
     output.innerHTML = nameChecker.lengthCheck(input);
     if (nameChecker.maxLength(input, max)) {
@@ -208,34 +235,7 @@ var nameChecker = (function() {
       });
     }
   }
-  // EVENT LISTENERS
-  var inputName = $('#inputName'), // INITIAL NAME INPUT
-    outputName = $('#outputName'), // PROCESSED NAME OUTPUT
-    outputShortName = $('#outputShortName'), // PROCESSED SHORT NAME OUTPUT
-    outputInHouseName = $('#outputInHouseName'), // PROCESSED IN HOUSE NAME OUTPUT
-    lenName = $('#lenName'), // NAME LENGTH
-    inputObj = $('#inputObj'), // OBJECTIVE INPUT
-    lenObj = $('#lenObj'), // OBJECTIVE LENGTH
-    showRules = $('#showRules'), // RULES BUTTON
-    divRules = $('#sectionRules'), // RULES LIST
-    shareClassesOutput = $('#shareClassesOutput'), // NAME WITH SC OUTPUT
-    shareClassesShortOutput = $('#shareClassesShortOutput'), // SHORT NAME WITH SC OUTPUT
-    shareClassesInHouseOutput = $('#shareClassesInHouseOutput'), // IN HOUSE NAME WITH SC OUTPUT
-    shareClassesInput = $('#shareClasses'),
-    btnSaveRules = $('#btnSaveRules'),
-    btnResetRules = $('#btnResetRules'),
-    btnCloseRules = $('#btnCloseRules'),
-    btnRemoveRules = $('#btnRemoveRules'),
-    rulesSaved = $('#rulesSaved'),
-    tableRules = $('#tableRules'),
-    tableBody = tableRules.querySelector('tbody'),
-    btnAddRule = $('#btnAddRule'),
-    buttonShorten = $('#buttonShorten'),
-    addRuleKey = $('#addRuleKey'),
-    addRuleValue = $('#addRuleValue'); // SHARE CLASSES INPUT
-    // sectionReplace = $('#sectionReplace'),
-    // replaceChars = $('#replaceChars');
-  var rules;
+
   var modifyRules = function(status) {
     if (status === 'saved') {
       rulesSaved.innerHTML = '';
@@ -259,9 +259,7 @@ var nameChecker = (function() {
     tableButtonRemove.innerHTML = 'Remove';
     tableButtonRemove.classList += 'button button--intable';
     tableCellKey.innerHTML = key;
-    // tableCellKey.setAttribute('contentEditable', true);
     tableCellValue.innerHTML = value;
-    // tableCellValue.setAttribute('contentEditable', true);
     tableCellRemove.appendChild(tableButtonRemove);
     tableRow.appendChild(tableCellKey);
     tableRow.appendChild(tableCellValue);
@@ -278,7 +276,7 @@ var nameChecker = (function() {
     tableBody.innerHTML = '';
     for (let prop in data) {
       if (data.hasOwnProperty(prop)) {
-        addTableRow(tableBody, prop, data[prop]);
+          addTableRow(tableBody, prop, data[prop]);
       }
     }
   };
@@ -428,21 +426,21 @@ var nameChecker = (function() {
       divRules.classList.remove('section__rules--show');
     }
   });
-	// replaceChars.addEventListener('click', function(e) {
-	// 	if (!sectionReplace.classList.contains('section__rules--show')) {
-	// 		sectionReplace.classList.add('section__rules--show');
-	// 	} else {
-	// 		sectionReplace.classList.remove('section__rules--show');
-	// 	}
-	// });
+  // replaceChars.addEventListener('click', function(e) {
+  // 	if (!sectionReplace.classList.contains('section__rules--show')) {
+  // 		sectionReplace.classList.add('section__rules--show');
+  // 	} else {
+  // 		sectionReplace.classList.remove('section__rules--show');
+  // 	}
+  // });
   btnCloseRules.addEventListener('click', function(e) {
     divRules.classList.remove('section__rules--show');
   });
   var comfyText = (function() {
     shareClassesInput.addEventListener('input', autoExpand);
 
-    function autoExpand(e, el) {
-      el = el || e.target;
+    function autoExpand(e) {
+      var el = e.target;
       el.style.height = 'inherit';
       el.style.height = (el.scrollHeight + 4) + 'px';
     }
