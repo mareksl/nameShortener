@@ -58,7 +58,7 @@ var nameChecker = (function() {
   //REMOVE DASHES
   var removeDashes = function(string) {
     return replaceLetter(string, {
-      '-': '',
+      '-': ' ',
 			'\\s\\s\+': ' '
     });
   };
