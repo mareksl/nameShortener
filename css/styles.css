@@ -412,8 +412,14 @@ strong {
   font-weight: bold;
   color: #ff5900; }
 
-.options__list {
-  align-self: flex-start; }
+.options-list {
+  display: flex;
+  align-self: flex-start;
+  flex-flow: row wrap; }
+
+.options-list__item {
+  flex: 0 0 50%;
+  padding-right: 1rem; }
 
 .input-checkbox {
   position: absolute;
@@ -441,7 +447,8 @@ strong {
 
 .input-checkbox__label {
   position: relative;
-  cursor: pointer; }
+  cursor: pointer;
+  white-space: nowrap; }
   .input-checkbox__label:before {
     display: inline-block;
     width: 1em;
@@ -527,11 +534,11 @@ strong {
   width: 2rem;
   height: 2rem;
   margin: 2rem;
+  transition: .2s ease-in-out;
   border: 2px dotted #ff5900;
   border-radius: 50%;
   align-items: center;
-  justify-content: center;
-  transition: .2s ease-in-out; }
+  justify-content: center; }
   .github-link:hover {
     transform: scale(1.2);
     box-shadow: 0 0 16px #FF8000; }

@@ -55,6 +55,19 @@ var nameChecker = (function() {
       '\n': ' '
     });
   };
+  //REMOVE DASHES
+  var removeDashes = function(string) {
+    return replaceLetter(string, {
+      '-': '',
+			'\\s\\s\+': ' '
+    });
+  };
+  //REMOVE WHITESPACE
+  var removeWhitespace = function(string) {
+    return replaceLetter(string, {
+      '\\s': ''
+    });
+  };
   // ADD CLASSES
   var addShareClasses = function(name, sClasses) {
     var output = [];
@@ -125,6 +138,10 @@ var nameChecker = (function() {
     var shortenedName = name;
     // remove parentheses
     shortenedName = options.removeParens ? removeParens(shortenedName) : shortenedName;
+    // remove dashes
+    shortenedName = options.removeDashes ? removeDashes(shortenedName) : shortenedName;
+    // remove whitespace
+    shortenedName = options.removeWhitespace ? removeWhitespace(shortenedName) : shortenedName;
     // replace umlauts
     shortenedName = options.replaceUmlauts ? replaceUmlauts(shortenedName) : shortenedName;
     // shorten name
@@ -395,6 +412,8 @@ var nameChecker = (function() {
     options.replaceUmlauts = $('#removeSpecial').checked;
     options.removeParens = $('#removeParens').checked;
     options.shortenName = $('#shortenNames').checked;
+		options.removeDashes = $('#removeDashes').checked;
+		options.removeWhitespace = $('#removeWhitespace').checked;
     var sClasses = shareClassesInput.value.length > 0 ? shareClassesInput.value.split('\n') : [];
     var shortened = nameChecker.shortenProcess(value, options, rules, sClasses, lengths);
     outputName.value = shortened.shortenedName;
@@ -470,6 +489,7 @@ var nameChecker = (function() {
     link.setAttribute("href", encodedUri);
     link.setAttribute("download", "names.csv");
     document.body.appendChild(link); // Required for FF
+		console.log(link);
     link.click();
     document.body.removeChild(link);
   };
