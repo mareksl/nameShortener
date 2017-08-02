@@ -554,7 +554,7 @@ body {
   .footer {
     position: relative; } }
 .notification {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 100%;
   margin: 2rem;
