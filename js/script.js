@@ -517,8 +517,8 @@ var init = (function(lengths) {
       ['Name', 'Short Name', 'In-House Name']
     ];
     var nameFields = elements.shareClassesOutput.getElementsByTagName('li');
-    var nameFieldsShort = elements.shareClassesOutputShort.getElementsByTagName('li');
-    var nameFieldsInHouse = elements.shareClassesOutputInHouse.getElementsByTagName('li');
+    var nameFieldsShort = elements.shareClassesShortOutput.getElementsByTagName('li');
+    var nameFieldsInHouse = elements.shareClassesInHouseOutput.getElementsByTagName('li');
     for (var i = 0; i < nameFields.length; i++) {
       let names = [];
       names[0] = (nameFields[i].innerHTML);
@@ -536,6 +536,7 @@ var init = (function(lengths) {
     var link = document.createElement("a");
     link.setAttribute("href", encodedUri);
     link.setAttribute("download", "names.csv");
+		animation.notify('Exporting to CSV!');
     document.body.appendChild(link); // Required for FF
     link.click();
     document.body.removeChild(link);
