@@ -208,6 +208,9 @@ strong {
   font-variant: small-caps; }
 
 /* TYPOGRAPHY END */
+body {
+  overflow-x: hidden; }
+
 .header {
   width: 100%;
   padding: 1rem;
@@ -550,5 +553,20 @@ strong {
 @media (max-width: 600px) {
   .footer {
     position: relative; } }
+.notification {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  margin: 2rem;
+  padding: 1rem;
+  transition: 1s;
+  transform: translateX(calc(-100% - 2rem));
+  border: 2px dashed #FF8000;
+  border-radius: 4px;
+  background-color: #fff; }
+
+.notification--visible {
+  transform: translateX(0); }
 
 /*# sourceMappingURL=styles.css.map */
