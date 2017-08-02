@@ -59,7 +59,7 @@ var nameChecker = (function() {
   var removeDashes = function(string) {
     return replaceLetter(string, {
       '-': ' ',
-			'\\s\\s\+': ' '
+      '\\s\\s\+': ' '
     });
   };
   //REMOVE WHITESPACE
@@ -152,6 +152,11 @@ var nameChecker = (function() {
       shortenedNameInHouse: shortenedName[2],
     };
   };
+  Object.prototype.hasOwnPropertyCI = function(prop) {
+    return Object.keys(this).filter(function(v) {
+      return v.toLowerCase() === prop.toLowerCase();
+    }).length > 0;
+  };
   //RETURN OBJECT
   return {
     lengthCheck: lengthCheck,
@@ -164,39 +169,92 @@ var nameChecker = (function() {
   };
 }());
 //-----------------------------------------------------------
-(function init(lengths) {
+var loadRules = (function() {
+  var load = function(callback) {
+    localStorage.localRulesSaved = true;
+    if (typeof localStorage.localRules !== 'undefined') {
+      console.log('Loading LOCAL rules!');
+      callback(localStorage.localRules);
+    } else {
+      console.log('Loading DEFAULT rules!');
+      var xobj = new XMLHttpRequest();
+      xobj.overrideMimeType("application/json");
+      xobj.open('GET', 'js/rules.json', true); // Replace 'my_data' with the path to your file
+      xobj.onreadystatechange = function() {
+        if (xobj.readyState == 4 && xobj.status == "200") {
+          // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+          callback(xobj.responseText);
+        }
+      };
+      xobj.send(null);
+    }
+  };
+  var modify = function(rules, status, callback) {
+    if (status === 'saved') {
+      localStorage.localRules = JSON.stringify(rules);
+      localStorage.localRulesSaved = true;
+    } else if (status === 'changed') {
+      localStorage.localRulesSaved = false;
+    }
+    callback();
+  };
+  return {
+    load: load,
+    modify: modify
+  };
+}());
+//-----------------------------------------------------------
+var elements = (function() {
   'use strict';
-	// SELECTOR
-	var $ = function(el) {
-		return document.querySelector(el);
-	};
-
-  var inputName = $('#inputName'), // INITIAL NAME INPUT
-    outputName = $('#outputName'), // PROCESSED NAME OUTPUT
-    outputShortName = $('#outputShortName'), // PROCESSED SHORT NAME OUTPUT
-    outputInHouseName = $('#outputInHouseName'), // PROCESSED IN HOUSE NAME OUTPUT
-    lenName = $('#lenName'), // NAME LENGTH
-    inputObj = $('#inputObj'), // OBJECTIVE INPUT
-    lenObj = $('#lenObj'), // OBJECTIVE LENGTH
-    showRules = $('#showRules'), // RULES BUTTON
-    divRules = $('#sectionRules'), // RULES LIST
-    shareClassesOutput = $('#shareClassesOutput'), // NAME WITH SC OUTPUT
-    shareClassesShortOutput = $('#shareClassesShortOutput'), // SHORT NAME WITH SC OUTPUT
-    shareClassesInHouseOutput = $('#shareClassesInHouseOutput'), // IN HOUSE NAME WITH SC OUTPUT
-    shareClassesInput = $('#shareClasses'),
-    btnSaveRules = $('#btnSaveRules'),
-    btnResetRules = $('#btnResetRules'),
-    btnCloseRules = $('#btnCloseRules'),
-    btnRemoveRules = $('#btnRemoveRules'),
-    rulesSaved = $('#rulesSaved'),
-    tableRules = $('#tableRules'),
-    tableBody = tableRules.querySelector('tbody'),
-    btnAddRule = $('#btnAddRule'),
-    buttonShorten = $('#buttonShorten'),
-    addRuleKey = $('#addRuleKey'),
-    addRuleValue = $('#addRuleValue'); // SHARE CLASSES INPUT
-  // sectionReplace = $('#sectionReplace'),
-  // replaceChars = $('#replaceChars');
+  // SELECTOR
+  var $ = function(el, context) {
+    context = context || document;
+    return context.querySelector(el);
+  };
+  return {
+    inputName: $('#inputName'), // INITIAL NAME INPUT
+    outputName: $('#outputName'), // PROCESSED NAME OUTPUT
+    outputShortName: $('#outputShortName'), // PROCESSED SHORT NAME OUTPUT
+    outputInHouseName: $('#outputInHouseName'), // PROCESSED IN HOUSE NAME OUTPUT
+    lenOutputName: $('#lenOutputName'), // PROCESSED NAME OUTPUT
+    lenOutputShortName: $('#lenOutputShortName'), // PROCESSED SHORT NAME OUTPUT
+    lenOutputInHouseName: $('#lenOutputInHouseName'),
+    lenName: $('#lenName'), // NAME LENGTH
+    inputObj: $('#inputObj'), // OBJECTIVE INPUT
+    lenObj: $('#lenObj'), // OBJECTIVE LENGTH
+    showRules: $('#showRules'), // RULES BUTTON
+    divRules: $('#sectionRules'), // RULES LIST
+    shareClassesOutput: $('#shareClassesOutput'), // NAME WITH SC OUTPUT
+    shareClassesShortOutput: $('#shareClassesShortOutput'), // SHORT NAME WITH SC OUTPUT
+    shareClassesInHouseOutput: $('#shareClassesInHouseOutput'), // IN HOUSE NAME WITH SC OUTPUT
+    shareClassesInput: $('#shareClasses'), // SHARE CLASSES INPUT
+    btnSaveRules: $('#btnSaveRules'),
+    btnResetRules: $('#btnResetRules'),
+    btnCloseRules: $('#btnCloseRules'),
+    btnRemoveRules: $('#btnRemoveRules'),
+    rulesSaved: $('#rulesSaved'),
+    tableRules: $('#tableRules'),
+    tableBody: $('tbody', tableRules),
+    btnAddRule: $('#btnAddRule'),
+    buttonShorten: $('#buttonShorten'),
+    addRuleKey: $('#addRuleKey'),
+    addRuleValue: $('#addRuleValue'),
+    btnObjUmlauts: $('#buttonObjUmlauts'),
+    btnObjBreaks: $('#buttonObjBreaks'),
+    linkTranslate: $('#linkTranslate'),
+    btnExportNames: $('#btnExportNames'),
+    removeSpecial: $('#removeSpecial'),
+    removeParens: $('#removeParens'),
+    shortenNames: $('#shortenNames'),
+    removeDashes: $('#removeDashes'),
+    removeWhitespace: $('#removeWhitespace')
+    // sectionReplace : $('#sectionReplace'),
+    // replaceChars : $('#replaceChars');
+  };
+}());
+//-----------------------------------------------------------
+var init = (function(lengths) {
+  'use strict';
   var rules;
   var displayLength = function(input, output, max) {
     output.innerHTML = nameChecker.lengthCheck(input);
@@ -211,15 +269,15 @@ var nameChecker = (function() {
     }
   };
 
-  function selectElementContents(el) {
+  var selectElementContents = function(el) {
     var range = document.createRange();
     range.selectNodeContents(el);
     var sel = window.getSelection();
     sel.removeAllRanges();
     sel.addRange(range);
-  }
+  };
 
-  function addShareClasses(name, sClassesIn, output, max) {
+  var addShareClasses = function(name, sClassesIn, output, max) {
     var sClasses = sClassesIn.value.length > 0 ? sClassesIn.value.split('\n') : [];
     while (output.firstChild) {
       output.removeChild(output.firstChild);
@@ -251,17 +309,15 @@ var nameChecker = (function() {
         }
       });
     }
-  }
-
+  };
   var modifyRules = function(status) {
-    if (status === 'saved') {
-      rulesSaved.innerHTML = '';
-      localStorage.localRules = JSON.stringify(rules);
-      localStorage.localRulesSaved = true;
-    } else if (status === 'changed') {
-      rulesSaved.innerHTML = '*';
-      localStorage.localRulesSaved = false;
-    }
+    loadRules.modify(rules, status, function() {
+      if (status === 'saved') {
+        elements.rulesSaved.innerHTML = '';
+      } else if (status === 'changed') {
+        elements.rulesSaved.innerHTML = '*';
+      }
+    });
   };
   var addTableRow = function(tableBody, key, value) {
     let tableRow = document.createElement('tr');
@@ -288,92 +344,64 @@ var nameChecker = (function() {
       tableBody.removeChild(tableRow);
     });
   };
-  var tableFromJSON = function(data, table) {
-    var tableBody = table.querySelector('tbody');
+  var tableFromJSON = function(data, tableBody) {
     tableBody.innerHTML = '';
     for (let prop in data) {
       if (data.hasOwnProperty(prop)) {
-          addTableRow(tableBody, prop, data[prop]);
+        addTableRow(tableBody, prop, data[prop]);
       }
     }
   };
-
-  function loadRules(callback) {
-    localStorage.localRulesSaved = true;
-    if (typeof localStorage.localRules !== 'undefined') {
-      console.log('Loading LOCAL rules!');
-      callback(localStorage.localRules);
-    } else {
-      console.log('Loading DEFAULT rules!');
-      var xobj = new XMLHttpRequest();
-      xobj.overrideMimeType("application/json");
-      xobj.open('GET', 'js/rules.json', true); // Replace 'my_data' with the path to your file
-      xobj.onreadystatechange = function() {
-        if (xobj.readyState == 4 && xobj.status == "200") {
-          // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
-          callback(xobj.responseText);
-        }
-      };
-      xobj.send(null);
-    }
-  }
-  loadRules(function(response) {
-    // Parse JSON string into object
-    rules = JSON.parse(response);
-    tableFromJSON(rules, tableRules);
-  });
-  Object.prototype.hasOwnPropertyCI = function(prop) {
-    return Object.keys(this).filter(function(v) {
-      return v.toLowerCase() === prop.toLowerCase();
-    }).length > 0;
+  var load = function() {
+    loadRules.load(function(response) {
+      rules = JSON.parse(response);
+      tableFromJSON(rules, elements.tableBody);
+    });
   };
-  btnAddRule.addEventListener('click', function(e) {
-    var key = addRuleKey.innerHTML,
-      value = addRuleValue.innerHTML;
+	load();
+  elements.btnAddRule.addEventListener('click', function(e) {
+    var key = elements.addRuleKey.innerHTML,
+      value = elements.addRuleValue.innerHTML;
     if (key !== '' && value !== '') {
       if (rules.hasOwnPropertyCI(key)) {
         alert('Rule already exists!');
       } else {
         rules[key] = value;
         modifyRules('changed');
-        addTableRow(tableBody, key, value);
-        addRuleKey.innerHTML = '';
-        addRuleValue.innerHTML = '';
+        addTableRow(elements.tableBody, key, value);
+        elements.addRuleKey.innerHTML = '';
+        elements.addRuleValue.innerHTML = '';
       }
     } else {
       alert('Please check rule input!');
     }
   });
-  addRuleKey.addEventListener('keydown', function(e) {
+  elements.addRuleKey.addEventListener('keydown', function(e) {
     if (e.which === 13) {
       e.preventDefault();
     }
   });
-  addRuleValue.addEventListener('keydown', function(e) {
+  elements.addRuleValue.addEventListener('keydown', function(e) {
     if (e.which === 13) {
       e.preventDefault();
     }
   });
-  btnRemoveRules.addEventListener('click', function(e) {
+  elements.btnRemoveRules.addEventListener('click', function(e) {
     rules = {};
-    while (tableBody.firstChild) {
-      tableBody.removeChild(tableBody.firstChild);
+    while (elements.tableBody.firstChild) {
+      elements.tableBody.removeChild(elements.tableBody.firstChild);
     }
     modifyRules('changed');
   });
-  btnSaveRules.addEventListener('click', function(e) {
+  elements.btnSaveRules.addEventListener('click', function(e) {
     modifyRules('saved');
   });
-  btnResetRules.addEventListener('click', function(e) {
+  elements.btnResetRules.addEventListener('click', function(e) {
     if (confirm('Do you want to reset the rules to the default set? All your changes will be lost!')) {
       console.log('Rules reset to DEFAULT!');
       localStorage.removeItem('localRules');
       localStorage.removeItem('localRulesSaved');
-      loadRules(function(response) {
-        // Parse JSON string into object
-        rules = JSON.parse(response);
-        tableFromJSON(rules, tableRules);
-      });
+      load();
     }
   });
   window.addEventListener('beforeunload', function(e) {
@@ -387,76 +415,76 @@ var nameChecker = (function() {
     var value = output.value;
     var length = lengths[lennum];
     displayLength(value, lenout, length);
-    addShareClasses(value, shareClassesInput, shareClassesOutput, length);
+    addShareClasses(value, elements.shareClassesInput, shareClassesOutput, length);
   };
-  inputName.addEventListener('input', function(e) {
-    displayLength(inputName.value, lenName, lengths[0]);
+  elements.inputName.addEventListener('input', function(e) {
+    displayLength(elements.inputName.value, elements.lenName, lengths[0]);
   });
-  inputName.addEventListener('keydown', function(e) {
+  elements.inputName.addEventListener('keydown', function(e) {
     if (e.which === 13) {
-      buttonShorten.click();
+      elements.buttonShorten.click();
     }
   });
-  outputName.addEventListener('input', function(e) {
-    displayAndAdd(outputName, lenOutputName, 0, shareClassesOutput);
+  elements.outputName.addEventListener('input', function(e) {
+    displayAndAdd(elements.outputName, elements.lenOutputName, 0, elements.shareClassesOutput);
   });
-  outputShortName.addEventListener('input', function(e) {
-    displayAndAdd(outputShortName, lenOutputShortName, 1, shareClassesOutputShort);
+  elements.outputShortName.addEventListener('input', function(e) {
+    displayAndAdd(elements.outputShortName, elements.lenOutputShortName, 1, elements.shareClassesShortOutput);
   });
-  outputInHouseName.addEventListener('input', function(e) {
-    displayAndAdd(outputInHouseName, lenOutputInHouseName, 2, shareClassesOutputInHouse);
+  elements.outputInHouseName.addEventListener('input', function(e) {
+    displayAndAdd(elements.outputInHouseName, elements.lenOutputInHouseName, 2, elements.shareClassesInHouseOutput);
   });
-  buttonShorten.addEventListener('click', function(e) {
-    var value = inputName.value;
+  elements.buttonShorten.addEventListener('click', function(e) {
+    var value = elements.inputName.value;
     var options = {};
-    options.replaceUmlauts = $('#removeSpecial').checked;
-    options.removeParens = $('#removeParens').checked;
-    options.shortenName = $('#shortenNames').checked;
-		options.removeDashes = $('#removeDashes').checked;
-		options.removeWhitespace = $('#removeWhitespace').checked;
-    var sClasses = shareClassesInput.value.length > 0 ? shareClassesInput.value.split('\n') : [];
+    options.replaceUmlauts = elements.removeSpecial.checked;
+    options.removeParens = elements.removeParens.checked;
+    options.shortenName = elements.shortenNames.checked;
+    options.removeDashes = elements.removeDashes.checked;
+    options.removeWhitespace = elements.removeWhitespace.checked;
+    var sClasses = elements.shareClassesInput.value.length > 0 ? elements.shareClassesInput.value.split('\n') : [];
     var shortened = nameChecker.shortenProcess(value, options, rules, sClasses, lengths);
-    outputName.value = shortened.shortenedName;
-    outputShortName.value = shortened.shortenedNameShort;
-    outputInHouseName.value = shortened.shortenedNameInHouse;
-    displayAndAdd(outputName, lenOutputName, 0, shareClassesOutput);
-    displayAndAdd(outputShortName, lenOutputShortName, 1, shareClassesOutputShort);
-    displayAndAdd(outputInHouseName, lenOutputInHouseName, 2, shareClassesOutputInHouse);
+    elements.outputName.value = shortened.shortenedName;
+    elements.outputShortName.value = shortened.shortenedNameShort;
+    elements.outputInHouseName.value = shortened.shortenedNameInHouse;
+    displayAndAdd(elements.outputName, elements.lenOutputName, 0, elements.shareClassesOutput);
+    displayAndAdd(elements.outputShortName, elements.lenOutputShortName, 1, elements.shareClassesShortOutput);
+    displayAndAdd(elements.outputInHouseName, elements.lenOutputInHouseName, 2, elements.shareClassesInHouseOutput);
   });
   //OBJECTIVE
-  inputObj.addEventListener('input', function(e) {
-    displayLength(inputObj.value, lenObj, 2000);
-    $('#linkTranslate').href = nameChecker.translateLink(inputObj.value);
+  elements.inputObj.addEventListener('input', function(e) {
+    displayLength(elements.inputObj.value, elements.lenObj, 2000);
+    elements.linkTranslate.href = nameChecker.translateLink(elements.inputObj.value);
   });
-  $('#buttonObjUmlauts').addEventListener('click', function(e) {
-    inputObj.value = nameChecker.replaceUmlauts(inputObj.value);
-    displayLength(inputObj.value, lenObj, 2000);
-    inputObj.select();
+  elements.btnObjUmlauts.addEventListener('click', function(e) {
+    elements.inputObj.value = nameChecker.replaceUmlauts(elements.inputObj.value);
+    displayLength(elements.inputObj.value, elements.lenObj, 2000);
+    elements.inputObj.select();
   });
-  $('#buttonObjBreaks').addEventListener('click', function(e) {
-    inputObj.value = nameChecker.removeBreaks(inputObj.value);
-    displayLength(inputObj.value, lenObj, 2000);
-    inputObj.select();
+  elements.btnObjBreaks.addEventListener('click', function(e) {
+    elements.inputObj.value = nameChecker.removeBreaks(elements.inputObj.value);
+    displayLength(elements.inputObj.value, elements.lenObj, 2000);
+    elements.inputObj.select();
   });
-  showRules.addEventListener('click', function(e) {
-    if (!divRules.classList.contains('section__rules--show')) {
-      divRules.classList.add('section__rules--show');
+  elements.showRules.addEventListener('click', function(e) {
+    if (!elements.divRules.classList.contains('section__rules--show')) {
+      elements.divRules.classList.add('section__rules--show');
     } else {
-      divRules.classList.remove('section__rules--show');
+      elements.divRules.classList.remove('section__rules--show');
     }
   });
-  // replaceChars.addEventListener('click', function(e) {
-  // 	if (!sectionReplace.classList.contains('section__rules--show')) {
-  // 		sectionReplace.classList.add('section__rules--show');
+  // elements.replaceChars.addEventListener('click', function(e) {
+  // 	if (!elements.sectionReplace.classList.contains('section__rules--show')) {
+  // 		elements.sectionReplace.classList.add('section__rules--show');
   // 	} else {
-  // 		sectionReplace.classList.remove('section__rules--show');
+  // 		elements.sectionReplace.classList.remove('section__rules--show');
   // 	}
   // });
-  btnCloseRules.addEventListener('click', function(e) {
-    divRules.classList.remove('section__rules--show');
+  elements.btnCloseRules.addEventListener('click', function(e) {
+    elements.divRules.classList.remove('section__rules--show');
   });
   var comfyText = (function() {
-    shareClassesInput.addEventListener('input', autoExpand);
+    elements.shareClassesInput.addEventListener('input', autoExpand);
 
     function autoExpand(e) {
       var el = e.target;
@@ -468,9 +496,9 @@ var nameChecker = (function() {
     var array = [
       ['Name', 'Short Name', 'In-House Name']
     ];
-    var nameFields = shareClassesOutput.getElementsByTagName('li');
-    var nameFieldsShort = shareClassesOutputShort.getElementsByTagName('li');
-    var nameFieldsInHouse = shareClassesOutputInHouse.getElementsByTagName('li');
+    var nameFields = elements.shareClassesOutput.getElementsByTagName('li');
+    var nameFieldsShort = elements.shareClassesOutputShort.getElementsByTagName('li');
+    var nameFieldsInHouse = elements.shareClassesOutputInHouse.getElementsByTagName('li');
     for (var i = 0; i < nameFields.length; i++) {
       let names = [];
       names[0] = (nameFields[i].innerHTML);
@@ -489,11 +517,11 @@ var nameChecker = (function() {
     link.setAttribute("href", encodedUri);
     link.setAttribute("download", "names.csv");
     document.body.appendChild(link); // Required for FF
-		console.log(link);
+    console.log(link);
     link.click();
     document.body.removeChild(link);
   };
-  $('#btnExportNames').addEventListener('click', function() {
+  elements.btnExportNames.addEventListener('click', function() {
     createCsvArray();
   });
 }([50, 30, 40]));
