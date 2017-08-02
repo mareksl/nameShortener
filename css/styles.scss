@@ -448,10 +448,10 @@ body {
 	padding: 1rem;
 	transition: 1s;
 	transform: translateX(0);
+	opacity: 0;
 	border: 2px dashed $tr-orange;
 	border-radius: 4px;
 	background-color: $tr-white;
-	opacity: 0;
 	box-shadow: 0 2px 2px $tr-darkgray;
 }
 

@@ -563,10 +563,10 @@ body {
   padding: 1rem;
   transition: 1s;
   transform: translateX(0);
+  opacity: 0;
   border: 2px dashed #FF8000;
   border-radius: 4px;
   background-color: #fff;
-  opacity: 0;
   box-shadow: 0 2px 2px #4D4D4D; }
 
 .notification--visible {
