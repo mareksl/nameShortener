@@ -6,21 +6,15 @@ var animation = (function() {
     notification.appendChild(text);
     notification.classList.add('notification');
     document.body.appendChild(notification);
-    var promise = new Promise(function(resolve, reject) {
       setTimeout(function() {
         notification.classList.add('notification--visible');
       }, 0);
       setTimeout(function() {
         notification.classList.remove('notification--visible');
+        notification.addEventListener("transitionend", function(event) {
+          notification.remove();
+        });
       }, 2000);
-      setTimeout(function() {
-        resolve(notification);
-      }, 3000);
-      // slideInOut(notification);
-    });
-    promise.then(function(result) {
-      notification.remove();
-    });
   };
   return {
     notify: notify
@@ -204,7 +198,7 @@ var loadRules = (function() {
       animation.notify('Loading local rules!');
       callback(localStorage.localRules);
     } else {
-			animation.notify('Loading default rules!');
+      animation.notify('Loading default rules!');
       var xobj = new XMLHttpRequest();
       xobj.overrideMimeType("application/json");
       xobj.open('GET', 'js/rules.json', true); // Replace 'my_data' with the path to your file
@@ -424,7 +418,7 @@ var init = (function(lengths) {
   });
   elements.btnResetRules.addEventListener('click', function(e) {
     if (confirm('Do you want to reset the rules to the default set? All your changes will be lost!')) {
-      console.log('Rules reset to DEFAULT!');
+      animation.notify('Rules reset to default!');
       localStorage.removeItem('localRules');
       localStorage.removeItem('localRulesSaved');
       load();
@@ -543,7 +537,6 @@ var init = (function(lengths) {
     link.setAttribute("href", encodedUri);
     link.setAttribute("download", "names.csv");
     document.body.appendChild(link); // Required for FF
-    console.log(link);
     link.click();
     document.body.removeChild(link);
   };
