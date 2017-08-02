@@ -1,4 +1,32 @@
 /*jshint esversion: 6 */
+var animation = (function() {
+  var notify = function(string) {
+    var notification = document.createElement('div');
+    var text = document.createTextNode(string);
+    notification.appendChild(text);
+    notification.classList.add('notification');
+    document.body.appendChild(notification);
+    var promise = new Promise(function(resolve, reject) {
+      setTimeout(function() {
+        notification.classList.add('notification--visible');
+      }, 0);
+      setTimeout(function() {
+        notification.classList.remove('notification--visible');
+      }, 2000);
+      setTimeout(function() {
+        resolve(notification);
+      }, 3000);
+      // slideInOut(notification);
+    });
+    promise.then(function(result) {
+      notification.remove();
+    });
+  };
+  return {
+    notify: notify
+  };
+}());
+//-----------------------------------------------------------
 var nameChecker = (function() {
   'use strict';
   // CHECK LENGTH
@@ -173,10 +201,10 @@ var loadRules = (function() {
   var load = function(callback) {
     localStorage.localRulesSaved = true;
     if (typeof localStorage.localRules !== 'undefined') {
-      console.log('Loading LOCAL rules!');
+      animation.notify('Loading local rules!');
       callback(localStorage.localRules);
     } else {
-      console.log('Loading DEFAULT rules!');
+			animation.notify('Loading default rules!');
       var xobj = new XMLHttpRequest();
       xobj.overrideMimeType("application/json");
       xobj.open('GET', 'js/rules.json', true); // Replace 'my_data' with the path to your file
@@ -268,7 +296,6 @@ var init = (function(lengths) {
       }
     }
   };
-
   var selectElementContents = function(el) {
     var range = document.createRange();
     range.selectNodeContents(el);
@@ -276,7 +303,6 @@ var init = (function(lengths) {
     sel.removeAllRanges();
     sel.addRange(range);
   };
-
   var addShareClasses = function(name, sClassesIn, output, max) {
     var sClasses = sClassesIn.value.length > 0 ? sClassesIn.value.split('\n') : [];
     while (output.firstChild) {
@@ -303,9 +329,9 @@ var init = (function(lengths) {
         try {
           let success = document.execCommand('copy');
           let msg = success ? 'successful' : 'unsuccessful';
-          console.log('Copying text command was ' + msg);
+          animation.notify('Copying text was ' + msg + '!');
         } catch (e) {
-          console.log('Unable to copy!');
+          animation.notify('Unable to copy!');
         }
       });
     }
@@ -358,7 +384,7 @@ var init = (function(lengths) {
       tableFromJSON(rules, elements.tableBody);
     });
   };
-	load();
+  load();
   elements.btnAddRule.addEventListener('click', function(e) {
     var key = elements.addRuleKey.innerHTML,
       value = elements.addRuleValue.innerHTML;

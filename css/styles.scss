@@ -1,6 +1,10 @@
 @import 'reset';
 @import 'typography';
 
+body {
+	overflow-x: hidden;
+}
+
 .header {
 	width: 100%;
 	padding: 1rem;
@@ -432,4 +436,22 @@
 	.footer {
 		position: relative;
 	}
+}
+
+.notification {
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: flex;
+	margin: 2rem;
+	padding: 1rem;
+	transition: 1s;
+	transform: translateX(calc(-100% - 2rem));
+	border: 2px dashed $tr-orange;
+	border-radius: 4px;
+	background-color: $tr-white;
+}
+
+.notification--visible {
+	transform: translateX(0);
 }
