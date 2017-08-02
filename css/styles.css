@@ -555,18 +555,22 @@ body {
     position: relative; } }
 .notification {
   position: absolute;
-  left: 0;
   top: 0;
+  right: 100%;
   display: flex;
+  width: 500px;
   margin: 2rem;
   padding: 1rem;
   transition: 1s;
-  transform: translateX(calc(-100% - 2rem));
+  transform: translateX(0);
+  opacity: 0;
   border: 2px dashed #FF8000;
   border-radius: 4px;
-  background-color: #fff; }
+  background-color: #fff;
+  box-shadow: 0 2px 2px #4D4D4D; }
 
 .notification--visible {
-  transform: translateX(0); }
+  transform: translateX(calc(100% + 4rem));
+  opacity: 1; }
 
 /*# sourceMappingURL=styles.css.map */
