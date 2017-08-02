@@ -1,20 +1,26 @@
 /*jshint esversion: 6 */
 var animation = (function() {
   var notify = function(string) {
+    var prevNotes = document.querySelectorAll('.notification');
+    for (let i = 0; i < prevNotes.length; ++i) {
+      let topValue = isNaN(parseInt(prevNotes[i].style.top)) ? 0 : parseInt(prevNotes[i].style.top);
+      topValue += 76;
+      prevNotes[i].style.top = topValue + 'px';
+    }
     var notification = document.createElement('div');
     var text = document.createTextNode(string);
     notification.appendChild(text);
     notification.classList.add('notification');
     document.body.appendChild(notification);
-      setTimeout(function() {
-        notification.classList.add('notification--visible');
-      }, 0);
-      setTimeout(function() {
-        notification.classList.remove('notification--visible');
-        notification.addEventListener("transitionend", function(event) {
-          notification.remove();
-        });
-      }, 2000);
+    setTimeout(function() {
+      notification.classList.add('notification--visible');
+    }, 10);
+    setTimeout(function() {
+      notification.classList.remove('notification--visible');
+      notification.addEventListener("transitionend", function(event) {
+        notification.remove();
+      });
+    }, 2000);
   };
   return {
     notify: notify
@@ -536,7 +542,7 @@ var init = (function(lengths) {
     var link = document.createElement("a");
     link.setAttribute("href", encodedUri);
     link.setAttribute("download", "names.csv");
-		animation.notify('Exporting to CSV!');
+    animation.notify('Exporting to CSV!');
     document.body.appendChild(link); // Required for FF
     link.click();
     document.body.removeChild(link);
