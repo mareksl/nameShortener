@@ -424,7 +424,7 @@ body {
 
 	&:hover {
 		transform: scale(1.2);
-		box-shadow: 0 0 16px $tr-orange;
+		box-shadow: 0 0 8px $tr-orange;
 	}
 }
 
@@ -451,7 +451,7 @@ body {
 	border: 2px dashed $tr-orange;
 	border-radius: 4px;
 	background-color: $tr-white;
-	box-shadow: 0 2px 2px $tr-darkgray;
+	box-shadow: 0 2px 8px $tr-orange;
 }
 
 .notification--visible {
