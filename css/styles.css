@@ -561,6 +561,7 @@ body {
   padding: 1rem;
   transition: 1s;
   transform: translateX(0);
+  white-space: nowrap;
   opacity: 0;
   border: 2px dashed #FF8000;
   border-radius: 4px;
