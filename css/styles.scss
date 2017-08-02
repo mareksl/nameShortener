@@ -442,12 +442,11 @@ body {
 	position: absolute;
 	top: 0;
 	right: 100%;
-	display: flex;
-	width: 500px;
 	margin: 2rem;
 	padding: 1rem;
 	transition: 1s;
 	transform: translateX(0);
+	white-space: nowrap;
 	opacity: 0;
 	border: 2px dashed $tr-orange;
 	border-radius: 4px;
