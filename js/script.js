@@ -252,7 +252,7 @@ var loadRules = (function() {
             animation.notify('Default rules loaded!', 'success');
           } else {
             createRules("{}");
-            animation.notify('No default rules found! ', 'warning');
+            animation.notify('No default rules found! Please add own rules.', 'error');
           }
         }
       };
