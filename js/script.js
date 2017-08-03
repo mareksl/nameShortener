@@ -32,12 +32,12 @@ var animation = (function() {
         break;
       case 'error':
         notification.classList.add('notification--error');
-				var close = document.createElement('span');
-				close.classList.add('notification__close');
-				close.addEventListener('click', function() {
-					fadeOut(notification);
-				});
-						notification.appendChild(close);
+        var close = document.createElement('span');
+        close.classList.add('notification__close');
+        close.addEventListener('click', function() {
+          fadeOut(notification);
+        });
+        notification.appendChild(close);
         break;
       default:
         setTimeout(function() {
@@ -382,7 +382,7 @@ var init = (function(lengths) {
   var modifyRules = function(status) {
     loadRules.modify(rules, status, function() {
       if (status === 'saved') {
-				animation.notify('Local rules saved!', 'success')
+        animation.notify('Local rules saved!', 'success')
         elements.rulesSaved.innerHTML = '';
       } else if (status === 'changed') {
         elements.rulesSaved.innerHTML = '*';
