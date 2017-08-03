@@ -227,9 +227,8 @@ var loadRules = (function() {
           createRules(xobj.responseText);
           animation.notify('Default rules loaded!', 'success');
         } else {
-          animation.notify('No default rules found!', 'warning');
+          animation.notify('No default rules found! ' + xobj.readyState, 'warning');
           createRules("{}");
-          animation.notify('Empty rules loaded!', 'success');
         }
       };
       xobj.send(null);
