@@ -3,23 +3,23 @@ var animation = (function() {
   var notify = function(string, type) {
     var fadeOut = function(el) {
       el.classList.remove('notification--visible');
+			var done = false;
       el.addEventListener("transitionend", function(event) {
-        el.remove();
-        var prevNotes = document.querySelectorAll('.notification');
-        var arr = [];
-        for (var i = prevNotes.length; i--; arr.unshift(prevNotes[i]));
-        arr.reverse();
-        for (let i = 0; i < arr.length; ++i) {
-          arr[i].style.top = i * 76 + 'px';
+        if (done === false) {
+          var prevNotes = document.querySelectorAll('.notification');
+          var arr = [];
+          for (var i = prevNotes.length; i--; arr.unshift(prevNotes[i]));
+          arr.reverse();
+          for (let i = arr.indexOf(el); i < arr.length; i++) {
+            let topValue = isNaN(parseInt(arr[i].style.top)) ? 0 : parseInt(arr[i].style.top);
+            topValue -= notification.computedHeight;
+            arr[i].style.top = topValue + 'px';
+          }
+          el.remove();
+					done = true;
         }
       });
     };
-    var prevNotes = document.querySelectorAll('.notification');
-    for (let i = 0; i < prevNotes.length; ++i) {
-      let topValue = isNaN(parseInt(prevNotes[i].style.top)) ? 0 : parseInt(prevNotes[i].style.top);
-      topValue += 76;
-      prevNotes[i].style.top = topValue + 'px';
-    }
     var notification = document.createElement('div');
     var text = document.createTextNode(string);
     notification.appendChild(text);
@@ -52,6 +52,13 @@ var animation = (function() {
         }, 2000);
     }
     document.body.appendChild(notification);
+    notification.computedHeight = notification.offsetHeight + parseFloat(window.getComputedStyle(notification, null).getPropertyValue('margin-top')) / 2;
+    var prevNotes = document.querySelectorAll('.notification');
+    for (let i = 0; i < prevNotes.length - 1; ++i) {
+      let topValue = isNaN(parseInt(prevNotes[i].style.top)) ? 0 : parseInt(prevNotes[i].style.top);
+      topValue += notification.computedHeight;
+      prevNotes[i].style.top = topValue + 'px';
+    }
     setTimeout(function() {
       notification.classList.add('notification--visible');
     }, 0);
@@ -389,7 +396,7 @@ var init = (function(lengths) {
   var modifyRules = function(status) {
     loadRules.modify(rules, status, function() {
       if (status === 'saved') {
-        animation.notify('Local rules saved!', 'success')
+        animation.notify('Local rules saved!', 'success');
         elements.rulesSaved.innerHTML = '';
       } else if (status === 'changed') {
         elements.rulesSaved.innerHTML = '*';
