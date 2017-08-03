@@ -440,6 +440,8 @@ body {
 
 .notification {
 	position: fixed;
+	display: flex;
+	align-items: center;
 	top: 0;
 	right: 100%;
 	margin: 2rem;
@@ -469,29 +471,27 @@ body {
 	box-shadow: 0 0 2px $tr-lightorange;
 
 	&:before {
+		margin-right: .5rem;
 		font-weight: bold;
-		content: 'Warning: ';
+		content: 'Warning:';
 	}
 }
 
 .notification--error {
-	padding-right: 1.75rem;
 	border-color: $tr-darkorange;
 	box-shadow: 0 0 2px $tr-darkorange;
 
 	&:before {
+		margin-right: .5rem;
 		font-weight: bold;
-		content: 'Error: ';
+		content: 'Error:';
 	}
 }
 
 .notification__close {
-	font-size: .6rem;
-	font-weight: lighter;
-	position: absolute;
-	top: .5rem;
-	right: .5rem;
+	font-size: .7rem;
 	cursor: pointer;
+	margin-left: 1rem;
 
 	&:hover {
 		color: $tr-orange;

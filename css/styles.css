@@ -555,6 +555,8 @@ body {
     position: relative; } }
 .notification {
   position: fixed;
+  display: flex;
+  align-items: center;
   top: 0;
   right: 100%;
   margin: 2rem;
@@ -580,24 +582,22 @@ body {
   border-color: #ffa100;
   box-shadow: 0 0 2px #ffa100; }
   .notification--warning:before {
+    margin-right: .5rem;
     font-weight: bold;
-    content: 'Warning: '; }
+    content: 'Warning:'; }
 
 .notification--error {
-  padding-right: 1.75rem;
   border-color: #ff5900;
   box-shadow: 0 0 2px #ff5900; }
   .notification--error:before {
+    margin-right: .5rem;
     font-weight: bold;
-    content: 'Error: '; }
+    content: 'Error:'; }
 
 .notification__close {
-  font-size: .6rem;
-  font-weight: lighter;
-  position: absolute;
-  top: .5rem;
-  right: .5rem;
-  cursor: pointer; }
+  font-size: .7rem;
+  cursor: pointer;
+  margin-left: 1rem; }
   .notification__close:hover {
     color: #FF8000;
     text-shadow: 0 0 2px #FF8000; }

@@ -382,6 +382,7 @@ var init = (function(lengths) {
   var modifyRules = function(status) {
     loadRules.modify(rules, status, function() {
       if (status === 'saved') {
+				animation.notify('Local rules saved!', 'success')
         elements.rulesSaved.innerHTML = '';
       } else if (status === 'changed') {
         elements.rulesSaved.innerHTML = '*';
