@@ -167,6 +167,7 @@ body {
 	&:focus {
 		border: 2px solid $tr-orange;
 		outline: none;
+			padding: calc(.5rem - 1px);
 	}
 }
 

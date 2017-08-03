@@ -339,7 +339,8 @@ body {
   border-radius: 4px; }
   .textarea:focus {
     border: 2px solid #FF8000;
-    outline: none; }
+    outline: none;
+    padding: calc(.5rem - 1px); }
 
 .textarea--expandable {
   resize: none; }
