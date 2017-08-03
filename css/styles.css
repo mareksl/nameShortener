@@ -563,13 +563,25 @@ body {
   transform: translateX(0);
   white-space: nowrap;
   opacity: 0;
-  border: 2px dashed #FF8000;
+  border: 1px solid #FF8000;
   border-radius: 4px;
   background-color: #fff;
-  box-shadow: 0 2px 8px #FF8000; }
+  box-shadow: 0 0 2px #FF8000; }
 
 .notification--visible {
   transform: translateX(calc(100% + 4rem));
   opacity: 1; }
+
+.notification--success {
+  box-shadow: 0 0 2px #387C2B;
+  border-color: #387C2B; }
+
+.notification--warning {
+  box-shadow: 0 0 2px #ffa100;
+  border-color: #ffa100; }
+
+.notification--error {
+  box-shadow: 0 0 2px #ff5900;
+  border-color: #ff5900; }
 
 /*# sourceMappingURL=styles.css.map */

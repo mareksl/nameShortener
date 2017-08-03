@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */
 var animation = (function() {
-  var notify = function(string) {
+  var notify = function(string, type) {
     var prevNotes = document.querySelectorAll('.notification');
     for (let i = 0; i < prevNotes.length; ++i) {
       let topValue = isNaN(parseInt(prevNotes[i].style.top)) ? 0 : parseInt(prevNotes[i].style.top);
@@ -11,10 +11,21 @@ var animation = (function() {
     var text = document.createTextNode(string);
     notification.appendChild(text);
     notification.classList.add('notification');
+    switch (type) {
+      case 'success':
+			notification.classList.add('notification--success');
+        break;
+      case 'warning':
+			notification.classList.add('notification--warning');
+        break;
+      case 'error':
+			notification.classList.add('notification--error');
+        break;
+    }
     document.body.appendChild(notification);
     setTimeout(function() {
       notification.classList.add('notification--visible');
-    }, 10);
+    }, 0);
     setTimeout(function() {
       notification.classList.remove('notification--visible');
       notification.addEventListener("transitionend", function(event) {
@@ -198,12 +209,14 @@ var nameChecker = (function() {
 }());
 //-----------------------------------------------------------
 var loadRules = (function() {
-  var load = function(callback) {
+  var load = function(createRules) {
     localStorage.localRulesSaved = true;
     if (typeof localStorage.localRules !== 'undefined') {
       animation.notify('Loading local rules!');
-      callback(localStorage.localRules);
+      createRules(localStorage.localRules);
+      animation.notify('Local rules loaded!', 'success');
     } else {
+      animation.notify('No local rules found!', 'warning');
       animation.notify('Loading default rules!');
       var xobj = new XMLHttpRequest();
       xobj.overrideMimeType("application/json");
@@ -211,7 +224,12 @@ var loadRules = (function() {
       xobj.onreadystatechange = function() {
         if (xobj.readyState == 4 && xobj.status == "200") {
           // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
-          callback(xobj.responseText);
+          createRules(xobj.responseText);
+          animation.notify('Default rules loaded!', 'success');
+        } else {
+          animation.notify('No default rules found!', 'warning');
+          createRules("{}");
+          animation.notify('Empty rules loaded!', 'success');
         }
       };
       xobj.send(null);
@@ -329,9 +347,10 @@ var init = (function(lengths) {
         try {
           let success = document.execCommand('copy');
           let msg = success ? 'successful' : 'unsuccessful';
-          animation.notify('Copying text was ' + msg + '!');
+					let status = success ? 'success' : 'error';
+          animation.notify('Copying text was ' + msg + '!', status);
         } catch (e) {
-          animation.notify('Unable to copy!');
+          animation.notify('Unable to copy!', 'error');
         }
       });
     }
