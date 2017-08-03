@@ -448,13 +448,28 @@ body {
 	transform: translateX(0);
 	white-space: nowrap;
 	opacity: 0;
-	border: 2px dashed $tr-orange;
+	border: 1px solid $tr-orange;
 	border-radius: 4px;
 	background-color: $tr-white;
-	box-shadow: 0 2px 8px $tr-orange;
+	box-shadow: 0 0 2px $tr-orange;
 }
 
 .notification--visible {
 	transform: translateX(calc(100% + 4rem));
 	opacity: 1;
+}
+
+.notification--success {
+	box-shadow: 0 0 2px $tr-darkgreen;
+	border-color: $tr-darkgreen;
+}
+
+.notification--warning {
+	box-shadow: 0 0 2px $tr-lightorange;
+	border-color: $tr-lightorange;
+}
+
+.notification--error {
+	box-shadow: 0 0 2px $tr-darkorange;
+	border-color: $tr-darkorange;
 }
