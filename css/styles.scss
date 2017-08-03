@@ -460,16 +460,45 @@ body {
 }
 
 .notification--success {
-	box-shadow: 0 0 2px $tr-darkgreen;
 	border-color: $tr-darkgreen;
+	box-shadow: 0 0 2px $tr-darkgreen;
 }
 
 .notification--warning {
-	box-shadow: 0 0 2px $tr-lightorange;
 	border-color: $tr-lightorange;
+	box-shadow: 0 0 2px $tr-lightorange;
+
+	&:before {
+		font-weight: bold;
+		content: 'Warning: ';
+	}
 }
 
 .notification--error {
-	box-shadow: 0 0 2px $tr-darkorange;
+	padding-right: 1.75rem;
 	border-color: $tr-darkorange;
+	box-shadow: 0 0 2px $tr-darkorange;
+
+	&:before {
+		font-weight: bold;
+		content: 'Error: ';
+	}
+}
+
+.notification__close {
+	font-size: .6rem;
+	font-weight: lighter;
+	position: absolute;
+	top: .5rem;
+	right: .5rem;
+	cursor: pointer;
+
+	&:hover {
+		color: $tr-orange;
+		text-shadow: 0 0 2px $tr-orange;
+	}
+
+	&:after {
+		content: '\274c';
+	}
 }
