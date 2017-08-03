@@ -226,7 +226,7 @@ var loadRules = (function() {
             createRules(xobj.responseText);
             animation.notify('Default rules loaded!', 'success');
           } else {
-						createRules("{}");
+            createRules("{}");
             animation.notify('No default rules found! ', 'warning');
           }
         }
@@ -537,33 +537,37 @@ var init = (function(lengths) {
     }
   })();
   var createCsvArray = function() {
-    var array = [
-      ['Name', 'Short Name', 'In-House Name']
-    ];
     var nameFields = elements.shareClassesOutput.getElementsByTagName('li');
     var nameFieldsShort = elements.shareClassesShortOutput.getElementsByTagName('li');
     var nameFieldsInHouse = elements.shareClassesInHouseOutput.getElementsByTagName('li');
-    for (var i = 0; i < nameFields.length; i++) {
-      let names = [];
-      names[0] = (nameFields[i].innerHTML);
-      names[1] = (nameFieldsShort[i].innerHTML);
-      names[2] = (nameFieldsInHouse[i].innerHTML);
-      array.push(names);
+    if (nameFields.length === 0 && nameFieldsShort.length === 0 && nameFieldsInHouse.length === 0) {
+      animation.notify('Nothing to export!', 'error');
+    } else {
+      var array = [
+        ['Name', 'Short Name', 'In-House Name']
+      ];
+      for (var i = 0; i < nameFields.length; i++) {
+        let names = [];
+        names[0] = (nameFields[i].innerHTML);
+        names[1] = (nameFieldsShort[i].innerHTML);
+        names[2] = (nameFieldsInHouse[i].innerHTML);
+        array.push(names);
+      }
+      var lineArray = [];
+      array.forEach(function(infoArray, index) {
+        var line = infoArray.join(",");
+        lineArray.push(index == 0 ? "data:text/csv;charset=utf-8," + line : line);
+      });
+      var csvContent = lineArray.join("\n");
+      var encodedUri = encodeURI(csvContent);
+      var link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", "names.csv");
+      animation.notify('Exporting to CSV!');
+      document.body.appendChild(link); // Required for FF
+      link.click();
+      document.body.removeChild(link);
     }
-    var lineArray = [];
-    array.forEach(function(infoArray, index) {
-      var line = infoArray.join(",");
-      lineArray.push(index == 0 ? "data:text/csv;charset=utf-8," + line : line);
-    });
-    var csvContent = lineArray.join("\n");
-    var encodedUri = encodeURI(csvContent);
-    var link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "names.csv");
-    animation.notify('Exporting to CSV!');
-    document.body.appendChild(link); // Required for FF
-    link.click();
-    document.body.removeChild(link);
   };
   elements.btnExportNames.addEventListener('click', function() {
     createCsvArray();
