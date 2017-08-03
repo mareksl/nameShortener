@@ -5,6 +5,13 @@ var animation = (function() {
       el.classList.remove('notification--visible');
       el.addEventListener("transitionend", function(event) {
         el.remove();
+        var prevNotes = document.querySelectorAll('.notification');
+        var arr = [];
+        for (var i = prevNotes.length; i--; arr.unshift(prevNotes[i]));
+        arr.reverse();
+        for (let i = 0; i < arr.length; ++i) {
+          arr[i].style.top = i * 76 + 'px';
+        }
       });
     };
     var prevNotes = document.querySelectorAll('.notification');
