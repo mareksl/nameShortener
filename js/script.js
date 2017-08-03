@@ -1,6 +1,12 @@
 /*jshint esversion: 6 */
 var animation = (function() {
   var notify = function(string, type) {
+    var fadeOut = function(el) {
+      el.classList.remove('notification--visible');
+      el.addEventListener("transitionend", function(event) {
+        el.remove();
+      });
+    };
     var prevNotes = document.querySelectorAll('.notification');
     for (let i = 0; i < prevNotes.length; ++i) {
       let topValue = isNaN(parseInt(prevNotes[i].style.top)) ? 0 : parseInt(prevNotes[i].style.top);
@@ -14,24 +20,34 @@ var animation = (function() {
     switch (type) {
       case 'success':
         notification.classList.add('notification--success');
+        setTimeout(function() {
+          fadeOut(notification);
+        }, 2000);
         break;
       case 'warning':
         notification.classList.add('notification--warning');
+        setTimeout(function() {
+          fadeOut(notification);
+        }, 2000);
         break;
       case 'error':
         notification.classList.add('notification--error');
+				var close = document.createElement('span');
+				close.classList.add('notification__close');
+				close.addEventListener('click', function() {
+					fadeOut(notification);
+				});
+						notification.appendChild(close);
         break;
+      default:
+        setTimeout(function() {
+          fadeOut(notification);
+        }, 2000);
     }
     document.body.appendChild(notification);
     setTimeout(function() {
       notification.classList.add('notification--visible');
     }, 0);
-    setTimeout(function() {
-      notification.classList.remove('notification--visible');
-      notification.addEventListener("transitionend", function(event) {
-        notification.remove();
-      });
-    }, 2000);
   };
   return {
     notify: notify
@@ -185,6 +201,15 @@ var nameChecker = (function() {
     shortenedName = options.replaceUmlauts ? replaceUmlauts(shortenedName) : shortenedName;
     // shorten name
     shortenedName = options.shortenName ? shortenName(shortenedName, shareClasses, rules, lengths) : [shortenedName, shortenedName, shortenedName];
+    if (shortenedName[0].length > lengths[0]) {
+      animation.notify('Couldn\'t fully shorten Name.', 'warning');
+    }
+    if (shortenedName[1].length > lengths[1]) {
+      animation.notify('Couldn\'t fully shorten Short Name.', 'warning');
+    }
+    if (shortenedName[2].length > lengths[2]) {
+      animation.notify('Couldn\'t fully shorten In-House Name.', 'warning');
+    }
     return {
       shortenedName: shortenedName[0],
       shortenedNameShort: shortenedName[1],

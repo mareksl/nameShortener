@@ -573,15 +573,35 @@ body {
   opacity: 1; }
 
 .notification--success {
-  box-shadow: 0 0 2px #387C2B;
-  border-color: #387C2B; }
+  border-color: #387C2B;
+  box-shadow: 0 0 2px #387C2B; }
 
 .notification--warning {
-  box-shadow: 0 0 2px #ffa100;
-  border-color: #ffa100; }
+  border-color: #ffa100;
+  box-shadow: 0 0 2px #ffa100; }
+  .notification--warning:before {
+    font-weight: bold;
+    content: 'Warning: '; }
 
 .notification--error {
-  box-shadow: 0 0 2px #ff5900;
-  border-color: #ff5900; }
+  padding-right: 1.75rem;
+  border-color: #ff5900;
+  box-shadow: 0 0 2px #ff5900; }
+  .notification--error:before {
+    font-weight: bold;
+    content: 'Error: '; }
+
+.notification__close {
+  font-size: .6rem;
+  font-weight: lighter;
+  position: absolute;
+  top: .5rem;
+  right: .5rem;
+  cursor: pointer; }
+  .notification__close:hover {
+    color: #FF8000;
+    text-shadow: 0 0 2px #FF8000; }
+  .notification__close:after {
+    content: '\274c'; }
 
 /*# sourceMappingURL=styles.css.map */
