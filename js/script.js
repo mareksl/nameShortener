@@ -5,6 +5,13 @@ var animation = (function() {
       el.classList.remove('notification--visible');
       el.addEventListener("transitionend", function(event) {
         el.remove();
+        var prevNotes = document.querySelectorAll('.notification');
+        var arr = [];
+        for (var i = prevNotes.length; i--; arr.unshift(prevNotes[i]));
+        arr.reverse();
+        for (let i = 0; i < arr.length; ++i) {
+          arr[i].style.top = i * 76 + 'px';
+        }
       });
     };
     var prevNotes = document.querySelectorAll('.notification');
@@ -32,12 +39,12 @@ var animation = (function() {
         break;
       case 'error':
         notification.classList.add('notification--error');
-				var close = document.createElement('span');
-				close.classList.add('notification__close');
-				close.addEventListener('click', function() {
-					fadeOut(notification);
-				});
-						notification.appendChild(close);
+        var close = document.createElement('span');
+        close.classList.add('notification__close');
+        close.addEventListener('click', function() {
+          fadeOut(notification);
+        });
+        notification.appendChild(close);
         break;
       default:
         setTimeout(function() {
@@ -252,7 +259,7 @@ var loadRules = (function() {
             animation.notify('Default rules loaded!', 'success');
           } else {
             createRules("{}");
-            animation.notify('No default rules found! ', 'warning');
+            animation.notify('No default rules found! Please add own rules.', 'error');
           }
         }
       };
@@ -382,7 +389,7 @@ var init = (function(lengths) {
   var modifyRules = function(status) {
     loadRules.modify(rules, status, function() {
       if (status === 'saved') {
-				animation.notify('Local rules saved!', 'success')
+        animation.notify('Local rules saved!', 'success')
         elements.rulesSaved.innerHTML = '';
       } else if (status === 'changed') {
         elements.rulesSaved.innerHTML = '*';
