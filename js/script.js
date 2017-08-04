@@ -46,6 +46,7 @@ var animation = (function() {
         span.appendChild(close);
         break;
       case 'confirm':
+        notification.classList.add('notification--confirm');
         var buttons = document.createElement('div');
         buttons.classList.add('notification__buttons');
         var buttonOK = document.createElement('button');
@@ -490,11 +491,13 @@ var init = (function(lengths) {
     }
   });
   elements.btnRemoveRules.addEventListener('click', function(e) {
-    rules = {};
-    while (elements.tableBody.firstChild) {
-      elements.tableBody.removeChild(elements.tableBody.firstChild);
-    }
-    modifyRules('changed');
+    animation.notify('Do you want to remove all rules?', 'confirm', function() {
+      rules = {};
+      while (elements.tableBody.firstChild) {
+        elements.tableBody.removeChild(elements.tableBody.firstChild);
+      }
+      modifyRules('changed');
+    });
   });
   elements.btnSaveRules.addEventListener('click', function(e) {
     modifyRules('saved');

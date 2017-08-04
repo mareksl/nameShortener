@@ -99,7 +99,7 @@ body {
 	padding: 0 .5rem;
 	cursor: pointer;
 	color: $tr-orange;
-	border: 2px solid $tr-orange;
+	border: 1px solid $tr-orange;
 	border-radius: 4px;
 	background-color: $tr-white;
 
@@ -457,10 +457,10 @@ body {
 	transform: translateX(0);
 	white-space: nowrap;
 	opacity: 0;
-	border: 1px solid $tr-orange;
+	border: 1px solid $tr-lightorange;
 	border-radius: 4px;
 	background-color: $tr-white;
-	box-shadow: 0 0 2px $tr-orange;
+	box-shadow: 0 0 2px $tr-lightorange;
 	align-items: center;
 }
 
@@ -471,6 +471,7 @@ body {
 }
 
 .notification__buttons {
+	margin-top: .5rem;
 	display: flex;
 	flex-flow: row nowrap;
 }
@@ -486,8 +487,8 @@ body {
 }
 
 .notification--warning {
-	border-color: $tr-lightorange;
-	box-shadow: 0 0 2px $tr-lightorange;
+	border-color: $tr-orange;
+	box-shadow: 0 0 2px $tr-orange;
 
 	.notification__message {
 		&:before {
@@ -499,8 +500,9 @@ body {
 }
 
 .notification--error {
-	animation: pulse 2s infinite;
+	animation: pulse__warning 2s infinite;
 	border-color: $tr-darkorange;
+	font-weight: bold;
 
 	.notification__message {
 		&:before {
@@ -510,7 +512,9 @@ body {
 		}
 	}
 }
-
+.notification--confirm {
+	animation: pulse 2s infinite;
+}
 .notification__close {
 	font-size: .7rem;
 	margin-left: 1rem;
@@ -526,6 +530,19 @@ body {
 	}
 }
 @keyframes pulse {
+	0% {
+		box-shadow: 0 0 0 0 rgba($tr-lightorange, 1);
+	}
+
+	70% {
+		box-shadow: 0 0 0 8px rgba($tr-lightorange, 0);
+	}
+
+	100% {
+		box-shadow: 0 0 0 0 rgba($tr-lightorange, 0);
+	}
+}
+@keyframes pulse__warning {
 	0% {
 		box-shadow: 0 0 0 0 rgba($tr-darkorange, 1);
 	}
