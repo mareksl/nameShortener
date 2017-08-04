@@ -312,8 +312,7 @@ body {
 .button-link {
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center; }
+  justify-content: center; }
   .button-link:active, .button-link:focus {
     text-decoration: none; }
   .button-link:hover {
