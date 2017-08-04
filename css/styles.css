@@ -310,9 +310,13 @@ body {
   margin: 0; }
 
 .button-link {
-  line-height: 1.7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center; }
-  .button-link:active, .button-link:focus, .button-link:hover {
+  .button-link:active, .button-link:focus {
+    text-decoration: none; }
+  .button-link:hover {
     text-decoration: none; }
 
 .button--narrow {
