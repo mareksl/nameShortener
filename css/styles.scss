@@ -129,11 +129,14 @@ body {
 }
 
 .button-link {
-	line-height: 1.7;
-	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
 	&:active,
-	&:focus,
+	&:focus {
+		text-decoration: none;
+	}
 	&:hover {
 		text-decoration: none;
 	}
