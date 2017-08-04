@@ -145,8 +145,8 @@ body {
 
 .button--narrow {
 	min-width: 80px;
-	margin-left: 10px;
 	margin-right: 10px;
+	margin-left: 10px;
 }
 
 .input-label {
@@ -454,7 +454,6 @@ body {
 	top: 0;
 	right: 100%;
 	display: flex;
-	flex-flow: column;
 	margin: 2rem;
 	padding: 1rem;
 	transition: 1s;
@@ -466,17 +465,18 @@ body {
 	background-color: $tr-white;
 	box-shadow: 0 0 2px $tr-lightorange;
 	align-items: center;
+	flex-flow: column;
 }
 
 .notification__message {
 	display: flex;
-	flex-flow: row;
 	align-items: center;
+	flex-flow: row;
 }
 
 .notification__buttons {
-	margin-top: .5rem;
 	display: flex;
+	margin-top: .5rem;
 	flex-flow: row nowrap;
 }
 
@@ -504,9 +504,9 @@ body {
 }
 
 .notification--error {
+	font-weight: bold;
 	animation: pulse__warning 2s infinite;
 	border-color: $tr-darkorange;
-	font-weight: bold;
 
 	.notification__message {
 		&:before {
@@ -525,9 +525,12 @@ body {
 	font-size: .7rem;
 	margin-left: 1rem;
 	cursor: pointer;
+	background-color: transparent;
 
+	&:focus,
 	&:hover {
 		color: $tr-orange;
+		outline: none;
 		text-shadow: 0 0 2px $tr-orange;
 	}
 

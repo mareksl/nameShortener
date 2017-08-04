@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
 var animation = (function() {
   var notify = function(string, type, callback) {
-		var timeout = 2500;
+    var timeout = 2500;
     var fadeOut = function(el) {
       el.classList.remove('notification--visible');
       var prevNotes = document.querySelectorAll('.notification');
@@ -39,8 +39,9 @@ var animation = (function() {
         break;
       case 'error':
         notification.classList.add('notification--error');
-        var close = document.createElement('span');
+        var close = document.createElement('button');
         close.classList.add('notification__close');
+        close.tabIndex = 1;
         close.addEventListener('click', function() {
           fadeOut(notification);
         });
