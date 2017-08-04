@@ -3,21 +3,17 @@ var animation = (function() {
   var notify = function(string, type) {
     var fadeOut = function(el) {
       el.classList.remove('notification--visible');
-			var done = false;
+      var prevNotes = document.querySelectorAll('.notification');
+      var arr = [];
+      for (var i = prevNotes.length; i--; arr.unshift(prevNotes[i]));
+      arr.reverse();
+      for (let i = arr.indexOf(el) + 1; i < arr.length; i++) {
+        let topValue = isNaN(parseInt(arr[i].style.top)) ? 0 : parseInt(arr[i].style.top);
+        topValue -= el.computedHeight;
+        arr[i].style.top = topValue + 'px';
+      }
       el.addEventListener("transitionend", function(event) {
-        if (done === false) {
-          var prevNotes = document.querySelectorAll('.notification');
-          var arr = [];
-          for (var i = prevNotes.length; i--; arr.unshift(prevNotes[i]));
-          arr.reverse();
-          for (let i = arr.indexOf(el); i < arr.length; i++) {
-            let topValue = isNaN(parseInt(arr[i].style.top)) ? 0 : parseInt(arr[i].style.top);
-            topValue -= notification.computedHeight;
-            arr[i].style.top = topValue + 'px';
-          }
-          el.remove();
-					done = true;
-        }
+        el.remove();
       });
     };
     var notification = document.createElement('div');
