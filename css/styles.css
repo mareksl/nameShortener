@@ -320,8 +320,8 @@ body {
 
 .button--narrow {
   min-width: 80px;
-  margin-left: 10px;
-  margin-right: 10px; }
+  margin-right: 10px;
+  margin-left: 10px; }
 
 .input-label {
   width: 100%; }
@@ -567,7 +567,6 @@ body {
   top: 0;
   right: 100%;
   display: flex;
-  flex-flow: column;
   margin: 2rem;
   padding: 1rem;
   transition: 1s;
@@ -578,16 +577,17 @@ body {
   border-radius: 4px;
   background-color: #fff;
   box-shadow: 0 0 2px #ffa100;
-  align-items: center; }
+  align-items: center;
+  flex-flow: column; }
 
 .notification__message {
   display: flex;
-  flex-flow: row;
-  align-items: center; }
+  align-items: center;
+  flex-flow: row; }
 
 .notification__buttons {
-  margin-top: .5rem;
   display: flex;
+  margin-top: .5rem;
   flex-flow: row nowrap; }
 
 .notification--visible {
@@ -607,9 +607,9 @@ body {
     content: 'Warning:'; }
 
 .notification--error {
+  font-weight: bold;
   animation: pulse__warning 2s infinite;
-  border-color: #ff5900;
-  font-weight: bold; }
+  border-color: #ff5900; }
   .notification--error .notification__message:before {
     font-weight: bold;
     margin-right: .5rem;
@@ -621,9 +621,11 @@ body {
 .notification__close {
   font-size: .7rem;
   margin-left: 1rem;
-  cursor: pointer; }
-  .notification__close:hover {
+  cursor: pointer;
+  background-color: transparent; }
+  .notification__close:focus, .notification__close:hover {
     color: #FF8000;
+    outline: none;
     text-shadow: 0 0 2px #FF8000; }
   .notification__close:after {
     content: '\274c'; }
