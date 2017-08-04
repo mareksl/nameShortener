@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */
 var animation = (function() {
-  var notify = function(string, type) {
+  var notify = function(string, type, callback) {
     var fadeOut = function(el) {
       el.classList.remove('notification--visible');
       var prevNotes = document.querySelectorAll('.notification');
@@ -18,7 +18,10 @@ var animation = (function() {
     };
     var notification = document.createElement('div');
     var text = document.createTextNode(string);
-    notification.appendChild(text);
+    var span = document.createElement('span');
+    span.classList.add('notification__message');
+    span.appendChild(text);
+    notification.appendChild(span);
     notification.classList.add('notification');
     switch (type) {
       case 'success':
@@ -40,7 +43,27 @@ var animation = (function() {
         close.addEventListener('click', function() {
           fadeOut(notification);
         });
-        notification.appendChild(close);
+        span.appendChild(close);
+        break;
+      case 'confirm':
+        var buttons = document.createElement('div');
+        buttons.classList.add('notification__buttons');
+        var buttonOK = document.createElement('button');
+        var buttonCancel = document.createElement('button');
+        buttonOK.classList.add('button', 'button--narrow');
+        buttonOK.innerHTML = 'OK';
+        buttonOK.addEventListener('click', function() {
+          callback();
+          fadeOut(notification);
+        });
+        buttonCancel.classList.add('button', 'button--narrow');
+        buttonCancel.innerHTML = 'Cancel';
+        buttonCancel.addEventListener('click', function() {
+          fadeOut(notification);
+        });
+        buttons.appendChild(buttonOK);
+        buttons.appendChild(buttonCancel);
+        notification.appendChild(buttons);
         break;
       default:
         setTimeout(function() {
@@ -477,12 +500,12 @@ var init = (function(lengths) {
     modifyRules('saved');
   });
   elements.btnResetRules.addEventListener('click', function(e) {
-    if (confirm('Do you want to reset the rules to the default set? All your changes will be lost!')) {
+    animation.notify('Do you want to reset to default rules?', 'confirm', function() {
       animation.notify('Rules reset to default!');
       localStorage.removeItem('localRules');
       localStorage.removeItem('localRulesSaved');
       load();
-    }
+    });
   });
   window.addEventListener('beforeunload', function(e) {
     if (localStorage.localRulesSaved === 'false') {

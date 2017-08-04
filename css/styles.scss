@@ -139,6 +139,12 @@ body {
 	}
 }
 
+.button--narrow {
+	min-width: 80px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
 .input-label {
 	width: 100%;
 }
@@ -444,6 +450,7 @@ body {
 	top: 0;
 	right: 100%;
 	display: flex;
+	flex-flow: column;
 	margin: 2rem;
 	padding: 1rem;
 	transition: 1s;
@@ -455,6 +462,17 @@ body {
 	background-color: $tr-white;
 	box-shadow: 0 0 2px $tr-orange;
 	align-items: center;
+}
+
+.notification__message {
+	display: flex;
+	flex-flow: row;
+	align-items: center;
+}
+
+.notification__buttons {
+	display: flex;
+	flex-flow: row nowrap;
 }
 
 .notification--visible {
@@ -471,10 +489,12 @@ body {
 	border-color: $tr-lightorange;
 	box-shadow: 0 0 2px $tr-lightorange;
 
-	&:before {
-		font-weight: bold;
-		margin-right: .5rem;
-		content: 'Warning:';
+	.notification__message {
+		&:before {
+			font-weight: bold;
+			margin-right: .5rem;
+			content: 'Warning:';
+		}
 	}
 }
 
@@ -482,10 +502,12 @@ body {
 	animation: pulse 2s infinite;
 	border-color: $tr-darkorange;
 
-	&:before {
-		font-weight: bold;
-		margin-right: .5rem;
-		content: 'Error:';
+	.notification__message {
+		&:before {
+			font-weight: bold;
+			margin-right: .5rem;
+			content: 'Error:';
+		}
 	}
 }
 

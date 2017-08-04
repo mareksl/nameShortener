@@ -315,6 +315,11 @@ body {
   .button-link:active, .button-link:focus, .button-link:hover {
     text-decoration: none; }
 
+.button--narrow {
+  min-width: 80px;
+  margin-left: 10px;
+  margin-right: 10px; }
+
 .input-label {
   width: 100%; }
 
@@ -559,6 +564,7 @@ body {
   top: 0;
   right: 100%;
   display: flex;
+  flex-flow: column;
   margin: 2rem;
   padding: 1rem;
   transition: 1s;
@@ -571,6 +577,15 @@ body {
   box-shadow: 0 0 2px #FF8000;
   align-items: center; }
 
+.notification__message {
+  display: flex;
+  flex-flow: row;
+  align-items: center; }
+
+.notification__buttons {
+  display: flex;
+  flex-flow: row nowrap; }
+
 .notification--visible {
   transform: translateX(calc(100% + 4rem));
   opacity: 1; }
@@ -582,7 +597,7 @@ body {
 .notification--warning {
   border-color: #ffa100;
   box-shadow: 0 0 2px #ffa100; }
-  .notification--warning:before {
+  .notification--warning .notification__message:before {
     font-weight: bold;
     margin-right: .5rem;
     content: 'Warning:'; }
@@ -590,7 +605,7 @@ body {
 .notification--error {
   animation: pulse 2s infinite;
   border-color: #ff5900; }
-  .notification--error:before {
+  .notification--error .notification__message:before {
     font-weight: bold;
     margin-right: .5rem;
     content: 'Error:'; }
