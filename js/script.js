@@ -1,6 +1,7 @@
 /*jshint esversion: 6 */
 var animation = (function() {
   var notify = function(string, type, callback) {
+		var timeout = 4000;
     var fadeOut = function(el) {
       el.classList.remove('notification--visible');
       var prevNotes = document.querySelectorAll('.notification');
@@ -28,13 +29,13 @@ var animation = (function() {
         notification.classList.add('notification--success');
         setTimeout(function() {
           fadeOut(notification);
-        }, 2000);
+        }, timeout);
         break;
       case 'warning':
         notification.classList.add('notification--warning');
         setTimeout(function() {
           fadeOut(notification);
-        }, 2000);
+        }, timeout);
         break;
       case 'error':
         notification.classList.add('notification--error');
@@ -69,7 +70,7 @@ var animation = (function() {
       default:
         setTimeout(function() {
           fadeOut(notification);
-        }, 2000);
+        }, timeout);
     }
     document.body.appendChild(notification);
     notification.computedHeight = notification.offsetHeight + parseFloat(window.getComputedStyle(notification, null).getPropertyValue('margin-top')) / 2;
