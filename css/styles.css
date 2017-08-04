@@ -288,7 +288,7 @@ body {
   padding: 0 .5rem;
   cursor: pointer;
   color: #FF8000;
-  border: 2px solid #FF8000;
+  border: 1px solid #FF8000;
   border-radius: 4px;
   background-color: #fff; }
   .button:focus {
@@ -571,10 +571,10 @@ body {
   transform: translateX(0);
   white-space: nowrap;
   opacity: 0;
-  border: 1px solid #FF8000;
+  border: 1px solid #ffa100;
   border-radius: 4px;
   background-color: #fff;
-  box-shadow: 0 0 2px #FF8000;
+  box-shadow: 0 0 2px #ffa100;
   align-items: center; }
 
 .notification__message {
@@ -583,6 +583,7 @@ body {
   align-items: center; }
 
 .notification__buttons {
+  margin-top: .5rem;
   display: flex;
   flex-flow: row nowrap; }
 
@@ -595,20 +596,24 @@ body {
   box-shadow: 0 0 2px #387C2B; }
 
 .notification--warning {
-  border-color: #ffa100;
-  box-shadow: 0 0 2px #ffa100; }
+  border-color: #FF8000;
+  box-shadow: 0 0 2px #FF8000; }
   .notification--warning .notification__message:before {
     font-weight: bold;
     margin-right: .5rem;
     content: 'Warning:'; }
 
 .notification--error {
-  animation: pulse 2s infinite;
-  border-color: #ff5900; }
+  animation: pulse__warning 2s infinite;
+  border-color: #ff5900;
+  font-weight: bold; }
   .notification--error .notification__message:before {
     font-weight: bold;
     margin-right: .5rem;
     content: 'Error:'; }
+
+.notification--confirm {
+  animation: pulse 2s infinite; }
 
 .notification__close {
   font-size: .7rem;
@@ -621,6 +626,13 @@ body {
     content: '\274c'; }
 
 @keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 #ffa100; }
+  70% {
+    box-shadow: 0 0 0 8px rgba(255, 161, 0, 0); }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 161, 0, 0); } }
+@keyframes pulse__warning {
   0% {
     box-shadow: 0 0 0 0 #ff5900; }
   70% {
