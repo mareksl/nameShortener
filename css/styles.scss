@@ -137,6 +137,7 @@ body {
 	&:focus {
 		text-decoration: none;
 	}
+
 	&:hover {
 		text-decoration: none;
 	}
@@ -515,9 +516,11 @@ body {
 		}
 	}
 }
+
 .notification--confirm {
 	animation: pulse 2s infinite;
 }
+
 .notification__close {
 	font-size: .7rem;
 	margin-left: 1rem;

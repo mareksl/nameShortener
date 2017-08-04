@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
 var animation = (function() {
   var notify = function(string, type, callback) {
-		var timeout = 4000;
+		var timeout = 2500;
     var fadeOut = function(el) {
       el.classList.remove('notification--visible');
       var prevNotes = document.querySelectorAll('.notification');
