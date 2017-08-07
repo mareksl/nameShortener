@@ -249,6 +249,12 @@ body {
 .section__rules {
   display: none; }
 
+.rules__buttons {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between; }
+
 .section__rules--show {
   display: flex; }
 
@@ -322,6 +328,13 @@ body {
   min-width: 80px;
   margin-right: 10px;
   margin-left: 10px; }
+
+.button--disabled {
+  filter: grayscale(1) blur(1px);
+  cursor: not-allowed; }
+  .button--disabled:hover {
+    color: #FF8000;
+    background-color: #fff; }
 
 .input-label {
   width: 100%; }
