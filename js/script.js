@@ -1,22 +1,22 @@
 /*jshint esversion: 6 */
 var animation = (function() {
+  var fadeOut = function(el) {
+    el.classList.remove('notification--visible');
+    var prevNotes = document.querySelectorAll('.notification');
+    var arr = [];
+    for (var i = prevNotes.length; i--; arr.unshift(prevNotes[i]));
+    arr.reverse();
+    for (let i = arr.indexOf(el) + 1; i < arr.length; i++) {
+      let topValue = isNaN(parseInt(arr[i].style.top)) ? 0 : parseInt(arr[i].style.top);
+      topValue -= el.computedHeight;
+      arr[i].style.top = topValue + 'px';
+    }
+    el.addEventListener("transitionend", function(event) {
+      el.remove();
+    });
+  };
   var notify = function(string, type, callback) {
     var timeout = 2500;
-    var fadeOut = function(el) {
-      el.classList.remove('notification--visible');
-      var prevNotes = document.querySelectorAll('.notification');
-      var arr = [];
-      for (var i = prevNotes.length; i--; arr.unshift(prevNotes[i]));
-      arr.reverse();
-      for (let i = arr.indexOf(el) + 1; i < arr.length; i++) {
-        let topValue = isNaN(parseInt(arr[i].style.top)) ? 0 : parseInt(arr[i].style.top);
-        topValue -= el.computedHeight;
-        arr[i].style.top = topValue + 'px';
-      }
-      el.addEventListener("transitionend", function(event) {
-        el.remove();
-      });
-    };
     var notification = document.createElement('div');
     var text = document.createTextNode(string);
     var span = document.createElement('span');
