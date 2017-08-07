@@ -45,17 +45,20 @@
 					</tr>
 				</tfoot>
 			</table>
-
-			<button class="button" id="btnSaveRules">Save <span id="rulesSaved"></span></button>
-			<button class="button" id="btnResetRules">Reset to default</button>
-			<button class="button" id="btnRemoveRules">Remove all rules</button>
-			<button class="button" id="btnCloseRules">Close</button>
+			<div class="rules__buttons">
+				<button class="button" id="btnSaveRules">Save <span id="rulesSaved"></span></button>
+				<button class="button" id="btnResetRules">Reset to default</button>
+				<button class="button" id="btnRemoveRules">Remove all rules</button>
+				<button class="button" id="btnDownloadRules">Download rules</button>
+				<button class="button button--disabled" id="btnUploadRules" disabled>Upload rules</button>
+				<button class="button" id="btnCloseRules">Close</button>
+			</div>
 		</section>
 
 		<section class="section">
 			<h2 class="section__header">Options</h2>
 			<ul class="options-list">
-				<li class="options-list__item"><input class="input-checkbox" type="checkbox" id="shortenNames"><label class="input-checkbox__label" for="shortenNames">Shorten Names</label></li>
+				<li class="options-list__item"><input class="input-checkbox" type="checkbox" id="shortenNames" checked><label class="input-checkbox__label" for="shortenNames">Shorten Names</label></li>
 				<li class="options-list__item"><input class="input-checkbox" type="checkbox" id="removeParens"><label class="input-checkbox__label" for="removeParens">Remove Parens</label></li>
 				<li class="options-list__item"><input class="input-checkbox" type="checkbox" id="removeDashes"><label class="input-checkbox__label" for="removeDashes">Remove Hyphens</label></li>
 				<li class="options-list__item"><input class="input-checkbox" type="checkbox" id="removeWhitespace"><label class="input-checkbox__label" for="removeWhitespace">Remove Whitespace</label></li>

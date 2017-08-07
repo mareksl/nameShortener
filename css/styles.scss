@@ -39,7 +39,6 @@ body {
 	padding: 8px;
 	align-items: flex-end;
 	flex-flow: column;
-	// border: 1px solid $tr-darkgray;
 }
 
 .section__header {
@@ -49,6 +48,13 @@ body {
 
 .section__rules {
 	display: none;
+}
+
+.rules__buttons {
+	width: 100%;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
 }
 
 .section__rules--show {
@@ -147,6 +153,16 @@ body {
 	min-width: 80px;
 	margin-right: 10px;
 	margin-left: 10px;
+}
+
+.button--disabled {
+	filter: grayscale(1) blur(1px);
+	cursor: not-allowed;
+
+	&:hover {
+		color: $tr-orange;
+		background-color: #fff;
+	}
 }
 
 .input-label {

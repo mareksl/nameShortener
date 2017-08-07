@@ -338,6 +338,7 @@ var elements = (function() {
     btnResetRules: $('#btnResetRules'),
     btnCloseRules: $('#btnCloseRules'),
     btnRemoveRules: $('#btnRemoveRules'),
+    btnDownloadRules: $('#btnDownloadRules'),
     rulesSaved: $('#rulesSaved'),
     tableRules: $('#tableRules'),
     tableBody: $('tbody', tableRules),
@@ -591,9 +592,20 @@ var init = (function(lengths) {
   elements.btnCloseRules.addEventListener('click', function(e) {
     elements.divRules.classList.remove('section__rules--show');
   });
+	elements.btnDownloadRules.addEventListener('click', function(e){
+		var exportRules = "data:text/json;charset=utf-8," + JSON.stringify(rules);
+		var encodedUri = encodeURI(exportRules);
+		var link = document.createElement("a");
+		link.setAttribute("href", encodedUri);
+		link.setAttribute("download", "rules.json");
+		animation.notify('Exporting to JSON!');
+		document.body.appendChild(link); // Required for FF
+		link.click();
+		document.body.removeChild(link);
+	});
+
   var comfyText = (function() {
     elements.shareClassesInput.addEventListener('input', autoExpand);
-
     function autoExpand(e) {
       var el = e.target;
       el.style.height = 'inherit';
