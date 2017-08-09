@@ -169,14 +169,7 @@ var nameChecker = (function() {
     }
     return output;
   };
-  var shortenName = function(name, shareClasses, rulesUns, lengths) {
-    var rulesTemp = Object.keys(rulesUns).sort(function(a, b) {
-      return name.lastIndexOf(a) - name.lastIndexOf(b);
-    });
-    var rules = {};
-    for (var i = 0; i < rulesTemp.length; i++) {
-      rules[rulesTemp[i].toUpperCase()] = rulesUns[rulesTemp[i]];
-    }
+  var shortenName = function(name, shareClasses, rules, lengths) {
     var shortenedNames = [];
     // add share classes for length calculation
     var nameWithShareclasses = addShareClasses(name, shareClasses);
@@ -199,22 +192,44 @@ var nameChecker = (function() {
       if (len <= maxlen) {
         return value;
       } else {
-        var newvalue = value;
-        var ivalue = value.toUpperCase();
+        var searches = [];
         for (var prop in options) {
-          if (options.hasOwnProperty(prop) && prop.length > options[prop].length) {
-            var regex = new RegExp(prop, 'i');
-            var pos = ivalue.lastIndexOf(prop);
-            if (pos > -1) {
-              var oldstring = newvalue.substring(0, pos);
-              var newstring = newvalue.substring(pos);
-              newstring = newstring.replace(regex, options[prop]);
-              newvalue = oldstring + newstring;
-              newvalue = shorten(newvalue, options, maxlen);
+          if (options.hasOwnProperty(prop) && prop.length > options[prop].replacements[0].length) {
+            var regex = new RegExp(prop, 'gi');
+            var match;
+            while ((match = regex.exec(value)) != null) {
+              var result = [];
+              result.push(match);
+              result.push(options[prop]);
+              result.push(match.index);
+              searches.push(result);
             }
           }
         }
-        return newvalue;
+        if (searches.length < 1) {
+          return value;
+        } else {
+          var newvalue = value;
+          searches.sort(function(a, b) {
+            var aPriority = a[1].priority,
+              bPriority = b[1].priority,
+              aIndex = a[2],
+              bIndex = b[2];
+            if (aPriority == bPriority) {
+              return bIndex - aIndex;
+            } else {
+              return bPriority - aPriority;
+            }
+          });
+          var pos = searches[0][2];
+          var oldstring = newvalue.substring(0, pos);
+          var newstring = newvalue.substring(pos);
+          newstring = newstring.replace(searches[0][0], searches[0][1].replacements[0]);
+          newvalue = oldstring + newstring;
+					console.log(1);
+          newvalue = shorten(newvalue, options, maxlen);
+          return newvalue;
+        }
       }
     };
     // shortening algorithm END
@@ -237,14 +252,18 @@ var nameChecker = (function() {
     shortenedName = options.replaceUmlauts ? replaceUmlauts(shortenedName) : shortenedName;
     // shorten name
     shortenedName = options.shortenName ? shortenName(shortenedName, shareClasses, rules, lengths) : [shortenedName, shortenedName, shortenedName];
-    if (shortenedName[0].length > lengths[0]) {
-      animation.notify('Couldn\'t fully shorten Name.', 'warning');
-    }
-    if (shortenedName[1].length > lengths[1]) {
-      animation.notify('Couldn\'t fully shorten Short Name.', 'warning');
-    }
-    if (shortenedName[2].length > lengths[2]) {
-      animation.notify('Couldn\'t fully shorten In-House Name.', 'warning');
+    for (var i = 0; i < shortenedName.length; i++) {
+      var type = i === 2 ? 'In-House' : i === 1 ? 'Short' : '';
+      if (shareClasses.length > 0) {
+        var nameWithShareclasses = addShareClasses(shortenedName[i], shareClasses).reduce(function(a, b) {
+          return a.length > b.length ? a : b;
+        });
+      } else {
+        var nameWithShareclasses = shortenedName[i];
+      }
+      if (nameWithShareclasses.length > lengths[i]) {
+        animation.notify('Couldn\'t fully shorten ' + type + ' Name.', 'warning');
+      }
     }
     return {
       shortenedName: shortenedName[0],
@@ -346,6 +365,7 @@ var elements = (function() {
     buttonShorten: $('#buttonShorten'),
     addRuleKey: $('#addRuleKey'),
     addRuleValue: $('#addRuleValue'),
+    addRulePriority: $('#addRulePriority'),
     btnObjUmlauts: $('#buttonObjUmlauts'),
     btnObjBreaks: $('#buttonObjBreaks'),
     linkTranslate: $('#linkTranslate'),
@@ -426,23 +446,27 @@ var init = (function(lengths) {
       }
     });
   };
-  var addTableRow = function(tableBody, key, value) {
+  var addTableRow = function(tableBody, key, value, priority) {
     let tableRow = document.createElement('tr');
     let tableCellKey = document.createElement('td');
     let tableCellValue = document.createElement('td');
+    let tableCellPriority = document.createElement('td');
     let tableCellRemove = document.createElement('td');
     let tableButtonRemove = document.createElement('button');
     tableRow.classList += 'table-rules__row';
     tableCellKey.classList += 'table-rules__item';
     tableCellValue.classList += 'table-rules__item';
-    tableCellRemove.classList += 'table-rules__item';
+    tableCellPriority.classList += 'table-rules__item table-rules__item--narrower';
+    tableCellRemove.classList += 'table-rules__item table-rules__item--narrow';
     tableButtonRemove.innerHTML = 'Remove';
     tableButtonRemove.classList += 'button button--intable';
     tableCellKey.innerHTML = key;
     tableCellValue.innerHTML = value;
+    tableCellPriority.innerHTML = priority;
     tableCellRemove.appendChild(tableButtonRemove);
     tableRow.appendChild(tableCellKey);
     tableRow.appendChild(tableCellValue);
+    tableRow.appendChild(tableCellPriority);
     tableRow.appendChild(tableCellRemove);
     tableBody.appendChild(tableRow);
     tableButtonRemove.addEventListener('click', function(e) {
@@ -455,7 +479,7 @@ var init = (function(lengths) {
     tableBody.innerHTML = '';
     for (let prop in data) {
       if (data.hasOwnProperty(prop)) {
-        addTableRow(tableBody, prop, data[prop]);
+        addTableRow(tableBody, prop, data[prop].replacements[0], data[prop].priority);
       }
     }
   };
@@ -467,31 +491,29 @@ var init = (function(lengths) {
   };
   load();
   elements.btnAddRule.addEventListener('click', function(e) {
-    var key = elements.addRuleKey.innerHTML,
-      value = elements.addRuleValue.innerHTML;
+    var key = elements.addRuleKey.value,
+      value = elements.addRuleValue.value,
+      priority = elements.addRulePriority.value <= 99 ? elements.addRulePriority.value : 99;
     if (key !== '' && value !== '') {
       if (rules.hasOwnPropertyCI(key)) {
         alert('Rule already exists!');
       } else {
-        rules[key] = value;
+        rules[key] = {
+          "priority": priority,
+          "replacements": [value]
+        };
         modifyRules('changed');
-        addTableRow(elements.tableBody, key, value);
-        elements.addRuleKey.innerHTML = '';
-        elements.addRuleValue.innerHTML = '';
+        addTableRow(elements.tableBody, key, value, priority);
+        elements.addRuleKey.value = '';
+        elements.addRuleValue.value = '';
+        elements.addRulePriority.value = '0';
       }
     } else {
       alert('Please check rule input!');
     }
   });
-  elements.addRuleKey.addEventListener('keydown', function(e) {
-    if (e.which === 13) {
-      e.preventDefault();
-    }
-  });
-  elements.addRuleValue.addEventListener('keydown', function(e) {
-    if (e.which === 13) {
-      e.preventDefault();
-    }
+  elements.addRulePriority.addEventListener('input', function(e) {
+    elements.addRulePriority.value = elements.addRulePriority.value.replace(/\D+/g, '');
   });
   elements.btnRemoveRules.addEventListener('click', function(e) {
     animation.notify('Do you want to remove all rules?', 'confirm', function() {
@@ -592,20 +614,20 @@ var init = (function(lengths) {
   elements.btnCloseRules.addEventListener('click', function(e) {
     elements.divRules.classList.remove('section__rules--show');
   });
-	elements.btnDownloadRules.addEventListener('click', function(e){
-		var exportRules = "data:text/json;charset=utf-8," + JSON.stringify(rules);
-		var encodedUri = encodeURI(exportRules);
-		var link = document.createElement("a");
-		link.setAttribute("href", encodedUri);
-		link.setAttribute("download", "rules.json");
-		animation.notify('Exporting to JSON!');
-		document.body.appendChild(link); // Required for FF
-		link.click();
-		document.body.removeChild(link);
-	});
-
+  elements.btnDownloadRules.addEventListener('click', function(e) {
+    var exportRules = "data:text/json;charset=utf-8," + JSON.stringify(rules);
+    var encodedUri = encodeURI(exportRules);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "rules.json");
+    animation.notify('Exporting to JSON!');
+    document.body.appendChild(link); // Required for FF
+    link.click();
+    document.body.removeChild(link);
+  });
   var comfyText = (function() {
     elements.shareClassesInput.addEventListener('input', autoExpand);
+
     function autoExpand(e) {
       var el = e.target;
       el.style.height = 'inherit';

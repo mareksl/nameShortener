@@ -32,16 +32,18 @@
 					<tr class="table-rules__row">
 						<th class="table-rules__item table-rules__item--noborder">Word</th>
 						<th class="table-rules__item table-rules__item--noborder">Replacement</th>
-						<td class="table-rules__item table-rules__item--removerule table-rules__item--noborder"></td>
+						<th class="table-rules__item table-rules__item--noborder table-rules__item--narrower">PRY</th>
+						<td class="table-rules__item table-rules__item--narrow table-rules__item--noborder"></td>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody class="table-rules__body">
 				</tbody>
-				<tfoot>
+				<tfoot class="table-rules__footer">
 					<tr class="table-rules__row">
-						<td class="table-rules__item table-rules__item--editable" id="addRuleKey" contenteditable="true"></td>
-						<td class="table-rules__item table-rules__item--editable" id="addRuleValue" contenteditable="true"></td>
-						<td class="table-rules__item"><button class="button button--intable" id="btnAddRule">Add</button></td>
+						<td class="table-rules__item table-rules__item--editable"><input type="text"  id="addRuleKey" class="table-rules__input-text"></td>
+						<td class="table-rules__item table-rules__item--editable"><input type="text"  id="addRuleValue" class="table-rules__input-text"></td>
+						<td class="table-rules__item table-rules__item--editable table-rules__item--narrower"><input type="number" max="99"  id="addRulePriority" value="0" class="table-rules__input-text"></td>
+						<td class="table-rules__item table-rules__item--narrow"><button class="button button--intable" id="btnAddRule">Add</button></td>
 					</tr>
 				</tfoot>
 			</table>
