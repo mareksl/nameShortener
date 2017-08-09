@@ -250,8 +250,8 @@ body {
   display: none; }
 
 .rules__buttons {
-  width: 100%;
   display: flex;
+  width: 100%;
   flex-flow: row wrap;
   justify-content: space-between; }
 
@@ -259,31 +259,56 @@ body {
   display: flex; }
 
 .table-rules {
+  display: flex;
   width: 100%;
   margin: 16px 0;
-  table-layout: fixed; }
+  align-items: stretch;
+  flex-flow: column nowrap; }
 
 .table-rules__header {
-  font-weight: bold;
   color: #fff;
   background-color: #4D4D4D; }
 
+.table-rules__body {
+  display: flex;
+  flex-flow: column nowrap; }
+
+.table-rules__row {
+  display: flex;
+  flex: 1 0;
+  flex-flow: row; }
+
 .table-rules__item {
+  flex: 1 1 10%;
   padding: .4rem;
   border: 1px solid #ededed; }
 
+.table-rules__item--narrow {
+  flex: 0 0 100px;
+  width: 100px; }
+
+.table-rules__item--narrower {
+  flex: 0 0 50px;
+  width: 50px; }
+
 .table-rules__item--editable {
-  line-height: 1rem; }
-  .table-rules__item--editable:focus {
+  padding: 0; }
+
+.table-rules__input-text {
+  font-family: "Knowledge", sans-serif;
+  font-size: 1rem;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border: 0;
+  padding: .4em; }
+  .table-rules__input-text:focus {
+    padding: calc(.4em - 2px);
     border: 2px solid #FF8000;
     outline: none; }
 
 .table-rules__item--noborder {
-  padding: .4rem;
   border: 0; }
-
-.table-rules__item--removerule {
-  width: 100px; }
 
 .button {
   font-weight: bold;
@@ -330,8 +355,8 @@ body {
   margin-left: 10px; }
 
 .button--disabled {
-  filter: grayscale(1) blur(1px);
-  cursor: not-allowed; }
+  cursor: not-allowed;
+  filter: grayscale(1) blur(1px); }
   .button--disabled:hover {
     color: #FF8000;
     background-color: #fff; }
@@ -396,16 +421,19 @@ body {
   flex-flow: row; }
 
 .container-count__input-text {
+  font-family: "Knowledge", sans-serif;
+  font-size: 1rem;
   display: block;
   flex: 1 1 auto;
   height: 2rem;
-  padding: .5rem;
+  padding: .4rem;
   border: 1px solid #afafaf;
   border-radius: 4px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   align-self: flex-start; }
   .container-count__input-text:focus {
+    padding: calc(.4rem - 1px);
     border: 2px solid #FF8000;
     outline: none; }
 
