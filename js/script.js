@@ -226,7 +226,7 @@ var nameChecker = (function() {
           var newstring = newvalue.substring(pos);
           newstring = newstring.replace(searches[0][0], searches[0][1].replacements[0]);
           newvalue = oldstring + newstring;
-					console.log(1);
+          console.log(1);
           newvalue = shorten(newvalue, options, maxlen);
           return newvalue;
         }
@@ -374,7 +374,10 @@ var elements = (function() {
     removeParens: $('#removeParens'),
     shortenNames: $('#shortenNames'),
     removeDashes: $('#removeDashes'),
-    removeWhitespace: $('#removeWhitespace')
+    removeWhitespace: $('#removeWhitespace'),
+    manualWrapper: $('#manualWrapper'),
+    manualClose: $('#manualClose'),
+    manualOpen: $('#manualOpen')
     // sectionReplace : $('#sectionReplace'),
     // replaceChars : $('#replaceChars');
   };
@@ -670,4 +673,23 @@ var init = (function(lengths) {
   elements.btnExportNames.addEventListener('click', function() {
     createCsvArray();
   });
+  // elements.manualWrapper.style.display = 'none';
+  elements.manualOpen.addEventListener('click', function(e) {
+    elements.manualWrapper.style.display = 'flex';
+    elements.manualWrapper.classList.add('manual--visible');
+  });
+  elements.manualClose.addEventListener('click', function(e) {
+    elements.manualWrapper.classList.remove('manual--visible');
+    elements.manualWrapper.addEventListener("transitionend", function(event) {
+      // elements.manualWrapper.style.display = 'none';
+    });
+  });
+  elements.manualWrapper.addEventListener('click', function(e) {
+    if (e.target == elements.manualWrapper) {
+      elements.manualWrapper.classList.remove('manual--visible');
+      elements.manualWrapper.addEventListener("transitionend", function(event) {
+        // elements.manualWrapper.style.display = 'none';
+      });
+    }
+  })
 }([50, 30, 40]));

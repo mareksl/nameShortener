@@ -85,10 +85,9 @@ h6 {
 }
 
 p {
-	font-size: 1.1em;
-	max-width: 32rem;
-	margin: auto;
-	text-align: center;
+	font-size: 1em;
+	// max-width: 32rem;
+	padding: .4rem 0;
 }
 
 small {
@@ -110,6 +109,5 @@ em {
 
 strong {
 	font-weight: bold;
-	font-variant: small-caps;
 }
 /* TYPOGRAPHY END */

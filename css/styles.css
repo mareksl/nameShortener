@@ -185,10 +185,8 @@ h6 {
   font-size: 1.0625em; }
 
 p {
-  font-size: 1.1em;
-  max-width: 32rem;
-  margin: auto;
-  text-align: center; }
+  font-size: 1em;
+  padding: .4rem 0; }
 
 small {
   font-size: .8em;
@@ -204,8 +202,7 @@ em {
   font-style: italic; }
 
 strong {
-  font-weight: bold;
-  font-variant: small-caps; }
+  font-weight: bold; }
 
 /* TYPOGRAPHY END */
 body {
@@ -258,6 +255,66 @@ body {
 .section__rules--show {
   display: flex; }
 
+.manual {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  overflow-y: auto;
+  transition: .4s;
+  pointer-events: none;
+  opacity: 0;
+  background-color: rgba(77, 77, 77, 0.6);
+  align-items: flex-start;
+  justify-content: center; }
+
+.manual--visible {
+  pointer-events: all;
+  opacity: 1; }
+
+.manual__content {
+  position: relative;
+  max-width: 680px;
+  margin: 1rem;
+  padding: 1rem;
+  border: 1px solid #FF8000;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 0 0 2px #ffa100; }
+
+.manual__list {
+  counter-reset: item; }
+  .manual__list li {
+    counter-increment: item;
+    margin-bottom: 1rem;
+    padding-left: 60px; }
+    .manual__list li:before {
+      margin-right: 10px;
+      margin-left: -60px;
+      padding: 0 1rem;
+      width: 1rem;
+      content: counter(item);
+      border: 1px solid #FF8000;
+      display: inline-block;
+      text-align: center; }
+
+.manual__close {
+  font-size: .7rem;
+  font-weight: bold;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+  background-color: transparent; }
+  .manual__close:focus, .manual__close:hover {
+    color: #FF8000;
+    outline: none;
+    text-shadow: 0 0 2px #FF8000; }
+  .manual__close:after {
+    content: '\274c'; }
+
 .table-rules {
   display: flex;
   width: 100%;
@@ -300,8 +357,8 @@ body {
   width: 100%;
   height: 100%;
   margin: 0;
-  border: 0;
-  padding: .4em; }
+  padding: .4em;
+  border: 0; }
   .table-rules__input-text:focus {
     padding: calc(.4em - 2px);
     border: 2px solid #FF8000;
@@ -591,7 +648,8 @@ body {
   border: 2px dotted #ff5900;
   border-radius: 50%;
   align-items: center;
-  justify-content: center; }
+  justify-content: center;
+  background-color: #fff; }
   .github-link:hover {
     transform: scale(1.2);
     box-shadow: 0 0 8px #FF8000; }
