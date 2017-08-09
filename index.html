@@ -9,7 +9,6 @@
 </head>
 
 <body>
-
 	<header class="header">
 		<h1 class="header__title">Fund Name Shortener <small>(beta)</small></h1>
 	</header>
@@ -19,12 +18,9 @@
 			<label class="input-label input-label--visuallyhidden" for="inputName">Fund Name</label>
 			<div class="container-count"><input class="container-count__input-text" type="text" id="inputName">
 				<span class="container-count__length" id="lenName">0</span></div>
-
-
 			<button class="button" type="button" id="buttonShorten">Shorten</button>
 			<button class="button" id="showRules">Rules</button>
 		</section>
-
 		<section class="section section__rules" id="sectionRules">
 			<h2 class="section__header">Rules</h2>
 			<table class="table-rules" id="tableRules">
@@ -40,9 +36,9 @@
 				</tbody>
 				<tfoot class="table-rules__footer">
 					<tr class="table-rules__row">
-						<td class="table-rules__item table-rules__item--editable"><input type="text"  id="addRuleKey" class="table-rules__input-text"></td>
-						<td class="table-rules__item table-rules__item--editable"><input type="text"  id="addRuleValue" class="table-rules__input-text"></td>
-						<td class="table-rules__item table-rules__item--editable table-rules__item--narrower"><input type="number" max="99"  id="addRulePriority" value="0" class="table-rules__input-text"></td>
+						<td class="table-rules__item table-rules__item--editable"><input type="text" id="addRuleKey" class="table-rules__input-text"></td>
+						<td class="table-rules__item table-rules__item--editable"><input type="text" id="addRuleValue" class="table-rules__input-text"></td>
+						<td class="table-rules__item table-rules__item--editable table-rules__item--narrower"><input type="number" max="99" id="addRulePriority" value="0" class="table-rules__input-text"></td>
 						<td class="table-rules__item table-rules__item--narrow"><button class="button button--intable" id="btnAddRule">Add</button></td>
 					</tr>
 				</tfoot>
@@ -56,7 +52,6 @@
 				<button class="button" id="btnCloseRules">Close</button>
 			</div>
 		</section>
-
 		<section class="section">
 			<h2 class="section__header">Options</h2>
 			<ul class="options-list">
@@ -70,7 +65,6 @@
 		</section>
 		<!-- <section class="section section__rules" id="sectionReplace">
 			<h2 class="section__header">Replacements</h2>
-
 			<table class="table-rules" id="tableReplace">
 				<thead class="table-rules__header">
 					<tr class="table-rules__row">
@@ -96,31 +90,24 @@
 			<textarea class="textarea textarea--expandable" id="shareClasses" placeholder="One Share Class per line."></textarea>
 		</section>
 		<section class="section">
-
 			<h2 class="section__header">Generated Share Classes</h2>
 			<label class="input-label" for="outputName">Name<small> (max. 50 chars)</small></label>
 			<div class="container-count"><input class="container-count__input-text" type="text" id="outputName">
 				<span class="container-count__length" id="lenOutputName">0</span></div>
-
 			<ul class="shareclass-list" id="shareClassesOutput">
 			</ul>
-
 			<label class="input-label" for="outputShortName">Short Name<small> (max. 30 chars)</small></label>
 			<div class="container-count"><input class="container-count__input-text" type="text" id="outputShortName">
 				<span class="container-count__length" id="lenOutputShortName">0</span></div>
-
 			<ul class="shareclass-list" id="shareClassesShortOutput">
 			</ul>
-
 			<label class="input-label" for="outputInHouseName">In-House Name<small> (max. 40 chars)</small></label>
 			<div class="container-count"><input class="container-count__input-text" type="text" id="outputInHouseName">
 				<span class="container-count__length" id="lenOutputInHouseName">0</span></div>
-
 			<ul class="shareclass-list" id="shareClassesInHouseOutput">
 			</ul>
 			<button class="button" id="btnExportNames">Export to CSV</button>
 		</section>
-
 		<section class="section">
 			<h2 class="section__header">Objective</h2>
 			<label class="input-label input-label--visuallyhidden" for="inputObj">Objective</label>
@@ -134,8 +121,31 @@
 				</div>
 			</div>
 		</section>
-
+		<button class="button" id="manualOpen">Instructions</button>
 	</main>
+	<aside class="manual" id="manualWrapper">
+		<section class="manual__content">
+			<button class="manual__close" id="manualClose"></button>
+			<h2>Instructions</h2>
+			<p>The Fund Name Shortener app can be used to shorten the names of funds according to internal limitations and add share class symbols in a uniform way.</p>
+			<p>The app uses predefined rules to shorten the name. The rules are processed in <strong>descending</strong> order by priority. If two or more rules have the same priority value, they are processed from <strong>last</strong> occurrence <strong>to first</strong>.</p>
+			<p>If the app isn't able to sufficiently shorten the name, you can manually edit the output.</p>
+			<hr>
+			<ol class="manual__list">
+				<li>Type the fund name in the input box</li>
+				<li>Edit rules <small>(optional)</small>
+					<p>English language rules are loaded by default. You can add/remove single rules, remove all rules or reset to default rules.</p>
+					<p>When you click "Save", the rules will be saved to your <strong>local storage</strong>, which is specific to the browser you are currently using. Your rules will not be saved on a different browser.</p>
+				</li>
+				<li>Choose options</li>
+				<li>Add share classes - each on new line <small>(optional)</small></li>
+				<li><strong>Click "Shorten"</strong></li>
+				<li>Export to csv <small>(optional)</small></li>
+			</ol>
+			<hr>
+			<p>The objective section of the shortener can help you with removing line breaks and umlauts. The Translate link sends you to the Google Translate website, pastes the input text and detects the language.</p>
+		</section>
+	</aside>
 	<footer class="footer"><a class="github-link" href="https://github.com/mareksl/nameShortener"><img class="github-link__logo" src="img/GitHub-Mark-32px.png" alt="GitHub"></a></footer>
 	<script src="js/script.js" charset="utf-8"></script>
 </body>
