@@ -313,8 +313,6 @@ body {
     color: #FF8000;
     outline: none;
     text-shadow: 0 0 2px #FF8000; }
-  .manual__close:after {
-    content: '\274c'; }
 
 .table-rules {
   display: flex;
