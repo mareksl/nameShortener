@@ -325,19 +325,31 @@ body {
   color: #fff;
   background-color: #4D4D4D; }
 
+.table-rules__footer {
+  border-top: 1px solid #ededed;
+  border-bottom: 1px solid #ededed; }
+
 .table-rules__body {
   display: flex;
+  overflow: auto;
+  max-height: 500px;
   flex-flow: column nowrap; }
 
 .table-rules__row {
   display: flex;
   flex: 1 0;
+  border-bottom: 1px solid #ededed;
   flex-flow: row; }
+  .table-rules__row:last-child {
+    border-bottom: none; }
 
 .table-rules__item {
-  flex: 1 1 10%;
+  flex: 1 0 25%;
   padding: .4rem;
-  border: 1px solid #ededed; }
+  border-collapse: collapse;
+  border-right: 1px solid #ededed; }
+  .table-rules__item:first-child {
+    border-left: 1px solid #ededed; }
 
 .table-rules__item--narrow {
   flex: 0 0 100px;
@@ -683,10 +695,10 @@ body {
   border-radius: 4px;
   background-color: #fff;
   box-shadow: 0 0 2px #ffa100;
-  align-items: center;
-  justify-content: space-between;
   align-content: center;
-  flex-flow: row; }
+  align-items: center;
+  flex-flow: row;
+  justify-content: space-between; }
 
 .notification__message {
   flex-grow: 1; }
@@ -733,8 +745,8 @@ body {
     content: 'Error:'; }
 
 .notification--confirm {
-  flex-flow: column;
-  animation: pulse 2s infinite; }
+  animation: pulse 2s infinite;
+  flex-flow: column; }
 
 @keyframes pulse {
   0% {
