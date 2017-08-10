@@ -63,6 +63,7 @@ body {
 
 .manual {
 	position: fixed;
+	z-index: 1;
 	top: 0;
 	right: 0;
 	bottom: 0;
@@ -97,19 +98,19 @@ body {
 	counter-reset: item;
 
 	li {
-		counter-increment: item;
 		margin-bottom: 1rem;
 		padding-left: 60px;
+		counter-increment: item;
 
 		&:before {
+			display: inline-block;
+			width: 1rem;
 			margin-right: 10px;
 			margin-left: -60px;
 			padding: 0 1rem;
-			width: 1rem;
 			content: counter(item);
-			border: 1px solid $tr-orange;
-			display: inline-block;
 			text-align: center;
+			border: 1px solid $tr-orange;
 		}
 	}
 }
@@ -252,6 +253,18 @@ body {
 
 	&:hover {
 		text-decoration: none;
+	}
+}
+
+.button-instructions {
+	position: fixed;
+	top: 0;
+	right: 0;
+	margin: 1rem;
+}
+@media (max-width: 1200px) {
+	.button-instructions {
+		position: relative;
 	}
 }
 
@@ -555,9 +568,9 @@ body {
 	transition: .2s ease-in-out;
 	border: 2px dotted $tr-darkorange;
 	border-radius: 50%;
+	background-color: $tr-white;
 	align-items: center;
 	justify-content: center;
-	background-color: $tr-white;
 
 	&:hover {
 		transform: scale(1.2);
@@ -584,7 +597,6 @@ body {
 	padding: 1rem;
 	transition: 1s;
 	transform: translateX(0);
-	white-space: nowrap;
 	opacity: 0;
 	border: 1px solid $tr-lightorange;
 	border-radius: 4px;
@@ -596,6 +608,7 @@ body {
 
 .notification__message {
 	display: flex;
+	white-space: nowrap;
 	align-items: center;
 	flex-flow: row;
 }

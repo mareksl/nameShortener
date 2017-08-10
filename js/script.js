@@ -607,13 +607,6 @@ var init = (function(lengths) {
       elements.divRules.classList.remove('section__rules--show');
     }
   });
-  // elements.replaceChars.addEventListener('click', function(e) {
-  // 	if (!elements.sectionReplace.classList.contains('section__rules--show')) {
-  // 		elements.sectionReplace.classList.add('section__rules--show');
-  // 	} else {
-  // 		elements.sectionReplace.classList.remove('section__rules--show');
-  // 	}
-  // });
   elements.btnCloseRules.addEventListener('click', function(e) {
     elements.divRules.classList.remove('section__rules--show');
   });
