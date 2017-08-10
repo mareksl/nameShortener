@@ -591,36 +591,51 @@ body {
 .notification {
 	position: fixed;
 	top: 0;
-	right: 100%;
+	left: 0;
 	display: flex;
 	margin: 2rem;
 	padding: 1rem;
 	transition: 1s;
-	transform: translateX(0);
+	transform: translateX(-100%);
 	opacity: 0;
 	border: 1px solid $tr-lightorange;
 	border-radius: 4px;
 	background-color: $tr-white;
 	box-shadow: 0 0 2px $tr-lightorange;
 	align-items: center;
-	flex-flow: column;
-}
-
-.notification__message {
-	display: flex;
-	white-space: nowrap;
-	align-items: center;
+	justify-content: space-between;
+	align-content: center;
 	flex-flow: row;
 }
+.notification__message {
+	flex-grow: 1;
+}
+.notification__close {
+	font-size: .7rem;
+	margin-left: 1rem;
+	cursor: pointer;
+	background-color: transparent;
 
+	&:focus,
+	&:hover {
+		color: $tr-orange;
+		outline: none;
+		text-shadow: 0 0 2px $tr-orange;
+	}
+
+	&:after {
+		content: '\274c';
+	}
+}
 .notification__buttons {
 	display: flex;
+	flex: 0 0 auto;
 	margin-top: .5rem;
 	flex-flow: row nowrap;
 }
 
 .notification--visible {
-	transform: translateX(calc(100% + 4rem));
+	transform: translateX(0);
 	opacity: 1;
 }
 
@@ -657,26 +672,10 @@ body {
 }
 
 .notification--confirm {
+	flex-flow: column;
 	animation: pulse 2s infinite;
 }
 
-.notification__close {
-	font-size: .7rem;
-	margin-left: 1rem;
-	cursor: pointer;
-	background-color: transparent;
-
-	&:focus,
-	&:hover {
-		color: $tr-orange;
-		outline: none;
-		text-shadow: 0 0 2px $tr-orange;
-	}
-
-	&:after {
-		content: '\274c';
-	}
-}
 @keyframes pulse {
 	0% {
 		box-shadow: 0 0 0 0 rgba($tr-lightorange, 1);

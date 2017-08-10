@@ -45,7 +45,7 @@ var animation = (function() {
         close.addEventListener('click', function() {
           fadeOut(notification);
         });
-        span.appendChild(close);
+        notification.appendChild(close);
         break;
       case 'confirm':
         notification.classList.add('notification--confirm');
