@@ -41,6 +41,7 @@ var animation = (function() {
         notification.classList.add('notification--error');
         var close = document.createElement('button');
         close.classList.add('notification__close');
+				close.setAttribute('aria-label', 'Close Notification');
         close.tabIndex = 1;
         close.addEventListener('click', function() {
           fadeOut(notification);
