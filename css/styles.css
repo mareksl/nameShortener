@@ -674,33 +674,45 @@ body {
 .notification {
   position: fixed;
   top: 0;
-  right: 100%;
+  left: 0;
   display: flex;
   margin: 2rem;
   padding: 1rem;
   transition: 1s;
-  transform: translateX(0);
+  transform: translateX(-100%);
   opacity: 0;
   border: 1px solid #ffa100;
   border-radius: 4px;
   background-color: #fff;
   box-shadow: 0 0 2px #ffa100;
   align-items: center;
-  flex-flow: column; }
+  justify-content: space-between;
+  align-content: center;
+  flex-flow: row; }
 
 .notification__message {
-  display: flex;
-  white-space: nowrap;
-  align-items: center;
-  flex-flow: row; }
+  flex-grow: 1; }
+
+.notification__close {
+  font-size: .7rem;
+  margin-left: 1rem;
+  cursor: pointer;
+  background-color: transparent; }
+  .notification__close:focus, .notification__close:hover {
+    color: #FF8000;
+    outline: none;
+    text-shadow: 0 0 2px #FF8000; }
+  .notification__close:after {
+    content: '\274c'; }
 
 .notification__buttons {
   display: flex;
+  flex: 0 0 auto;
   margin-top: .5rem;
   flex-flow: row nowrap; }
 
 .notification--visible {
-  transform: translateX(calc(100% + 4rem));
+  transform: translateX(0);
   opacity: 1; }
 
 .notification--success {
@@ -725,19 +737,8 @@ body {
     content: 'Error:'; }
 
 .notification--confirm {
+  flex-flow: column;
   animation: pulse 2s infinite; }
-
-.notification__close {
-  font-size: .7rem;
-  margin-left: 1rem;
-  cursor: pointer;
-  background-color: transparent; }
-  .notification__close:focus, .notification__close:hover {
-    color: #FF8000;
-    outline: none;
-    text-shadow: 0 0 2px #FF8000; }
-  .notification__close:after {
-    content: '\274c'; }
 
 @keyframes pulse {
   0% {
