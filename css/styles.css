@@ -252,6 +252,9 @@ body {
   flex-flow: row wrap;
   justify-content: space-between; }
 
+.rules__input-file {
+  display: none; }
+
 .section__rules--show {
   display: flex; }
 
@@ -407,6 +410,9 @@ body {
   min-width: 0;
   height: 1.7rem;
   margin: 0; }
+
+.button--unsaved {
+  animation: pulse 2s infinite; }
 
 .button-link {
   display: flex;

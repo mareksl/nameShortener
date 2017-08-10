@@ -41,8 +41,8 @@ var animation = (function() {
         notification.classList.add('notification--error');
         var close = document.createElement('button');
         close.classList.add('notification__close');
-				close.innerHTML = '&#10060;';
-				close.setAttribute('aria-label', 'Close Notification');
+        close.innerHTML = '&#10060;';
+        close.setAttribute('aria-label', 'Close Notification');
         close.tabIndex = 1;
         close.addEventListener('click', function() {
           fadeOut(notification);
@@ -228,7 +228,6 @@ var nameChecker = (function() {
           var newstring = newvalue.substring(pos);
           newstring = newstring.replace(searches[0][0], searches[0][1].replacements[0]);
           newvalue = oldstring + newstring;
-          console.log(1);
           newvalue = shorten(newvalue, options, maxlen);
           return newvalue;
         }
@@ -325,9 +324,36 @@ var loadRules = (function() {
     }
     callback();
   };
+  var uploadRules = function(e, createRules) {
+    var fileTypes = ['json', 'txt'];
+    var maxSize = 1000000;
+    var input = e.target;
+    if (input.files && input.files[0]) {
+      var extension = input.files[0].name.split('.').pop().toLowerCase();
+      if (fileTypes.indexOf(extension) < 0) {
+        animation.notify('Only .json and .txt files allowed!', 'error');
+      } else if (input.files[0].size > maxSize) {
+        animation.notify('Max. ' + Math.floor(maxSize / 1000000) + 'MB allowed');
+      } else {
+        var reader = new FileReader();
+        reader.onloadstart = function(e) {
+          animation.notify('Uploading rules.');
+        }
+        reader.onerror = function(e) {
+          animation.notify('Upload not successful.', 'error');
+        }
+        reader.onload = function() {
+          createRules(reader.result);
+          animation.notify('Rules uploaded successfully.', 'success');
+        };
+        reader.readAsText(input.files[0]);
+      }
+    }
+  };
   return {
     load: load,
-    modify: modify
+    modify: modify,
+    uploadRules: uploadRules
   };
 }());
 //-----------------------------------------------------------
@@ -360,6 +386,7 @@ var elements = (function() {
     btnCloseRules: $('#btnCloseRules'),
     btnRemoveRules: $('#btnRemoveRules'),
     btnDownloadRules: $('#btnDownloadRules'),
+    btnUploadRules: $('#btnUploadRules'),
     rulesSaved: $('#rulesSaved'),
     tableRules: $('#tableRules'),
     tableBody: $('tbody', tableRules),
@@ -446,8 +473,10 @@ var init = (function(lengths) {
       if (status === 'saved') {
         animation.notify('Local rules saved!', 'success');
         elements.rulesSaved.innerHTML = '';
+				elements.btnSaveRules.classList.remove('button--unsaved');
       } else if (status === 'changed') {
         elements.rulesSaved.innerHTML = '*';
+        elements.btnSaveRules.classList.add('button--unsaved');
       }
     });
   };
@@ -668,7 +697,6 @@ var init = (function(lengths) {
   elements.btnExportNames.addEventListener('click', function() {
     createCsvArray();
   });
-  // elements.manualWrapper.style.display = 'none';
   elements.manualOpen.addEventListener('click', function(e) {
     elements.manualWrapper.style.display = 'flex';
     elements.manualWrapper.classList.add('manual--visible');
@@ -676,15 +704,23 @@ var init = (function(lengths) {
   elements.manualClose.addEventListener('click', function(e) {
     elements.manualWrapper.classList.remove('manual--visible');
     elements.manualWrapper.addEventListener("transitionend", function(event) {
-      // elements.manualWrapper.style.display = 'none';
     });
   });
   elements.manualWrapper.addEventListener('click', function(e) {
     if (e.target == elements.manualWrapper) {
       elements.manualWrapper.classList.remove('manual--visible');
       elements.manualWrapper.addEventListener("transitionend", function(event) {
-        // elements.manualWrapper.style.display = 'none';
       });
     }
+  })
+  elements.btnUploadRules.addEventListener('click', function(e) {
+    e.target.value = null;
+  })
+  elements.btnUploadRules.addEventListener('change', function(e) {
+    loadRules.uploadRules(e, function(response) {
+      rules = JSON.parse(response);
+      tableFromJSON(rules, elements.tableBody);
+			modifyRules('changed');
+    });
   })
 }([50, 30, 40]));
