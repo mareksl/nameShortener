@@ -700,8 +700,6 @@ body {
     color: #FF8000;
     outline: none;
     text-shadow: 0 0 2px #FF8000; }
-  .notification__close:after {
-    content: '\274c'; }
 
 .notification__buttons {
   display: flex;
