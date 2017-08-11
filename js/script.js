@@ -473,7 +473,7 @@ var init = (function(lengths) {
       if (status === 'saved') {
         animation.notify('Local rules saved!', 'success');
         elements.rulesSaved.innerHTML = '';
-				elements.btnSaveRules.classList.remove('button--unsaved');
+        elements.btnSaveRules.classList.remove('button--unsaved');
       } else if (status === 'changed') {
         elements.rulesSaved.innerHTML = '*';
         elements.btnSaveRules.classList.add('button--unsaved');
@@ -511,10 +511,15 @@ var init = (function(lengths) {
   };
   var tableFromJSON = function(data, tableBody) {
     tableBody.innerHTML = '';
-    for (let prop in data) {
-      if (data.hasOwnProperty(prop)) {
-        addTableRow(tableBody, prop, data[prop].replacements[0], data[prop].priority);
+    try {
+      for (let prop in data) {
+        if (data.hasOwnProperty(prop)) {
+          addTableRow(tableBody, prop, data[prop].replacements[0], data[prop].priority);
+        }
       }
+    } catch (e) {
+      animation.notify('There was a problem loading local rules. Please reset to default or remove all rules.', 'error');
+      console.log(e);
     }
   };
   var load = function() {
@@ -703,14 +708,12 @@ var init = (function(lengths) {
   });
   elements.manualClose.addEventListener('click', function(e) {
     elements.manualWrapper.classList.remove('manual--visible');
-    elements.manualWrapper.addEventListener("transitionend", function(event) {
-    });
+    elements.manualWrapper.addEventListener("transitionend", function(event) {});
   });
   elements.manualWrapper.addEventListener('click', function(e) {
     if (e.target == elements.manualWrapper) {
       elements.manualWrapper.classList.remove('manual--visible');
-      elements.manualWrapper.addEventListener("transitionend", function(event) {
-      });
+      elements.manualWrapper.addEventListener("transitionend", function(event) {});
     }
   })
   elements.btnUploadRules.addEventListener('click', function(e) {
@@ -720,7 +723,7 @@ var init = (function(lengths) {
     loadRules.uploadRules(e, function(response) {
       rules = JSON.parse(response);
       tableFromJSON(rules, elements.tableBody);
-			modifyRules('changed');
+      modifyRules('changed');
     });
   })
 }([50, 30, 40]));
