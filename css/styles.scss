@@ -146,18 +146,22 @@ body {
 
 .table-rules__header {
 	color: $tr-white;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
 	background-color: $tr-darkgray;
 }
 
 .table-rules__footer {
 	border-top: 1px solid $own-mutedgray;
 	border-bottom: 1px solid $own-mutedgray;
+	border-left: 1px solid $own-mutedgray;
 }
 
 .table-rules__body {
 	display: flex;
 	overflow: auto;
 	max-height: 500px;
+	border-left: 1px solid $own-mutedgray;
 	flex-flow: column nowrap;
 }
 
@@ -172,15 +176,16 @@ body {
 	}
 }
 
+.table-rules__row--header {
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+}
+
 .table-rules__item {
 	flex: 1 0 25%;
 	padding: .4rem;
 	border-collapse: collapse;
 	border-right: 1px solid $own-mutedgray;
-
-	&:first-child {
-		border-left: 1px solid $own-mutedgray;
-	}
 }
 
 .table-rules__item--narrow {
