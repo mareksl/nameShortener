@@ -260,7 +260,7 @@ body {
 
 .manual {
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   top: 0;
   right: 0;
   bottom: 0;
@@ -624,7 +624,7 @@ body {
 
 [data-tooltip] {
   position: relative;
-  z-index: 2;
+  z-index: 1;
   cursor: pointer; }
   [data-tooltip]:after, [data-tooltip]:before {
     transition: transform .2s;
