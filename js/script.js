@@ -91,18 +91,14 @@ var animation = (function() {
     notify: notify
   };
 }());
-//-----------------------------------------------------------
 var nameChecker = (function() {
   'use strict';
-  // CHECK LENGTH
   var lengthCheck = function(target) {
     return target.length;
   };
-  // MAXIMUM lENGTH
   var maxLength = function(target, max) {
     return lengthCheck(target) > max;
   };
-  // REPLACE LETTER
   var replaceLetter = function(string, options) {
     var value = string;
     var regex;
@@ -114,7 +110,6 @@ var nameChecker = (function() {
     }
     return value;
   };
-  //REPLACE UMLAUTS
   var replaceUmlauts = function(string) {
     return replaceLetter(string, {
       '\u00c4': 'Ae',
@@ -126,42 +121,35 @@ var nameChecker = (function() {
       '\u00df': 'ss',
     });
   };
-  //REPLACE SLASHES
   var replaceSlashes = function(string) {
     return replaceLetter(string, {
       '/': '%2F'
     });
   };
-  //GENERATE TRANSLATE LINK
   var translateLink = function(string) {
     return 'https://translate.google.com/#auto/en/' + replaceSlashes(encodeURI(removeBreaks(string)));
   };
-  //REMOVE PARENS
   var removeParens = function(string) {
     return replaceLetter(string, {
       '[()]': ''
     });
   };
-  //REMOVE LINE BREAKS
   var removeBreaks = function(string) {
     return replaceLetter(string, {
       '\n': ' '
     });
   };
-  //REMOVE DASHES
   var removeDashes = function(string) {
     return replaceLetter(string, {
       '-': ' ',
       '\\s\\s\+': ' '
     });
   };
-  //REMOVE WHITESPACE
   var removeWhitespace = function(string) {
     return replaceLetter(string, {
       '\\s': ''
     });
   };
-  // ADD CLASSES
   var addShareClasses = function(name, sClasses) {
     var output = [];
     for (var i = 0; i < sClasses.length; i++) {
@@ -173,22 +161,17 @@ var nameChecker = (function() {
   };
   var shortenName = function(name, shareClasses, rules, lengths) {
     var shortenedNames = [];
-    // add share classes for length calculation
     var nameWithShareclasses = addShareClasses(name, shareClasses);
-    // find out longest possible name (with sc if any)
     var longest = name;
     if (nameWithShareclasses.length > 0) {
       longest = nameWithShareclasses.reduce(function(a, b) {
         return a.length > b.length ? a : b;
       });
     }
-    // max length of share class to add
     var maxShareClassLen = longest.length - name.length;
-    // lengths to shorten name to
     var shortenToLen = lengths.map(function(e) {
       return e - maxShareClassLen;
     });
-    // shortening algorithm
     var shorten = function(value, options, maxlen) {
       var len = value.length;
       if (len <= maxlen) {
@@ -233,8 +216,6 @@ var nameChecker = (function() {
         }
       }
     };
-    // shortening algorithm END
-    // output
     for (let i = 0; i < shortenToLen.length; i++) {
       var short = shorten(name, rules, shortenToLen[i]);
       shortenedNames.push(short);
@@ -243,15 +224,10 @@ var nameChecker = (function() {
   };
   var shortenProcess = function(name, options, rules, shareClasses, lengths) {
     var shortenedName = name;
-    // remove parentheses
     shortenedName = options.removeParens ? removeParens(shortenedName) : shortenedName;
-    // remove dashes
     shortenedName = options.removeDashes ? removeDashes(shortenedName) : shortenedName;
-    // remove whitespace
     shortenedName = options.removeWhitespace ? removeWhitespace(shortenedName) : shortenedName;
-    // replace umlauts
     shortenedName = options.replaceUmlauts ? replaceUmlauts(shortenedName) : shortenedName;
-    // shorten name
     shortenedName = options.shortenName ? shortenName(shortenedName, shareClasses, rules, lengths) : [shortenedName, shortenedName, shortenedName];
     for (var i = 0; i < shortenedName.length; i++) {
       var type = i === 2 ? 'In-House' : i === 1 ? 'Short' : '';
@@ -277,7 +253,6 @@ var nameChecker = (function() {
       return v.toLowerCase() === prop.toLowerCase();
     }).length > 0;
   };
-  //RETURN OBJECT
   return {
     lengthCheck: lengthCheck,
     replaceUmlauts: replaceUmlauts,
@@ -288,7 +263,6 @@ var nameChecker = (function() {
     shortenProcess: shortenProcess
   };
 }());
-//-----------------------------------------------------------
 var loadRules = (function() {
   var load = function(createRules) {
     localStorage.localRulesSaved = true;
@@ -299,11 +273,10 @@ var loadRules = (function() {
       animation.notify('No local rules found!', 'warning');
       var xobj = new XMLHttpRequest();
       xobj.overrideMimeType("application/json");
-      xobj.open('GET', 'js/rules.json', true); // Replace 'my_data' with the path to your file
+      xobj.open('GET', 'js/rules.json', true);
       xobj.onreadystatechange = function() {
         if (xobj.readyState == 4) {
           if (xobj.status == "200") {
-            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
             createRules(xobj.responseText);
             animation.notify('Default rules loaded!', 'success');
           } else {
@@ -356,31 +329,29 @@ var loadRules = (function() {
     uploadRules: uploadRules
   };
 }());
-//-----------------------------------------------------------
 var elements = (function() {
   'use strict';
-  // SELECTOR
   var $ = function(el, context) {
     context = context || document;
     return context.querySelector(el);
   };
   return {
-    inputName: $('#inputName'), // INITIAL NAME INPUT
-    outputName: $('#outputName'), // PROCESSED NAME OUTPUT
-    outputShortName: $('#outputShortName'), // PROCESSED SHORT NAME OUTPUT
-    outputInHouseName: $('#outputInHouseName'), // PROCESSED IN HOUSE NAME OUTPUT
-    lenOutputName: $('#lenOutputName'), // PROCESSED NAME OUTPUT
-    lenOutputShortName: $('#lenOutputShortName'), // PROCESSED SHORT NAME OUTPUT
+    inputName: $('#inputName'),
+    outputName: $('#outputName'),
+    outputShortName: $('#outputShortName'),
+    outputInHouseName: $('#outputInHouseName'),
+    lenOutputName: $('#lenOutputName'),
+    lenOutputShortName: $('#lenOutputShortName'),
     lenOutputInHouseName: $('#lenOutputInHouseName'),
-    lenName: $('#lenName'), // NAME LENGTH
-    inputObj: $('#inputObj'), // OBJECTIVE INPUT
-    lenObj: $('#lenObj'), // OBJECTIVE LENGTH
-    showRules: $('#showRules'), // RULES BUTTON
-    divRules: $('#sectionRules'), // RULES LIST
-    shareClassesOutput: $('#shareClassesOutput'), // NAME WITH SC OUTPUT
-    shareClassesShortOutput: $('#shareClassesShortOutput'), // SHORT NAME WITH SC OUTPUT
-    shareClassesInHouseOutput: $('#shareClassesInHouseOutput'), // IN HOUSE NAME WITH SC OUTPUT
-    shareClassesInput: $('#shareClasses'), // SHARE CLASSES INPUT
+    lenName: $('#lenName'),
+    inputObj: $('#inputObj'),
+    lenObj: $('#lenObj'),
+    showRules: $('#showRules'),
+    divRules: $('#sectionRules'),
+    shareClassesOutput: $('#shareClassesOutput'),
+    shareClassesShortOutput: $('#shareClassesShortOutput'),
+    shareClassesInHouseOutput: $('#shareClassesInHouseOutput'),
+    shareClassesInput: $('#shareClasses'),
     btnSaveRules: $('#btnSaveRules'),
     btnResetRules: $('#btnResetRules'),
     btnCloseRules: $('#btnCloseRules'),
@@ -407,11 +378,8 @@ var elements = (function() {
     manualWrapper: $('#manualWrapper'),
     manualClose: $('#manualClose'),
     manualOpen: $('#manualOpen')
-    // sectionReplace : $('#sectionReplace'),
-    // replaceChars : $('#replaceChars');
   };
 }());
-//-----------------------------------------------------------
 var init = (function(lengths) {
   'use strict';
   var rules;
@@ -653,7 +621,7 @@ var init = (function(lengths) {
     link.setAttribute("href", encodedUri);
     link.setAttribute("download", "rules.json");
     animation.notify('Exporting to JSON!');
-    document.body.appendChild(link); // Required for FF
+    document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   });
@@ -694,7 +662,7 @@ var init = (function(lengths) {
       link.setAttribute("href", encodedUri);
       link.setAttribute("download", "names.csv");
       animation.notify('Exporting to CSV!');
-      document.body.appendChild(link); // Required for FF
+      document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
     }
