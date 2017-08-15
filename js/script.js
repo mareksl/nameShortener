@@ -22,7 +22,6 @@ const animation = (function() {
   function notify(message, options) {
     options = options || {};
     const timeout = options.time || 2500;
-    const type = options.type || undefined;
     const notification = document.createElement('div');
     const text = document.createTextNode(message);
     const span = document.createElement('span');
@@ -409,7 +408,7 @@ const elements = (function() {
     manualOpen: document.querySelector('#manualOpen')
   };
 }());
-const init = (function(lengths) {
+(function(lengths) {
   var rules;
 
   function displayLength(input, output, max) {
