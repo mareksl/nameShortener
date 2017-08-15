@@ -22,8 +22,6 @@ gulp.task('useref', function(){
   return gulp.src('app/*.html')
     .pipe(useref())
     .pipe(gulpIf('*.js', uglify()))
-			.on('error', function (err) { gutil.log(gutil.colors.red('[Error]'), err.toString());
-		})
     // Minifies only if it's a CSS file
     .pipe(gulpIf('*.css', cssnano()))
     .pipe(gulp.dest('docs'))
