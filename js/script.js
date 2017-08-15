@@ -2,12 +2,12 @@
 /*jshint browser:true */
 /*jshint strict:global */
 'use strict';
-var animation = (function() {
+const animation = (function() {
   function fadeOut(el) {
     el.classList.remove('notification--visible');
-    var prevNotes = document.querySelectorAll('.notification');
-    var arr = [];
-    for (var i = prevNotes.length; i--; arr.unshift(prevNotes[i]));
+    const prevNotes = document.querySelectorAll('.notification');
+    const arr = [];
+    for (let i = prevNotes.length; i--; arr.unshift(prevNotes[i]));
     arr.reverse();
     for (let i = arr.indexOf(el) + 1; i < arr.length; i++) {
       let topValue = isNaN(parseInt(arr[i].style.top)) ? 0 : parseInt(arr[i].style.top);
@@ -21,11 +21,11 @@ var animation = (function() {
 
   function notify(message, options) {
     options = options || {};
-    var timeout = options.time || 2500;
-    var type = options.type || undefined;
-    var notification = document.createElement('div');
-    var text = document.createTextNode(message);
-    var span = document.createElement('span');
+    const timeout = options.time || 2500;
+    const type = options.type || undefined;
+    const notification = document.createElement('div');
+    const text = document.createTextNode(message);
+    const span = document.createElement('span');
     span.classList.add('notification__message');
     span.appendChild(text);
     notification.appendChild(span);
@@ -45,7 +45,7 @@ var animation = (function() {
         break;
       case 'error':
         notification.classList.add('notification--error');
-        var close = document.createElement('button');
+        const close = document.createElement('button');
         close.classList.add('notification__close');
         close.innerHTML = '&#10060;';
         close.setAttribute('aria-label', 'Close Notification');
@@ -57,10 +57,10 @@ var animation = (function() {
         break;
       case 'confirm':
         notification.classList.add('notification--confirm');
-        var buttons = document.createElement('div');
+        const buttons = document.createElement('div');
         buttons.classList.add('notification__buttons');
-        var buttonOK = document.createElement('button');
-        var buttonCancel = document.createElement('button');
+        const buttonOK = document.createElement('button');
+        const buttonCancel = document.createElement('button');
         buttonOK.classList.add('button', 'button--narrow');
         buttonOK.innerHTML = 'OK';
         buttonOK.addEventListener('click', function() {
@@ -83,7 +83,7 @@ var animation = (function() {
     }
     document.body.appendChild(notification);
     notification.computedHeight = notification.offsetHeight + parseFloat(window.getComputedStyle(notification, null).getPropertyValue('margin-top')) / 2;
-    var prevNotes = document.querySelectorAll('.notification');
+    const prevNotes = document.querySelectorAll('.notification');
     for (let i = 0; i < prevNotes.length - 1; ++i) {
       let topValue = isNaN(parseInt(prevNotes[i].style.top)) ? 0 : parseInt(prevNotes[i].style.top);
       topValue += notification.computedHeight;
@@ -97,17 +97,16 @@ var animation = (function() {
     notify: notify
   };
 }());
-var nameChecker = (function() {
+const nameChecker = (function() {
   function maxLength(target, max) {
     return target.length > max;
   }
 
   function replaceLetter(string, options) {
     var value = string;
-    var regex;
-    for (var letter in options) {
+    for (let letter in options) {
       if (options.hasOwnProperty(letter)) {
-        regex = new RegExp(letter, 'g');
+        const regex = new RegExp(letter, 'g');
         value = value.replace(regex, options[letter]);
       }
     }
@@ -162,8 +161,8 @@ var nameChecker = (function() {
   }
 
   function addShareClasses(name, sClasses) {
-    var output = [];
-    for (var i = 0; i < sClasses.length; i++) {
+    const output = [];
+    for (let i = 0; i < sClasses.length; i++) {
       if (sClasses[i] !== '') {
         output.push(name + ' ' + sClasses[i]);
       }
@@ -172,31 +171,31 @@ var nameChecker = (function() {
   }
 
   function shortenName(name, shareClasses, rules, lengths) {
-    var shortenedNames = [];
-    var nameWithShareclasses = addShareClasses(name, shareClasses);
+    const shortenedNames = [];
+    const nameWithShareclasses = addShareClasses(name, shareClasses);
     var longest = name;
     if (nameWithShareclasses.length > 0) {
       longest = nameWithShareclasses.reduce(function(a, b) {
         return a.length > b.length ? a : b;
       });
     }
-    var maxShareClassLen = longest.length - name.length;
-    var shortenToLen = lengths.map(function(e) {
+    const maxShareClassLen = longest.length - name.length;
+    const shortenToLen = lengths.map(function(e) {
       return e - maxShareClassLen;
     });
 
     function shorten(value, options, maxlen) {
-      var len = value.length;
+      const len = value.length;
       if (len <= maxlen) {
         return value;
       } else {
-        var searches = [];
-        for (var prop in options) {
+        const searches = [];
+        for (let prop in options) {
           if (options.hasOwnProperty(prop) && prop.length > options[prop].replacements[0].length) {
-            var regex = new RegExp(prop, 'gi');
+            const regex = new RegExp(prop, 'gi');
             var match;
             while ((match = regex.exec(value)) != null) {
-              var result = [];
+              const result = [];
               result.push(match);
               result.push(options[prop]);
               result.push(match.index);
@@ -209,28 +208,28 @@ var nameChecker = (function() {
         } else {
           var newvalue = value;
           searches.sort(function(a, b) {
-            var aPriority = a[1].priority,
-              bPriority = b[1].priority,
-              aIndex = a[2],
-              bIndex = b[2];
+            const aPriority = a[1].priority;
+            const bPriority = b[1].priority;
+            const aIndex = a[2];
+            const bIndex = b[2];
             if (aPriority == bPriority) {
               return bIndex - aIndex;
             } else {
               return bPriority - aPriority;
             }
           });
-          var pos = searches[0][2];
-          var oldstring = newvalue.substring(0, pos);
-          var newstring = newvalue.substring(pos);
-          newstring = newstring.replace(searches[0][0], searches[0][1].replacements[0]);
-          newvalue = oldstring + newstring;
+          const pos = searches[0][2];
+          const oldString = newvalue.substring(0, pos);
+          const newString = newvalue.substring(pos);
+          const replacedString = newString.replace(searches[0][0], searches[0][1].replacements[0]);
+          newvalue = oldString + replacedString;
           newvalue = shorten(newvalue, options, maxlen);
           return newvalue;
         }
       }
     }
     for (let i = 0; i < shortenToLen.length; i++) {
-      var short = shorten(name, rules, shortenToLen[i]);
+      const short = shorten(name, rules, shortenToLen[i]);
       shortenedNames.push(short);
     }
     return shortenedNames;
@@ -243,8 +242,8 @@ var nameChecker = (function() {
     shortenedName = options.removeWhitespace ? removeWhitespace(shortenedName) : shortenedName;
     shortenedName = options.replaceUmlauts ? replaceUmlauts(shortenedName) : shortenedName;
     shortenedName = options.shortenName ? shortenName(shortenedName, shareClasses, rules, lengths) : [shortenedName, shortenedName, shortenedName];
-    for (var i = 0; i < shortenedName.length; i++) {
-      var nameType = i === 2 ? 'In-House' : i === 1 ? 'Short' : '';
+    for (let i = 0; i < shortenedName.length; i++) {
+      const nameType = i === 2 ? 'In-House' : i === 1 ? 'Short' : '';
       var nameWithShareclasses;
       if (shareClasses.length > 0) {
         nameWithShareclasses = addShareClasses(shortenedName[i], shareClasses).reduce(function(a, b) {
@@ -279,7 +278,7 @@ var nameChecker = (function() {
     shortenProcess: shortenProcess
   };
 }());
-var loadRules = (function() {
+const loadRules = (function() {
   function load(createRules) {
     localStorage.localRulesSaved = true;
     if (typeof localStorage.localRules !== 'undefined') {
@@ -291,7 +290,7 @@ var loadRules = (function() {
       animation.notify('No local rules found!', {
         type: 'warning'
       });
-      var xobj = new XMLHttpRequest();
+      const xobj = new XMLHttpRequest();
       xobj.overrideMimeType("application/json");
       xobj.open('GET', 'js/rules.json', true);
       xobj.onreadystatechange = function() {
@@ -324,11 +323,11 @@ var loadRules = (function() {
   }
 
   function uploadRules(e, createRules) {
-    var fileTypes = ['json', 'txt'];
-    var maxSize = 1000000;
-    var input = e.target;
+    const fileTypes = ['json', 'txt'];
+    const maxSize = 1000000;
+    const input = e.target;
     if (input.files && input.files[0]) {
-      var extension = input.files[0].name.split('.').pop().toLowerCase();
+      const extension = input.files[0].name.split('.').pop().toLowerCase();
       if (fileTypes.indexOf(extension) < 0) {
         animation.notify('Only .json and .txt files allowed!', {
           type: 'error'
@@ -338,7 +337,7 @@ var loadRules = (function() {
           type: 'error'
         });
       } else {
-        var reader = new FileReader();
+        const reader = new FileReader();
         reader.onloadstart = function(e) {
           animation.notify('Uploading rules.');
         };
@@ -363,7 +362,7 @@ var loadRules = (function() {
     uploadRules: uploadRules
   };
 }());
-var elements = (function() {
+const elements = (function() {
   return {
     inputName: document.querySelector('#inputName'),
     outputName: document.querySelector('#outputName'),
@@ -381,6 +380,7 @@ var elements = (function() {
     shareClassesShortOutput: document.querySelector('#shareClassesShortOutput'),
     shareClassesInHouseOutput: document.querySelector('#shareClassesInHouseOutput'),
     shareClassesInput: document.querySelector('#shareClasses'),
+    btnsRules: document.querySelector('#btnsRules'),
     btnSaveRules: document.querySelector('#btnSaveRules'),
     btnResetRules: document.querySelector('#btnResetRules'),
     btnCloseRules: document.querySelector('#btnCloseRules'),
@@ -409,7 +409,7 @@ var elements = (function() {
     manualOpen: document.querySelector('#manualOpen')
   };
 }());
-var init = (function(lengths) {
+const init = (function(lengths) {
   var rules;
 
   function displayLength(input, output, max) {
@@ -426,15 +426,31 @@ var init = (function(lengths) {
   }
 
   function selectElementContents(el) {
-    var range = document.createRange();
+    const range = document.createRange();
     range.selectNodeContents(el);
-    var sel = window.getSelection();
+    const sel = window.getSelection();
     sel.removeAllRanges();
     sel.addRange(range);
   }
 
+  function copyText(el) {
+    selectElementContents(el);
+    try {
+      let success = document.execCommand('copy');
+      let msg = success ? 'successful' : 'unsuccessful';
+      let status = success ? 'success' : 'error';
+      animation.notify('Copying text was ' + msg + '!', {
+        type: status
+      });
+    } catch (e) {
+      animation.notify('Unable to copy!', {
+        type: 'error'
+      });
+    }
+  }
+
   function addShareClasses(name, sClassesIn, output, max) {
-    var sClasses = sClassesIn.value.length > 0 ? sClassesIn.value.split('\n') : [];
+    const sClasses = sClassesIn.value.length > 0 ? sClassesIn.value.split('\n') : [];
     while (output.firstChild) {
       output.removeChild(output.firstChild);
     }
@@ -455,19 +471,7 @@ var init = (function(lengths) {
       output.appendChild(newShareClass);
       output.appendChild(newShareClassLen);
       newShareClassLen.addEventListener('click', function() {
-        selectElementContents(newShareClass);
-        try {
-          let success = document.execCommand('copy');
-          let msg = success ? 'successful' : 'unsuccessful';
-          let status = success ? 'success' : 'error';
-          animation.notify('Copying text was ' + msg + '!', {
-            type: status
-          });
-        } catch (e) {
-          animation.notify('Unable to copy!', {
-            type: 'error'
-          });
-        }
+        copyText(newShareClass);
       });
     }
   }
@@ -540,9 +544,9 @@ var init = (function(lengths) {
   }
   load();
   elements.btnAddRule.addEventListener('click', function(e) {
-    var key = elements.addRuleKey.value,
-      value = elements.addRuleValue.value,
-      priority = elements.addRulePriority.value <= 99 ? elements.addRulePriority.value : 99;
+    const key = elements.addRuleKey.value;
+    const value = elements.addRuleValue.value;
+    const priority = elements.addRulePriority.value <= 99 ? elements.addRulePriority.value : 99;
     if (key !== '' && value !== '') {
       if (rules.hasOwnPropertyCI(key)) {
         animation.notify('Rule already exists!', {
@@ -568,43 +572,73 @@ var init = (function(lengths) {
   elements.addRulePriority.addEventListener('input', function(e) {
     elements.addRulePriority.value = elements.addRulePriority.value.replace(/\D+/g, '');
   });
-  elements.btnRemoveRules.addEventListener('click', function(e) {
-    animation.notify('Do you want to remove all rules?', {
-      type: 'confirm',
-      callback: function() {
-        rules = {};
-        while (elements.tableBody.firstChild) {
-          elements.tableBody.removeChild(elements.tableBody.firstChild);
-        }
+  (function listenRules() {
+    elements.btnsRules.addEventListener('click', function(e) {
+      switch (e.target) {
+        case elements.btnSaveRules:
+          modifyRules('saved');
+          break;
+        case elements.btnResetRules:
+          animation.notify('Do you want to reset to default rules?', {
+            type: 'confirm',
+            callback: function() {
+              animation.notify('Rules reset to default!');
+              localStorage.removeItem('localRules');
+              localStorage.removeItem('localRulesSaved');
+              load();
+            }
+          });
+          break;
+        case elements.btnRemoveRules:
+          animation.notify('Do you want to remove all rules?', {
+            type: 'confirm',
+            callback: function() {
+              rules = {};
+              while (elements.tableBody.firstChild) {
+                elements.tableBody.removeChild(elements.tableBody.firstChild);
+              }
+              modifyRules('changed');
+            }
+          });
+          break;
+        case elements.btnDownloadRules:
+          const exportRules = "data:text/json;charset=utf-8," + JSON.stringify(rules);
+          const encodedUri = encodeURI(exportRules);
+          const link = document.createElement("a");
+          link.setAttribute("href", encodedUri);
+          link.setAttribute("download", "rules.json");
+          animation.notify('Exporting to JSON!');
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          break;
+        case elements.btnUploadRules:
+          e.target.value = null;
+          break;
+        case elements.btnCloseRules:
+          elements.divRules.classList.remove('section__rules--show');
+          break;
+      }
+    });
+    elements.btnUploadRules.addEventListener('change', function(e) {
+      loadRules.uploadRules(e, function(response) {
+        rules = JSON.parse(response);
+        tableFromJSON(rules, elements.tableBody);
         modifyRules('changed');
+      });
+    });
+    window.addEventListener('beforeunload', function(e) {
+      if (localStorage.localRulesSaved === 'false') {
+        const dialogText = 'You have unsaved rules!';
+        e.returnValue = dialogText;
+        return dialogText;
       }
     });
-  });
-  elements.btnSaveRules.addEventListener('click', function(e) {
-    modifyRules('saved');
-  });
-  elements.btnResetRules.addEventListener('click', function(e) {
-    animation.notify('Do you want to reset to default rules?', {
-      type: 'confirm',
-      callback: function() {
-        animation.notify('Rules reset to default!');
-        localStorage.removeItem('localRules');
-        localStorage.removeItem('localRulesSaved');
-        load();
-      }
-    });
-  });
-  window.addEventListener('beforeunload', function(e) {
-    if (localStorage.localRulesSaved === 'false') {
-      var dialogText = 'You have unsaved rules!';
-      e.returnValue = dialogText;
-      return dialogText;
-    }
-  });
+  }());
 
   function displayAndAdd(output, lenout, lennum, shareClassesOutput) {
-    var value = output.value;
-    var length = lengths[lennum];
+    const value = output.value;
+    const length = lengths[lennum];
     displayLength(value, lenout, length);
     addShareClasses(value, elements.shareClassesInput, shareClassesOutput, length);
   }
@@ -626,15 +660,15 @@ var init = (function(lengths) {
     displayAndAdd(elements.outputInHouseName, elements.lenOutputInHouseName, 2, elements.shareClassesInHouseOutput);
   });
   elements.buttonShorten.addEventListener('click', function(e) {
-    var value = elements.inputName.value;
-    var options = {};
+    const value = elements.inputName.value;
+    const options = {};
     options.replaceUmlauts = elements.removeSpecial.checked;
     options.removeParens = elements.removeParens.checked;
     options.shortenName = elements.shortenNames.checked;
     options.removeDashes = elements.removeDashes.checked;
     options.removeWhitespace = elements.removeWhitespace.checked;
-    var sClasses = elements.shareClassesInput.value.length > 0 ? elements.shareClassesInput.value.split('\n') : [];
-    var shortened = nameChecker.shortenProcess(value, options, rules, sClasses, lengths);
+    const sClasses = elements.shareClassesInput.value.length > 0 ? elements.shareClassesInput.value.split('\n') : [];
+    const shortened = nameChecker.shortenProcess(value, options, rules, sClasses, lengths);
     elements.outputName.value = shortened.shortenedName;
     elements.outputShortName.value = shortened.shortenedNameShort;
     elements.outputInHouseName.value = shortened.shortenedNameInHouse;
@@ -664,54 +698,40 @@ var init = (function(lengths) {
       elements.divRules.classList.remove('section__rules--show');
     }
   });
-  elements.btnCloseRules.addEventListener('click', function(e) {
-    elements.divRules.classList.remove('section__rules--show');
-  });
-  elements.btnDownloadRules.addEventListener('click', function(e) {
-    var exportRules = "data:text/json;charset=utf-8," + JSON.stringify(rules);
-    var encodedUri = encodeURI(exportRules);
-    var link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "rules.json");
-    animation.notify('Exporting to JSON!');
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  });
 
   function autoExpand(e) {
-    var el = e.target;
+    const el = e.target;
     el.style.height = 'inherit';
     el.style.height = (el.scrollHeight + 4) + 'px';
   }
   elements.shareClassesInput.addEventListener('input', autoExpand);
-  var createCsvArray = function() {
-    var nameFields = elements.shareClassesOutput.getElementsByTagName('li');
-    var nameFieldsShort = elements.shareClassesShortOutput.getElementsByTagName('li');
-    var nameFieldsInHouse = elements.shareClassesInHouseOutput.getElementsByTagName('li');
+  const createCsvArray = function() {
+    const nameFields = elements.shareClassesOutput.getElementsByTagName('li');
+    const nameFieldsShort = elements.shareClassesShortOutput.getElementsByTagName('li');
+    const nameFieldsInHouse = elements.shareClassesInHouseOutput.getElementsByTagName('li');
     if (nameFields.length === 0 && nameFieldsShort.length === 0 && nameFieldsInHouse.length === 0) {
       animation.notify('Nothing to export!', {
         type: 'error'
       });
     } else {
-      var array = [
+      const array = [
         ['Name', 'Short Name', 'In-House Name']
       ];
-      for (var i = 0; i < nameFields.length; i++) {
+      for (let i = 0; i < nameFields.length; i++) {
         let names = [];
         names[0] = (nameFields[i].innerHTML);
         names[1] = (nameFieldsShort[i].innerHTML);
         names[2] = (nameFieldsInHouse[i].innerHTML);
         array.push(names);
       }
-      var lineArray = [];
+      const lineArray = [];
       array.forEach(function(infoArray, index) {
-        var line = infoArray.join(",");
+        const line = infoArray.join(",");
         lineArray.push(index == 0 ? "data:text/csv;charset=utf-8," + line : line);
       });
-      var csvContent = lineArray.join("\n");
-      var encodedUri = encodeURI(csvContent);
-      var link = document.createElement("a");
+      const csvContent = lineArray.join("\n");
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
       link.setAttribute("href", encodedUri);
       link.setAttribute("download", "names.csv");
       animation.notify('Exporting to CSV!');
@@ -736,15 +756,5 @@ var init = (function(lengths) {
       elements.manualWrapper.classList.remove('manual--visible');
       elements.manualWrapper.addEventListener("transitionend", function(event) {});
     }
-  });
-  elements.btnUploadRules.addEventListener('click', function(e) {
-    e.target.value = null;
-  });
-  elements.btnUploadRules.addEventListener('change', function(e) {
-    loadRules.uploadRules(e, function(response) {
-      rules = JSON.parse(response);
-      tableFromJSON(rules, elements.tableBody);
-      modifyRules('changed');
-    });
   });
 }([50, 30, 40]));
