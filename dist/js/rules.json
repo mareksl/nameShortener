@@ -1,0 +1,1954 @@
+{
+  "Absolute": {
+    "priority": 0,
+    "replacements": ["Abst"]
+  },
+  "Absolute Return": {
+    "priority": 0,
+    "replacements": ["Abs Rtn"]
+  },
+  "Access": {
+    "priority": 0,
+    "replacements": ["Accss"]
+  },
+  "Account": {
+    "priority": 0,
+    "replacements": ["Acct"]
+  },
+  "Accumulation": {
+    "priority": 0,
+    "replacements": ["Acc"]
+  },
+  "Achievement": {
+    "priority": 0,
+    "replacements": ["Achvmnt"]
+  },
+  "Achiever": {
+    "priority": 0,
+    "replacements": ["Achvr"]
+  },
+  "Adjustable": {
+    "priority": 0,
+    "replacements": ["Adjstbl"]
+  },
+  "Advantage": {
+    "priority": 0,
+    "replacements": ["Advtg"]
+  },
+  "Adventurous": {
+    "priority": 0,
+    "replacements": ["Advt"]
+  },
+  "Advisor": {
+    "priority": 0,
+    "replacements": ["Advsr"]
+  },
+  "Agency": {
+    "priority": 0,
+    "replacements": ["Agncy"]
+  },
+  "Aggregate": {
+    "priority": 0,
+    "replacements": ["Aggrgte"]
+  },
+  "Aggressive": {
+    "priority": 0,
+    "replacements": ["Aggrssv"]
+  },
+  "Agricultural": {
+    "priority": 0,
+    "replacements": ["Agric"]
+  },
+  "Alliance": {
+    "priority": 0,
+    "replacements": ["Allnc"]
+  },
+  "Allocated": {
+    "priority": 0,
+    "replacements": ["Alloctd"]
+  },
+  "Allocation": {
+    "priority": 0,
+    "replacements": ["Alloctn"]
+  },
+  "Alpha": {
+    "priority": 0,
+    "replacements": ["Alp"]
+  },
+  "Alternative": {
+    "priority": 0,
+    "replacements": ["Altern"]
+  },
+  "America": {
+    "priority": 0,
+    "replacements": ["Amer"]
+  },
+  "Analyst": {
+    "priority": 0,
+    "replacements": ["Anls"]
+  },
+  "Annuity": {
+    "priority": 0,
+    "replacements": ["Ann"]
+  },
+  "Appreciation": {
+    "priority": 0,
+    "replacements": ["Apprectn"]
+  },
+  "Arbitrage": {
+    "priority": 0,
+    "replacements": ["Arbtge"]
+  },
+  "Asia-Pacific": {
+    "priority": 0,
+    "replacements": ["As-Pac"]
+  },
+  "Asia Pacific": {
+    "priority": 0,
+    "replacements": ["AsPac"]
+  },
+  "Asset": {
+    "priority": 0,
+    "replacements": ["Asst"]
+  },
+  "Australia": {
+    "priority": 0,
+    "replacements": ["Austl"]
+  },
+  "Australian": {
+    "priority": 0,
+    "replacements": ["Astr"]
+  },
+  "Avenue": {
+    "priority": 0,
+    "replacements": ["Ave"]
+  },
+  "Back Load": {
+    "priority": 0,
+    "replacements": ["BL"]
+  },
+  "Bahrain": {
+    "priority": 0,
+    "replacements": ["BH"]
+  },
+  "Balanced": {
+    "priority": 0,
+    "replacements": ["Blncd"]
+  },
+  "Bank": {
+    "priority": 0,
+    "replacements": ["Bk"]
+  },
+  "Banking": {
+    "priority": 0,
+    "replacements": ["Bkg"]
+  },
+  "Basic": {
+    "priority": 0,
+    "replacements": ["Bas"]
+  },
+  "Benchmark": {
+    "priority": 0,
+    "replacements": ["Bnmk"]
+  },
+  "Benefit": {
+    "priority": 0,
+    "replacements": ["Bnft"]
+  },
+  "Benefit Combination": {
+    "priority": 0,
+    "replacements": ["BC"]
+  },
+  "Best of America": {
+    "priority": 0,
+    "replacements": ["BOA"]
+  },
+  "Blue Chip": {
+    "priority": 0,
+    "replacements": ["Bl Chp"]
+  },
+  "Bond": {
+    "priority": 0,
+    "replacements": ["Bd"]
+  },
+  "British": {
+    "priority": 0,
+    "replacements": ["Brit"]
+  },
+  "Brothers": {
+    "priority": 0,
+    "replacements": ["Bros"]
+  },
+  "Builder": {
+    "priority": 0,
+    "replacements": ["Bldr"]
+  },
+  "Business": {
+    "priority": 0,
+    "replacements": ["Busns"]
+  },
+  "Capital": {
+    "priority": 0,
+    "replacements": ["Captl"]
+  },
+  "Cautious": {
+    "priority": 0,
+    "replacements": ["Caut"]
+  },
+  "Central": {
+    "priority": 0,
+    "replacements": ["Ctrl"]
+  },
+  "Century": {
+    "priority": 0,
+    "replacements": ["Ctry"]
+  },
+  "Champion": {
+    "priority": 0,
+    "replacements": ["Champ"]
+  },
+  "Channel Islands": {
+    "priority": 0,
+    "replacements": ["CI"]
+  },
+  "Charge": {
+    "priority": 0,
+    "replacements": ["Chrg"]
+  },
+  "Charter": {
+    "priority": 0,
+    "replacements": ["Chrtr"]
+  },
+  "Classic": {
+    "priority": 0,
+    "replacements": ["Clsc"]
+  },
+  "Colonial": {
+    "priority": 0,
+    "replacements": ["Colnl"]
+  },
+  "Commercial": {
+    "priority": 0,
+    "replacements": ["Comrcl"]
+  },
+  "Commodities": {
+    "priority": 0,
+    "replacements": ["Comdts"]
+  },
+  "Commodity": {
+    "priority": 0,
+    "replacements": ["Comdt"]
+  },
+  "Commodore": {
+    "priority": 0,
+    "replacements": ["Cmdr"]
+  },
+  "Commonwealth": {
+    "priority": 0,
+    "replacements": ["Cmwlth"]
+  },
+  "Communication": {
+    "priority": 0,
+    "replacements": ["Communic"]
+  },
+  "Companies": {
+    "priority": 0,
+    "replacements": ["Cos"]
+  },
+  "Company": {
+    "priority": 0,
+    "replacements": ["Co"]
+  },
+  "Compliant": {
+    "priority": 0,
+    "replacements": ["Compl"]
+  },
+  "Concentrated": {
+    "priority": 0,
+    "replacements": ["Conc"]
+  },
+  "Conditional": {
+    "priority": 0,
+    "replacements": ["Cdtnl"]
+  },
+  "Consecutive": {
+    "priority": 0,
+    "replacements": ["Cnsc"]
+  },
+  "Conservative": {
+    "priority": 0,
+    "replacements": ["Consv"]
+  },
+  "Consultants": {
+    "priority": 0,
+    "replacements": ["Cnslt"]
+  },
+  "Consumer": {
+    "priority": 0,
+    "replacements": ["Cnsmr"]
+  },
+  "Continental": {
+    "priority": 0,
+    "replacements": ["Contntl"]
+  },
+  "Contract": {
+    "priority": 0,
+    "replacements": ["Cntrct"]
+  },
+  "Controlled": {
+    "priority": 0,
+    "replacements": ["Cntrld"]
+  },
+  "Conversion": {
+    "priority": 0,
+    "replacements": ["Cnvr"]
+  },
+  "Convertible": {
+    "priority": 0,
+    "replacements": ["Conv"]
+  },
+  "Convertibles": {
+    "priority": 0,
+    "replacements": ["Convs"]
+  },
+  "Corporate": {
+    "priority": 0,
+    "replacements": ["Corp"]
+  },
+  "Country": {
+    "priority": 0,
+    "replacements": ["Cntry"]
+  },
+  "Creator": {
+    "priority": 0,
+    "replacements": ["Crtr"]
+  },
+  "Credit": {
+    "priority": 0,
+    "replacements": ["Crdt"]
+  },
+  "Cumulative": {
+    "priority": 0,
+    "replacements": ["Cuml"]
+  },
+  "Currency": {
+    "priority": 0,
+    "replacements": ["Curr"]
+  },
+  "Custom": {
+    "priority": 0,
+    "replacements": ["Cust"]
+  },
+  "Customized": {
+    "priority": 0,
+    "replacements": ["Cstm"]
+  },
+  "Cyclical": {
+    "priority": 0,
+    "replacements": ["Cyclcl"]
+  },
+  "Daily": {
+    "priority": 0,
+    "replacements": ["Dly"]
+  },
+  "Dean Witter": {
+    "priority": 0,
+    "replacements": ["DW"]
+  },
+  "Death": {
+    "priority": 0,
+    "replacements": ["Dth"]
+  },
+  "Death Benefit": {
+    "priority": 0,
+    "replacements": ["DB"]
+  },
+  "Debt": {
+    "priority": 0,
+    "replacements": ["Dbt"]
+  },
+  "Declaration": {
+    "priority": 0,
+    "replacements": ["Decl"]
+  },
+  "Defensive": {
+    "priority": 0,
+    "replacements": ["Def"]
+  },
+  "Deferred": {
+    "priority": 0,
+    "replacements": ["Defrd"]
+  },
+  "Defined": {
+    "priority": 0,
+    "replacements": ["Dfnd"]
+  },
+  "Delaware": {
+    "priority": 0,
+    "replacements": ["Del"]
+  },
+  "Derivatives": {
+    "priority": 0,
+    "replacements": ["Derivt"]
+  },
+  "Destinations": {
+    "priority": 0,
+    "replacements": ["Dest"]
+  },
+  "Developed": {
+    "priority": 0,
+    "replacements": ["Dvlp"]
+  },
+  "Developing Markets": {
+    "priority": 0,
+    "replacements": ["DevMkts"]
+  },
+  "Development": {
+    "priority": 0,
+    "replacements": ["Devpt"]
+  },
+  "Diluted": {
+    "priority": 0,
+    "replacements": ["Dil"]
+  },
+  "Dimensions": {
+    "priority": 0,
+    "replacements": ["Dmns"]
+  },
+  "Direct": {
+    "priority": 0,
+    "replacements": ["Dir"]
+  },
+  "Directed": {
+    "priority": 0,
+    "replacements": ["Drctd"]
+  },
+  "Directions": {
+    "priority": 0,
+    "replacements": ["Drct"]
+  },
+  "Director": {
+    "priority": 0,
+    "replacements": ["Drctr"]
+  },
+  "Disciplined": {
+    "priority": 0,
+    "replacements": ["Dspd"]
+  },
+  "Discovery": {
+    "priority": 0,
+    "replacements": ["Discvry"]
+  },
+  "Distribution": {
+    "priority": 0,
+    "replacements": ["Dist"]
+  },
+  "Diversified": {
+    "priority": 0,
+    "replacements": ["Dvsfd"]
+  },
+  "Dividend": {
+    "priority": 0,
+    "replacements": ["Div"]
+  },
+  "Dollar": {
+    "priority": 0,
+    "replacements": ["Dol"]
+  },
+  "Dreyfus": {
+    "priority": 0,
+    "replacements": ["Drey"]
+  },
+  "Duration": {
+    "priority": 0,
+    "replacements": ["Dur"]
+  },
+  "Dynamic": {
+    "priority": 0,
+    "replacements": ["Dyn"]
+  },
+  "Economy": {
+    "priority": 0,
+    "replacements": ["Econ"]
+  },
+  "Education": {
+    "priority": 0,
+    "replacements": ["Eductn"]
+  },
+  "Educator": {
+    "priority": 0,
+    "replacements": ["Educ"]
+  },
+  "Elite": {
+    "priority": 0,
+    "replacements": ["Elt"]
+  },
+  "Emerald": {
+    "priority": 0,
+    "replacements": ["Emrld"]
+  },
+  "Emerging": {
+    "priority": 0,
+    "replacements": ["Emerg"]
+  },
+  "Emerging Markets": {
+    "priority": 0,
+    "replacements": ["Em Mkts"]
+  },
+  "Employee": {
+    "priority": 0,
+    "replacements": ["Emplye"]
+  },
+  "Employer": {
+    "priority": 0,
+    "replacements": ["Emplyr"]
+  },
+  "Endeavor": {
+    "priority": 0,
+    "replacements": ["Endvr"]
+  },
+  "Energy": {
+    "priority": 0,
+    "replacements": ["Engy"]
+  },
+  "Engineering": {
+    "priority": 0,
+    "replacements": ["Eng"]
+  },
+  "Enhanced": {
+    "priority": 0,
+    "replacements": ["Enhcd"]
+  },
+  "Enhanced Death Benefit": {
+    "priority": 0,
+    "replacements": ["ED"]
+  },
+  "Enterprise": {
+    "priority": 0,
+    "replacements": ["Entrp"]
+  },
+  "Environmental": {
+    "priority": 0,
+    "replacements": ["Environ"]
+  },
+  "Equitable": {
+    "priority": 0,
+    "replacements": ["Eqtb"]
+  },
+  "Equities": {
+    "priority": 0,
+    "replacements": ["Eqs"]
+  },
+  "Equity": {
+    "priority": 0,
+    "replacements": ["Eq"]
+  },
+  "Equity Income": {
+    "priority": 0,
+    "replacements": ["Eq Inc"]
+  },
+  "Essentials": {
+    "priority": 0,
+    "replacements": ["Essntls"]
+  },
+  "Estate": {
+    "priority": 0,
+    "replacements": ["Est"]
+  },
+  "Euro": {
+    "priority": 0,
+    "replacements": ["EUR"]
+  },
+  "Europe": {
+    "priority": 0,
+    "replacements": ["Euro"]
+  },
+  "European": {
+    "priority": 0,
+    "replacements": ["Europn"]
+  },
+  "Evergreen": {
+    "priority": 0,
+    "replacements": ["Evrgrn"]
+  },
+  "Everyday": {
+    "priority": 0,
+    "replacements": ["Evrydy"]
+  },
+  "Excellence": {
+    "priority": 0,
+    "replacements": ["Excllnc"]
+  },
+  "Exceptional": {
+    "priority": 0,
+    "replacements": ["Excpt"]
+  },
+  "Exchange": {
+    "priority": 0,
+    "replacements": ["Exchg"]
+  },
+  "Exclusive": {
+    "priority": 0,
+    "replacements": ["Excl"]
+  },
+  "Exempt": {
+    "priority": 0,
+    "replacements": ["Exmt"]
+  },
+  "Exposure": {
+    "priority": 0,
+    "replacements": ["Expo"]
+  },
+  "Extension": {
+    "priority": 0,
+    "replacements": ["Extsn"]
+  },
+  "Extra": {
+    "priority": 0,
+    "replacements": ["Ext"]
+  },
+  "Far East": {
+    "priority": 0,
+    "replacements": ["F East"]
+  },
+  "Federal": {
+    "priority": 0,
+    "replacements": ["Fed"]
+  },
+  "Fidelity": {
+    "priority": 0,
+    "replacements": ["Fid"]
+  },
+  "Finance": {
+    "priority": 0,
+    "replacements": ["Fin"]
+  },
+  "Financial": {
+    "priority": 0,
+    "replacements": ["Finl"]
+  },
+  "Financial Services": {
+    "priority": 0,
+    "replacements": ["Finl Svcs"]
+  },
+  "Financing": {
+    "priority": 0,
+    "replacements": ["Fing"]
+  },
+  "First": {
+    "priority": 0,
+    "replacements": ["Fst"]
+  },
+  "Fixed": {
+    "priority": 0,
+    "replacements": ["Fxd"]
+  },
+  "Fixed Income": {
+    "priority": 0,
+    "replacements": ["Fxd Inc"]
+  },
+  "Fixed Interest": {
+    "priority": 0,
+    "replacements": ["Fixed Intr"]
+  },
+  "Flexible": {
+    "priority": 0,
+    "replacements": ["Flex"]
+  },
+  "Foreign": {
+    "priority": 0,
+    "replacements": ["Forgn"]
+  },
+  "Foreign Currency Deposit": {
+    "priority": 0,
+    "replacements": ["FCD"]
+  },
+  "Foundation": {
+    "priority": 0,
+    "replacements": ["Fndtn"]
+  },
+  "Franklin": {
+    "priority": 0,
+    "replacements": ["Frank"]
+  },
+  "Freedom": {
+    "priority": 0,
+    "replacements": ["Frdm"]
+  },
+  "Front Load": {
+    "priority": 0,
+    "replacements": ["FL"]
+  },
+  "Frontier": {
+    "priority": 0,
+    "replacements": ["Frtr"]
+  },
+  "Fund": {
+    "priority": 0,
+    "replacements": ["Fd"]
+  },
+  "Fundamental": {
+    "priority": 0,
+    "replacements": ["Fndm"]
+  },
+  "Future": {
+    "priority": 0,
+    "replacements": ["Futr"]
+  },
+  "Futures": {
+    "priority": 0,
+    "replacements": ["Futrs"]
+  },
+  "Futurity": {
+    "priority": 0,
+    "replacements": ["Ftry"]
+  },
+  "Gallery": {
+    "priority": 0,
+    "replacements": ["Gllry"]
+  },
+  "Gateway": {
+    "priority": 0,
+    "replacements": ["Gtwy"]
+  },
+  "Geared": {
+    "priority": 0,
+    "replacements": ["Gear"]
+  },
+  "General": {
+    "priority": 0,
+    "replacements": ["Gen"]
+  },
+  "Generation": {
+    "priority": 0,
+    "replacements": ["Gnrtn"]
+  },
+  "Germany": {
+    "priority": 0,
+    "replacements": ["Ger"]
+  },
+  "Gilt": {
+    "priority": 0,
+    "replacements": ["Glt"]
+  },
+  "Ginnie Mae": {
+    "priority": 0,
+    "replacements": ["GNMA"]
+  },
+  "Global": {
+    "priority": 0,
+    "replacements": ["Glbl"]
+  },
+  "Golden Select": {
+    "priority": 0,
+    "replacements": ["GldnSel"]
+  },
+  "Government": {
+    "priority": 0,
+    "replacements": ["Govt"]
+  },
+  "Grade": {
+    "priority": 0,
+    "replacements": ["Grd"]
+  },
+  "Greater": {
+    "priority": 0,
+    "replacements": ["Grtr"]
+  },
+  "Group": {
+    "priority": 0,
+    "replacements": ["Grp"]
+  },
+  "Gross": {
+    "priority": 0,
+    "replacements": ["Grs"]
+  },
+  "Growth": {
+    "priority": 0,
+    "replacements": ["Gro"]
+  },
+  "Growth & Income": {
+    "priority": 0,
+    "replacements": ["Gro & Inc"]
+  },
+  "Guaranteed": {
+    "priority": 0,
+    "replacements": ["Gteed"]
+  },
+  "Guernsey": {
+    "priority": 0,
+    "replacements": ["Gue"]
+  },
+  "Harvester": {
+    "priority": 0,
+    "replacements": ["Harv"]
+  },
+  "Health": {
+    "priority": 0,
+    "replacements": ["Hlth"]
+  },
+  "Health Sciences": {
+    "priority": 0,
+    "replacements": ["Hlth Sci"]
+  },
+  "Healthcare": {
+    "priority": 0,
+    "replacements": ["Hlthcr"]
+  },
+  "Hedge": {
+    "priority": 0,
+    "replacements": ["Hdge"]
+  },
+  "Hedged": {
+    "priority": 0,
+    "replacements": ["Hgd"]
+  },
+  "Heritage": {
+    "priority": 0,
+    "replacements": ["Htge"]
+  },
+  "High": {
+    "priority": 0,
+    "replacements": ["Hi"]
+  },
+  "High Income": {
+    "priority": 0,
+    "replacements": ["High Inc"]
+  },
+  "High Yield": {
+    "priority": 0,
+    "replacements": ["Hi Yield"]
+  },
+  "Holding": {
+    "priority": 0,
+    "replacements": ["Hldg"]
+  },
+  "Homeland": {
+    "priority": 0,
+    "replacements": ["Homelnd"]
+  },
+  "Horizon": {
+    "priority": 0,
+    "replacements": ["Horz"]
+  },
+  "House": {
+    "priority": 0,
+    "replacements": ["Hos"]
+  },
+  "Incentive": {
+    "priority": 0,
+    "replacements": ["Incntv"]
+  },
+  "Income": {
+    "priority": 0,
+    "replacements": ["Inc"]
+  },
+  "Income Benefit": {
+    "priority": 0,
+    "replacements": ["IB"]
+  },
+  "Independence": {
+    "priority": 0,
+    "replacements": ["Indpn"]
+  },
+  "Independent": {
+    "priority": 0,
+    "replacements": ["Indpnt"]
+  },
+  "Index": {
+    "priority": 0,
+    "replacements": ["Idx"]
+  },
+  "Index Linked": {
+    "priority": 0,
+    "replacements": ["Idx Lnk"]
+  },
+  "Index tracked": {
+    "priority": 0,
+    "replacements": ["Idx Trk"]
+  },
+  "Individual": {
+    "priority": 0,
+    "replacements": ["Indv"]
+  },
+  "Industrial": {
+    "priority": 0,
+    "replacements": ["Indust"]
+  },
+  "Inflation Linked": {
+    "priority": 0,
+    "replacements": ["Infl Lnk"]
+  },
+  "Information": {
+    "priority": 0,
+    "replacements": ["Info"]
+  },
+  "Infrastructure": {
+    "priority": 0,
+    "replacements": ["Infrastruct"]
+  },
+  "Initial": {
+    "priority": 0,
+    "replacements": ["Init"]
+  },
+  "Insights": {
+    "priority": 0,
+    "replacements": ["Ins"]
+  },
+  "Installment": {
+    "priority": 0,
+    "replacements": ["Insl"]
+  },
+  "Institutional": {
+    "priority": 0,
+    "replacements": ["Instl"]
+  },
+  "Institutional Service": {
+    "priority": 0,
+    "replacements": ["Instl Svc"]
+  },
+  "Instruments": {
+    "priority": 0,
+    "replacements": ["Instrum"]
+  },
+  "Insurance": {
+    "priority": 0,
+    "replacements": ["Ins"]
+  },
+  "Integration": {
+    "priority": 0,
+    "replacements": ["Integ"]
+  },
+  "Interest": {
+    "priority": 0,
+    "replacements": ["Intr"]
+  },
+  "Intermediate": {
+    "priority": 0,
+    "replacements": ["Intmdt"]
+  },
+  "International": {
+    "priority": 0,
+    "replacements": ["Internatl"]
+  },
+  "International Equity": {
+    "priority": 0,
+    "replacements": ["Intl Eq"]
+  },
+  "Interval": {
+    "priority": 0,
+    "replacements": ["Intv"]
+  },
+  "Invest": {
+    "priority": 0,
+    "replacements": ["Inv"]
+  },
+  "Investment": {
+    "priority": 0,
+    "replacements": ["Invt"]
+  },
+  "Investment Grade": {
+    "priority": 0,
+    "replacements": ["Invt Grd"]
+  },
+  "Investments": {
+    "priority": 0,
+    "replacements": ["Invts"]
+  },
+  "Investor": {
+    "priority": 0,
+    "replacements": ["Invr"]
+  },
+  "Investors": {
+    "priority": 0,
+    "replacements": ["Invrs"]
+  },
+  "Irregular": {
+    "priority": 0,
+    "replacements": ["Irreg"]
+  },
+  "Islamic": {
+    "priority": 0,
+    "replacements": ["Islmc"]
+  },
+  "Israel": {
+    "priority": 0,
+    "replacements": ["Isr"]
+  },
+  "Japan": {
+    "priority": 0,
+    "replacements": ["Jpn"]
+  },
+  "Kemper": {
+    "priority": 0,
+    "replacements": ["Kemp"]
+  },
+  "Large": {
+    "priority": 0,
+    "replacements": ["Lg"]
+  },
+  "Large Cap": {
+    "priority": 0,
+    "replacements": ["Lg Cap"]
+  },
+  "Large Cap Growth": {
+    "priority": 0,
+    "replacements": ["LCG"]
+  },
+  "Large Cap Value": {
+    "priority": 0,
+    "replacements": ["LCV"]
+  },
+  "Latin America": {
+    "priority": 0,
+    "replacements": ["Latin Amer"]
+  },
+  "Leaders": {
+    "priority": 0,
+    "replacements": ["Lds"]
+  },
+  "Leading": {
+    "priority": 0,
+    "replacements": ["Ldg"]
+  },
+  "Leverage": {
+    "priority": 0,
+    "replacements": ["Lvrg"]
+  },
+  "Life": {
+    "priority": 0,
+    "replacements": ["Lf"]
+  },
+  "Lifeplan": {
+    "priority": 0,
+    "replacements": ["Lfpln"]
+  },
+  "Lifetime": {
+    "priority": 0,
+    "replacements": ["Lftm"]
+  },
+  "Limited": {
+    "priority": 0,
+    "replacements": ["Ltd"]
+  },
+  "Limited Maturity": {
+    "priority": 0,
+    "replacements": ["Ltd Mat"]
+  },
+  "Link": {
+    "priority": 0,
+    "replacements": ["Lnk"]
+  },
+  "Liquidity": {
+    "priority": 0,
+    "replacements": ["Lqdty"]
+  },
+  "Local": {
+    "priority": 0,
+    "replacements": ["Loc"]
+  },
+  "Local Currency": {
+    "priority": 0,
+    "replacements": ["LC"]
+  },
+  "Long": {
+    "priority": 0,
+    "replacements": ["Lng"]
+  },
+  "Long Term": {
+    "priority": 0,
+    "replacements": ["LgTrm"]
+  },
+  "Luxembourg": {
+    "priority": 0,
+    "replacements": ["Lux"]
+  },
+  "Macquarie": {
+    "priority": 0,
+    "replacements": ["Macqre"]
+  },
+  "Managed": {
+    "priority": 0,
+    "replacements": ["Mngd"]
+  },
+  "Management": {
+    "priority": 0,
+    "replacements": ["Mgmnt"]
+  },
+  "Manager": {
+    "priority": 0,
+    "replacements": ["Mngr"]
+  },
+  "Manufacturers": {
+    "priority": 0,
+    "replacements": ["Mnfs"]
+  },
+  "Market": {
+    "priority": 0,
+    "replacements": ["Mrkt"]
+  },
+  "Market Place": {
+    "priority": 0,
+    "replacements": ["MrktPl"]
+  },
+  "Master": {
+    "priority": 0,
+    "replacements": ["Mstr"]
+  },
+  "Maturity": {
+    "priority": 0,
+    "replacements": ["Mat"]
+  },
+  "Medallion": {
+    "priority": 0,
+    "replacements": ["Medlln"]
+  },
+  "Medium Term": {
+    "priority": 0,
+    "replacements": ["MedTrm"]
+  },
+  "Mid Cap": {
+    "priority": 0,
+    "replacements": ["Mid Cp"]
+  },
+  "Mid Cap Growth": {
+    "priority": 0,
+    "replacements": ["MCG"]
+  },
+  "Mid Cap Value": {
+    "priority": 0,
+    "replacements": ["MCV"]
+  },
+  "Middle East": {
+    "priority": 0,
+    "replacements": ["M East"]
+  },
+  "Millenium": {
+    "priority": 0,
+    "replacements": ["Millnm"]
+  },
+  "Minerals & Natural Resources": {
+    "priority": 0,
+    "replacements": ["Min&NatRes"]
+  },
+  "Moderate": {
+    "priority": 0,
+    "replacements": ["Modt"]
+  },
+  "Modified": {
+    "priority": 0,
+    "replacements": ["Mod"]
+  },
+  "Money Market": {
+    "priority": 0,
+    "replacements": ["Money Mkt"]
+  },
+  "Monthly": {
+    "priority": 0,
+    "replacements": ["Mthly"]
+  },
+  "Morgan": {
+    "priority": 0,
+    "replacements": ["Morg"]
+  },
+  "Morgan Stanley Dean Witter": {
+    "priority": 0,
+    "replacements": ["MSDW"]
+  },
+  "Mortgage": {
+    "priority": 0,
+    "replacements": ["Mtge"]
+  },
+  "Multi": {
+    "priority": 0,
+    "replacements": ["Mult"]
+  },
+  "Multi-currency": {
+    "priority": 0,
+    "replacements": ["MultiCurr"]
+  },
+  "Multi-Manager": {
+    "priority": 0,
+    "replacements": ["MultiMngr"]
+  },
+  "Multi-Strategy": {
+    "priority": 0,
+    "replacements": ["MultiStrat"]
+  },
+  "Municipal": {
+    "priority": 0,
+    "replacements": ["Mncpl"]
+  },
+  "Mutual": {
+    "priority": 0,
+    "replacements": ["Mtl"]
+  },
+  "Nasdaq": {
+    "priority": 0,
+    "replacements": ["Nsdq"]
+  },
+  "National": {
+    "priority": 0,
+    "replacements": ["Natl"]
+  },
+  "Natural": {
+    "priority": 0,
+    "replacements": ["Ntrl"]
+  },
+  "Navigator": {
+    "priority": 0,
+    "replacements": ["Nav"]
+  },
+  "Neutral": {
+    "priority": 0,
+    "replacements": ["Neutl"]
+  },
+  "No Load": {
+    "priority": 0,
+    "replacements": ["No Ld"]
+  },
+  "Non Qualified": {
+    "priority": 0,
+    "replacements": ["NQ"]
+  },
+  "Nordic": {
+    "priority": 0,
+    "replacements": ["Nrdc"]
+  },
+  "North": {
+    "priority": 0,
+    "replacements": ["Nth"]
+  },
+  "North America": {
+    "priority": 0,
+    "replacements": ["N Amer"]
+  },
+  "Norway": {
+    "priority": 0,
+    "replacements": ["Nor"]
+  },
+  "Obligation": {
+    "priority": 0,
+    "replacements": ["Oblig"]
+  },
+  "Occidental": {
+    "priority": 0,
+    "replacements": ["Occid"]
+  },
+  "Offshore": {
+    "priority": 0,
+    "replacements": ["Offsh"]
+  },
+  "Onepath": {
+    "priority": 0,
+    "replacements": ["1pth"]
+  },
+  "Opportunistic": {
+    "priority": 0,
+    "replacements": ["Oppc"]
+  },
+  "Opportunities": {
+    "priority": 0,
+    "replacements": ["Opps"]
+  },
+  "Opportunity": {
+    "priority": 0,
+    "replacements": ["Oppty"]
+  },
+  "Optimum": {
+    "priority": 0,
+    "replacements": ["Opt"]
+  },
+  "Optimix": {
+    "priority": 0,
+    "replacements": ["Optmx"]
+  },
+  "Options": {
+    "priority": 0,
+    "replacements": ["Opt"]
+  },
+  "Ovation": {
+    "priority": 0,
+    "replacements": ["Ovat"]
+  },
+  "Overature": {
+    "priority": 0,
+    "replacements": ["Ovrtr"]
+  },
+  "Overseas": {
+    "priority": 0,
+    "replacements": ["Ovseas"]
+  },
+  "Pacific": {
+    "priority": 0,
+    "replacements": ["Pac"]
+  },
+  "Partners": {
+    "priority": 0,
+    "replacements": ["Prtnrs"]
+  },
+  "Passage": {
+    "priority": 0,
+    "replacements": ["Pssg"]
+  },
+  "Passive": {
+    "priority": 0,
+    "replacements": ["Pssve"]
+  },
+  "Payment": {
+    "priority": 0,
+    "replacements": ["Paymt"]
+  },
+  "Pennant": {
+    "priority": 0,
+    "replacements": ["Penn"]
+  },
+  "Pension": {
+    "priority": 0,
+    "replacements": ["Pens"]
+  },
+  "Performance": {
+    "priority": 0,
+    "replacements": ["Perf"]
+  },
+  "Perpetual": {
+    "priority": 0,
+    "replacements": ["Perp"]
+  },
+  "Personal": {
+    "priority": 0,
+    "replacements": ["Prsnl"]
+  },
+  "Pioneer": {
+    "priority": 0,
+    "replacements": ["Pion"]
+  },
+  "Placement": {
+    "priority": 0,
+    "replacements": ["Plmt"]
+  },
+  "Platinum": {
+    "priority": 0,
+    "replacements": ["Plat"]
+  },
+  "Plus": {
+    "priority": 0,
+    "replacements": ["Pls"]
+  },
+  "Policy": {
+    "priority": 0,
+    "replacements": ["Plcy"]
+  },
+  "Portfolio": {
+    "priority": 0,
+    "replacements": ["Pfolio"]
+  },
+  "Portfolios": {
+    "priority": 0,
+    "replacements": ["P'folios"]
+  },
+  "Post Venture": {
+    "priority": 0,
+    "replacements": ["Post Ven"]
+  },
+  "Preference": {
+    "priority": 0,
+    "replacements": ["Prfnc"]
+  },
+  "Preferred": {
+    "priority": 0,
+    "replacements": ["Prfrd"]
+  },
+  "Premier": {
+    "priority": 0,
+    "replacements": ["Prmr"]
+  },
+  "Premium": {
+    "priority": 0,
+    "replacements": ["Prem"]
+  },
+  "Preservation": {
+    "priority": 0,
+    "replacements": ["Pres"]
+  },
+  "Primary Capital": {
+    "priority": 0,
+    "replacements": ["PC"]
+  },
+  "Prime": {
+    "priority": 0,
+    "replacements": ["Prm"]
+  },
+  "Private Banking": {
+    "priority": 0,
+    "replacements": ["Priv Bkng"]
+  },
+  "Private Placement": {
+    "priority": 0,
+    "replacements": ["Prv Plc"]
+  },
+  "Privileged": {
+    "priority": 0,
+    "replacements": ["Prvlgd"]
+  },
+  "Product": {
+    "priority": 0,
+    "replacements": ["Prod"]
+  },
+  "Program": {
+    "priority": 0,
+    "replacements": ["Prgm"]
+  },
+  "Properties": {
+    "priority": 0,
+    "replacements": ["Props"]
+  },
+  "Property": {
+    "priority": 0,
+    "replacements": ["Prop"]
+  },
+  "Protected": {
+    "priority": 0,
+    "replacements": ["Prtd"]
+  },
+  "Protection": {
+    "priority": 0,
+    "replacements": ["Prtc"]
+  },
+  "Provident": {
+    "priority": 0,
+    "replacements": ["Prov"]
+  },
+  "Provider": {
+    "priority": 0,
+    "replacements": ["Prvdr"]
+  },
+  "Prudential": {
+    "priority": 0,
+    "replacements": ["Pru"]
+  },
+  "Putnam": {
+    "priority": 0,
+    "replacements": ["Put"]
+  },
+  "Qualified": {
+    "priority": 0,
+    "replacements": ["Qlfd"]
+  },
+  "Quality": {
+    "priority": 0,
+    "replacements": ["Qual"]
+  },
+  "Quantitative": {
+    "priority": 0,
+    "replacements": ["Quant"]
+  },
+  "Quarterly": {
+    "priority": 0,
+    "replacements": ["Qtr"]
+  },
+  "Rate": {
+    "priority": 0,
+    "replacements": ["Rt"]
+  },
+  "Real Estate": {
+    "priority": 0,
+    "replacements": ["Real Est"]
+  },
+  "Redemption": {
+    "priority": 0,
+    "replacements": ["Rdmt"]
+  },
+  "Reduction": {
+    "priority": 0,
+    "replacements": ["Rdct"]
+  },
+  "Regular": {
+    "priority": 0,
+    "replacements": ["Rgr"]
+  },
+  "Representative": {
+    "priority": 0,
+    "replacements": ["Repr"]
+  },
+  "Republic": {
+    "priority": 0,
+    "replacements": ["Rep"]
+  },
+  "Research": {
+    "priority": 0,
+    "replacements": ["Rsrch"]
+  },
+  "Research & Development": {
+    "priority": 0,
+    "replacements": ["R&D"]
+  },
+  "Reserve": {
+    "priority": 0,
+    "replacements": ["Res"]
+  },
+  "Residents": {
+    "priority": 0,
+    "replacements": ["Resid"]
+  },
+  "Resource": {
+    "priority": 0,
+    "replacements": ["Res"]
+  },
+  "Respectively": {
+    "priority": 0,
+    "replacements": ["Respv"]
+  },
+  "Responsibility": {
+    "priority": 0,
+    "replacements": ["Rspblty"]
+  },
+  "Responsible": {
+    "priority": 0,
+    "replacements": ["Resp"]
+  },
+  "Retail": {
+    "priority": 0,
+    "replacements": ["Rtl"]
+  },
+  "Retirement": {
+    "priority": 0,
+    "replacements": ["Ret"]
+  },
+  "Return": {
+    "priority": 0,
+    "replacements": ["Rtn"]
+  },
+  "Rollover": {
+    "priority": 0,
+    "replacements": ["Rlvr"]
+  },
+  "Savings": {
+    "priority": 0,
+    "replacements": ["Svns"]
+  },
+  "Sciences": {
+    "priority": 0,
+    "replacements": ["Scis"]
+  },
+  "Scientific": {
+    "priority": 0,
+    "replacements": ["Sci"]
+  },
+  "Second": {
+    "priority": 0,
+    "replacements": ["Scd"]
+  },
+  "Securities": {
+    "priority": 0,
+    "replacements": ["Secs"]
+  },
+  "Security": {
+    "priority": 0,
+    "replacements": ["Sec"]
+  },
+  "Select": {
+    "priority": 0,
+    "replacements": ["Sel"]
+  },
+  "Selected": {
+    "priority": 0,
+    "replacements": ["Sltd"]
+  },
+  "Selection": {
+    "priority": 0,
+    "replacements": ["Slcn"]
+  },
+  "Selective": {
+    "priority": 0,
+    "replacements": ["Slcv"]
+  },
+  "Separate": {
+    "priority": 0,
+    "replacements": ["Sep"]
+  },
+  "Series": {
+    "priority": 0,
+    "replacements": ["Srs"]
+  },
+  "Service": {
+    "priority": 0,
+    "replacements": ["Svc"]
+  },
+  "Shares": {
+    "priority": 0,
+    "replacements": ["Shs"]
+  },
+  "Sheltered": {
+    "priority": 0,
+    "replacements": ["Shltrd"]
+  },
+  "Short": {
+    "priority": 0,
+    "replacements": ["Sht"]
+  },
+  "Short Term": {
+    "priority": 0,
+    "replacements": ["ShTrm"]
+  },
+  "Short/Intermediate": {
+    "priority": 0,
+    "replacements": ["Sht/Int"]
+  },
+  "Signature": {
+    "priority": 0,
+    "replacements": ["Sgntr"]
+  },
+  "Single": {
+    "priority": 0,
+    "replacements": ["Sngl"]
+  },
+  "Situation": {
+    "priority": 0,
+    "replacements": ["Sit"]
+  },
+  "Small": {
+    "priority": 0,
+    "replacements": ["Sm"]
+  },
+  "Small Cap": {
+    "priority": 0,
+    "replacements": ["SmCp"]
+  },
+  "Small Cap Growth": {
+    "priority": 0,
+    "replacements": ["SCG"]
+  },
+  "Small Cap Value": {
+    "priority": 0,
+    "replacements": ["SCV"]
+  },
+  "Small Companies": {
+    "priority": 0,
+    "replacements": ["Sm Cos"]
+  },
+  "Small Company": {
+    "priority": 0,
+    "replacements": ["Sm Co"]
+  },
+  "Smaller": {
+    "priority": 0,
+    "replacements": ["Smllr"]
+  },
+  "Smaller Companies": {
+    "priority": 0,
+    "replacements": ["Smllr Cos"]
+  },
+  "Solution": {
+    "priority": 0,
+    "replacements": ["Sltn"]
+  },
+  "Solutions": {
+    "priority": 0,
+    "replacements": ["Sltns"]
+  },
+  "South": {
+    "priority": 0,
+    "replacements": ["Sth"]
+  },
+  "Southern": {
+    "priority": 0,
+    "replacements": ["Sthn"]
+  },
+  "South East": {
+    "priority": 0,
+    "replacements": ["S East"]
+  },
+  "Sovereign": {
+    "priority": 0,
+    "replacements": ["Sov"]
+  },
+  "Special": {
+    "priority": 0,
+    "replacements": ["Spec"]
+  },
+  "Special Situations": {
+    "priority": 0,
+    "replacements": ["Spec Sits"]
+  },
+  "Sponsored": {
+    "priority": 0,
+    "replacements": ["Spon"]
+  },
+  "Stagecoach": {
+    "priority": 0,
+    "replacements": ["Stgcoach"]
+  },
+  "Stakeholder": {
+    "priority": 0,
+    "replacements": ["Stkhldr"]
+  },
+  "Standard": {
+    "priority": 0,
+    "replacements": ["Std"]
+  },
+  "Stanley": {
+    "priority": 0,
+    "replacements": ["Stan"]
+  },
+  "State": {
+    "priority": 0,
+    "replacements": ["Sta"]
+  },
+  "Stearns": {
+    "priority": 0,
+    "replacements": ["Strns"]
+  },
+  "Sterling": {
+    "priority": 0,
+    "replacements": ["Stg"]
+  },
+  "Stock": {
+    "priority": 0,
+    "replacements": ["Stk"]
+  },
+  "Stockmarket": {
+    "priority": 0,
+    "replacements": ["Stockmkt"]
+  },
+  "Strategic": {
+    "priority": 0,
+    "replacements": ["Stratc"]
+  },
+  "Strategies": {
+    "priority": 0,
+    "replacements": ["Strats"]
+  },
+  "Strategy": {
+    "priority": 0,
+    "replacements": ["Strat"]
+  },
+  "Street": {
+    "priority": 0,
+    "replacements": ["St"]
+  },
+  "Stripped": {
+    "priority": 0,
+    "replacements": ["Strpd"]
+  },
+  "Structured": {
+    "priority": 0,
+    "replacements": ["Struct"]
+  },
+  "Success": {
+    "priority": 0,
+    "replacements": ["Scs"]
+  },
+  "Suncorp": {
+    "priority": 0,
+    "replacements": ["Suncp"]
+  },
+  "Superannuation": {
+    "priority": 0,
+    "replacements": ["Spnn"]
+  },
+  "Surrender": {
+    "priority": 0,
+    "replacements": ["Srndr"]
+  },
+  "Survivor": {
+    "priority": 0,
+    "replacements": ["Srvr"]
+  },
+  "Survivorship": {
+    "priority": 0,
+    "replacements": ["Srvshp"]
+  },
+  "Survivorship Var Univ Life": {
+    "priority": 0,
+    "replacements": ["SVUL"]
+  },
+  "Sustainable": {
+    "priority": 0,
+    "replacements": ["Sust"]
+  },
+  "Swiss Franc": {
+    "priority": 0,
+    "replacements": ["CHF"]
+  },
+  "Systematic": {
+    "priority": 0,
+    "replacements": ["Syst"]
+  },
+  "Tactical": {
+    "priority": 0,
+    "replacements": ["Tact"]
+  },
+  "Talents": {
+    "priority": 0,
+    "replacements": ["Tlnts"]
+  },
+  "Target": {
+    "priority": 0,
+    "replacements": ["Tgt"]
+  },
+  "Tax Exempt": {
+    "priority": 0,
+    "replacements": ["Tax Ex"]
+  },
+  "Tax Free": {
+    "priority": 0,
+    "replacements": ["Tax Fr"]
+  },
+  "Tax-Exempt": {
+    "priority": 0,
+    "replacements": ["Tax-Ex"]
+  },
+  "Technical": {
+    "priority": 0,
+    "replacements": ["Tchnl"]
+  },
+  "Technology": {
+    "priority": 0,
+    "replacements": ["Technol"]
+  },
+  "Telecommunications": {
+    "priority": 0,
+    "replacements": ["Telecom"]
+  },
+  "Templeton": {
+    "priority": 0,
+    "replacements": ["Temp"]
+  },
+  "Total return": {
+    "priority": 0,
+    "replacements": ["Tot Rtn"]
+  },
+  "Tracker": {
+    "priority": 0,
+    "replacements": ["Trkr"]
+  },
+  "Tracking": {
+    "priority": 0,
+    "replacements": ["Trkg"]
+  },
+  "Trade": {
+    "priority": 0,
+    "replacements": ["Trd"]
+  },
+  "Trading": {
+    "priority": 0,
+    "replacements": ["Trdng"]
+  },
+  "Tradition": {
+    "priority": 0,
+    "replacements": ["Trdn"]
+  },
+  "Transamerica": {
+    "priority": 0,
+    "replacements": ["Transam"]
+  },
+  "Travelers": {
+    "priority": 0,
+    "replacements": ["Trav"]
+  },
+  "Treasury": {
+    "priority": 0,
+    "replacements": ["Treas"]
+  },
+  "Trust": {
+    "priority": 0,
+    "replacements": ["Tr"]
+  },
+  "Un-diluted": {
+    "priority": 0,
+    "replacements": ["Un-dil"]
+  },
+  "United Kingdom": {
+    "priority": 0,
+    "replacements": ["UK"]
+  },
+  "United States": {
+    "priority": 0,
+    "replacements": ["US"]
+  },
+  "Universal": {
+    "priority": 0,
+    "replacements": ["Univ"]
+  },
+  "Unregistered": {
+    "priority": 0,
+    "replacements": ["UNREG"]
+  },
+  "US Dollar": {
+    "priority": 0,
+    "replacements": ["USD"]
+  },
+  "Utility": {
+    "priority": 0,
+    "replacements": ["Util"]
+  },
+  "Value": {
+    "priority": 0,
+    "replacements": ["Val"]
+  },
+  "Valuemark": {
+    "priority": 0,
+    "replacements": ["Valmrk"]
+  },
+  "Vanguard": {
+    "priority": 0,
+    "replacements": ["Vngrd"]
+  },
+  "Vantage": {
+    "priority": 0,
+    "replacements": ["Vntg"]
+  },
+  "Variable": {
+    "priority": 0,
+    "replacements": ["Var"]
+  },
+  "Variable Annuity": {
+    "priority": 0,
+    "replacements": ["VA"]
+  },
+  "Variable Life": {
+    "priority": 0,
+    "replacements": ["VL"]
+  },
+  "Variable Universal Life": {
+    "priority": 0,
+    "replacements": ["VUL"]
+  },
+  "Vision": {
+    "priority": 0,
+    "replacements": ["Vis"]
+  },
+  "Warrant": {
+    "priority": 0,
+    "replacements": ["Warr"]
+  },
+  "WealthSmart": {
+    "priority": 0,
+    "replacements": ["Wlthsmt"]
+  },
+  "Wealth": {
+    "priority": 0,
+    "replacements": ["Wlth"]
+  },
+  "Wholesale": {
+    "priority": 0,
+    "replacements": ["Whsl"]
+  },
+  "World": {
+    "priority": 0,
+    "replacements": ["Wld"]
+  },
+  "Worldwide": {
+    "priority": 0,
+    "replacements": ["Wldwd"]
+  },
+  "Workforce": {
+    "priority": 0,
+    "replacements": ["Wkfrce"]
+  },
+  "Yield": {
+    "priority": 0,
+    "replacements": ["Yld"]
+  }
+}

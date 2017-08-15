@@ -129,12 +129,14 @@ table {
 /* RESET END */
 @font-face {
   font-family: 'Knowledge';
-  src: url("fonts/knowledge2017-20170221/Knowledge2017-Regular.ttf");
+  src: url("../fonts/knowledge2017-20170221/Knowledge2017-Regular.ttf");
   font-weight: normal; }
+
 @font-face {
   font-family: 'Knowledge';
-  src: url("fonts/knowledge2017-20170221/Knowledge2017-Bold.ttf");
+  src: url("../fonts/knowledge2017-20170221/Knowledge2017-Bold.ttf");
   font-weight: bold; }
+
 html {
   font-size: 16px; }
 
@@ -438,6 +440,7 @@ body {
 @media (max-width: 1200px) {
   .button-instructions {
     position: relative; } }
+
 .button--narrow {
   min-width: 80px;
   margin-right: 10px;
@@ -566,7 +569,8 @@ body {
 .input-checkbox {
   position: absolute;
   opacity: 0; }
-  .input-checkbox:focus + .input-checkbox__label:before, .input-checkbox:hover + .input-checkbox__label:before {
+  .input-checkbox:focus + .input-checkbox__label:before,
+  .input-checkbox:hover + .input-checkbox__label:before {
     transform: scale(1.1);
     border: 1px solid #FF8000;
     box-shadow: 0 0 0 1px #FF8000; }
@@ -693,6 +697,7 @@ body {
 @media (max-width: 600px) {
   .footer {
     position: relative; } }
+
 .notification {
   position: fixed;
   top: 0;
@@ -767,6 +772,7 @@ body {
     box-shadow: 0 0 0 8px rgba(255, 161, 0, 0); }
   100% {
     box-shadow: 0 0 0 0 rgba(255, 161, 0, 0); } }
+
 @keyframes pulse__warning {
   0% {
     box-shadow: 0 0 0 0 #ff5900; }
@@ -774,5 +780,3 @@ body {
     box-shadow: 0 0 0 8px rgba(255, 89, 0, 0); }
   100% {
     box-shadow: 0 0 0 0 rgba(255, 89, 0, 0); } }
-
-/*# sourceMappingURL=styles.css.map */
