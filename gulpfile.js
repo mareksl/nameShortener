@@ -26,25 +26,25 @@ gulp.task('useref', function(){
 		})
     // Minifies only if it's a CSS file
     .pipe(gulpIf('*.css', cssnano()))
-    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest('docs'))
 });
 gulp.task('rules', function() {
   return gulp.src('app/js/rules.json')
-  .pipe(gulp.dest('dist/js'))
+  .pipe(gulp.dest('docs/js'))
 });
 gulp.task('img', function() {
   return gulp.src('app/img/**/*')
-  .pipe(gulp.dest('dist/img'))
+  .pipe(gulp.dest('docs/img'))
 });
 gulp.task('fonts', function() {
   return gulp.src(['app/fonts/knowledge2017-20170221/Knowledge2017-Regular.ttf', 'app/fonts/knowledge2017-20170221/Knowledge2017-Bold.ttf'])
-	.pipe(gulp.dest('dist/fonts'))
+	.pipe(gulp.dest('docs/fonts'))
 });
-gulp.task('clean:dist', function() {
-  return del.sync('dist');
+gulp.task('clean:docs', function() {
+  return del.sync('docs');
 })
 gulp.task('build', function (callback) {
-  runSequence('clean:dist',
+  runSequence('clean:docs',
     ['sass', 'useref', 'img', 'rules', 'fonts'],
     callback
   );
