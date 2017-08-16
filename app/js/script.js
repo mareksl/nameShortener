@@ -29,56 +29,44 @@ const animation = (function() {
     span.appendChild(text);
     notification.appendChild(span);
     notification.classList.add('notification');
-    switch (options.type) {
-      case 'success':
-        notification.classList.add('notification--success');
-        setTimeout(function() {
-          fadeOut(notification);
-        }, timeout);
-        break;
-      case 'warning':
-        notification.classList.add('notification--warning');
-        setTimeout(function() {
-          fadeOut(notification);
-        }, timeout);
-        break;
-      case 'error':
-        notification.classList.add('notification--error');
-        const close = document.createElement('button');
-        close.classList.add('notification__close');
-        close.innerHTML = '&#10060;';
-        close.setAttribute('aria-label', 'Close Notification');
-        close.tabIndex = 1;
-        close.addEventListener('click', function() {
-          fadeOut(notification);
-        });
-        notification.appendChild(close);
-        break;
-      case 'confirm':
-        notification.classList.add('notification--confirm');
-        const buttons = document.createElement('div');
-        buttons.classList.add('notification__buttons');
-        const buttonOK = document.createElement('button');
-        const buttonCancel = document.createElement('button');
-        buttonOK.classList.add('button', 'button--narrow');
-        buttonOK.innerHTML = 'OK';
-        buttonOK.addEventListener('click', function() {
-          options.callback();
-          fadeOut(notification);
-        });
-        buttonCancel.classList.add('button', 'button--narrow');
-        buttonCancel.innerHTML = 'Cancel';
-        buttonCancel.addEventListener('click', function() {
-          fadeOut(notification);
-        });
-        buttons.appendChild(buttonOK);
-        buttons.appendChild(buttonCancel);
-        notification.appendChild(buttons);
-        break;
-      default:
-        setTimeout(function() {
-          fadeOut(notification);
-        }, timeout);
+    if (options.type !== undefined) {
+      notification.classList.add('notification--' + options.type);
+    }
+    if (options.type !== 'error' && options.type !== 'confirm') {
+      setTimeout(function() {
+        fadeOut(notification);
+      }, timeout);
+    }
+    if (options.type === 'error') {
+      const close = document.createElement('button');
+      close.classList.add('notification__close');
+      close.innerHTML = '&#10060;';
+      close.setAttribute('aria-label', 'Close Notification');
+      close.tabIndex = 1;
+      close.addEventListener('click', function() {
+        fadeOut(notification);
+      });
+      notification.appendChild(close);
+    }
+    if (options.type === 'confirm') {
+      const buttons = document.createElement('div');
+      buttons.classList.add('notification__buttons');
+      const buttonOK = document.createElement('button');
+      const buttonCancel = document.createElement('button');
+      buttonOK.classList.add('button', 'button--narrow');
+      buttonOK.innerHTML = 'OK';
+      buttonOK.addEventListener('click', function() {
+        options.callback();
+        fadeOut(notification);
+      });
+      buttonCancel.classList.add('button', 'button--narrow');
+      buttonCancel.innerHTML = 'Cancel';
+      buttonCancel.addEventListener('click', function() {
+        fadeOut(notification);
+      });
+      buttons.appendChild(buttonOK);
+      buttons.appendChild(buttonCancel);
+      notification.appendChild(buttons);
     }
     document.body.appendChild(notification);
     notification.computedHeight = notification.offsetHeight + parseFloat(window.getComputedStyle(notification, null).getPropertyValue('margin-top')) / 2;
