@@ -436,6 +436,34 @@ body {
 	flex-flow: row wrap;
 }
 
+.options-remove {
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+	flex: 1 1 100%;
+	padding: .4rem 0;
+}
+
+.options-remove__label {
+	margin-right: 1rem;
+}
+
+.options-remove__input-text {
+	font-family: $sans;
+	font-size: 1rem;
+	border: 1px solid $tr-lightgray;
+	border-radius: 4px;
+	height: 2rem;
+	padding: .4rem;
+	flex: 1 1 auto;
+
+	&:focus {
+		padding: calc(.4em - 2px);
+		border: 2px solid $tr-orange;
+		outline: none;
+	}
+}
+
 .options-list__item {
 	flex: 0 0 50%;
 	padding-right: 1rem;
