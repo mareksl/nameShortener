@@ -96,7 +96,16 @@ small {
 }
 
 a {
+	color: $tr-darkorange;
 	text-decoration: none;
+
+	&:active,
+	&:focus,
+	&:hover {
+		outline: none;
+		color: $tr-orange;
+		text-decoration: underline;
+	}
 }
 
 i {
