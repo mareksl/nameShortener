@@ -1,3 +1,4 @@
+/* TYPOGRAPHY */
 @font-face {
 	font-family: 'Knowledge';
 	src: url('../fonts/knowledge2017-20170221/Knowledge2017-Regular.ttf');
@@ -8,17 +9,19 @@
 	src: url('../fonts/knowledge2017-20170221/Knowledge2017-Bold.ttf');
 	font-weight: bold;
 }
-$primary-color: #853109;
 $tr-white: #fff;
-$tr-darkgray: #4D4D4D;
+$tr-darkgray: #4d4d4d;
 $tr-lightgray: #afafaf;
-$tr-mutedgray: #D0D0D0;
+$tr-mutedgray: #d0d0d0;
 $own-mutedgray: #ededed;
-$tr-orange: #FF8000;
+$tr-orange: #ff8000;
 $tr-darkorange: #ff5900;
 $tr-lightorange: #ffa100;
 $own-mutedorange: #ffeccc; //tint of $tr-lightorange
-$tr-darkgreen: #387C2B;
+$tr-darkgreen: #387c2b;
+$tr-defaultlink: #005da2;
+$tr-hoverlink: #00467b;
+$tr-visitedlink: #0099c4;
 $sans: 'Knowledge', sans-serif;
 $monospace: 'Courier new', Courier, 'Andale Mono', monospace;
 $hover-shadow: 0 .2rem .2rem $tr-orange;
@@ -96,14 +99,19 @@ small {
 }
 
 a {
-	color: $tr-darkorange;
+	color: $tr-defaultlink;
+	font-weight: bold;
 	text-decoration: none;
+
+	&:visited {
+		color: $tr-visitedlink;
+	}
 
 	&:active,
 	&:focus,
 	&:hover {
 		outline: none;
-		color: $tr-orange;
+		color: $tr-hoverlink;
 		text-decoration: underline;
 	}
 }
