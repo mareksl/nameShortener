@@ -45,8 +45,8 @@ gulp.task('clean:docs', function() {
   return del.sync('docs');
 })
 gulp.task('build', function (callback) {
-  runSequence('clean:docs',
-    ['sass', 'useref', 'img', 'rules', 'fonts'],
+  runSequence('clean:docs', 'sass',
+    ['useref', 'img', 'rules', 'fonts'],
     callback
   );
 });
