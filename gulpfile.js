@@ -35,7 +35,10 @@ gulp.task('img', function() {
   .pipe(gulp.dest('docs/img'))
 });
 gulp.task('fonts', function() {
-  return gulp.src(['app/fonts/knowledge2017-20170221/Knowledge2017-Regular.ttf', 'app/fonts/knowledge2017-20170221/Knowledge2017-Bold.ttf'])
+  return gulp.src([
+		'app/fonts/knowledge2017-20170221/Knowledge2017-Regular.ttf',
+		'app/fonts/knowledge2017-20170221/Knowledge2017-Bold.ttf'
+	])
 	.pipe(gulp.dest('docs/fonts'))
 });
 gulp.task('clean:docs', function() {
