@@ -438,10 +438,10 @@ body {
 
 .options-remove {
 	display: flex;
-	flex-flow: row wrap;
-	align-items: center;
 	flex: 1 1 100%;
 	padding: .4rem 0;
+	align-items: center;
+	flex-flow: row wrap;
 }
 
 .options-remove__label {
@@ -451,11 +451,11 @@ body {
 .options-remove__input-text {
 	font-family: $sans;
 	font-size: 1rem;
-	border: 1px solid $tr-lightgray;
-	border-radius: 4px;
+	flex: 1 1 auto;
 	height: 2rem;
 	padding: .4rem;
-	flex: 1 1 auto;
+	border: 1px solid $tr-lightgray;
+	border-radius: 4px;
 
 	&:focus {
 		padding: calc(.4em - 2px);
