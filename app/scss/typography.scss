@@ -99,21 +99,7 @@ small {
 }
 
 a {
-	color: $tr-defaultlink;
-	font-weight: bold;
 	text-decoration: none;
-
-	&:visited {
-		color: $tr-visitedlink;
-	}
-
-	&:active,
-	&:focus,
-	&:hover {
-		outline: none;
-		color: $tr-hoverlink;
-		text-decoration: underline;
-	}
 }
 
 i {

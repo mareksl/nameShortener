@@ -196,15 +196,7 @@ small {
   color: #afafaf; }
 
 a {
-  color: #005da2;
-  font-weight: bold;
   text-decoration: none; }
-  a:visited {
-    color: #0099c4; }
-  a:active, a:focus, a:hover {
-    outline: none;
-    color: #00467b;
-    text-decoration: underline; }
 
 i {
   font-style: italic; }
@@ -397,6 +389,17 @@ body {
 
 .table-rules__item--noborder {
   border: 0; }
+
+.link {
+  color: #005da2;
+  font-weight: bold;
+  text-decoration: none; }
+  .link:visited {
+    color: #0099c4; }
+  .link:active, .link:focus, .link:hover {
+    outline: none;
+    color: #00467b;
+    text-decoration: underline; }
 
 .button {
   font-weight: bold;

@@ -222,6 +222,24 @@ body {
 	border: 0;
 }
 
+.link {
+	color: $tr-defaultlink;
+	font-weight: bold;
+	text-decoration: none;
+
+	&:visited {
+		color: $tr-visitedlink;
+	}
+
+	&:active,
+	&:focus,
+	&:hover {
+		outline: none;
+		color: $tr-hoverlink;
+		text-decoration: underline;
+	}
+}
+
 .button {
 	font-weight: bold;
 	display: block;
