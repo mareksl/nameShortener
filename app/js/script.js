@@ -136,8 +136,7 @@ const nameChecker = (function() {
 
   function removeDashes(string) {
     return replaceLetter(string, {
-      '-': ' ',
-      '\\s\\s\+': ' '
+      '-': ' '
     });
   }
 
@@ -145,6 +144,18 @@ const nameChecker = (function() {
     return replaceLetter(string, {
       '\\s': ''
     });
+  }
+
+  function removeMultipleWhitespace(string) {
+    return replaceLetter(string, {
+      '\\s\\s\+': ' '
+    });
+  }
+
+  function removeRegex(string, regex) {
+    const options = {};
+    options[regex] = '';
+    return replaceLetter(string, options);
   }
 
   function addShareClasses(name, sClasses) {
@@ -222,12 +233,14 @@ const nameChecker = (function() {
     return shortenedNames;
   }
 
-  function shortenProcess(name, options, rules, shareClasses, lengths) {
+  function shortenProcess(name, options, rules, shareClasses, lengths, regex) {
     var shortenedName = name;
+		shortenedName = options.removeRegex ? removeRegex(shortenedName, regex) : shortenedName;
     shortenedName = options.removeParens ? removeParens(shortenedName) : shortenedName;
     shortenedName = options.removeDashes ? removeDashes(shortenedName) : shortenedName;
     shortenedName = options.removeWhitespace ? removeWhitespace(shortenedName) : shortenedName;
     shortenedName = options.replaceUmlauts ? replaceUmlauts(shortenedName) : shortenedName;
+		shortenedName = removeMultipleWhitespace(shortenedName);
     shortenedName = options.shortenName ? shortenName(shortenedName, shareClasses, rules, lengths) : [shortenedName, shortenedName, shortenedName];
     for (let i = 0; i < shortenedName.length; i++) {
       const nameType = i === 2 ? 'In-House' : i === 1 ? 'Short' : '';
@@ -393,7 +406,8 @@ const elements = (function() {
     removeWhitespace: document.querySelector('#removeWhitespace'),
     manualWrapper: document.querySelector('#manualWrapper'),
     manualClose: document.querySelector('#manualClose'),
-    manualOpen: document.querySelector('#manualOpen')
+    manualOpen: document.querySelector('#manualOpen'),
+    removeRegex: document.querySelector('#removeRegex')
   };
 }());
 (function(lengths) {
@@ -654,8 +668,10 @@ const elements = (function() {
     options.shortenName = elements.shortenNames.checked;
     options.removeDashes = elements.removeDashes.checked;
     options.removeWhitespace = elements.removeWhitespace.checked;
+    options.removeRegex = elements.removeRegex.value !== '' ? true : false;
+    const regex = elements.removeRegex.value;
     const sClasses = elements.shareClassesInput.value.length > 0 ? elements.shareClassesInput.value.split('\n') : [];
-    const shortened = nameChecker.shortenProcess(value, options, rules, sClasses, lengths);
+    const shortened = nameChecker.shortenProcess(value, options, rules, sClasses, lengths, regex);
     elements.outputName.value = shortened.shortenedName;
     elements.outputShortName.value = shortened.shortenedNameShort;
     elements.outputInHouseName.value = shortened.shortenedNameInHouse;
