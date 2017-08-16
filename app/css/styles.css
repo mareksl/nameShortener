@@ -564,10 +564,10 @@ body {
 
 .options-remove {
   display: flex;
-  flex-flow: row wrap;
-  align-items: center;
   flex: 1 1 100%;
-  padding: .4rem 0; }
+  padding: .4rem 0;
+  align-items: center;
+  flex-flow: row wrap; }
 
 .options-remove__label {
   margin-right: 1rem; }
@@ -575,11 +575,11 @@ body {
 .options-remove__input-text {
   font-family: "Knowledge", sans-serif;
   font-size: 1rem;
-  border: 1px solid #afafaf;
-  border-radius: 4px;
+  flex: 1 1 auto;
   height: 2rem;
   padding: .4rem;
-  flex: 1 1 auto; }
+  border: 1px solid #afafaf;
+  border-radius: 4px; }
   .options-remove__input-text:focus {
     padding: calc(.4em - 2px);
     border: 2px solid #FF8000;

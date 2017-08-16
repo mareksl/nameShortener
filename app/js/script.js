@@ -155,7 +155,16 @@ const nameChecker = (function() {
   function removeRegex(string, regex) {
     const options = {};
     options[regex] = '';
-    return replaceLetter(string, options);
+    try {
+      return replaceLetter(string, options);
+    } catch (e) {
+      if (e.name === 'SyntaxError') {
+        animation.notify(e.message, {
+          type: 'error'
+        });
+        return string;
+      }
+    }
   }
 
   function addShareClasses(name, sClasses) {
@@ -235,12 +244,12 @@ const nameChecker = (function() {
 
   function shortenProcess(name, options, rules, shareClasses, lengths, regex) {
     var shortenedName = name;
-		shortenedName = options.removeRegex ? removeRegex(shortenedName, regex) : shortenedName;
+    shortenedName = options.removeRegex ? removeRegex(shortenedName, regex) : shortenedName;
     shortenedName = options.removeParens ? removeParens(shortenedName) : shortenedName;
     shortenedName = options.removeDashes ? removeDashes(shortenedName) : shortenedName;
     shortenedName = options.removeWhitespace ? removeWhitespace(shortenedName) : shortenedName;
     shortenedName = options.replaceUmlauts ? replaceUmlauts(shortenedName) : shortenedName;
-		shortenedName = removeMultipleWhitespace(shortenedName);
+    shortenedName = removeMultipleWhitespace(shortenedName);
     shortenedName = options.shortenName ? shortenName(shortenedName, shareClasses, rules, lengths) : [shortenedName, shortenedName, shortenedName];
     for (let i = 0; i < shortenedName.length; i++) {
       const nameType = i === 2 ? 'In-House' : i === 1 ? 'Short' : '';
