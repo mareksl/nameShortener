@@ -234,13 +234,19 @@ body {
   flex-flow: column; }
 
 .section {
+  background-color: #fff;
   display: flex;
   width: 66.6666%;
   max-width: 680px;
   margin: auto;
-  padding: 8px;
+  padding: .5rem;
   align-items: flex-end;
   flex-flow: column; }
+
+@media (max-width: 600px) {
+  .section {
+    width: 100%;
+    padding: 1rem; } }
 
 .section__header {
   display: inline;
@@ -574,10 +580,15 @@ body {
   align-self: flex-start;
   flex-flow: row wrap; }
 
+.options-list__item {
+  flex: 0 0 50%;
+  padding-right: 1rem; }
+
 .options-remove {
   display: flex;
   flex: 1 1 100%;
-  padding: .4rem 0;
+  padding-right: 0;
+  margin-top: .5rem;
   align-items: center;
   flex-flow: row wrap; }
 
@@ -596,10 +607,6 @@ body {
     padding: calc(.4em - 2px);
     border: 2px solid #ff8000;
     outline: none; }
-
-.options-list__item {
-  flex: 0 0 50%;
-  padding-right: 1rem; }
 
 .input-checkbox {
   position: absolute;
