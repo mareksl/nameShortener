@@ -90,7 +90,7 @@ const nameChecker = (function() {
   }
 
   function replaceLetter(string, options) {
-    var value = string;
+    let value = string;
     for (let letter in options) {
       if (options.hasOwnProperty(letter)) {
         const regex = new RegExp(letter, 'g');
@@ -180,7 +180,7 @@ const nameChecker = (function() {
   function shortenName(name, shareClasses, rules, lengths) {
     const shortenedNames = [];
     const nameWithShareclasses = addShareClasses(name, shareClasses);
-    var longest = name;
+    let longest = name;
     if (nameWithShareclasses.length > 0) {
       longest = nameWithShareclasses.reduce(function(a, b) {
         return a.length > b.length ? a : b;
@@ -200,7 +200,7 @@ const nameChecker = (function() {
         for (let prop in options) {
           if (options.hasOwnProperty(prop) && prop.length > options[prop].replacements[0].length) {
             const regex = new RegExp(prop, 'gi');
-            var match;
+            let match;
             while ((match = regex.exec(value)) != null) {
               const result = [];
               result.push(match);
@@ -213,7 +213,6 @@ const nameChecker = (function() {
         if (searches.length < 1) {
           return value;
         } else {
-          var newvalue = value;
           searches.sort(function(a, b) {
             const aPriority = a[1].priority;
             const bPriority = b[1].priority;
@@ -226,12 +225,12 @@ const nameChecker = (function() {
             }
           });
           const pos = searches[0][2];
-          const oldString = newvalue.substring(0, pos);
-          const newString = newvalue.substring(pos);
+          const oldString = value.substring(0, pos);
+          const newString = value.substring(pos);
           const replacedString = newString.replace(searches[0][0], searches[0][1].replacements[0]);
-          newvalue = oldString + replacedString;
-          newvalue = shorten(newvalue, options, maxlen);
-          return newvalue;
+          const newvalue = oldString + replacedString;
+          const newvalueRecurs = shorten(newvalue, options, maxlen);
+          return newvalueRecurs;
         }
       }
     }
@@ -243,17 +242,16 @@ const nameChecker = (function() {
   }
 
   function shortenProcess(name, options, rules, shareClasses, lengths, regex) {
-    var shortenedName = name;
-    shortenedName = options.removeRegex ? removeRegex(shortenedName, regex) : shortenedName;
-    shortenedName = options.removeParens ? removeParens(shortenedName) : shortenedName;
-    shortenedName = options.removeDashes ? removeDashes(shortenedName) : shortenedName;
-    shortenedName = options.removeWhitespace ? removeWhitespace(shortenedName) : shortenedName;
-    shortenedName = options.replaceUmlauts ? replaceUmlauts(shortenedName) : shortenedName;
-    shortenedName = removeMultipleWhitespace(shortenedName);
-    shortenedName = options.shortenName ? shortenName(shortenedName, shareClasses, rules, lengths) : [shortenedName, shortenedName, shortenedName];
+    const nameRegex = options.removeRegex ? removeRegex(name, regex) : name;
+    const nameParens = options.removeParens ? removeParens(nameRegex) : nameRegex;
+    const nameDashes = options.removeDashes ? removeDashes(nameParens) : nameParens;
+    const nameWhitespace = options.removeWhitespace ? removeWhitespace(nameDashes) : nameDashes;
+    const nameUmlauts = options.replaceUmlauts ? replaceUmlauts(nameWhitespace) : nameWhitespace;
+    const nameMultipleWhitespace = removeMultipleWhitespace(nameUmlauts);
+    const shortenedName = options.shortenName ? shortenName(nameMultipleWhitespace, shareClasses, rules, lengths) : [nameMultipleWhitespace, nameMultipleWhitespace, nameMultipleWhitespace];
     for (let i = 0; i < shortenedName.length; i++) {
       const nameType = i === 2 ? 'In-House' : i === 1 ? 'Short' : '';
-      var nameWithShareclasses;
+      let nameWithShareclasses;
       if (shareClasses.length > 0) {
         nameWithShareclasses = addShareClasses(shortenedName[i], shareClasses).reduce(function(a, b) {
           return a.length > b.length ? a : b;
@@ -419,8 +417,8 @@ const elements = (function() {
     removeRegex: document.querySelector('#removeRegex')
   };
 }());
-(function(lengths) {
-  var rules;
+(function init(lengths) {
+  let rules;
 
   function displayLength(input, output, max) {
     output.innerHTML = input.length;
@@ -446,9 +444,9 @@ const elements = (function() {
   function copyText(el) {
     selectElementContents(el);
     try {
-      let success = document.execCommand('copy');
-      let msg = success ? 'successful' : 'unsuccessful';
-      let status = success ? 'success' : 'error';
+      const success = document.execCommand('copy');
+      const msg = success ? 'successful' : 'unsuccessful';
+      const status = success ? 'success' : 'error';
       animation.notify('Copying text was ' + msg + '!', {
         type: status
       });
@@ -464,16 +462,16 @@ const elements = (function() {
     while (output.firstChild) {
       output.removeChild(output.firstChild);
     }
-    let classesOutput = nameChecker.addShareClasses(name, sClasses);
+    const classesOutput = nameChecker.addShareClasses(name, sClasses);
     for (let i = 0; i < classesOutput.length; i++) {
-      let lenId = output.id + '_' + i;
-      let newShareClass = document.createElement('li');
+      const lenId = output.id + '_' + i;
+      const newShareClass = document.createElement('li');
       newShareClass.setAttribute('tabIndex', '0');
       newShareClass.setAttribute('contentEditable', 'true');
       newShareClass.classList += "shareclass-list__item";
-      let newShareClassText = document.createTextNode(classesOutput[i]);
+      const newShareClassText = document.createTextNode(classesOutput[i]);
       newShareClass.appendChild(newShareClassText);
-      let newShareClassLen = document.createElement('span');
+      const newShareClassLen = document.createElement('span');
       newShareClassLen.setAttribute('id', lenId);
       newShareClassLen.setAttribute('data-tooltip', "Copy");
       newShareClassLen.classList += "shareclass-list__length";
@@ -502,12 +500,12 @@ const elements = (function() {
   }
 
   function addTableRow(tableBody, key, value, priority) {
-    let tableRow = document.createElement('tr');
-    let tableCellKey = document.createElement('td');
-    let tableCellValue = document.createElement('td');
-    let tableCellPriority = document.createElement('td');
-    let tableCellRemove = document.createElement('td');
-    let tableButtonRemove = document.createElement('button');
+    const tableRow = document.createElement('tr');
+    const tableCellKey = document.createElement('td');
+    const tableCellValue = document.createElement('td');
+    const tableCellPriority = document.createElement('td');
+    const tableCellRemove = document.createElement('td');
+    const tableButtonRemove = document.createElement('button');
     tableRow.classList += 'table-rules__row';
     tableCellKey.classList += 'table-rules__item';
     tableCellValue.classList += 'table-rules__item';
@@ -730,7 +728,7 @@ const elements = (function() {
         ['Name', 'Short Name', 'In-House Name']
       ];
       for (let i = 0; i < nameFields.length; i++) {
-        let names = [];
+        const names = [];
         names[0] = (nameFields[i].innerHTML);
         names[1] = (nameFieldsShort[i].innerHTML);
         names[2] = (nameFieldsInHouse[i].innerHTML);
