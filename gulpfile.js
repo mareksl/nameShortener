@@ -39,7 +39,7 @@ gulp.task('fonts', function() {
 		'app/fonts/knowledge2017-20170221/Knowledge2017-Regular.ttf',
 		'app/fonts/knowledge2017-20170221/Knowledge2017-Bold.ttf'
 	])
-	.pipe(gulp.dest('docs/fonts'))
+	.pipe(gulp.dest('docs/fonts/knowledge2017-20170221'))
 });
 gulp.task('clean:docs', function() {
   return del.sync('docs');
