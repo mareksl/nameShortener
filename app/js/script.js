@@ -3,6 +3,20 @@
 /*jshint strict:global */
 'use strict';
 const animation = (function() {
+  function fadeIn(el) {
+    document.body.appendChild(el);
+    el.computedHeight = el.offsetHeight + parseFloat(window.getComputedStyle(el, null).getPropertyValue('margin-top')) / 2;
+    const prevNotes = document.querySelectorAll('.notification');
+    for (let i = 0; i < prevNotes.length - 1; ++i) {
+      let topValue = isNaN(parseInt(prevNotes[i].style.top)) ? 0 : parseInt(prevNotes[i].style.top);
+      topValue += el.computedHeight;
+      prevNotes[i].style.top = topValue + 'px';
+    }
+    setTimeout(function() {
+      el.classList.add('notification--visible');
+    }, 0);
+  }
+
   function fadeOut(el) {
     el.classList.remove('notification--visible');
     const prevNotes = document.querySelectorAll('.notification');
@@ -19,7 +33,7 @@ const animation = (function() {
     });
   }
 
-  function notify(message, options) {
+  function createNotification(message, options) {
     options = options || {};
     const timeout = options.time || 2500;
     const notification = document.createElement('div');
@@ -31,11 +45,6 @@ const animation = (function() {
     notification.classList.add('notification');
     if (options.type !== undefined) {
       notification.classList.add('notification--' + options.type);
-    }
-    if (options.type !== 'error' && options.type !== 'confirm') {
-      setTimeout(function() {
-        fadeOut(notification);
-      }, timeout);
     }
     if (options.type === 'error') {
       const close = document.createElement('button');
@@ -68,17 +77,17 @@ const animation = (function() {
       buttons.appendChild(buttonCancel);
       notification.appendChild(buttons);
     }
-    document.body.appendChild(notification);
-    notification.computedHeight = notification.offsetHeight + parseFloat(window.getComputedStyle(notification, null).getPropertyValue('margin-top')) / 2;
-    const prevNotes = document.querySelectorAll('.notification');
-    for (let i = 0; i < prevNotes.length - 1; ++i) {
-      let topValue = isNaN(parseInt(prevNotes[i].style.top)) ? 0 : parseInt(prevNotes[i].style.top);
-      topValue += notification.computedHeight;
-      prevNotes[i].style.top = topValue + 'px';
+    if (options.type !== 'error' && options.type !== 'confirm') {
+      setTimeout(function() {
+        fadeOut(notification);
+      }, timeout);
     }
-    setTimeout(function() {
-      notification.classList.add('notification--visible');
-    }, 0);
+    return notification;
+  }
+
+  function notify(message, options) {
+    const notification = createNotification(message, options);
+    fadeIn(notification);
   }
   return {
     notify: notify
@@ -177,6 +186,64 @@ const nameChecker = (function() {
     return output;
   }
 
+  function search(value, options) {
+    const searches = [];
+    for (let prop in options) {
+      if (options.hasOwnProperty(prop) && prop.length > options[prop].replacements[0].length) {
+        const regex = new RegExp(prop, 'gi');
+        let match;
+        while ((match = regex.exec(value)) != null) {
+          const result = [];
+          result.push(match);
+          result.push(options[prop]);
+          result.push(match.index);
+          searches.push(result);
+        }
+      }
+    }
+    return searches;
+  }
+
+  function sortSearches(searches) {
+    return searches.sort(function(a, b) {
+      const aPriority = a[1].priority;
+      const bPriority = b[1].priority;
+      const aIndex = a[2];
+      const bIndex = b[2];
+      if (aPriority == bPriority) {
+        return bIndex - aIndex;
+      } else {
+        return bPriority - aPriority;
+      }
+    });
+  }
+
+  function replaceSearches(value, searches) {
+    const searchesSorted = sortSearches(searches);
+    const pos = searchesSorted[0][2];
+    const oldString = value.substring(0, pos);
+    const newString = value.substring(pos);
+    const replacedString = newString.replace(searchesSorted[0][0], searchesSorted[0][1].replacements[0]);
+    const newvalue = oldString + replacedString;
+    return newvalue;
+  }
+
+  function shorten(value, options, maxlen) {
+    const len = value.length;
+    if (len <= maxlen) {
+      return value;
+    } else {
+      const searches = search(value, options);
+      if (searches.length < 1) {
+        return value;
+      } else {
+        const newvalue = replaceSearches(value, searches);
+        const newvalueRecursive = shorten(newvalue, options, maxlen);
+        return newvalueRecursive;
+      }
+    }
+  }
+
   function shortenName(name, shareClasses, rules, lengths) {
     const shortenedNames = [];
     const nameWithShareclasses = addShareClasses(name, shareClasses);
@@ -190,50 +257,6 @@ const nameChecker = (function() {
     const shortenToLen = lengths.map(function(e) {
       return e - maxShareClassLen;
     });
-
-    function shorten(value, options, maxlen) {
-      const len = value.length;
-      if (len <= maxlen) {
-        return value;
-      } else {
-        const searches = [];
-        for (let prop in options) {
-          if (options.hasOwnProperty(prop) && prop.length > options[prop].replacements[0].length) {
-            const regex = new RegExp(prop, 'gi');
-            let match;
-            while ((match = regex.exec(value)) != null) {
-              const result = [];
-              result.push(match);
-              result.push(options[prop]);
-              result.push(match.index);
-              searches.push(result);
-            }
-          }
-        }
-        if (searches.length < 1) {
-          return value;
-        } else {
-          searches.sort(function(a, b) {
-            const aPriority = a[1].priority;
-            const bPriority = b[1].priority;
-            const aIndex = a[2];
-            const bIndex = b[2];
-            if (aPriority == bPriority) {
-              return bIndex - aIndex;
-            } else {
-              return bPriority - aPriority;
-            }
-          });
-          const pos = searches[0][2];
-          const oldString = value.substring(0, pos);
-          const newString = value.substring(pos);
-          const replacedString = newString.replace(searches[0][0], searches[0][1].replacements[0]);
-          const newvalue = oldString + replacedString;
-          const newvalueRecurs = shorten(newvalue, options, maxlen);
-          return newvalueRecurs;
-        }
-      }
-    }
     for (let i = 0; i < shortenToLen.length; i++) {
       const short = shorten(name, rules, shortenToLen[i]);
       shortenedNames.push(short);
