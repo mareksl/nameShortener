@@ -480,6 +480,18 @@ const elements = (function() {
     }
   }
 
+  function autoExpand(e) {
+    const el = e.target;
+    el.style.height = 'inherit';
+    el.style.height = (el.scrollHeight + 4) + 'px';
+  }
+
+  function addCopyListener(el, target) {
+    el.addEventListener('click', function() {
+      copyText(target);
+    });
+  }
+
   function addShareClasses(name, sClassesIn, output, max) {
     const sClasses = sClassesIn.value.length > 0 ? sClassesIn.value.split('\n') : [];
     while (output.firstChild) {
@@ -501,10 +513,15 @@ const elements = (function() {
       displayLength(newShareClassText, newShareClassLen, max);
       output.appendChild(newShareClass);
       output.appendChild(newShareClassLen);
-      newShareClassLen.addEventListener('click', function() {
-        copyText(newShareClass);
-      });
+      addCopyListener(newShareClassLen, newShareClass);
     }
+  }
+
+  function displayAndAdd(output, lenout, lennum, shareClassesOutput) {
+    const value = output.value;
+    const length = lengths[lennum];
+    displayLength(value, lenout, length);
+    addShareClasses(value, elements.shareClassesInput, shareClassesOutput, length);
   }
 
   function modifyRules(status) {
@@ -520,6 +537,12 @@ const elements = (function() {
         elements.btnSaveRules.classList.add('button--unsaved');
       }
     });
+  }
+
+  function removeRule(key, tbl, row) {
+    delete rules[key];
+    modifyRules('changed');
+    tbl.removeChild(row);
   }
 
   function addTableRow(tableBody, key, value, priority) {
@@ -546,9 +569,7 @@ const elements = (function() {
     tableRow.appendChild(tableCellRemove);
     tableBody.appendChild(tableRow);
     tableButtonRemove.addEventListener('click', function(e) {
-      delete rules[key];
-      modifyRules('changed');
-      tableBody.removeChild(tableRow);
+      removeRule(key, tableBody, tableRow);
     });
   }
 
@@ -574,36 +595,69 @@ const elements = (function() {
     });
   }
   load();
-  elements.btnAddRule.addEventListener('click', function(e) {
-    const key = elements.addRuleKey.value;
-    const value = elements.addRuleValue.value;
-    const priority = elements.addRulePriority.value <= 99 ? elements.addRulePriority.value : 99;
-    if (key !== '' && value !== '') {
-      if (rules.hasOwnPropertyCI(key)) {
-        animation.notify('Rule already exists!', {
+
+  function createCsvArray() {
+    const nameFields = elements.shareClassesOutput.getElementsByTagName('li');
+    const nameFieldsShort = elements.shareClassesShortOutput.getElementsByTagName('li');
+    const nameFieldsInHouse = elements.shareClassesInHouseOutput.getElementsByTagName('li');
+    if (nameFields.length === 0 && nameFieldsShort.length === 0 && nameFieldsInHouse.length === 0) {
+      animation.notify('Nothing to export!', {
+        type: 'error'
+      });
+    } else {
+      const array = [
+        ['Name', 'Short Name', 'In-House Name']
+      ];
+      for (let i = 0; i < nameFields.length; i++) {
+        const names = [];
+        names[0] = (nameFields[i].innerHTML);
+        names[1] = (nameFieldsShort[i].innerHTML);
+        names[2] = (nameFieldsInHouse[i].innerHTML);
+        array.push(names);
+      }
+      const lineArray = [];
+      array.forEach(function(infoArray, index) {
+        const line = infoArray.join(",");
+        lineArray.push(index == 0 ? "data:text/csv;charset=utf-8," + line : line);
+      });
+      const csvContent = lineArray.join("\n");
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", "names.csv");
+      animation.notify('Exporting to CSV!');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  }
+  (function listenRules() {
+    elements.btnAddRule.addEventListener('click', function(e) {
+      const key = elements.addRuleKey.value;
+      const value = elements.addRuleValue.value;
+      const priority = elements.addRulePriority.value <= 99 ? elements.addRulePriority.value : 99;
+      if (key !== '' && value !== '') {
+        if (rules.hasOwnPropertyCI(key)) {
+          animation.notify('Rule already exists!', {
+            type: 'warning'
+          });
+        } else {
+          rules[key] = {
+            "priority": priority,
+            "replacements": [value]
+          };
+          modifyRules('changed');
+          addTableRow(elements.tableBody, key, value, priority);
+          elements.addRuleKey.value = '';
+          elements.addRuleValue.value = '';
+          elements.addRulePriority.value = '0';
+        }
+      } else {
+        animation.notify('Please check rule input!', {
           type: 'warning'
         });
-      } else {
-        rules[key] = {
-          "priority": priority,
-          "replacements": [value]
-        };
-        modifyRules('changed');
-        addTableRow(elements.tableBody, key, value, priority);
-        elements.addRuleKey.value = '';
-        elements.addRuleValue.value = '';
-        elements.addRulePriority.value = '0';
       }
-    } else {
-      animation.notify('Please check rule input!', {
-        type: 'warning'
-      });
-    }
-  });
-  elements.addRulePriority.addEventListener('input', function(e) {
-    elements.addRulePriority.value = elements.addRulePriority.value.replace(/\D+/g, '');
-  });
-  (function listenRules() {
+    });
     elements.btnsRules.addEventListener('click', function(e) {
       switch (e.target) {
         case elements.btnSaveRules:
@@ -666,13 +720,10 @@ const elements = (function() {
       }
     });
   }());
-
-  function displayAndAdd(output, lenout, lennum, shareClassesOutput) {
-    const value = output.value;
-    const length = lengths[lennum];
-    displayLength(value, lenout, length);
-    addShareClasses(value, elements.shareClassesInput, shareClassesOutput, length);
-  }
+  // allow only numbers in priority input
+  elements.addRulePriority.addEventListener('input', function(e) {
+    elements.addRulePriority.value = elements.addRulePriority.value.replace(/\D+/g, '');
+  });
   elements.inputName.addEventListener('input', function(e) {
     displayLength(elements.inputName.value, elements.lenName, lengths[0]);
   });
@@ -731,48 +782,7 @@ const elements = (function() {
       elements.divRules.classList.remove('section__rules--show');
     }
   });
-
-  function autoExpand(e) {
-    const el = e.target;
-    el.style.height = 'inherit';
-    el.style.height = (el.scrollHeight + 4) + 'px';
-  }
   elements.shareClassesInput.addEventListener('input', autoExpand);
-  const createCsvArray = function() {
-    const nameFields = elements.shareClassesOutput.getElementsByTagName('li');
-    const nameFieldsShort = elements.shareClassesShortOutput.getElementsByTagName('li');
-    const nameFieldsInHouse = elements.shareClassesInHouseOutput.getElementsByTagName('li');
-    if (nameFields.length === 0 && nameFieldsShort.length === 0 && nameFieldsInHouse.length === 0) {
-      animation.notify('Nothing to export!', {
-        type: 'error'
-      });
-    } else {
-      const array = [
-        ['Name', 'Short Name', 'In-House Name']
-      ];
-      for (let i = 0; i < nameFields.length; i++) {
-        const names = [];
-        names[0] = (nameFields[i].innerHTML);
-        names[1] = (nameFieldsShort[i].innerHTML);
-        names[2] = (nameFieldsInHouse[i].innerHTML);
-        array.push(names);
-      }
-      const lineArray = [];
-      array.forEach(function(infoArray, index) {
-        const line = infoArray.join(",");
-        lineArray.push(index == 0 ? "data:text/csv;charset=utf-8," + line : line);
-      });
-      const csvContent = lineArray.join("\n");
-      const encodedUri = encodeURI(csvContent);
-      const link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", "names.csv");
-      animation.notify('Exporting to CSV!');
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-  };
   elements.btnExportNames.addEventListener('click', function() {
     createCsvArray();
   });
