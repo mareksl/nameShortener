@@ -49,7 +49,7 @@ const animation = (function() {
     if (options.type === 'error') {
       const close = document.createElement('button');
       close.classList.add('notification__close');
-      close.innerHTML = '&#10060;';
+      close.innerHTML = '&times;';
       close.setAttribute('aria-label', 'Close Notification');
       close.tabIndex = 1;
       close.addEventListener('click', function() {
