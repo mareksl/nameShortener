@@ -441,7 +441,7 @@ const elements = (function() {
   };
 }());
 (function init(lengths) {
-  let rules;
+  let rules = load();
 
   function displayLength(input, output, max) {
     output.innerHTML = input.length;
@@ -590,11 +590,11 @@ const elements = (function() {
 
   function load() {
     loadRules.load(function(response) {
-      rules = JSON.parse(response);
-      tableFromJSON(rules, elements.tableBody);
+      const tmp = JSON.parse(response);
+      tableFromJSON(tmp, elements.tableBody);
+      return tmp;
     });
   }
-  load();
 
   function createCsvArray() {
     const nameFields = elements.shareClassesOutput.getElementsByTagName('li');
@@ -631,7 +631,24 @@ const elements = (function() {
       document.body.removeChild(link);
     }
   }
+
+  function fadeInManual() {
+    elements.manualWrapper.style.display = 'flex';
+    elements.manualWrapper.classList.add('manual--visible');
+  }
+
+  function fadeOutManual() {
+    elements.manualWrapper.classList.remove('manual--visible');
+    elements.manualWrapper.addEventListener("transitionend", function(event) {});
+  }
   (function listenRules() {
+    elements.showRules.addEventListener('click', function(e) {
+      if (!elements.divRules.classList.contains('section__rules--show')) {
+        elements.divRules.classList.add('section__rules--show');
+      } else {
+        elements.divRules.classList.remove('section__rules--show');
+      }
+    });
     elements.btnAddRule.addEventListener('click', function(e) {
       const key = elements.addRuleKey.value;
       const value = elements.addRuleValue.value;
@@ -670,7 +687,7 @@ const elements = (function() {
               animation.notify('Rules reset to default!');
               localStorage.removeItem('localRules');
               localStorage.removeItem('localRulesSaved');
-              load();
+              rules = load();
             }
           });
           break;
@@ -720,84 +737,80 @@ const elements = (function() {
       }
     });
   }());
-  // allow only numbers in priority input
-  elements.addRulePriority.addEventListener('input', function(e) {
-    elements.addRulePriority.value = elements.addRulePriority.value.replace(/\D+/g, '');
-  });
-  elements.inputName.addEventListener('input', function(e) {
-    displayLength(elements.inputName.value, elements.lenName, lengths[0]);
-  });
-  elements.inputName.addEventListener('keydown', function(e) {
-    if (e.which === 13) {
-      elements.buttonShorten.click();
-    }
-  });
-  elements.outputName.addEventListener('input', function(e) {
-    displayAndAdd(elements.outputName, elements.lenOutputName, 0, elements.shareClassesOutput);
-  });
-  elements.outputShortName.addEventListener('input', function(e) {
-    displayAndAdd(elements.outputShortName, elements.lenOutputShortName, 1, elements.shareClassesShortOutput);
-  });
-  elements.outputInHouseName.addEventListener('input', function(e) {
-    displayAndAdd(elements.outputInHouseName, elements.lenOutputInHouseName, 2, elements.shareClassesInHouseOutput);
-  });
-  elements.buttonShorten.addEventListener('click', function(e) {
-    const value = elements.inputName.value;
-    const options = {};
-    options.replaceUmlauts = elements.removeSpecial.checked;
-    options.removeParens = elements.removeParens.checked;
-    options.shortenName = elements.shortenNames.checked;
-    options.removeDashes = elements.removeDashes.checked;
-    options.removeWhitespace = elements.removeWhitespace.checked;
-    options.removeRegex = elements.removeRegex.value !== '' ? true : false;
-    const regex = elements.removeRegex.value;
-    const sClasses = elements.shareClassesInput.value.length > 0 ? elements.shareClassesInput.value.split('\n') : [];
-    const shortened = nameChecker.shortenProcess(value, options, rules, sClasses, lengths, regex);
-    elements.outputName.value = shortened.shortenedName;
-    elements.outputShortName.value = shortened.shortenedNameShort;
-    elements.outputInHouseName.value = shortened.shortenedNameInHouse;
-    displayAndAdd(elements.outputName, elements.lenOutputName, 0, elements.shareClassesOutput);
-    displayAndAdd(elements.outputShortName, elements.lenOutputShortName, 1, elements.shareClassesShortOutput);
-    displayAndAdd(elements.outputInHouseName, elements.lenOutputInHouseName, 2, elements.shareClassesInHouseOutput);
-  });
-  //OBJECTIVE
-  elements.inputObj.addEventListener('input', function(e) {
-    displayLength(elements.inputObj.value, elements.lenObj, 2000);
-    elements.linkTranslate.href = nameChecker.translateLink(elements.inputObj.value);
-  });
-  elements.btnObjUmlauts.addEventListener('click', function(e) {
-    elements.inputObj.value = nameChecker.replaceUmlauts(elements.inputObj.value);
-    displayLength(elements.inputObj.value, elements.lenObj, 2000);
-    elements.inputObj.select();
-  });
-  elements.btnObjBreaks.addEventListener('click', function(e) {
-    elements.inputObj.value = nameChecker.removeBreaks(elements.inputObj.value);
-    displayLength(elements.inputObj.value, elements.lenObj, 2000);
-    elements.inputObj.select();
-  });
-  elements.showRules.addEventListener('click', function(e) {
-    if (!elements.divRules.classList.contains('section__rules--show')) {
-      elements.divRules.classList.add('section__rules--show');
-    } else {
-      elements.divRules.classList.remove('section__rules--show');
-    }
-  });
-  elements.shareClassesInput.addEventListener('input', autoExpand);
-  elements.btnExportNames.addEventListener('click', function() {
-    createCsvArray();
-  });
-  elements.manualOpen.addEventListener('click', function(e) {
-    elements.manualWrapper.style.display = 'flex';
-    elements.manualWrapper.classList.add('manual--visible');
-  });
-  elements.manualClose.addEventListener('click', function(e) {
-    elements.manualWrapper.classList.remove('manual--visible');
-    elements.manualWrapper.addEventListener("transitionend", function(event) {});
-  });
-  elements.manualWrapper.addEventListener('click', function(e) {
-    if (e.target == elements.manualWrapper) {
-      elements.manualWrapper.classList.remove('manual--visible');
-      elements.manualWrapper.addEventListener("transitionend", function(event) {});
-    }
-  });
+  (function listenInputs() {
+    elements.addRulePriority.addEventListener('input', function(e) {
+      elements.addRulePriority.value = elements.addRulePriority.value.replace(/\D+/g, '');
+    });
+    elements.inputName.addEventListener('input', function(e) {
+      displayLength(elements.inputName.value, elements.lenName, lengths[0]);
+    });
+    elements.inputName.addEventListener('keydown', function(e) {
+      if (e.which === 13) {
+        elements.buttonShorten.click();
+      }
+    });
+    elements.outputName.addEventListener('input', function(e) {
+      displayAndAdd(elements.outputName, elements.lenOutputName, 0, elements.shareClassesOutput);
+    });
+    elements.outputShortName.addEventListener('input', function(e) {
+      displayAndAdd(elements.outputShortName, elements.lenOutputShortName, 1, elements.shareClassesShortOutput);
+    });
+    elements.outputInHouseName.addEventListener('input', function(e) {
+      displayAndAdd(elements.outputInHouseName, elements.lenOutputInHouseName, 2, elements.shareClassesInHouseOutput);
+    });
+    elements.shareClassesInput.addEventListener('input', autoExpand);
+  }());
+  (function listenNames() {
+    elements.buttonShorten.addEventListener('click', function(e) {
+      const value = elements.inputName.value;
+      const options = {};
+      options.replaceUmlauts = elements.removeSpecial.checked;
+      options.removeParens = elements.removeParens.checked;
+      options.shortenName = elements.shortenNames.checked;
+      options.removeDashes = elements.removeDashes.checked;
+      options.removeWhitespace = elements.removeWhitespace.checked;
+      options.removeRegex = elements.removeRegex.value !== '' ? true : false;
+      const regex = elements.removeRegex.value;
+      const sClasses = elements.shareClassesInput.value.length > 0 ? elements.shareClassesInput.value.split('\n') : [];
+      const shortened = nameChecker.shortenProcess(value, options, rules, sClasses, lengths, regex);
+      elements.outputName.value = shortened.shortenedName;
+      elements.outputShortName.value = shortened.shortenedNameShort;
+      elements.outputInHouseName.value = shortened.shortenedNameInHouse;
+      displayAndAdd(elements.outputName, elements.lenOutputName, 0, elements.shareClassesOutput);
+      displayAndAdd(elements.outputShortName, elements.lenOutputShortName, 1, elements.shareClassesShortOutput);
+      displayAndAdd(elements.outputInHouseName, elements.lenOutputInHouseName, 2, elements.shareClassesInHouseOutput);
+    });
+    elements.btnExportNames.addEventListener('click', function() {
+      createCsvArray();
+    });
+  }());
+  (function listenObjective() {
+    elements.inputObj.addEventListener('input', function(e) {
+      displayLength(elements.inputObj.value, elements.lenObj, 2000);
+      elements.linkTranslate.href = nameChecker.translateLink(elements.inputObj.value);
+    });
+    elements.btnObjUmlauts.addEventListener('click', function(e) {
+      elements.inputObj.value = nameChecker.replaceUmlauts(elements.inputObj.value);
+      displayLength(elements.inputObj.value, elements.lenObj, 2000);
+      elements.inputObj.select();
+    });
+    elements.btnObjBreaks.addEventListener('click', function(e) {
+      elements.inputObj.value = nameChecker.removeBreaks(elements.inputObj.value);
+      displayLength(elements.inputObj.value, elements.lenObj, 2000);
+      elements.inputObj.select();
+    });
+  }());
+  (function listenManual() {
+    elements.manualOpen.addEventListener('click', function(e) {
+      fadeInManual();
+    });
+    elements.manualWrapper.addEventListener('click', function(e) {
+      if (e.target == elements.manualWrapper) {
+        fadeOutManual();
+      }
+      if (e.target == elements.manualClose) {
+        fadeOutManual();
+      }
+    });
+  }());
 }([50, 30, 40]));
