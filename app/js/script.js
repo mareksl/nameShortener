@@ -441,8 +441,8 @@ const elements = (function() {
   };
 }());
 (function init(lengths) {
-  let rules = load();
-  console.log(rules);
+  let rules;
+	load();
 
   function displayLength(input, output, max) {
     output.innerHTML = input.length;
@@ -613,12 +613,10 @@ const elements = (function() {
   }
 
   function load() {
-    let tmp;
-    loadRules.load(function(response) {
-      tmp = JSON.parse(response);
-      tableFromJSON(tmp, elements.tableBody);
+		loadRules.load(function(response) {
+      rules = JSON.parse(response);
+      tableFromJSON(rules, elements.tableBody);
     });
-    return tmp;
   }
 
   function createCsvArray() {
