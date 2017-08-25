@@ -442,6 +442,7 @@ const elements = (function() {
 }());
 (function init(lengths) {
   let rules = load();
+  console.log(rules);
 
   function displayLength(input, output, max) {
     output.innerHTML = input.length;
@@ -539,6 +540,29 @@ const elements = (function() {
     });
   }
 
+  function addRule(key, value, priority, callback) {
+    const maxPriority = priority <= 99 ? priority : 99;
+    if (key !== '' && value !== '') {
+      if (rules.hasOwnPropertyCI(key)) {
+        animation.notify('Rule already exists!', {
+          type: 'warning'
+        });
+      } else {
+        rules[key] = {
+          "priority": maxPriority,
+          "replacements": [value]
+        };
+        modifyRules('changed');
+        addTableRow(elements.tableBody, key, value, priority);
+        callback();
+      }
+    } else {
+      animation.notify('Please check rule input!', {
+        type: 'warning'
+      });
+    }
+  }
+
   function removeRule(key, tbl, row) {
     delete rules[key];
     modifyRules('changed');
@@ -589,11 +613,12 @@ const elements = (function() {
   }
 
   function load() {
+    let tmp;
     loadRules.load(function(response) {
-      const tmp = JSON.parse(response);
+      tmp = JSON.parse(response);
       tableFromJSON(tmp, elements.tableBody);
-      return tmp;
     });
+    return tmp;
   }
 
   function createCsvArray() {
@@ -650,30 +675,12 @@ const elements = (function() {
       }
     });
     elements.btnAddRule.addEventListener('click', function(e) {
-      const key = elements.addRuleKey.value;
-      const value = elements.addRuleValue.value;
-      const priority = elements.addRulePriority.value <= 99 ? elements.addRulePriority.value : 99;
-      if (key !== '' && value !== '') {
-        if (rules.hasOwnPropertyCI(key)) {
-          animation.notify('Rule already exists!', {
-            type: 'warning'
-          });
-        } else {
-          rules[key] = {
-            "priority": priority,
-            "replacements": [value]
-          };
-          modifyRules('changed');
-          addTableRow(elements.tableBody, key, value, priority);
-          elements.addRuleKey.value = '';
-          elements.addRuleValue.value = '';
-          elements.addRulePriority.value = '0';
-        }
-      } else {
-        animation.notify('Please check rule input!', {
-          type: 'warning'
-        });
-      }
+      addRule(elements.addRuleKey.value, elements.addRuleValue.value, elements.addRulePriority.value, function() {
+        elements.addRuleKey.value = '';
+        elements.addRuleValue.value = '';
+        elements.addRulePriority.value = 0;
+        elements.tableBody.scrollTop = elements.tableBody.scrollHeight;
+      });
     });
     elements.btnsRules.addEventListener('click', function(e) {
       switch (e.target) {
