@@ -442,7 +442,7 @@ const elements = (function() {
 }());
 (function init(lengths) {
   let rules;
-	load();
+  load();
 
   function displayLength(input, output, max) {
     output.innerHTML = input.length;
@@ -600,9 +600,13 @@ const elements = (function() {
   function tableFromJSON(data, tableBody) {
     tableBody.innerHTML = '';
     try {
-      for (let prop in data) {
-        if (data.hasOwnProperty(prop)) {
-          addTableRow(tableBody, prop, data[prop].replacements[0], data[prop].priority);
+      const ordered = {};
+      Object.keys(data).sort().forEach(function(key) {
+        ordered[key] = data[key];
+      });
+      for (let prop in ordered) {
+        if (ordered.hasOwnProperty(prop)) {
+          addTableRow(tableBody, prop, ordered[prop].replacements[0], ordered[prop].priority);
         }
       }
     } catch (e) {
@@ -613,7 +617,7 @@ const elements = (function() {
   }
 
   function load() {
-		loadRules.load(function(response) {
+    loadRules.load(function(response) {
       rules = JSON.parse(response);
       tableFromJSON(rules, elements.tableBody);
     });
