@@ -264,6 +264,25 @@ const nameChecker = (function() {
     return shortenedNames;
   }
 
+  function checkIfShortened(name, shareClasses, lengths) {
+    for (let i = 0; i < name.length; i++) {
+      const nameType = i === 2 ? 'In-House' : i === 1 ? 'Short' : '';
+      let nameWithShareclasses;
+      if (shareClasses.length > 0) {
+        nameWithShareclasses = addShareClasses(name[i], shareClasses).reduce(function(a, b) {
+          return a.length > b.length ? a : b;
+        });
+      } else {
+        nameWithShareclasses = name[i];
+      }
+      if (nameWithShareclasses.length > lengths[i]) {
+        animation.notify('Couldn\'t fully shorten ' + nameType + ' Name.', {
+          type: 'warning'
+        });
+      }
+    }
+  }
+
   function shortenProcess(name, options, rules, shareClasses, lengths, regex) {
     const nameRegex = options.removeRegex ? removeRegex(name, regex) : name;
     const nameParens = options.removeParens ? removeParens(nameRegex) : nameRegex;
@@ -272,21 +291,8 @@ const nameChecker = (function() {
     const nameUmlauts = options.replaceUmlauts ? replaceUmlauts(nameWhitespace) : nameWhitespace;
     const nameMultipleWhitespace = removeMultipleWhitespace(nameUmlauts);
     const shortenedName = options.shortenName ? shortenName(nameMultipleWhitespace, shareClasses, rules, lengths) : [nameMultipleWhitespace, nameMultipleWhitespace, nameMultipleWhitespace];
-    for (let i = 0; i < shortenedName.length; i++) {
-      const nameType = i === 2 ? 'In-House' : i === 1 ? 'Short' : '';
-      let nameWithShareclasses;
-      if (shareClasses.length > 0) {
-        nameWithShareclasses = addShareClasses(shortenedName[i], shareClasses).reduce(function(a, b) {
-          return a.length > b.length ? a : b;
-        });
-      } else {
-        nameWithShareclasses = shortenedName[i];
-      }
-      if (nameWithShareclasses.length > lengths[i]) {
-        animation.notify('Couldn\'t fully shorten ' + nameType + ' Name.', {
-          type: 'warning'
-        });
-      }
+    if (options.shortenName) {
+      checkIfShortened(shortenedName, shareClasses, lengths);
     }
     return {
       shortenedName: shortenedName[0],
