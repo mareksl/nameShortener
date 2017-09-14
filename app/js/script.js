@@ -739,9 +739,15 @@ const elements = (function() {
     });
     elements.btnUploadRules.addEventListener('change', function(e) {
       loadRules.uploadRules(e, function(response) {
-        rules = JSON.parse(response);
-        tableFromJSON(rules, elements.tableBody);
-        modifyRules('changed');
+        try {
+          rules = JSON.parse(response);
+          tableFromJSON(rules, elements.tableBody);
+          modifyRules('changed');
+        } catch (e) {
+          animation.notify(e, {
+            type: 'error'
+          });
+        }
       });
     });
     window.addEventListener('beforeunload', function(e) {
