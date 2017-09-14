@@ -11,6 +11,7 @@
 </head>
 
 <body>
+
 	<header class="header">
 		<h1 class="header__title">Fund Name Shortener</h1>
 	</header>
@@ -19,13 +20,14 @@
 			<section class="manual__content">
 				<button class="manual__close" id="manualClose" aria-label="Close Instructions">&times;</button>
 				<h2>Instructions</h2>
+				<h3>General</h3>
 				<p>The Fund Name Shortener app can be used to shorten the names of funds according to internal limitations and add share class symbols in a uniform way.</p>
 				<p>The app uses predefined rules to shorten the name. The rules are processed in <strong>descending</strong> order by priority. If two or more rules have the same priority value, they are processed from <strong>last</strong> occurrence <strong>to first</strong>.</p>
 				<p>If the app isn't able to sufficiently shorten the name, you can manually edit the output.</p>
 				<hr>
 				<ol class="manual__list">
 					<li>Type the fund name in the input box</li>
-					<li>Edit rules <small>(optional)</small>
+					<li>Edit or upload rules <small>(optional)</small>
 						<p>English language rules are loaded by default. You can add/remove single rules, remove all rules or reset to default rules.</p>
 						<p>When you click "Save", the rules will be saved to your <strong>local storage</strong>, which is specific to the browser you are currently using. Your rules will not be saved on a different browser.</p>
 					</li>
@@ -35,9 +37,21 @@
 					<li><strong>Click "Shorten"</strong></li>
 					<li>Export to csv <small>(optional)</small></li>
 				</ol>
-				<hr>
+				<h3>Objective</h3>
 				<p>The objective section of the shortener can help you with removing line breaks and umlauts. The Translate link sends you to the Google Translate website, pastes the input text and detects the language.</p>
-				<hr>
+				<h3 id="upload">Uploading Rules</h3>
+				<p>You can upload rules by clicking the "Upload Rules" button under the rule list. The app accepts <span class="manual__file-extension">.json</span> and <span class="manual__file-extension">.txt</span> formats, however with specific formatting.</p><p>Example rule file contents:</p>
+				<pre class="manual__pre"><code>{
+	"Fund": {
+		"priority": "1",
+		"replacements": ["Fd"]
+	},
+	"Global": {
+		"priority": "0",
+		"replacements": ["Glb"]
+	}
+}</code></pre>
+				<h3>Support</h3>
 				<p>You can submit issues <a class="link" href="https://gitreports.com/issue/mareksl/nameShortener/" title="Submit an issue.">here</a>. Please use this option sparingly. You can also contact me directly with any issues or suggestions.</p>
 			</section>
 		</aside>
@@ -121,6 +135,7 @@
 			<h2 class="section__header">Objective</h2>
 			<label class="input-label input-label--visuallyhidden" for="inputObj">Objective</label>
 			<textarea class="textarea textarea--minheight" id="inputObj"></textarea>
+			<!-- <div class="inputCTE" contenteditable="true"></div> -->
 			<div class="objective">
 				<span class="objective__length" id="lenObj">0</span>
 				<div class="objective__buttons">

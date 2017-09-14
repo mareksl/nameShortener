@@ -3,6 +3,7 @@
 
 body {
 	overflow-x: hidden;
+	// background-color: red;
 }
 
 .header {
@@ -96,7 +97,7 @@ body {
 
 .manual__content {
 	position: relative;
-	max-width: 680px;
+	max-width: 960px;
 	margin: 1rem;
 	padding: 1rem;
 	border: 1px solid $tr-orange;
@@ -141,6 +142,28 @@ body {
 		outline: none;
 		text-shadow: 0 0 2px $tr-orange;
 	}
+}
+
+pre {
+	border: 1px solid $tr-orange;
+	background-color: $tr-darkgray;
+	color: $tr-white;
+	tab-size: 2;
+	border-left-width: .5rem;
+	border-radius: 4px;
+	font-family: monospace;
+	font-size: .8rem;
+	padding: .5rem;
+	margin: .5rem 1rem;
+}
+
+.manual__file-extension {
+	font-family: monospace;
+	background-color: $tr-darkgray;
+	color: $tr-white;
+	border-radius: 4px;
+	border: 1px solid $tr-orange;
+	padding: 0 .25rem;
 }
 
 .table-rules {
@@ -449,6 +472,32 @@ body {
 	flex: 1 0 auto;
 	text-align: center;
 }
+// .inputCTE {
+// 	position: relative;
+// 	font-family: $sans;
+// 	font-size: 1rem;
+// 	display: block;
+// 	width: 100%;
+// 	padding: .5rem;
+// 	padding-left: 1rem;
+// 	border: 1px solid $tr-lightgray;
+// 	border-radius: 4px;
+//
+// 	&:focus {
+// 		padding: calc(.5rem - 1px);
+// 		border: 2px solid $tr-orange;
+// 		outline: none;
+// 		padding-left: 1rem;
+//
+// 	}
+// 	&>* {
+// 		&:before {
+// 			position: absolute;
+// 			left: .25rem;
+// 			content: '\21b5';
+// 		}
+// 	}
+// }
 
 .length--warning {
 	font-weight: bold;
