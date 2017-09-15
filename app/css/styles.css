@@ -308,10 +308,13 @@ body {
       width: 1rem;
       margin-right: 10px;
       margin-left: -60px;
-      padding: 0 1rem;
+      padding: 0 .5rem;
       content: counter(item);
       text-align: center;
-      border: 1px solid #ff8000; }
+      border: 1px solid #ff8000;
+      border-radius: 4px;
+      background-color: #4d4d4d;
+      color: #fff; }
 
 .manual__close {
   font-size: 1.4rem;

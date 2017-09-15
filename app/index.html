@@ -34,13 +34,13 @@
 					<li>Choose options</li>
 					<li>Add <a class="link" href="http://www.regular-expressions.info/" title="Learn more about Regular Expressions.">Regular Expression</a> to remove from name. <small>(optional)</small></li>
 					<li>Add share classes - each on new line <small>(optional)</small></li>
-					<li><strong>Click "Shorten"</strong></li>
+					<li><strong>Click "Shorten"!</strong></li>
 					<li>Export to csv <small>(optional)</small></li>
 				</ol>
 				<h3>Objective</h3>
 				<p>The objective section of the shortener can help you with removing line breaks and umlauts. The Translate link sends you to the Google Translate website, pastes the input text and detects the language.</p>
 				<h3 id="upload">Uploading Rules</h3>
-				<p>You can upload rules by clicking the "Upload Rules" button under the rule list. The app accepts <span class="manual__file-extension">.json</span> and <span class="manual__file-extension">.txt</span> formats, however with specific formatting.</p><p>Example rule file contents:</p>
+				<p>You can upload rules by clicking the "Upload Rules" button under the rule list. The app currently <em>only</em> accepts <span class="manual__file-extension">.json</span> and <span class="manual__file-extension">.txt</span> formats, however with specific formatting.</p><p>Example rule file contents:</p>
 				<pre class="manual__pre"><code>{
 	"Fund": {
 		"priority": "1",
@@ -51,6 +51,7 @@
 		"replacements": ["Glb"]
 	}
 }</code></pre>
+<p>Currently, only one replacement per word is supported.</p>
 				<h3>Support</h3>
 				<p>You can submit issues <a class="link" href="https://gitreports.com/issue/mareksl/nameShortener/" title="Submit an issue.">here</a>. Please use this option sparingly. You can also contact me directly with any issues or suggestions.</p>
 			</section>
