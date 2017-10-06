@@ -255,6 +255,9 @@ body {
 .section__rules {
   display: none; }
 
+.section__multiple {
+  display: none; }
+
 .rules__buttons {
   display: flex;
   width: 100%;
@@ -265,6 +268,9 @@ body {
   display: none; }
 
 .section__rules--show {
+  display: flex; }
+
+.section__multiple--show {
   display: flex; }
 
 .manual {

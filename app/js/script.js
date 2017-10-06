@@ -2,7 +2,7 @@
 /*jshint browser:true */
 /*jshint strict:global */
 'use strict';
-const animation = (function() {
+const animation = (function () {
   function fadeIn(el) {
     document.body.appendChild(el);
     el.computedHeight = el.offsetHeight + parseFloat(window.getComputedStyle(el, null).getPropertyValue('margin-top')) / 2;
@@ -12,7 +12,7 @@ const animation = (function() {
       topValue += el.computedHeight;
       prevNotes[i].style.top = topValue + 'px';
     }
-    setTimeout(function() {
+    setTimeout(function () {
       el.classList.add('notification--visible');
     }, 0);
   }
@@ -28,7 +28,7 @@ const animation = (function() {
       topValue -= el.computedHeight;
       arr[i].style.top = topValue + 'px';
     }
-    el.addEventListener("transitionend", function(event) {
+    el.addEventListener("transitionend", function (event) {
       el.remove();
     });
   }
@@ -52,7 +52,7 @@ const animation = (function() {
       close.innerHTML = '&times;';
       close.setAttribute('aria-label', 'Close Notification');
       close.tabIndex = 1;
-      close.addEventListener('click', function() {
+      close.addEventListener('click', function () {
         fadeOut(notification);
       });
       notification.appendChild(close);
@@ -64,13 +64,13 @@ const animation = (function() {
       const buttonCancel = document.createElement('button');
       buttonOK.classList.add('button', 'button--narrow');
       buttonOK.innerHTML = 'OK';
-      buttonOK.addEventListener('click', function() {
+      buttonOK.addEventListener('click', function () {
         options.callback();
         fadeOut(notification);
       });
       buttonCancel.classList.add('button', 'button--narrow');
       buttonCancel.innerHTML = 'Cancel';
-      buttonCancel.addEventListener('click', function() {
+      buttonCancel.addEventListener('click', function () {
         fadeOut(notification);
       });
       buttons.appendChild(buttonOK);
@@ -78,7 +78,7 @@ const animation = (function() {
       notification.appendChild(buttons);
     }
     if (options.type !== 'error' && options.type !== 'confirm') {
-      setTimeout(function() {
+      setTimeout(function () {
         fadeOut(notification);
       }, timeout);
     }
@@ -93,7 +93,7 @@ const animation = (function() {
     notify: notify
   };
 }());
-const nameChecker = (function() {
+const nameChecker = (function () {
   function maxLength(target, max) {
     return target.length > max;
   }
@@ -205,7 +205,7 @@ const nameChecker = (function() {
   }
 
   function sortSearches(searches) {
-    return searches.sort(function(a, b) {
+    return searches.sort(function (a, b) {
       const aPriority = a[1].priority;
       const bPriority = b[1].priority;
       const aIndex = a[2];
@@ -249,12 +249,12 @@ const nameChecker = (function() {
     const nameWithShareclasses = addShareClasses(name, shareClasses);
     let longest = name;
     if (nameWithShareclasses.length > 0) {
-      longest = nameWithShareclasses.reduce(function(a, b) {
+      longest = nameWithShareclasses.reduce(function (a, b) {
         return a.length > b.length ? a : b;
       });
     }
     const maxShareClassLen = longest.length - name.length;
-    const shortenToLen = lengths.map(function(e) {
+    const shortenToLen = lengths.map(function (e) {
       return e - maxShareClassLen;
     });
     for (let i = 0; i < shortenToLen.length; i++) {
@@ -269,7 +269,7 @@ const nameChecker = (function() {
       const nameType = i === 2 ? 'In-House' : i === 1 ? 'Short' : '';
       let nameWithShareclasses;
       if (shareClasses.length > 0) {
-        nameWithShareclasses = addShareClasses(name[i], shareClasses).reduce(function(a, b) {
+        nameWithShareclasses = addShareClasses(name[i], shareClasses).reduce(function (a, b) {
           return a.length > b.length ? a : b;
         });
       } else {
@@ -300,8 +300,8 @@ const nameChecker = (function() {
       shortenedNameInHouse: shortenedName[2],
     };
   }
-  Object.prototype.hasOwnPropertyCI = function(prop) {
-    return Object.keys(this).filter(function(v) {
+  Object.prototype.hasOwnPropertyCI = function (prop) {
+    return Object.keys(this).filter(function (v) {
       return v.toLowerCase() === prop.toLowerCase();
     }).length > 0;
   };
@@ -314,7 +314,7 @@ const nameChecker = (function() {
     shortenProcess: shortenProcess
   };
 }());
-const loadRules = (function() {
+const loadRules = (function () {
   function load(createRules) {
     localStorage.localRulesSaved = true;
     if (typeof localStorage.localRules !== 'undefined') {
@@ -329,7 +329,7 @@ const loadRules = (function() {
       const xobj = new XMLHttpRequest();
       xobj.overrideMimeType("application/json");
       xobj.open('GET', 'js/rules.json', true);
-      xobj.onreadystatechange = function() {
+      xobj.onreadystatechange = function () {
         if (xobj.readyState == 4) {
           if (xobj.status == "200") {
             createRules(xobj.responseText);
@@ -374,15 +374,15 @@ const loadRules = (function() {
         });
       } else {
         const reader = new FileReader();
-        reader.onloadstart = function(e) {
+        reader.onloadstart = function (e) {
           animation.notify('Uploading rules.');
         };
-        reader.onerror = function(e) {
+        reader.onerror = function (e) {
           animation.notify('Upload not successful.', {
             type: 'error'
           });
         };
-        reader.onload = function() {
+        reader.onload = function () {
           createRules(reader.result);
           animation.notify('Rules uploaded successfully.', {
             type: 'success'
@@ -398,7 +398,7 @@ const loadRules = (function() {
     uploadRules: uploadRules
   };
 }());
-const elements = (function() {
+const elements = (function () {
   return {
     inputName: document.querySelector('#inputName'),
     outputName: document.querySelector('#outputName'),
@@ -443,7 +443,12 @@ const elements = (function() {
     manualWrapper: document.querySelector('#manualWrapper'),
     manualClose: document.querySelector('#manualClose'),
     manualOpen: document.querySelector('#manualOpen'),
-    removeRegex: document.querySelector('#removeRegex')
+    removeRegex: document.querySelector('#removeRegex'),
+    sectionMultiple: document.querySelector('#sectionMultiple'),
+    showMultiple: document.querySelector('#showMultiple'),
+    shortenMultiple: document.querySelector('#shortenMultiple'),
+    inputMultiple: document.querySelector('#inputMultiple'),
+    expandableTextareas: document.querySelectorAll('.textarea--expandable')
   };
 }());
 (function init(lengths) {
@@ -494,24 +499,19 @@ const elements = (function() {
   }
 
   function addCopyListener(el, target) {
-    el.addEventListener('click', function() {
+    el.addEventListener('click', function () {
       copyText(target);
     });
   }
 
-  function addShareClasses(name, sClassesIn, output, max) {
-    const sClasses = sClassesIn.value.length > 0 ? sClassesIn.value.split('\n') : [];
-    while (output.firstChild) {
-      output.removeChild(output.firstChild);
-    }
-    const classesOutput = nameChecker.addShareClasses(name, sClasses);
-    for (let i = 0; i < classesOutput.length; i++) {
+  function addOutput(input, output, max) {
+    for (let i = 0; i < input.length; i++) {
       const lenId = output.id + '_' + i;
       const newShareClass = document.createElement('li');
       newShareClass.setAttribute('tabIndex', '0');
       newShareClass.setAttribute('contentEditable', 'true');
       newShareClass.classList += "shareclass-list__item";
-      const newShareClassText = document.createTextNode(classesOutput[i]);
+      const newShareClassText = document.createTextNode(input[i]);
       newShareClass.appendChild(newShareClassText);
       const newShareClassLen = document.createElement('span');
       newShareClassLen.setAttribute('id', lenId);
@@ -524,15 +524,27 @@ const elements = (function() {
     }
   }
 
-  function displayAndAdd(output, lenout, lennum, shareClassesOutput) {
-    const value = output.value;
+  function addShareClasses(name, sClassesIn, output, max) {
+    const sClasses = sClassesIn && sClassesIn.length > 0 ? sClassesIn.split('\n') : [];
+    while (output.firstChild) {
+      output.removeChild(output.firstChild);
+    }
+    const classesOutput = nameChecker.addShareClasses(name, sClasses);
+    addOutput(classesOutput, output, max)
+  }
+
+  function displayAndAdd(value, lenout, lennum, shareClassesInput, shareClassesOutput, multiple) {
     const length = lengths[lennum];
-    displayLength(value, lenout, length);
-    addShareClasses(value, elements.shareClassesInput, shareClassesOutput, length);
+    if (multiple === true) {
+      addOutput(value, shareClassesOutput, length);
+    } else {
+      displayLength(value, lenout, length);
+      addShareClasses(value, shareClassesInput, shareClassesOutput, length);
+    }
   }
 
   function modifyRules(status) {
-    loadRules.modify(rules, status, function() {
+    loadRules.modify(rules, status, function () {
       if (status === 'saved') {
         animation.notify('Local rules saved!', {
           type: 'success'
@@ -598,7 +610,7 @@ const elements = (function() {
     tableRow.appendChild(tableCellPriority);
     tableRow.appendChild(tableCellRemove);
     tableBody.appendChild(tableRow);
-    tableButtonRemove.addEventListener('click', function(e) {
+    tableButtonRemove.addEventListener('click', function (e) {
       removeRule(key, tableBody, tableRow);
     });
   }
@@ -607,7 +619,7 @@ const elements = (function() {
     tableBody.innerHTML = '';
     try {
       const ordered = {};
-      Object.keys(data).sort().forEach(function(key) {
+      Object.keys(data).sort().forEach(function (key) {
         ordered[key] = data[key];
       });
       for (let prop in ordered) {
@@ -623,7 +635,7 @@ const elements = (function() {
   }
 
   function load() {
-    loadRules.load(function(response) {
+    loadRules.load(function (response) {
       rules = JSON.parse(response);
       tableFromJSON(rules, elements.tableBody);
     });
@@ -649,7 +661,7 @@ const elements = (function() {
         array.push(names);
       }
       const lineArray = [];
-      array.forEach(function(infoArray, index) {
+      array.forEach(function (infoArray, index) {
         const line = infoArray.join(",");
         lineArray.push(index == 0 ? "data:text/csv;charset=utf-8," + line : line);
       });
@@ -672,25 +684,25 @@ const elements = (function() {
 
   function fadeOutManual() {
     elements.manualWrapper.classList.remove('manual--visible');
-    elements.manualWrapper.addEventListener("transitionend", function(event) {});
+    elements.manualWrapper.addEventListener("transitionend", function (event) {});
   }
   (function listenRules() {
-    elements.showRules.addEventListener('click', function(e) {
+    elements.showRules.addEventListener('click', function (e) {
       if (!elements.divRules.classList.contains('section__rules--show')) {
         elements.divRules.classList.add('section__rules--show');
       } else {
         elements.divRules.classList.remove('section__rules--show');
       }
     });
-    elements.btnAddRule.addEventListener('click', function(e) {
-      addRule(elements.addRuleKey.value, elements.addRuleValue.value, elements.addRulePriority.value, function() {
+    elements.btnAddRule.addEventListener('click', function (e) {
+      addRule(elements.addRuleKey.value, elements.addRuleValue.value, elements.addRulePriority.value, function () {
         elements.addRuleKey.value = '';
         elements.addRuleValue.value = '';
         elements.addRulePriority.value = 0;
         elements.tableBody.scrollTop = elements.tableBody.scrollHeight;
       });
     });
-    elements.btnsRules.addEventListener('click', function(e) {
+    elements.btnsRules.addEventListener('click', function (e) {
       switch (e.target) {
         case elements.btnSaveRules:
           modifyRules('saved');
@@ -698,7 +710,7 @@ const elements = (function() {
         case elements.btnResetRules:
           animation.notify('Do you want to reset to default rules?', {
             type: 'confirm',
-            callback: function() {
+            callback: function () {
               animation.notify('Rules reset to default!');
               localStorage.removeItem('localRules');
               localStorage.removeItem('localRulesSaved');
@@ -709,7 +721,7 @@ const elements = (function() {
         case elements.btnRemoveRules:
           animation.notify('Do you want to remove all rules?', {
             type: 'confirm',
-            callback: function() {
+            callback: function () {
               rules = {};
               while (elements.tableBody.firstChild) {
                 elements.tableBody.removeChild(elements.tableBody.firstChild);
@@ -737,8 +749,8 @@ const elements = (function() {
           break;
       }
     });
-    elements.btnUploadRules.addEventListener('change', function(e) {
-      loadRules.uploadRules(e, function(response) {
+    elements.btnUploadRules.addEventListener('change', function (e) {
+      loadRules.uploadRules(e, function (response) {
         try {
           rules = JSON.parse(response);
           tableFromJSON(rules, elements.tableBody);
@@ -750,7 +762,7 @@ const elements = (function() {
         }
       });
     });
-    window.addEventListener('beforeunload', function(e) {
+    window.addEventListener('beforeunload', function (e) {
       if (localStorage.localRulesSaved === 'false') {
         const dialogText = 'You have unsaved rules!';
         e.returnValue = dialogText;
@@ -759,30 +771,40 @@ const elements = (function() {
     });
   }());
   (function listenInputs() {
-    elements.addRulePriority.addEventListener('input', function(e) {
+    elements.showMultiple.addEventListener('click', function (e) {
+      if (!elements.sectionMultiple.classList.contains('section__multiple--show')) {
+        elements.sectionMultiple.classList.add('section__multiple--show');
+      } else {
+        elements.sectionMultiple.classList.remove('section__multiple--show');
+      }
+    });
+    elements.addRulePriority.addEventListener('input', function (e) {
       elements.addRulePriority.value = elements.addRulePriority.value.replace(/\D+/g, '');
     });
-    elements.inputName.addEventListener('input', function(e) {
+    elements.inputName.addEventListener('input', function (e) {
       displayLength(elements.inputName.value, elements.lenName, lengths[0]);
     });
-    elements.inputName.addEventListener('keydown', function(e) {
+    elements.inputName.addEventListener('keydown', function (e) {
       if (e.which === 13) {
         elements.buttonShorten.click();
       }
     });
-    elements.outputName.addEventListener('input', function(e) {
-      displayAndAdd(elements.outputName, elements.lenOutputName, 0, elements.shareClassesOutput);
+    elements.outputName.addEventListener('input', function (e) {
+      displayAndAdd(elements.outputName.value, elements.lenOutputName, 0, elements.shareClassesInput.value, elements.shareClassesOutput);
     });
-    elements.outputShortName.addEventListener('input', function(e) {
-      displayAndAdd(elements.outputShortName, elements.lenOutputShortName, 1, elements.shareClassesShortOutput);
+    elements.outputShortName.addEventListener('input', function (e) {
+      displayAndAdd(elements.outputShortName.value, elements.lenOutputShortName, 1, elements.shareClassesInput.value, elements.shareClassesShortOutput);
     });
-    elements.outputInHouseName.addEventListener('input', function(e) {
-      displayAndAdd(elements.outputInHouseName, elements.lenOutputInHouseName, 2, elements.shareClassesInHouseOutput);
+    elements.outputInHouseName.addEventListener('input', function (e) {
+      displayAndAdd(elements.outputInHouseName.value, elements.lenOutputInHouseName, 2, elements.shareClassesInput.value, elements.shareClassesInHouseOutput);
     });
-    elements.shareClassesInput.addEventListener('input', autoExpand);
+    for (let i = 0; i < elements.expandableTextareas.length; i++) {
+      const el = elements.expandableTextareas[i];
+      el.addEventListener('input', autoExpand)
+    }
   }());
   (function listenNames() {
-    elements.buttonShorten.addEventListener('click', function(e) {
+    elements.buttonShorten.addEventListener('click', function (e) {
       const value = elements.inputName.value;
       const options = {};
       options.replaceUmlauts = elements.removeSpecial.checked;
@@ -797,35 +819,58 @@ const elements = (function() {
       elements.outputName.value = shortened.shortenedName;
       elements.outputShortName.value = shortened.shortenedNameShort;
       elements.outputInHouseName.value = shortened.shortenedNameInHouse;
-      displayAndAdd(elements.outputName, elements.lenOutputName, 0, elements.shareClassesOutput);
-      displayAndAdd(elements.outputShortName, elements.lenOutputShortName, 1, elements.shareClassesShortOutput);
-      displayAndAdd(elements.outputInHouseName, elements.lenOutputInHouseName, 2, elements.shareClassesInHouseOutput);
+      displayAndAdd(shortened.shortenedName, elements.lenOutputName, 0, elements.shareClassesInput.value, elements.shareClassesOutput);
+      displayAndAdd(shortened.shortenedNameShort, elements.lenOutputShortName, 1, elements.shareClassesInput.value, elements.shareClassesShortOutput);
+      displayAndAdd(shortened.shortenedNameInHouse, elements.lenOutputInHouseName, 2, elements.shareClassesInput.value, elements.shareClassesInHouseOutput);
     });
-    elements.btnExportNames.addEventListener('click', function() {
+    elements.shortenMultiple.addEventListener('click', function (e) {
+      const value = elements.inputMultiple.value.split('\n');
+      const options = {};
+      options.replaceUmlauts = elements.removeSpecial.checked;
+      options.removeParens = elements.removeParens.checked;
+      options.shortenName = elements.shortenNames.checked;
+      options.removeDashes = elements.removeDashes.checked;
+      options.removeWhitespace = elements.removeWhitespace.checked;
+      options.removeRegex = elements.removeRegex.value !== '' ? true : false;
+      const regex = elements.removeRegex.value;
+
+      for (let i = 0; i < value.length; i++) {
+        const shortened = nameChecker.shortenProcess(value[i], options, rules, [], lengths, regex);
+        console.log(shortened);
+        displayAndAdd(shortened.shortenedName, elements.lenOutputName, 0, undefined, elements.shareClassesOutput, true);
+        displayAndAdd(shortened.shortenedNameShort, elements.lenOutputShortName, 1, undefined, elements.shareClassesShortOutput, true);
+        displayAndAdd(shortened.shortenedNameInHouse, elements.lenOutputInHouseName, 2, undefined, elements.shareClassesInHouseOutput, true);
+      }
+      elements.outputName.value = 'MULTIPLE';
+      elements.outputShortName.value = 'MULTIPLE';
+      elements.outputInHouseName.value = 'MULTIPLE';
+
+    });
+    elements.btnExportNames.addEventListener('click', function () {
       createCsvArray();
     });
   }());
   (function listenObjective() {
-    elements.inputObj.addEventListener('input', function(e) {
+    elements.inputObj.addEventListener('input', function (e) {
       displayLength(elements.inputObj.value, elements.lenObj, 2000);
       elements.linkTranslate.href = nameChecker.translateLink(elements.inputObj.value);
     });
-    elements.btnObjUmlauts.addEventListener('click', function(e) {
+    elements.btnObjUmlauts.addEventListener('click', function (e) {
       elements.inputObj.value = nameChecker.replaceUmlauts(elements.inputObj.value);
       displayLength(elements.inputObj.value, elements.lenObj, 2000);
       elements.inputObj.select();
     });
-    elements.btnObjBreaks.addEventListener('click', function(e) {
+    elements.btnObjBreaks.addEventListener('click', function (e) {
       elements.inputObj.value = nameChecker.removeBreaks(elements.inputObj.value);
       displayLength(elements.inputObj.value, elements.lenObj, 2000);
       elements.inputObj.select();
     });
   }());
   (function listenManual() {
-    elements.manualOpen.addEventListener('click', function(e) {
+    elements.manualOpen.addEventListener('click', function (e) {
       fadeInManual();
     });
-    elements.manualWrapper.addEventListener('click', function(e) {
+    elements.manualWrapper.addEventListener('click', function (e) {
       if (e.target == elements.manualWrapper) {
         fadeOutManual();
       }

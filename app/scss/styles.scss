@@ -1,9 +1,7 @@
 @import 'reset';
 @import 'typography';
-
 body {
-	overflow-x: hidden;
-	// background-color: red;
+	overflow-x: hidden; // background-color: red;
 }
 
 .header {
@@ -42,6 +40,7 @@ body {
 	align-items: flex-end;
 	flex-flow: column;
 }
+
 @media (max-width: 600px) {
 	.section {
 		width: 100%;
@@ -58,6 +57,10 @@ body {
 	display: none;
 }
 
+.section__multiple {
+	display: none;
+}
+
 .rules__buttons {
 	display: flex;
 	width: 100%;
@@ -70,6 +73,10 @@ body {
 }
 
 .section__rules--show {
+	display: flex;
+}
+
+.section__multiple--show {
 	display: flex;
 }
 
@@ -108,12 +115,10 @@ body {
 
 .manual__list {
 	counter-reset: item;
-
 	li {
 		margin-bottom: 1rem;
 		padding-left: 60px;
 		counter-increment: item;
-
 		&:before {
 			display: inline-block;
 			width: 1rem;
@@ -138,7 +143,6 @@ body {
 	right: 1rem;
 	cursor: pointer;
 	background-color: transparent;
-
 	&:focus,
 	&:hover {
 		color: $tr-orange;
@@ -203,7 +207,6 @@ pre {
 	flex: 1 0;
 	border-bottom: 1px solid $own-mutedgray;
 	flex-flow: row;
-
 	&:last-child {
 		border-bottom: none;
 	}
@@ -243,7 +246,6 @@ pre {
 	margin: 0;
 	padding: .4em;
 	border: 0;
-
 	&:focus {
 		padding: calc(.4em - 2px);
 		border: 2px solid $tr-orange;
@@ -259,11 +261,9 @@ pre {
 	color: $tr-defaultlink;
 	font-weight: bold;
 	text-decoration: none;
-
 	&:visited {
 		color: $tr-visitedlink;
 	}
-
 	&:active,
 	&:focus,
 	&:hover {
@@ -285,18 +285,15 @@ pre {
 	border: 1px solid $tr-orange;
 	border-radius: 4px;
 	background-color: $tr-white;
-
 	&:focus {
 		border: 2px dashed $tr-orange;
 		outline: none;
 	}
-
 	&:hover {
 		color: $tr-white;
 		outline: none;
 		background-color: $tr-orange;
 	}
-
 	&:active {
 		outline: none;
 		background-color: $tr-darkorange;
@@ -319,12 +316,10 @@ pre {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-
 	&:active,
 	&:focus {
 		text-decoration: none;
 	}
-
 	&:hover {
 		text-decoration: none;
 	}
@@ -336,6 +331,7 @@ pre {
 	right: 0;
 	margin: 1rem;
 }
+
 @media (max-width: 1200px) {
 	.button-instructions {
 		position: relative;
@@ -351,7 +347,6 @@ pre {
 .button--disabled {
 	cursor: not-allowed;
 	filter: grayscale(1) blur(1px);
-
 	&:hover {
 		color: $tr-orange;
 		background-color: #fff;
@@ -382,7 +377,6 @@ pre {
 	resize: vertical;
 	border: 1px solid $tr-lightgray;
 	border-radius: 4px;
-
 	&:focus {
 		padding: calc(.5rem - 1px);
 		border: 2px solid $tr-orange;
@@ -441,7 +435,6 @@ pre {
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;
 	align-self: flex-start;
-
 	&:focus {
 		padding: calc(.4rem - 1px);
 		border: 2px solid $tr-orange;
@@ -475,6 +468,7 @@ pre {
 	flex: 1 0 auto;
 	text-align: center;
 }
+
 // .inputCTE {
 // 	position: relative;
 // 	font-family: $sans;
@@ -501,7 +495,6 @@ pre {
 // 		}
 // 	}
 // }
-
 .length--warning {
 	font-weight: bold;
 	color: $tr-darkorange;
@@ -539,7 +532,6 @@ pre {
 	padding: .4rem;
 	border: 1px solid $tr-lightgray;
 	border-radius: 4px;
-
 	&:focus {
 		padding: calc(.4em - 2px);
 		border: 2px solid $tr-orange;
@@ -550,22 +542,19 @@ pre {
 .input-checkbox {
 	position: absolute;
 	opacity: 0;
-
-	&:focus + .input-checkbox__label,
-	&:hover + .input-checkbox__label {
+	&:focus+.input-checkbox__label,
+	&:hover+.input-checkbox__label {
 		&:before {
 			transform: scale(1.1);
 			border: 1px solid $tr-orange;
 			box-shadow: 0 0 0 1px $tr-orange;
 		}
 	}
-
-	&:checked + .input-checkbox__label {
+	&:checked+.input-checkbox__label {
 		&:before {
 			border: 1px solid $tr-darkorange;
 			background: $tr-orange;
 		}
-
 		&:after {
 			position: absolute;
 			top: 4px;
@@ -587,7 +576,6 @@ pre {
 	position: relative;
 	cursor: pointer;
 	white-space: nowrap;
-
 	&:before {
 		display: inline-block;
 		width: 1em;
@@ -611,7 +599,6 @@ pre {
 	width: calc(100% - 3rem);
 	height: 1.6rem;
 	border-bottom: 1px dotted $tr-lightorange;
-
 	&:focus {
 		border-color: $tr-orange;
 		border-bottom-style: solid;
@@ -636,13 +623,11 @@ pre {
 	position: relative;
 	z-index: 1;
 	cursor: pointer;
-
 	&:after,
 	&:before {
 		transition: transform .2s;
 		pointer-events: none;
 	}
-
 	&:before {
 		line-height: 1.6rem;
 		position: absolute;
@@ -659,7 +644,6 @@ pre {
 		border-left: 1px dotted $tr-lightorange;
 		background: rgba($tr-white, 1);
 	}
-
 	&:after {
 		font-size: 0;
 		line-height: 0;
@@ -675,14 +659,11 @@ pre {
 		border: solid $tr-lightorange;
 		border-width: 0 2px 2px 0;
 	}
-
 	&:hover {
 		border-left: 0;
-
 		&:before {
 			transform: scaleX(1);
 		}
-
 		&:after {
 			opacity: 1;
 		}
@@ -700,7 +681,6 @@ pre {
 	background-color: $tr-white;
 	align-items: center;
 	justify-content: center;
-
 	&:hover {
 		transform: scale(1.2);
 		box-shadow: 0 0 8px $tr-orange;
@@ -711,6 +691,7 @@ pre {
 	width: 1.5rem;
 	height: 1.5rem;
 }
+
 @media (max-width: 600px) {
 	.footer {
 		position: relative;
@@ -746,7 +727,6 @@ pre {
 	margin-left: 1rem;
 	cursor: pointer;
 	background-color: transparent;
-
 	&:focus,
 	&:hover {
 		color: $tr-orange;
@@ -775,7 +755,6 @@ pre {
 .notification--warning {
 	border-color: $tr-orange;
 	box-shadow: 0 0 2px $tr-orange;
-
 	.notification__message {
 		&:before {
 			font-weight: bold;
@@ -789,7 +768,6 @@ pre {
 	font-weight: bold;
 	animation: pulse__warning 2s infinite;
 	border-color: $tr-darkorange;
-
 	.notification__message {
 		&:before {
 			font-weight: bold;
@@ -803,28 +781,26 @@ pre {
 	animation: pulse 2s infinite;
 	flex-flow: column;
 }
+
 @keyframes pulse {
 	0% {
 		box-shadow: 0 0 0 0 rgba($tr-lightorange, 1);
 	}
-
 	70% {
 		box-shadow: 0 0 0 8px rgba($tr-lightorange, 0);
 	}
-
 	100% {
 		box-shadow: 0 0 0 0 rgba($tr-lightorange, 0);
 	}
 }
+
 @keyframes pulse__warning {
 	0% {
 		box-shadow: 0 0 0 0 rgba($tr-darkorange, 1);
 	}
-
 	70% {
 		box-shadow: 0 0 0 8px rgba($tr-darkorange, 0);
 	}
-
 	100% {
 		box-shadow: 0 0 0 0 rgba($tr-darkorange, 0);
 	}

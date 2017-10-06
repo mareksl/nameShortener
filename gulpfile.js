@@ -57,7 +57,7 @@ gulp.task('browser-sync', ['sass'], function() {
 	    server: "app",
 			notify: true
 	});
-	gulp.watch('app/scss/**/*.scss', ['sass']);
+	gulp.watch('app/scss/*.scss', ['sass']);
 	gulp.watch("app/index.html").on('change', browserSync.reload);
 });
 
