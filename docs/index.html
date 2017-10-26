@@ -6,39 +6,73 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Fund Name Shortener</title>
 	<link rel="stylesheet" href="css/styles.min.css">
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-108713418-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+
+		function gtag() {
+			dataLayer.push(arguments);
+		}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-108713418-1');
+	</script>
 </head>
 
 <body>
-
 	<header class="header">
 		<h1 class="header__title">Fund Name Shortener</h1>
 	</header>
-	<main class="main"> <button class="button button-instructions" id="manualOpen">Instructions</button>
+	<main class="main">
+		<button class="button button-instructions" id="manualOpen">Instructions</button>
 		<aside class="manual" id="manualWrapper">
 			<section class="manual__content">
 				<button class="manual__close" id="manualClose" aria-label="Close Instructions">&times;</button>
 				<h2>Instructions</h2>
 				<h3>General</h3>
-				<p>The Fund Name Shortener app can be used to shorten the names of funds according to internal limitations and add share class symbols in a uniform way.</p>
-				<p>The app uses predefined rules to shorten the name. The rules are processed in <strong>descending</strong> order by priority. If two or more rules have the same priority value, they are processed from <strong>last</strong> occurrence <strong>to first</strong>.</p>
+				<p>The Fund Name Shortener app can be used to shorten the names of funds according to internal limitations and add share
+					class symbols in a uniform way.</p>
+				<p>The app uses predefined rules to shorten the name. The rules are processed in
+					<strong>descending</strong> order by priority. If two or more rules have the same priority value, they are processed from
+					<strong>last</strong> occurrence
+					<strong>to first</strong>.</p>
 				<p>If the app isn't able to sufficiently shorten the name, you can manually edit the output.</p>
 				<hr>
 				<ol class="manual__list">
 					<li>Type the fund name in the input box</li>
-					<li>Edit or upload rules <small>(optional)</small>
-						<p>English language rules are loaded by default. You can add/remove single rules, remove all rules or reset to default rules.</p>
-						<p>When you click "Save", the rules will be saved to your <strong>local storage</strong>, which is specific to the browser you are currently using. Your rules will not be saved on a different browser.</p>
+					<li>Edit or upload rules
+						<small>(optional)</small>
+						<p>English language rules are loaded by default. You can add/remove single rules, remove all rules or reset to default
+							rules.</p>
+						<p>When you click "Save", the rules will be saved to your
+							<strong>local storage</strong>, which is specific to the browser you are currently using. Your rules will not be saved on
+							a different browser.</p>
 					</li>
 					<li>Choose options</li>
-					<li>Add <a class="link" href="http://www.regular-expressions.info/" title="Learn more about Regular Expressions.">Regular Expression</a> to remove from name. <small>(optional)</small></li>
-					<li>Add share classes - each on new line <small>(optional)</small></li>
-					<li><strong>Click "Shorten"!</strong></li>
-					<li>Export to csv <small>(optional)</small></li>
+					<li>Add
+						<a class="link" href="http://www.regular-expressions.info/" title="Learn more about Regular Expressions.">Regular Expression</a> to remove from name.
+						<small>(optional)</small>
+					</li>
+					<li>Add share classes - each on new line
+						<small>(optional)</small>
+					</li>
+					<li>
+						<strong>Click "Shorten"!</strong>
+					</li>
+					<li>Export to csv
+						<small>(optional)</small>
+					</li>
 				</ol>
 				<h3>Objective</h3>
-				<p>The objective section of the shortener can help you with removing line breaks and umlauts. The Translate link sends you to the Google Translate website, pastes the input text and detects the language.</p>
+				<p>The objective section of the shortener can help you with removing line breaks and umlauts. The Translate link sends you
+					to the Google Translate website, pastes the input text and detects the language.</p>
 				<h3 id="upload">Uploading Rules</h3>
-				<p>You can upload rules by clicking the "Upload Rules" button under the rule list. The app currently <em>only</em> accepts <span class="manual__file-extension">.json</span> and <span class="manual__file-extension">.txt</span> formats, however with specific formatting.</p><p>Example rule file contents:</p>
+				<p>You can upload rules by clicking the "Upload Rules" button under the rule list. The app currently
+					<em>only</em> accepts
+					<span class="manual__file-extension">.json</span> and
+					<span class="manual__file-extension">.txt</span> formats, however with specific formatting.</p>
+				<p>Example rule file contents:</p>
 				<pre class="manual__pre"><code>{
 	"Fund": {
 		"priority": "1",
@@ -49,16 +83,19 @@
 		"replacements": ["Glb"]
 	}
 }</code></pre>
-<p>Currently, only one replacement per word is supported.</p>
+				<p>Currently, only one replacement per word is supported.</p>
 				<h3>Support</h3>
-				<p>You can submit issues <a class="link" href="https://gitreports.com/issue/mareksl/nameShortener/" title="Submit an issue.">here</a>. Please use this option sparingly. You can also contact me directly with any issues or suggestions.</p>
+				<p>You can submit issues
+					<a class="link" href="https://gitreports.com/issue/mareksl/nameShortener/" title="Submit an issue.">here</a>. Please use this option sparingly. You can also contact me directly with any issues or suggestions.</p>
 			</section>
 		</aside>
 		<section class="section">
 			<h2 class="section__header">Fund name</h2>
 			<label class="input-label input-label--visuallyhidden" for="inputName">Fund Name</label>
-			<div class="container-count"><input class="container-count__input-text" type="text" id="inputName">
-				<span class="container-count__length" id="lenName">0</span></div>
+			<div class="container-count">
+				<input class="container-count__input-text" type="text" id="inputName">
+				<span class="container-count__length" id="lenName">0</span>
+			</div>
 			<button class="button" type="button" id="buttonShorten">Shorten</button>
 			<button class="button" id="showRules">Rules</button>
 		</section>
@@ -77,15 +114,28 @@
 				</tbody>
 				<tfoot class="table-rules__footer">
 					<tr class="table-rules__row">
-						<td class="table-rules__item table-rules__item--editable"><label class="input-label input-label--visuallyhidden" for="addRuleKey">Word</label><input type="text" id="addRuleKey" class="table-rules__input-text"></td>
-						<td class="table-rules__item table-rules__item--editable"><label class="input-label input-label--visuallyhidden" for="addRuleValue">Replacement</label><input type="text" id="addRuleValue" class="table-rules__input-text"></td>
-						<td class="table-rules__item table-rules__item--editable table-rules__item--narrower"><label class="input-label input-label--visuallyhidden" for="addRulePriority">Priority</label><input type="number" max="99" id="addRulePriority" value="0" class="table-rules__input-text"></td>
-						<td class="table-rules__item table-rules__item--narrow"><button class="button button--intable" id="btnAddRule">Add</button></td>
+						<td class="table-rules__item table-rules__item--editable">
+							<label class="input-label input-label--visuallyhidden" for="addRuleKey">Word</label>
+							<input type="text" id="addRuleKey" class="table-rules__input-text">
+						</td>
+						<td class="table-rules__item table-rules__item--editable">
+							<label class="input-label input-label--visuallyhidden" for="addRuleValue">Replacement</label>
+							<input type="text" id="addRuleValue" class="table-rules__input-text">
+						</td>
+						<td class="table-rules__item table-rules__item--editable table-rules__item--narrower">
+							<label class="input-label input-label--visuallyhidden" for="addRulePriority">Priority</label>
+							<input type="number" max="99" id="addRulePriority" value="0" class="table-rules__input-text">
+						</td>
+						<td class="table-rules__item table-rules__item--narrow">
+							<button class="button button--intable" id="btnAddRule">Add</button>
+						</td>
 					</tr>
 				</tfoot>
 			</table>
 			<div class="rules__buttons" id="btnsRules">
-				<button class="button" id="btnSaveRules">Save <span id="rulesSaved"></span></button>
+				<button class="button" id="btnSaveRules">Save
+					<span id="rulesSaved"></span>
+				</button>
 				<button class="button" id="btnResetRules">Reset to default</button>
 				<button class="button" id="btnRemoveRules">Remove all rules</button>
 				<button class="button" id="btnDownloadRules">Download rules</button>
@@ -97,12 +147,31 @@
 		<section class="section">
 			<h2 class="section__header">Options</h2>
 			<ul class="options-list">
-				<li class="options-list__item"><input class="input-checkbox" type="checkbox" id="shortenNames" checked><label class="input-checkbox__label" for="shortenNames">Shorten Names</label></li>
-				<li class="options-list__item"><input class="input-checkbox" type="checkbox" id="removeParens"><label class="input-checkbox__label" for="removeParens">Remove Parens</label></li>
-				<li class="options-list__item"><input class="input-checkbox" type="checkbox" id="removeDashes"><label class="input-checkbox__label" for="removeDashes">Remove Hyphens</label></li>
-				<li class="options-list__item"><input class="input-checkbox" type="checkbox" id="removeWhitespace"><label class="input-checkbox__label" for="removeWhitespace">Remove Whitespace</label></li>
-				<li class="options-list__item"><input class="input-checkbox" type="checkbox" id="removeSpecial"><label class="input-checkbox__label" for="removeSpecial">Replace Umlauts and ß</label></li>
-				<li class="options-list__item options-remove"><label for="removeRegex" class="options-remove__label">Remove <small>(RegEx)</small>:</label><input type="text" id="removeRegex" class="options-remove__input-text"></li>
+				<li class="options-list__item">
+					<input class="input-checkbox" type="checkbox" id="shortenNames" checked>
+					<label class="input-checkbox__label" for="shortenNames">Shorten Names</label>
+				</li>
+				<li class="options-list__item">
+					<input class="input-checkbox" type="checkbox" id="removeParens">
+					<label class="input-checkbox__label" for="removeParens">Remove Parens</label>
+				</li>
+				<li class="options-list__item">
+					<input class="input-checkbox" type="checkbox" id="removeDashes">
+					<label class="input-checkbox__label" for="removeDashes">Remove Hyphens</label>
+				</li>
+				<li class="options-list__item">
+					<input class="input-checkbox" type="checkbox" id="removeWhitespace">
+					<label class="input-checkbox__label" for="removeWhitespace">Remove Whitespace</label>
+				</li>
+				<li class="options-list__item">
+					<input class="input-checkbox" type="checkbox" id="removeSpecial">
+					<label class="input-checkbox__label" for="removeSpecial">Replace Umlauts and ß</label>
+				</li>
+				<li class="options-list__item options-remove">
+					<label for="removeRegex" class="options-remove__label">Remove
+						<small>(RegEx)</small>:</label>
+					<input type="text" id="removeRegex" class="options-remove__input-text">
+				</li>
 			</ul>
 		</section>
 		<section class="section">
@@ -113,19 +182,31 @@
 		</section>
 		<section class="section">
 			<h2 class="section__header">Generated Share Classes</h2>
-			<label class="input-label" for="outputName">Name<small> (max. 50 chars)</small></label>
-			<div class="container-count"><input class="container-count__input-text" type="text" id="outputName">
-				<span class="container-count__length" id="lenOutputName">0</span></div>
+			<label class="input-label" for="outputName">Name
+				<small> (max. 50 chars)</small>
+			</label>
+			<div class="container-count">
+				<input class="container-count__input-text" type="text" id="outputName">
+				<span class="container-count__length" id="lenOutputName">0</span>
+			</div>
 			<ul class="shareclass-list" id="shareClassesOutput">
 			</ul>
-			<label class="input-label" for="outputShortName">Short Name<small> (max. 30 chars)</small></label>
-			<div class="container-count"><input class="container-count__input-text" type="text" id="outputShortName">
-				<span class="container-count__length" id="lenOutputShortName">0</span></div>
+			<label class="input-label" for="outputShortName">Short Name
+				<small> (max. 30 chars)</small>
+			</label>
+			<div class="container-count">
+				<input class="container-count__input-text" type="text" id="outputShortName">
+				<span class="container-count__length" id="lenOutputShortName">0</span>
+			</div>
 			<ul class="shareclass-list" id="shareClassesShortOutput">
 			</ul>
-			<label class="input-label" for="outputInHouseName">In-House Name<small> (max. 40 chars)</small></label>
-			<div class="container-count"><input class="container-count__input-text" type="text" id="outputInHouseName">
-				<span class="container-count__length" id="lenOutputInHouseName">0</span></div>
+			<label class="input-label" for="outputInHouseName">In-House Name
+				<small> (max. 40 chars)</small>
+			</label>
+			<div class="container-count">
+				<input class="container-count__input-text" type="text" id="outputInHouseName">
+				<span class="container-count__length" id="lenOutputInHouseName">0</span>
+			</div>
 			<ul class="shareclass-list" id="shareClassesInHouseOutput">
 			</ul>
 			<button class="button" id="btnExportNames">Export to CSV</button>
@@ -145,7 +226,11 @@
 			</div>
 		</section>
 	</main>
-	<footer class="footer"><a class="github-link" href="https://github.com/mareksl/nameShortener"><img class="github-link__logo" src="img/GitHub-Mark-32px.png" alt="GitHub"></a></footer>
+	<footer class="footer">
+		<a class="github-link" href="https://github.com/mareksl/nameShortener">
+			<img class="github-link__logo" src="img/GitHub-Mark-32px.png" alt="GitHub">
+		</a>
+	</footer>
 	<script src="js/script.min.js"></script>
 </body>
 
