@@ -444,10 +444,10 @@ const elements = (function () {
     manualClose: document.querySelector('#manualClose'),
     manualOpen: document.querySelector('#manualOpen'),
     removeRegex: document.querySelector('#removeRegex'),
-    sectionMultiple: document.querySelector('#sectionMultiple'),
-    showMultiple: document.querySelector('#showMultiple'),
-    shortenMultiple: document.querySelector('#shortenMultiple'),
-    inputMultiple: document.querySelector('#inputMultiple'),
+    // sectionMultiple: document.querySelector('#sectionMultiple'),
+    // showMultiple: document.querySelector('#showMultiple'),
+    // shortenMultiple: document.querySelector('#shortenMultiple'),
+    // inputMultiple: document.querySelector('#inputMultiple'),
     expandableTextareas: document.querySelectorAll('.textarea--expandable')
   };
 }());
@@ -535,12 +535,12 @@ const elements = (function () {
 
   function displayAndAdd(value, lenout, lennum, shareClassesInput, shareClassesOutput, multiple) {
     const length = lengths[lennum];
-    if (multiple === true) {
-      addOutput(value, shareClassesOutput, length);
-    } else {
+    // if (multiple === true) {
+      // addOutput(value, shareClassesOutput, length);
+    // } else {
       displayLength(value, lenout, length);
       addShareClasses(value, shareClassesInput, shareClassesOutput, length);
-    }
+    // }
   }
 
   function modifyRules(status) {
@@ -771,13 +771,13 @@ const elements = (function () {
     });
   }());
   (function listenInputs() {
-    elements.showMultiple.addEventListener('click', function (e) {
-      if (!elements.sectionMultiple.classList.contains('section__multiple--show')) {
-        elements.sectionMultiple.classList.add('section__multiple--show');
-      } else {
-        elements.sectionMultiple.classList.remove('section__multiple--show');
-      }
-    });
+    // elements.showMultiple.addEventListener('click', function (e) {
+    //   if (!elements.sectionMultiple.classList.contains('section__multiple--show')) {
+    //     elements.sectionMultiple.classList.add('section__multiple--show');
+    //   } else {
+    //     elements.sectionMultiple.classList.remove('section__multiple--show');
+    //   }
+    // });
     elements.addRulePriority.addEventListener('input', function (e) {
       elements.addRulePriority.value = elements.addRulePriority.value.replace(/\D+/g, '');
     });
@@ -823,29 +823,29 @@ const elements = (function () {
       displayAndAdd(shortened.shortenedNameShort, elements.lenOutputShortName, 1, elements.shareClassesInput.value, elements.shareClassesShortOutput);
       displayAndAdd(shortened.shortenedNameInHouse, elements.lenOutputInHouseName, 2, elements.shareClassesInput.value, elements.shareClassesInHouseOutput);
     });
-    elements.shortenMultiple.addEventListener('click', function (e) {
-      const value = elements.inputMultiple.value.split('\n');
-      const options = {};
-      options.replaceUmlauts = elements.removeSpecial.checked;
-      options.removeParens = elements.removeParens.checked;
-      options.shortenName = elements.shortenNames.checked;
-      options.removeDashes = elements.removeDashes.checked;
-      options.removeWhitespace = elements.removeWhitespace.checked;
-      options.removeRegex = elements.removeRegex.value !== '' ? true : false;
-      const regex = elements.removeRegex.value;
+    // elements.shortenMultiple.addEventListener('click', function (e) {
+    //   const value = elements.inputMultiple.value.split('\n');
+    //   const options = {};
+    //   options.replaceUmlauts = elements.removeSpecial.checked;
+    //   options.removeParens = elements.removeParens.checked;
+    //   options.shortenName = elements.shortenNames.checked;
+    //   options.removeDashes = elements.removeDashes.checked;
+    //   options.removeWhitespace = elements.removeWhitespace.checked;
+    //   options.removeRegex = elements.removeRegex.value !== '' ? true : false;
+    //   const regex = elements.removeRegex.value;
 
-      for (let i = 0; i < value.length; i++) {
-        const shortened = nameChecker.shortenProcess(value[i], options, rules, [], lengths, regex);
-        console.log(shortened);
-        displayAndAdd(shortened.shortenedName, elements.lenOutputName, 0, undefined, elements.shareClassesOutput, true);
-        displayAndAdd(shortened.shortenedNameShort, elements.lenOutputShortName, 1, undefined, elements.shareClassesShortOutput, true);
-        displayAndAdd(shortened.shortenedNameInHouse, elements.lenOutputInHouseName, 2, undefined, elements.shareClassesInHouseOutput, true);
-      }
-      elements.outputName.value = 'MULTIPLE';
-      elements.outputShortName.value = 'MULTIPLE';
-      elements.outputInHouseName.value = 'MULTIPLE';
+    //   for (let i = 0; i < value.length; i++) {
+    //     const shortened = nameChecker.shortenProcess(value[i], options, rules, [], lengths, regex);
+    //     console.log(shortened);
+    //     displayAndAdd(shortened.shortenedName, elements.lenOutputName, 0, undefined, elements.shareClassesOutput, true);
+    //     displayAndAdd(shortened.shortenedNameShort, elements.lenOutputShortName, 1, undefined, elements.shareClassesShortOutput, true);
+    //     displayAndAdd(shortened.shortenedNameInHouse, elements.lenOutputInHouseName, 2, undefined, elements.shareClassesInHouseOutput, true);
+    //   }
+    //   elements.outputName.value = 'MULTIPLE';
+    //   elements.outputShortName.value = 'MULTIPLE';
+    //   elements.outputInHouseName.value = 'MULTIPLE';
 
-    });
+    // });
     elements.btnExportNames.addEventListener('click', function () {
       createCsvArray();
     });
