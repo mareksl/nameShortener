@@ -1,0 +1,24 @@
+
+@keyframes pulse {
+	0% {
+		box-shadow: 0 0 0 0 rgba($tr-lightorange, 1);
+	}
+	70% {
+		box-shadow: 0 0 0 8px rgba($tr-lightorange, 0);
+	}
+	100% {
+		box-shadow: 0 0 0 0 rgba($tr-lightorange, 0);
+	}
+}
+
+@keyframes pulse__warning {
+	0% {
+		box-shadow: 0 0 0 0 rgba($tr-darkorange, 1);
+	}
+	70% {
+		box-shadow: 0 0 0 8px rgba($tr-darkorange, 0);
+	}
+	100% {
+		box-shadow: 0 0 0 0 rgba($tr-darkorange, 0);
+	}
+}

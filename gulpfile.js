@@ -57,13 +57,15 @@ gulp.task('browser-sync', ['sass'], function() {
 	    server: "app",
 			notify: true
 	});
-	gulp.watch('app/scss/*.scss', ['sass']);
-	gulp.watch("app/index.html").on('change', browserSync.reload);
+	gulp.watch('app/scss/**/*.scss', ['sass']);
+	gulp.watch("app/*.html").on('change', browserSync.reload);
+	gulp.watch("app/js/*.js").on('change', browserSync.reload);
 });
 
 gulp.task('sass', function() {
-  return gulp.src('app/scss/styles.scss')
-	.pipe(sass())
+  return gulp.src('app/scss/main.scss')
+  .pipe(sass())
+  .on('error', gutil.log)
   .pipe(gulp.dest('app/css'))
 	.pipe(browserSync.stream())
 	.on('end', function(){ gutil.log('Sass done!');

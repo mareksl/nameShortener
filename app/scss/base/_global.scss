@@ -1,0 +1,15 @@
+body {
+	overflow: hidden; // background-color: red;
+}
+
+pre {
+	border: 1px solid $tr-lightorange;
+	background-color: $tr-darkgray;
+	color: $tr-white;
+	tab-size: 2;
+	border-left-width: .5rem;
+	font-family: monospace;
+	font-size: .8rem;
+	padding: .5rem;
+	margin: .5rem 1rem;
+}

@@ -1,0 +1,29 @@
+@font-face {
+  font-family: 'Knowledge';
+  src: url('../fonts/knowledge2017-20170221/Knowledge2017-Regular.ttf');
+  font-weight: normal;
+}
+@font-face {
+  font-family: 'Knowledge';
+  src: url('../fonts/knowledge2017-20170221/Knowledge2017-Bold.ttf');
+  font-weight: bold;
+}
+
+$tr-white: #fff;
+$tr-darkgray: #4d4d4d;
+$tr-lightgray: #afafaf;
+$tr-mutedgray: #d0d0d0;
+$own-mutedgray: #ededed;
+$tr-orange: #ff8000;
+$tr-darkorange: #ff5900;
+$tr-lightorange: #ffa100;
+$own-mutedorange: #ffeccc; //tint of $tr-lightorange
+$tr-darkgreen: #387c2b;
+$tr-defaultlink: #005da2;
+$tr-hoverlink: #00467b;
+$tr-visitedlink: #0099c4;
+
+$sans: 'Knowledge', sans-serif;
+$monospace: 'Courier new', Courier, 'Andale Mono', monospace;
+$hover-shadow: 0 0.2rem 0.2rem $tr-orange;
+$hover-shadow-dark: 0 0.15rem 0.1rem rgba($tr-darkgray, 0.5);

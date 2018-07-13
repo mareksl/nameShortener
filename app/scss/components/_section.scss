@@ -1,0 +1,41 @@
+
+.section {
+	display: flex;
+	width: 80%;
+	max-width: 50rem;
+	margin: 2rem auto;
+	padding: 2rem;
+	align-items: flex-end;
+	flex-flow: column;
+	box-shadow: 0 .5rem 1rem -.25rem $tr-mutedgray;
+}
+
+@media (max-width: 600px) {
+	.section {
+		width: 100%;
+		padding: 2rem;
+		box-shadow: none;
+	}
+}
+
+.section__header {
+	display: inline;
+	align-self: flex-start;
+}
+
+.section__rules {
+	display: none;
+}
+
+// .section__multiple {
+// 	display: none;
+// }
+
+.section__rules--show {
+	display: flex;
+}
+
+// .section__multiple--show {
+// 	display: flex;
+// }
+

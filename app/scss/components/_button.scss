@@ -1,0 +1,88 @@
+.button {
+  display: block;
+  min-width: 200px;
+  height: 2rem;
+  margin: 0.2rem 0;
+  padding: 0 0.5rem;
+  cursor: pointer;
+  color: $tr-orange;
+  transition: 0.2s;
+  border: 1px solid transparent;
+  box-shadow: 0 0.25rem 1rem -0.5rem $tr-lightgray;
+  background-color: $tr-white;
+  &:focus {
+    border: 1px solid $tr-orange;
+    outline: none;
+    box-shadow: 0 0.25rem 1rem -0.125rem $tr-lightgray;
+  }
+  &:hover {
+    color: $tr-white;
+    outline: none;
+    background-color: $tr-orange;
+    box-shadow: 0 0.25rem 1rem -0.125rem $tr-lightgray;
+  }
+  &:active {
+    outline: none;
+    background-color: $tr-darkorange;
+    color: $tr-white;
+    box-shadow: inset 0 1px 1px $tr-darkgray;
+  }
+}
+
+.button--intable {
+  width: 5.5rem;
+  min-width: 0;
+  height: 1.7rem;
+  margin: 0;
+}
+
+.button--unsaved {
+  animation: pulse 2s infinite;
+}
+
+.button-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:active,
+  &:focus {
+    text-decoration: none;
+  }
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.button-instructions {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 1rem;
+  z-index: 1;
+  border: 1px solid $tr-orange;
+}
+
+@media (max-width: 1200px) {
+  .button-instructions {
+    border: none;
+
+    position: relative;
+    z-index: 0;
+    margin: 1rem auto;
+  }
+}
+
+.button--narrow {
+  min-width: 80px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.button--disabled {
+  cursor: not-allowed;
+  filter: grayscale(1) blur(1px);
+  &:hover {
+    color: $tr-orange;
+    background-color: #fff;
+  }
+}

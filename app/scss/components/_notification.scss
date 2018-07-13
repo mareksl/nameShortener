@@ -1,0 +1,84 @@
+
+.notification {
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: flex;
+	margin: 2rem;
+	padding: 1rem;
+	transition: 1s;
+	transform: translateX(-100%);
+	opacity: 0;
+	border: 1px solid $tr-lightorange;
+	background-color: $tr-white;
+	box-shadow: 0 0 2px $tr-lightorange;
+	align-content: center;
+	align-items: center;
+	flex-flow: row;
+	justify-content: space-between;
+	z-index: 2;
+}
+
+.notification__message {
+	flex-grow: 1;
+}
+
+.notification__close {
+	font-size: 1.4rem;
+	margin-left: 1rem;
+	cursor: pointer;
+	background-color: transparent;
+	&:focus,
+	&:hover {
+		color: $tr-orange;
+		outline: none;
+		text-shadow: 0 0 2px $tr-orange;
+	}
+}
+
+.notification__buttons {
+	display: flex;
+	flex: 0 0 auto;
+	margin-top: .5rem;
+	flex-flow: row nowrap;
+}
+
+.notification--visible {
+	transform: translateX(0);
+	opacity: 1;
+}
+
+.notification--success {
+	border-color: $tr-darkgreen;
+	box-shadow: 0 0 2px $tr-darkgreen;
+}
+
+.notification--warning {
+	border-color: $tr-orange;
+	box-shadow: 0 0 2px $tr-orange;
+	.notification__message {
+		&:before {
+			font-weight: bold;
+			margin-right: .5rem;
+			content: 'Warning:';
+		}
+	}
+}
+
+.notification--error {
+	font-weight: bold;
+	animation: pulse__warning 2s infinite;
+	border-color: $tr-darkorange;
+	.notification__message {
+		&:before {
+			font-weight: bold;
+			margin-right: .5rem;
+			content: 'Error:';
+		}
+	}
+}
+
+.notification--confirm {
+	animation: pulse 2s infinite;
+	flex-flow: column;
+}

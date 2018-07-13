@@ -1,0 +1,23 @@
+.header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.5rem;
+  text-align: center;
+  background-color: $tr-white;
+  box-shadow: 0 0rem .5rem $tr-mutedgray;
+  z-index: 1;
+}
+
+.header__title {
+  color: $tr-orange;
+}
+.header__link {
+  color: $tr-orange;
+  transition: .2s;
+  &:hover {
+    color: $tr-darkorange;
+  }
+}

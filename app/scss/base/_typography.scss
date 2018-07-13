@@ -1,0 +1,104 @@
+html {
+  font-size: 16px;
+}
+
+body {
+  color: $tr-darkgray;
+  font-family: $sans;
+  font-weight: 400;
+  font-size: 100%;
+  line-height: 1.5;
+}
+
+::selection {
+  background: $tr-orange;
+  color: $tr-white;
+}
+
+::-moz-selection {
+  background: $tr-orange;
+  color: $tr-white;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $sans;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+h2 {
+  display: block;
+  font-size: 1.25em;
+}
+
+h3 {
+  display: inline;
+  font-size: 1em;
+}
+
+h4 {
+  font-size: 1.25em;
+}
+
+h5 {
+  font-size: 1.125em;
+}
+
+h6 {
+  font-size: 1.0625em;
+}
+
+p {
+  font-size: 1em;
+  padding: 0.4rem 0;
+}
+
+small {
+  font-size: 0.8em;
+  color: $tr-lightgray;
+}
+
+a {
+  text-decoration: none;
+}
+
+i {
+  font-style: italic;
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+}
+
+hr {
+  border-color: $tr-mutedgray;
+  border-width: 0 0 1px 0;
+  margin: 1rem 0;
+}
+
+.link {
+  color: $tr-defaultlink;
+  font-weight: bold;
+  text-decoration: none;
+  &:visited {
+    color: $tr-visitedlink;
+  }
+  &:active,
+  &:focus,
+  &:hover {
+    outline: none;
+    color: $tr-hoverlink;
+    text-decoration: underline;
+  }
+}

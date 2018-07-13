@@ -1,0 +1,38 @@
+
+.objective {
+	display: flex;
+	width: 100%;
+	align-items: center;
+	flex-flow: row;
+	justify-content: space-between;
+}
+
+.objective__length {
+	flex: 1 0 auto;
+	text-align: center;
+}
+
+// .inputCTE {
+// 	position: relative;
+// 	font-family: $sans;
+// 	font-size: 1rem;
+// 	display: block;
+// 	width: 100%;
+// 	padding: .5rem;
+// 	padding-left: 1rem;
+// 	border: 1px solid $tr-lightgray;
+//
+// 	&:focus {
+// 		border: 2px solid $tr-orange;
+// 		outline: none;
+// 		padding-left: 1rem;
+//
+// 	}
+// 	&>* {
+// 		&:before {
+// 			position: absolute;
+// 			left: .25rem;
+// 			content: '\21b5';
+// 		}
+// 	}
+// }

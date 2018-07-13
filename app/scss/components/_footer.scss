@@ -1,0 +1,37 @@
+.footer {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.github-link {
+	display: flex;
+	width: 2rem;
+	height: 2rem;
+	margin: 2rem;
+	transition: .2s ease-in-out;
+	border: 1px solid $tr-lightorange;
+	border-radius: 50%;
+	background-color: $tr-white;
+	align-items: center;
+	justify-content: center;
+	&:hover {
+		border-width: .25rem;
+		transform: scale(1.2);
+		box-shadow: 0 0 8px $tr-orange;
+	}
+}
+
+.github-link__logo {
+	width: 1.5rem;
+	height: 1.5rem;
+}
+
+@media (max-width: 600px) {
+	.footer {
+		position: relative;
+	}
+}

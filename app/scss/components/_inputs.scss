@@ -1,0 +1,118 @@
+input,
+textarea {
+  color: $tr-darkgray;
+}
+
+.input-label {
+  width: 100%;
+}
+
+.input-label--visuallyhidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+}
+
+.textarea {
+  font-family: $sans;
+  font-size: 1rem;
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  resize: vertical;
+  border: 1px solid $own-mutedgray;
+  box-shadow: 0 0.25rem 1rem -0.5rem $tr-lightgray;
+  transition: .2s;
+
+
+  &:focus {
+    border: 1px solid $tr-orange;
+    outline: none;
+  }
+}
+
+.textarea--expandable {
+  resize: none;
+}
+
+.textarea--minheight {
+  min-height: 12rem;
+}
+
+::-webkit-input-placeholder {
+  font-size: 0.8rem;
+  opacity: 1;
+  color: $tr-lightgray;
+}
+
+::-moz-placeholder {
+  font-size: 0.8rem;
+  opacity: 1;
+  color: $tr-lightgray;
+}
+
+:-ms-input-placeholder {
+  font-size: 0.8rem;
+  opacity: 1;
+  color: $tr-lightgray;
+}
+
+:-moz-placeholder {
+  font-size: 0.8rem;
+  opacity: 1;
+  color: $tr-lightgray;
+}
+
+.input-checkbox {
+  position: absolute;
+  opacity: 0;
+  &:focus + .input-checkbox__label,
+  &:hover + .input-checkbox__label {
+    &:before {
+      transform: scale(1.1);
+      border: 1px solid $tr-darkorange;
+      box-shadow: 0 0 0 1px $tr-darkorange;
+    }
+  }
+  &:checked + .input-checkbox__label {
+    &:before {
+      border: 1px solid $tr-orange;
+      background: $tr-orange;
+    }
+    &:after {
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 8px;
+      height: 4px;
+      content: '';
+      transform: rotate(-45deg);
+      opacity: 1;
+      border: 2px solid $tr-white;
+      border-top: 0;
+      border-right: 0;
+      background: transparent;
+    }
+  }
+}
+
+.input-checkbox__label {
+  position: relative;
+  cursor: pointer;
+  white-space: nowrap;
+  &:before {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    margin-right: 10px;
+    content: '';
+    vertical-align: text-top;
+    border: 1px solid $own-mutedgray;
+    transition: 0.2s;
+  }
+}

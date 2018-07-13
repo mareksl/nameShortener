@@ -1,0 +1,43 @@
+.container-count {
+  display: flex;
+  width: 100%;
+  margin: 0.2rem 0;
+  flex-flow: row;
+}
+
+.container-count__input-text {
+  font-family: $sans;
+  font-size: 1rem;
+  display: block;
+  flex: 1 1 auto;
+  height: 2rem;
+  padding: 0.4rem;
+  border: 1px solid $own-mutedgray;
+  box-shadow: 0 0.25rem 1rem -0.5rem $tr-lightgray;
+  transition: 0.2s;
+  align-self: flex-start;
+
+  &:focus {
+    border: 1px solid $tr-orange;
+    outline: none;
+  }
+}
+
+.container-count__length {
+  line-height: 2rem;
+  display: block;
+  flex: 0 0 3rem;
+  width: 3rem;
+  height: 2rem;
+  padding: 0 0.5rem;
+  text-align: center;
+  border: 1px solid $own-mutedgray;
+  box-shadow: 0 0.25rem 1rem -0.5rem $tr-lightgray;
+
+  border-left: 0;
+}
+
+.length--warning {
+  font-weight: bold;
+  color: $tr-darkorange;
+}

@@ -1,0 +1,71 @@
+.manual {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  overflow-y: auto;
+  transition: 0.4s;
+  pointer-events: none;
+  opacity: 0;
+  background-color: rgba($tr-white, 0.5);
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.manual--visible {
+  pointer-events: all;
+  opacity: 1;
+}
+
+.manual__content {
+  position: relative;
+  max-width: 960px;
+  margin: 1rem;
+  padding: 1rem;
+  background-color: $tr-white;
+  box-shadow: 0 0 2rem -0.5rem $tr-lightgray;
+}
+
+.manual__list {
+  counter-reset: item;
+  li {
+    margin-bottom: 1rem;
+    padding-left: 60px;
+    counter-increment: item;
+    &:before {
+      display: inline-block;
+      width: 1rem;
+      margin-right: 10px;
+      margin-left: -60px;
+      padding: 0 0.5rem;
+      content: counter(item);
+      text-align: center;
+      border: 1px solid $tr-lightorange;
+    }
+  }
+}
+
+.manual__close {
+  font-size: 1.4rem;
+  font-weight: bold;
+  position: absolute;
+  top: 0.7rem;
+  right: 1rem;
+  cursor: pointer;
+  background-color: transparent;
+  &:focus,
+  &:hover {
+    color: $tr-orange;
+    outline: none;
+    text-shadow: 0 0 2px $tr-orange;
+  }
+}
+
+.manual__file-extension {
+  font-family: monospace;
+  border: 1px solid $tr-lightorange;
+  padding: 0 0.25rem;
+}

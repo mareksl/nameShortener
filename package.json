@@ -4,7 +4,8 @@
   "description": "Fund Name Shortener",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "gulp browser-sync",
+    "build": "gulp build"
   },
   "repository": {
     "type": "git",

@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Fund Name Shortener</title>
 	<!--build:css css/styles.min.css-->
-	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/main.css">
 	<!--endbuild-->
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-108713418-1"></script>
@@ -24,7 +24,9 @@
 
 <body>
 	<header class="header">
-		<h1 class="header__title">Fund Name Shortener</h1>
+		<h1 class="header__title">
+			<a class="header__link" href="#">Fund Name Shortener</a>
+		</h1>
 	</header>
 	<main class="main">
 		<button class="button button-instructions" id="manualOpen">Instructions</button>
@@ -115,10 +117,10 @@
 			<table class="table-rules" id="tableRules">
 				<thead class="table-rules__header">
 					<tr class="table-rules__row table-rules__row--header">
-						<th class="table-rules__item table-rules__item--noborder">Word</th>
-						<th class="table-rules__item table-rules__item--noborder">Replacement</th>
-						<th class="table-rules__item table-rules__item--noborder table-rules__item--narrower">PRY</th>
-						<td class="table-rules__item table-rules__item--narrow table-rules__item--noborder"></td>
+						<th class="table-rules__item table-rules__header-cell table-rules__item--noborder">Word</th>
+						<th class="table-rules__item table-rules__header-cell table-rules__item--noborder">Replacement</th>
+						<th class="table-rules__item table-rules__header-cell table-rules__item--noborder table-rules__item--narrower">PRY</th>
+						<td class="table-rules__item table-rules__header-cell table-rules__item--narrow table-rules__item--noborder"></td>
 					</tr>
 				</thead>
 				<tbody class="table-rules__body">
@@ -127,11 +129,11 @@
 					<tr class="table-rules__row">
 						<td class="table-rules__item table-rules__item--editable">
 							<label class="input-label input-label--visuallyhidden" for="addRuleKey">Word</label>
-							<input type="text" id="addRuleKey" class="table-rules__input-text">
+							<input type="text" id="addRuleKey" class="table-rules__input-text" placeholder="Word">
 						</td>
 						<td class="table-rules__item table-rules__item--editable">
 							<label class="input-label input-label--visuallyhidden" for="addRuleValue">Replacement</label>
-							<input type="text" id="addRuleValue" class="table-rules__input-text">
+							<input type="text" id="addRuleValue" class="table-rules__input-text" placeholder="Replacement">
 						</td>
 						<td class="table-rules__item table-rules__item--editable table-rules__item--narrower">
 							<label class="input-label input-label--visuallyhidden" for="addRulePriority">Priority</label>
@@ -236,12 +238,12 @@
 				</div>
 			</div>
 		</section>
+		<footer class="footer">
+			<a class="github-link" href="https://github.com/mareksl/nameShortener">
+				<img class="github-link__logo" src="img/GitHub-Mark-32px.png" alt="GitHub">
+			</a>
+		</footer>
 	</main>
-	<footer class="footer">
-		<a class="github-link" href="https://github.com/mareksl/nameShortener">
-			<img class="github-link__logo" src="img/GitHub-Mark-32px.png" alt="GitHub">
-		</a>
-	</footer>
 	<!--build:js js/script.min.js -->
 	<script src="js/script.js" charset="utf-8"></script>
 	<!-- endbuild -->
