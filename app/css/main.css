@@ -285,7 +285,7 @@ pre {
   padding: 2rem;
   align-items: flex-end;
   flex-flow: column;
-  box-shadow: 0 0.5rem 1rem -0.25rem #d0d0d0; }
+  box-shadow: 0 0.25rem 1rem -0.25rem #d0d0d0; }
 
 @media (max-width: 600px) {
   .section {
