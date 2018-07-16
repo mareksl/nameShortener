@@ -11,7 +11,6 @@
 	opacity: 0;
 	border: 1px solid $tr-lightorange;
 	background-color: $tr-white;
-	box-shadow: 0 0 2px $tr-lightorange;
 	align-content: center;
 	align-items: center;
 	flex-flow: row;
@@ -50,12 +49,10 @@
 
 .notification--success {
 	border-color: $tr-darkgreen;
-	box-shadow: 0 0 2px $tr-darkgreen;
 }
 
 .notification--warning {
 	border-color: $tr-orange;
-	box-shadow: 0 0 2px $tr-orange;
 	.notification__message {
 		&:before {
 			font-weight: bold;

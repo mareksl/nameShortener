@@ -792,7 +792,6 @@ textarea {
   opacity: 0;
   border: 1px solid #ffa100;
   background-color: #fff;
-  box-shadow: 0 0 2px #ffa100;
   align-content: center;
   align-items: center;
   flex-flow: row;
@@ -823,12 +822,10 @@ textarea {
   opacity: 1; }
 
 .notification--success {
-  border-color: #387c2b;
-  box-shadow: 0 0 2px #387c2b; }
+  border-color: #387c2b; }
 
 .notification--warning {
-  border-color: #ff8000;
-  box-shadow: 0 0 2px #ff8000; }
+  border-color: #ff8000; }
   .notification--warning .notification__message:before {
     font-weight: bold;
     margin-right: .5rem;
